@@ -1,0 +1,74 @@
+{
+    "name": "Bazaarvoice",
+    "description": "Bazaarvoice connects you to consumers so they can discover you, be inspired to choose you, and buy with confidence. Data and content from our shopping network power insights that help you understand and delight consumers.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/703-bazaarvoice.jpg",
+    "tags": [
+        "api provider",
+        "commerce",
+        "have api",
+        "social"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/bazaarvoice\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Bazaarvoice",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/703-bazaarvoice.jpg",
+            "humanURL": "http:\/\/bazaarvoice.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/bazaarvoice-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/stg.api.bazaarvoice.com\/"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/blog.developer.bazaarvoice.com\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/blog.developer.bazaarvoice.com\/feed"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/bazaarvoice"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/bazaarvoice"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/developer.bazaarvoice.com\/"
+        },
+        {
+            "type": "Email",
+            "url": "legal@bazaarvoice.com"
+        },
+        {
+            "type": "Email",
+            "url": "privacy@bazaarvoice.com"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/bazaarvoice"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/bazaarvoice.com\/"
+        }
+    ]
+}
