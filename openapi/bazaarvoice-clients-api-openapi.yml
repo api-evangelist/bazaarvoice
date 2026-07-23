@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Bazaarvoice Content Search Answers Clients API
+  description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
+  version: '2.0'
+  contact:
+    name: Bazaarvoice Developer Support
+    url: https://developers.bazaarvoice.com/support
+servers:
+- url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+  description: QA | Content Search
+- url: https://seo-stg.bazaarvoice.com/structured-data/v1
+  description: Staging Server
+- url: https://seo.bazaarvoice.com/structured-data/v1
+  description: Production Server
+tags:
+- name: Clients
+paths:
+  /clients/{client-id}/ugc:
+    get:
+      summary: Fetch Structured Data (JSON-LD or Microdata)
+      description: Retrieves structured data for a specific product. This is the recommended endpoint that accepts product-id as a query parameter.
+      operationId: getStructuredDataV2
+      security:
+      - Bv-Passkey: []
+      parameters:
+      - name: client-id
+        in: path
+        description: The name of the client. Can contain special characters.
+        required: true
+        schema:
+          type: string
+        example: yourclientid
+      - name: productId
+        in: query
+        description: The ID of the product. Can contain special characters.
+        required: true
+        schema:
+          type: string
+        example: product1
+      - name: Bv-Forwarded-User-Agent
+        in: header
+        description: Clients will need to send User-Agent of consumers accessing the PDP page
+        required: false
+        schema:
+          type: string
+          example: Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot
+      - name: User-Agent
+        in: header
+        description: Clients will need to send User-Agent of their backend http client
+        required: false
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9\s\(\)\[\]\{\}\/\.\-_;:,+]+$
+          minLength: 10
+          maxLength: 500
+          example: Apache-HttpClient/4.5.8 (Java/1.8.0_191)
+      - name: Accept
+        in: header
+        description: Accept header must be empty or omitted. The API will return the default content type (text/javascript) for now, in future this might change.
+        required: false
+        schema:
+          type: string
+          maxLength: 0
+          example: ''
+      - name: q
+        in: query
+        description: 'A JSON-encoded query object containing parameters for various content types. Refer to Bazaarvoice CV2 documentation for specific filter and sort values.
+
+          '
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reviews:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    sort:
+                      type: string
+                    filter:
+                      type: array
+                      items:
+                        type: string
+                    limit:
+                      type: string
+                    offset:
+                      type: string
+                ratings:
+                  type: object
+                  properties:
+                    filter:
+                      type: array
+                      items:
+                        type: string
+                questions:
+                  type: object
+                  nullable: true
+                reviewSummary:
+                  type: object
+                  nullable: true
+            example:
+              reviews:
+                filter:
+                - productid:eq:product1
+                limit: '1'
+                offset: '0'
+                sort: submissiontime:desc
+      - name: canonical
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+        description: The exact identifier string used in your Product Schema's `@id` field. **CRITICAL REQUIREMENT:** For search engines to associate these reviews with your product, the string you send here **MUST BE IDENTICAL** (character-for-character) to the `@id` you assign to the Product object in your own schema generation. **Recommended Format:** Product Canonical URL + `#product` fragment.
+        example: https://www.example.com/running-shoe#product
+      - name: locale
+        in: query
+        description: Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.
+        required: true
+        schema:
+          type: string
+          example: en_US
+      - name: siteId
+        in: query
+        description: Site ID of the implementation, default will be main_site
+        required: false
+        schema:
+          type: string
+          example: main_site
+      responses:
+        '200':
+          description: 'Returns JSONLD by default for reviews and ratings.
+
+            '
+          headers:
+            Vary:
+              description: Indicates which request headers affect the response
+              schema:
+                type: string
+                example: Origin, Accept-Encoding, Accept
+            Cache-Control:
+              description: Caching directives (default 55 minutes)
+              schema:
+                type: string
+                example: public, max-age=3300
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JsonLdResponseJSONFormat'
+            text/javascript:
+              schema:
+                $ref: '#/components/schemas/JsonLdResponseScript'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/MicrodataResponse'
+        '400':
+          description: Bad Request, Validation failed for the request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                status: 400
+                detail: Bv-passkey is required
+                instance: /clients/clientid/ugc
+            text/html:
+              schema:
+                type: string
+              example: "<html>\n  <head><title>400 Bad Request</title></head>\n  <body>\n    <h1>Bad Request</h1>\n    <p><strong>Status:</strong> 400</p>\n    <p><strong>Detail:</strong> Bv-passkey is required</p>\n    <p><strong>Type:</strong> /problems/bad-request </p>\n    <p><strong>Instance:</strong> /clients/clientid/ugc</p>\n  </body>\n</html>\n"
+            text/javascript:
+              schema:
+                type: string
+              example: "<script type=\"application/json\" id=\"bv-error-data\">\n{\n  \"type\": \"/problems/bad-request\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Bv-Passkey is required\",\n  \"instance\": \"/clients/clientid/ugc\"\n}\n</script>\n"
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                status: 401
+                detail: Invalid Bv-Passkey
+                instance: /clients/clientid/ugc
+            text/html:
+              schema:
+                type: string
+              example: "<html>\n  <head><title>401 Unauthorized</title></head>\n  <body>\n    <h1>Unauthorized</h1>\n    <p><strong>Status:</strong> 401</p>\n    <p><strong>Detail:</strong> Invalid Bv-Passkey</p>\n    <p><strong>Type:</strong> /problems/unauthorized</p>\n    <p><strong>Instance:</strong> /clients/clientid/ugc</p>\n  </body>\n</html>\n"
+            text/javascript:
+              schema:
+                type: string
+              example: "<script type=\"application/json\" id=\"bv-error-data\">\n{\n  \"type\": \"/problems/unauthorized\",\n  \"status\": 401,\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid Bv-Passkey\",\n  \"instance\": \"/clients/clientid/ugc\"\n}\n</script>\n"
+        default:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Internal Server Error
+                status: 500
+                detail: Internal Server Error
+                instance: /clients/clientid/ugc
+            text/html:
+              schema:
+                type: string
+              example: "<html>\n  <head><title>500 Internal Server Error</title></head>\n  <body>\n    <h1>Internal Server Error</h1>\n    <p><strong>Status:</strong> 500</p>\n    <p><strong>Detail:</strong> Internal Server Error</p>\n    <p><strong>Type:</strong>/problems/unexpected-error</p>\n    <p><strong>Instance:</strong> /clients/clientid/ugc</p>\n  </body>\n</html>\n"
+            text/javascript:
+              schema:
+                type: string
+              example: "<script type=\"application/json\" id=\"bv-error-data\">\n  {\n    \"type\": \"/problems/unexpected-error\",\n    \"status\": 500,\n    \"title\": \"Internal Server Error\",\n    \"detail\": \"Internal Server Error\",\n    \"instance\": \"/clients/clientid/ugc\"\n  }\n</script>\n"
+      tags:
+      - Clients
+components:
+  schemas:
+    MicrodataResponse:
+      type: string
+      description: HTML containing Microdata tags. Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating
+      example: "<div itemscope itemtype=\"https://schema.org/IndividualProduct\" itemid=\"https://www.example.com/skincare/acne/blemish-patches\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://schema.org/AggregateRating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
+    ErrorResponse:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      - detail
+      - instance
+      properties:
+        type:
+          type: string
+          format: uri-reference
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+    JsonLdResponseScript:
+      type: string
+      description: JSON-LD structured data object inside script tag, Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating
+      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://www.example.com/skincare/acne/blemish-patches\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
+    JsonLdResponseJSONFormat:
+      type: object
+      description: JSON-LD structured data object inside script tag
+      properties:
+        reviews:
+          type: object
+          description: contains https://schema.org/Review schema in form of array
+        questions:
+          type: object
+          description: contains https://schema.org/FAQPage
+        ratings:
+          type: object
+          description: contains https://schema.org/AggregateRating
+        reviewSummary:
+          type: object
+          description: contains https://schema.org/Review schema in form of array
+      example:
+        ratings:
+          '@context': https://schema.org/
+          '@id': https://www.example.com/skincare/acne/blemish-patches
+          aggregateRating:
+            '@type': AggregateRating
+            ratingValue: '4.7'
+            reviewCount: 873
+            bestRating: 5
+  securitySchemes:
+    Bv-Passkey:
+      type: apiKey
+      in: header
+      name: Bv-Passkey
+      description: GEO API key for authentication

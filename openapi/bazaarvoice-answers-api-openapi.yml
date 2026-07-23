@@ -1,0 +1,378 @@
+openapi: 3.0.0
+info:
+  title: Bazaarvoice Content Search Answers API
+  description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
+  version: '2.0'
+  contact:
+    name: Bazaarvoice Developer Support
+    url: https://developers.bazaarvoice.com/support
+servers:
+- url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+  description: QA | Content Search
+- url: https://seo-stg.bazaarvoice.com/structured-data/v1
+  description: Staging Server
+- url: https://seo.bazaarvoice.com/structured-data/v1
+  description: Production Server
+tags:
+- name: Answers
+paths:
+  /questions/{legacyInternalId}/answers:
+    post:
+      tags:
+      - Answers
+      summary: getAnswers
+      operationId: getQuestionsUsingPOSTAndQuestionId
+      parameters:
+      - name: legacyInternalId
+        in: path
+        description: Question's legacy internal ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerFilters'
+        description: Page, Filter & Sort
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AnswerQueryResponse'
+        '400':
+          description: Invalid request body
+        '500':
+          description: Unexpected internal error
+components:
+  schemas:
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
+          type: string
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+          format: int32
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        client:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
+        featured:
+          type: boolean
+        contributorNickname:
+          type: string
+        sendEmailAlertWhenPublished:
+          type: boolean
+        displayAsAnonymous:
+          type: boolean
+        text:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        externalAnswerId:
+          type: string
+        externalProductId:
+          type: string
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        tagOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        tagProperties:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        contributor:
+          $ref: '#/components/schemas/Coordinate'
+        question:
+          $ref: '#/components/schemas/Coordinate'
+        submissionInstant:
+          type: integer
+          format: int32
+        statusGroup:
+          type: string
+    QuestionContributor:
+      type: object
+      properties:
+        id:
+          type: string
+        table:
+          type: string
+        version:
+          type: integer
+          format: int32
+        sourceVersion:
+          type: integer
+          format: int32
+        deleted:
+          type: boolean
+        signature:
+          type: string
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        type:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        clearTextExternalId:
+          type: string
+        anonymous:
+          type: boolean
+        rank:
+          type: string
+        merit:
+          type: string
+        affiliation:
+          type: string
+        contributorBadgeEnabled:
+          type: boolean
+        contributorLocation:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayCode:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        displayName:
+          type: string
+        sourceName:
+          type: string
+        agreedToTermsAndConditions:
+          type: boolean
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        ratingOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        avatarPhoto:
+          $ref: '#/components/schemas/Photo'
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        displayLastUpdate:
+          $ref: '#/components/schemas/PrrUpdate'
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        ratingProperties:
+          type: object
+          additionalProperties:
+            type: string
+        externalId:
+          type: string
+    AnswerQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+    AllAnswers:
+      type: object
+      properties:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    AnswerFilters:
+      type: object
+      properties:
+        questionId:
+          type: string
+    Coordinate:
+      type: object
+      properties:
+        table:
+          type: string
+        id:
+          type: string
+    Statistics:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        helpfulnessScore:
+          type: integer
+          format: int32
+        characterCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        numPhotos:
+          type: integer
+          format: int32
+        numVideos:
+          type: integer
+          format: int32
+        hasPhotos:
+          type: boolean
+        hasVideos:
+          type: boolean
+    Video:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
+          type: string
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
+  securitySchemes:
+    Bv-Passkey:
+      type: apiKey
+      in: header
+      name: Bv-Passkey
+      description: GEO API key for authentication

@@ -1,0 +1,328 @@
+openapi: 3.0.0
+info:
+  title: Bazaarvoice Content Search Answers Contributor API
+  description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
+  version: '2.0'
+  contact:
+    name: Bazaarvoice Developer Support
+    url: https://developers.bazaarvoice.com/support
+servers:
+- url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+  description: QA | Content Search
+- url: https://seo-stg.bazaarvoice.com/structured-data/v1
+  description: Staging Server
+- url: https://seo.bazaarvoice.com/structured-data/v1
+  description: Production Server
+tags:
+- name: Contributor
+paths:
+  /{clientId}/contributors/{contributorExternalId}:
+    get:
+      tags:
+      - Contributor
+      summary: Contributor Search
+      operationId: clientGetSingularContributor
+      parameters:
+      - name: clientId
+        in: path
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: contributorExternalId
+        in: path
+        description: Contributor's external Id (not the internal legacy Id), use - when using the body
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ContributorSearchResult'
+        '400':
+          description: Invalid request body, or missing clientId header
+        '500':
+          description: Unexpected internal error
+  /contributor:
+    post:
+      tags:
+      - Contributor
+      summary: Contributor Search
+      operationId: contributorLookaheadSearch
+      parameters:
+      - name: clientId
+        in: header
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContributorRequest'
+        description: Contributor Lookahead search
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ContributorResponse'
+        '400':
+          description: Invalid request body, or missing clientId header
+        '500':
+          description: Unexpected internal error
+  /contributors/{contributorExternalId}:
+    get:
+      tags:
+      - Contributor
+      summary: Contributor Search
+      operationId: getSingularContributor
+      parameters:
+      - name: contributorExternalId
+        in: path
+        description: Contributor's external Id (not the internal legacy Id), use - when using the body
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: header
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ContributorSearchResult'
+        '400':
+          description: Invalid request body, or missing clientId header
+        '500':
+          description: Unexpected internal error
+    post:
+      tags:
+      - Contributor
+      summary: Contributor Search
+      operationId: searchContributors
+      parameters:
+      - name: contributorExternalId
+        in: path
+        description: Contributor's external Id (not the internal legacy Id), use - when using the body
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: header
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContributorQuery'
+        description: Contributor search
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ContributorSearchResponse'
+        '400':
+          description: Invalid request body, or missing clientId header
+        '500':
+          description: Unexpected internal error
+components:
+  schemas:
+    ContributorSearchResult:
+      type: object
+      properties:
+        clearTextExternalId:
+          type: string
+        legacyInternalId:
+          type: string
+        displayName:
+          type: string
+        merit:
+          type: string
+        rank:
+          type: string
+        affiliation:
+          type: string
+        meritBadgeEligible:
+          type: string
+        hyperlinkingEnabled:
+          type: string
+        location:
+          type: string
+        externalId:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+    ContributorSort:
+      type: object
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
+      example:
+      - field: lastPublishTime
+        direction: desc
+      - field: submissionTime
+        direction: asc
+      - field: legacyInternalId
+        direction: desc
+      - field: status
+        direction: desc
+      - field: externalId
+        direction: asc
+      - field: displayName
+        direction: asc
+    ContributorQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/ContributorSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/ContributorFilters'
+    ContributorResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContributorMatch'
+    ContributorSearchResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContributorSearchResult'
+    ContributorFilters:
+      type: object
+      properties:
+        externalId:
+          type: array
+          items:
+            type: string
+        legacyInternalId:
+          type: array
+          items:
+            type: string
+        displayName:
+          type: array
+          items:
+            type: string
+        affiliation:
+          type: array
+          items:
+            type: string
+          description: staff badges
+        rank:
+          type: array
+          items:
+            type: string
+          description: staff badges
+        merit:
+          type: array
+          items:
+            type: string
+          description: TOP_250, TOP_100 etc.
+        meritBadgeEligible:
+          type: boolean
+        hyperlinkingEnabled:
+          type: boolean
+        status:
+          type: string
+          description: basic moderation status, APPROVED, REJECTED, PENDING, EXPIRED, SUBMITTED, AUTOMTEDHOLD etc
+        statusGroup:
+          type: string
+          description: Grouped moderation status, APPROVED, REJECTED, PENDING, EXPIRED
+    ContributorRequest:
+      type: object
+      properties:
+        term:
+          type: string
+        mode:
+          type: string
+    ContributorMatch:
+      type: object
+      properties:
+        id:
+          type: string
+        legacyInternalID:
+          type: string
+        displayName:
+          type: string
+        externalId:
+          type: string
+  securitySchemes:
+    Bv-Passkey:
+      type: apiKey
+      in: header
+      name: Bv-Passkey
+      description: GEO API key for authentication

@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: Bazaarvoice Content Search Answers Lookahead API
+  description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
+  version: '2.0'
+  contact:
+    name: Bazaarvoice Developer Support
+    url: https://developers.bazaarvoice.com/support
+servers:
+- url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+  description: QA | Content Search
+- url: https://seo-stg.bazaarvoice.com/structured-data/v1
+  description: Staging Server
+- url: https://seo.bazaarvoice.com/structured-data/v1
+  description: Production Server
+tags:
+- name: Lookahead
+paths:
+  /lookahead:
+    post:
+      tags:
+      - Lookahead
+      summary: Lookahead Search
+      operationId: catalogLookaheadSearch
+      parameters:
+      - name: clientId
+        in: header
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookaheadRequest'
+        description: Catalog Lookahead search
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LookaheadResponse'
+        '400':
+          description: Invalid request body, or missing clientId header
+        '500':
+          description: Unexpected internal error
+components:
+  schemas:
+    LookaheadMatch:
+      type: object
+      properties:
+        hierachy:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        externalId:
+          type: string
+    LookaheadRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        term:
+          type: string
+        mode:
+          type: string
+    LookaheadResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/LookaheadMatch'
+  securitySchemes:
+    Bv-Passkey:
+      type: apiKey
+      in: header
+      name: Bv-Passkey
+      description: GEO API key for authentication

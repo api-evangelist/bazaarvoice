@@ -1,0 +1,601 @@
+openapi: 3.0.0
+info:
+  title: Bazaarvoice Content Search Answers Reviews API
+  description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
+  version: '2.0'
+  contact:
+    name: Bazaarvoice Developer Support
+    url: https://developers.bazaarvoice.com/support
+servers:
+- url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+  description: QA | Content Search
+- url: https://seo-stg.bazaarvoice.com/structured-data/v1
+  description: Staging Server
+- url: https://seo.bazaarvoice.com/structured-data/v1
+  description: Production Server
+tags:
+- name: Reviews
+  description: Search for reviews
+paths:
+  /reviews/{legacyInternalId}:
+    get:
+      tags:
+      - Reviews
+      summary: Get review
+      operationId: getReviewById
+      parameters:
+      - name: clientId
+        in: header
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      - name: legacyInternalId
+        in: path
+        description: Review's legacy internal id
+        required: true
+        schema:
+          type: string
+      - name: reviewClientId
+        in: query
+        description: client that owns the review, when not the client specified by the clientId header
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          description: Missing clientId header
+        '404':
+          description: Review not found
+        '500':
+          description: Unexpected internal error
+  /{clientId}/reviews/{legacyInternalId}:
+    get:
+      tags:
+      - Reviews
+      summary: Get review
+      operationId: getReviewByIdAndClientId
+      parameters:
+      - name: clientId
+        in: path
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      - name: legacyInternalId
+        in: path
+        description: Review's legacy internal id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Review'
+        '404':
+          description: Review not found
+        '500':
+          description: Unexpected internal error
+  /reviews:
+    post:
+      tags:
+      - Reviews
+      summary: searchReviews
+      operationId: searchReviewsUsingPOST
+      parameters:
+      - name: clientId
+        in: header
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewQuery'
+        description: Page, Filter & Sort
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReviewQueryResponse'
+        '400':
+          description: Invalid request body, or missing clientId header
+        '500':
+          description: Unexpected internal error
+  /{clientId}/reviews:
+    post:
+      tags:
+      - Reviews
+      summary: searchReviews
+      operationId: searchReviewsUsingPOSTAndClientId
+      parameters:
+      - name: clientId
+        in: path
+        description: Client ID
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        description: Correlation ID
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewQuery'
+        description: Page, Filter & Sort
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReviewQueryResponse'
+        '400':
+          description: Invalid request body
+        '500':
+          description: Unexpected internal error
+components:
+  schemas:
+    ReviewQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/ReviewSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/ReviewFilters'
+    CommentStats:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+    TimeRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+    ReviewSort:
+      type: object
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
+      example:
+      - field: moderationTime
+        direction: desc
+      - field: submissionTime
+        direction: desc
+      - field: rating
+        direction: desc
+      - field: legacyInternalId
+        direction: desc
+    Stats:
+      type: object
+      properties:
+        characterCount:
+          type: integer
+          format: int32
+        commentsApprovedCount:
+          type: integer
+          format: int32
+        commentsPendingCount:
+          type: integer
+          format: int32
+        commentsRejectedCount:
+          type: integer
+          format: int32
+        commentsExpiredCount:
+          type: integer
+          format: int32
+        hasApprovedComment:
+          type: boolean
+        hasPendingComment:
+          type: boolean
+        hasRejectedComment:
+          type: boolean
+        hasExpiredComment:
+          type: boolean
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        photoCount:
+          type: integer
+          format: int32
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        videoCount:
+          type: integer
+          format: int32
+        responseCount:
+          type: integer
+          format: int32
+        hasResponses:
+          type: boolean
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+        description:
+          type: string
+        imageUrl:
+          type: string
+        brandId:
+          type: string
+        brandName:
+          type: string
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+        productPageUrl:
+          type: string
+    ReviewCdvs:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    ReviewFilters:
+      type: object
+      properties:
+        brandId:
+          type: array
+          items:
+            type: string
+        categoryId:
+          type: array
+          items:
+            type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        displayLocale:
+          type: array
+          items:
+            type: string
+        legacyInternalId:
+          type: array
+          items:
+            type: string
+        moderationStatusGroup:
+          type: array
+          items:
+            type: string
+        moderationStatus:
+          type: array
+          items:
+            type: string
+        productId:
+          type: array
+          items:
+            type: string
+        activeProduct:
+          type: boolean
+        productName:
+          type: array
+          items:
+            type: string
+        rating:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ratingsOnly:
+          type: boolean
+        productAttributes:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        globalSearch:
+          type: string
+        submissionTime:
+          $ref: '#/components/schemas/TimeRange'
+        moderationTime:
+          $ref: '#/components/schemas/TimeRange'
+        withClientResponse:
+          type: boolean
+        hasPhoto:
+          type: boolean
+        hasVideo:
+          type: boolean
+        includeNetwork:
+          type: boolean
+        featured:
+          type: boolean
+        campaignId:
+          type: array
+          items:
+            type: string
+        contributorExternalId:
+          type: array
+          items:
+            type: string
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+        legacyInternalId:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        ratingsOnly:
+          type: boolean
+        submissionTime:
+          type: string
+        submissionId:
+          type: string
+        moderationTime:
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        stats:
+          $ref: '#/components/schemas/Stats'
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Response'
+        recommend:
+          type: boolean
+        contributor:
+          $ref: '#/components/schemas/ReviewContributor'
+        contributorLocation:
+          type: string
+        contributorNickname:
+          type: string
+        displayLocale:
+          type: string
+        displayCode:
+          type: string
+        client:
+          type: string
+        cdvs:
+          $ref: '#/components/schemas/ReviewCdvs'
+        secondaryRatings:
+          $ref: '#/components/schemas/SecondaryRatings'
+        moderationStatus:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        campaignId:
+          type: string
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
+        featured:
+          type: boolean
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        moderationStatusGroup:
+          type: string
+        tagOrder:
+          type: array
+          items:
+            type: string
+        tagProperties:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    Response:
+      type: object
+      properties:
+        id:
+          type: string
+        legacyInternalId:
+          type: string
+        text:
+          type: string
+        department:
+          type: string
+        source:
+          type: string
+        name:
+          type: string
+        submissionTime:
+          type: string
+        type:
+          type: string
+        responderClient:
+          type: string
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
+    SecondaryRatings:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    ReviewContributor:
+      type: object
+      properties:
+        clearTextExternalId:
+          type: string
+        displayName:
+          type: string
+        merit:
+          type: string
+        rank:
+          type: string
+        affiliation:
+          type: string
+        location:
+          type: string
+        externalId:
+          type: string
+    Video:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
+          type: string
+    ReviewQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+    Comment:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        text:
+          type: string
+        submissionTime:
+          type: string
+        moderationTime:
+          type: string
+        contributor:
+          $ref: '#/components/schemas/ReviewContributor'
+        moderationStatus:
+          type: string
+        stats:
+          $ref: '#/components/schemas/CommentStats'
+        contentCodes:
+          type: array
+          items:
+            type: string
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
+        moderationStatusGroup:
+          type: string
+  securitySchemes:
+    Bv-Passkey:
+      type: apiKey
+      in: header
+      name: Bv-Passkey
+      description: GEO API key for authentication
