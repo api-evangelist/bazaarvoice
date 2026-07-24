@@ -1,0 +1,51 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bazaarvoice-content-search-openapi.json
+format: http-status
+note: Derived from OpenAPI 4xx/5xx responses. The Content Search API returns standard HTTP status codes;
+  response bodies are not application/problem+json.
+problems:
+- status: 400
+  title: Invalid request body, or missing clientId header
+  operations:
+  - catalogLookaheadSearch
+  - clientGetSingularContributor
+  - contributorLookaheadSearch
+  - getQuestionById
+  - getQuestionsUsingPOSTAndQuestionId
+  - getReviewById
+  - getSingularContributor
+  - getStructuredDataV2
+  - searchContributors
+  - searchQuestionsUsingPOST
+  - searchQuestionsUsingPOSTAndClientId
+  - searchReviewsUsingPOST
+  - searchReviewsUsingPOSTAndClientId
+- status: 401
+  title: Unauthorized
+  operations:
+  - getStructuredDataV2
+- status: 404
+  title: Question not found
+  operations:
+  - getQuestionById
+  - getQuestionByIdAndClientId
+  - getReviewById
+  - getReviewByIdAndClientId
+- status: 500
+  title: Unexpected internal error
+  operations:
+  - catalogLookaheadSearch
+  - clientGetSingularContributor
+  - contributorLookaheadSearch
+  - getQuestionById
+  - getQuestionByIdAndClientId
+  - getQuestionsUsingPOSTAndQuestionId
+  - getReviewById
+  - getReviewByIdAndClientId
+  - getSingularContributor
+  - searchContributors
+  - searchQuestionsUsingPOST
+  - searchQuestionsUsingPOSTAndClientId
+  - searchReviewsUsingPOST
+  - searchReviewsUsingPOSTAndClientId

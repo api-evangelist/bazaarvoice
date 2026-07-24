@@ -1,0 +1,12 @@
+generated: '2026-07-18'
+method: searched
+source: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide
+scheme: major.minor
+current_version: '5.4'
+docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide
+note: >-
+  Bazaarvoice maintains dated per-version changelogs and an upgrade guide for the
+  Conversations API. The current major line is 5.4. Specific dated entries are
+  published on the live upgrade-guide/changelog pages; only the versioning scheme and
+  current version are captured here to avoid transcribing unverified dates.
+entries: []

@@ -1,0 +1,25 @@
+# Bazaarvoice
+
+> Bazaarvoice operates a retail and brand user-generated-content network - ratings, reviews, questions and answers, and product sampling - syndicated across thousands of brand and retailer sites. Its developer platform exposes the Conversations, Content Search, Transactions, Response, Social Commerce, and Authentic Discovery APIs for retrieving and submitting UGC and structured data.
+
+## APIs
+- [Bazaarvoice Content Search API](openapi/bazaarvoice-content-search-openapi.json): Search reviews, questions, answers, contributors, catalog lookahead, and structured data (JSON-LD/Microdata).
+
+## Docs
+- [Developer Space V2.0](https://developers.bazaarvoice.com/): Developer portal and API reference.
+- [Conversations API](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home): Flagship UGC retrieval and submission API.
+- [Authentication - OAuth2 (Transactions)](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/oauth2-2-legged): 2-legged OAuth2 client credentials.
+- [API Key Management](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management): Requesting and activating API passkeys.
+- [Rate limits](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit): QPM/quota headers.
+- [Upgrade guide](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide): Versioning and changelogs (current 5.4).
+- [llms.txt](https://developers.bazaarvoice.com/llms.txt): Provider-published LLM index.
+
+## SDKs
+- [iOS Swift SDK](https://github.com/bazaarvoice/bv-ios-swift-sdk)
+- [iOS SDK](https://github.com/bazaarvoice/bv-ios-sdk)
+- [Android SDK](https://github.com/bazaarvoice/bv-android-sdk)
+- [bv-ui-core (npm)](https://www.npmjs.com/package/bv-ui-core)
+- [SEO SDKs (PHP/Java/.NET)](https://github.com/bazaarvoice)
+
+## Status
+- [Status page](https://status.bazaarvoice.com): Statuspage.io, all-systems status + incident history.

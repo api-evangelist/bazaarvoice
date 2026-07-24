@@ -1,0 +1,11 @@
+generated: '2026-07-18'
+method: generated
+skills:
+- file: bazaarvoice-search-ugc.md
+  name: Search Bazaarvoice UGC (reviews and questions)
+  api: openapi/bazaarvoice-content-search-openapi.json
+  operations: [searchReviewsUsingPOST, getReviewById, searchQuestionsUsingPOST, getQuestionsUsingPOSTAndQuestionId, searchContributors, catalogLookaheadSearch]
+- file: bazaarvoice-structured-data-seo.md
+  name: Fetch Bazaarvoice structured data for SEO
+  api: openapi/bazaarvoice-content-search-openapi.json
+  operations: [getStructuredDataV2]

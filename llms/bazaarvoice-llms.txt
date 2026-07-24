@@ -1,0 +1,39 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Documentation](https://developers.bazaarvoice.com/docs.md): Bazaarvoice Developer Space V2.0 documentation
+
+## API Reference
+- [Get review](https://developers.bazaarvoice.com/reference/getreviewbyid.md)
+- [Get review](https://developers.bazaarvoice.com/reference/getreviewbyidandclientid.md)
+- [searchReviews](https://developers.bazaarvoice.com/reference/searchreviewsusingpost.md)
+- [searchReviews](https://developers.bazaarvoice.com/reference/searchreviewsusingpostandclientid.md)
+- [Get question](https://developers.bazaarvoice.com/reference/getquestionbyid.md)
+- [Get question](https://developers.bazaarvoice.com/reference/getquestionbyidandclientid.md)
+- [searchQuestions](https://developers.bazaarvoice.com/reference/searchquestionsusingpost.md)
+- [searchQuestions](https://developers.bazaarvoice.com/reference/searchquestionsusingpostandclientid.md)
+- [getAnswers](https://developers.bazaarvoice.com/reference/getquestionsusingpostandquestionid.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/contributorlookaheadsearch.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/getsingularcontributor.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/searchcontributors.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/clientgetsingularcontributor.md)
+- [Get review](https://developers.bazaarvoice.com/reference/getreviewbyid-1.md)
+- [Get review](https://developers.bazaarvoice.com/reference/getreviewbyidandclientid-1.md)
+- [searchReviews](https://developers.bazaarvoice.com/reference/searchreviewsusingpost-1.md)
+- [searchReviews](https://developers.bazaarvoice.com/reference/searchreviewsusingpostandclientid-1.md)
+- [Get question](https://developers.bazaarvoice.com/reference/getquestionbyid-1.md)
+- [Get question](https://developers.bazaarvoice.com/reference/getquestionbyidandclientid-1.md)
+- [searchQuestions](https://developers.bazaarvoice.com/reference/searchquestionsusingpost-1.md)
+- [searchQuestions](https://developers.bazaarvoice.com/reference/searchquestionsusingpostandclientid-1.md)
+- [getAnswers](https://developers.bazaarvoice.com/reference/getquestionsusingpostandquestionid-1.md)
+- [Lookahead Search](https://developers.bazaarvoice.com/reference/cataloglookaheadsearch-1.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/contributorlookaheadsearch-1.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/getsingularcontributor-1.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/searchcontributors-1.md)
+- [Contributor Search](https://developers.bazaarvoice.com/reference/clientgetsingularcontributor-1.md)
+- [Fetch Structured Data (JSON-LD or Microdata)](https://developers.bazaarvoice.com/reference/getstructureddatav2.md): Retrieves structured data for a specific product. This is the recommended endpoint that accepts product-id as a query parameter.
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/support.md)

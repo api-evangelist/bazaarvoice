@@ -1,0 +1,64 @@
+generated: '2026-07-18'
+method: searched
+source:
+- openapi/bazaarvoice-content-search-openapi.json
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts
+authentication:
+  style: api-passkey
+  detail: >-
+    Content Search API sends the Bv-Passkey header; classic Conversations API sends a
+    Passkey query parameter. Transactions/Response APIs use 2-legged OAuth2. See
+    authentication/bazaarvoice-authentication.yml.
+versioning:
+  style: query-parameter
+  detail: >-
+    The classic Conversations API selects version with the ApiVersion query parameter
+    (e.g. ApiVersion=5.4); current major line is 5.4. The V2.0 Content Search API is
+    versioned in its base path/host.
+  current: '5.4'
+content_negotiation:
+  detail: >-
+    Classic Conversations API returns JSON or XML selected by the URL extension
+    (/data/reviews.json vs .xml). The Content Search API returns application/json.
+  formats: [json, xml]
+request_tracing:
+  header: X-Correlation-ID
+  detail: >-
+    The Content Search API accepts an optional X-Correlation-ID request header to
+    correlate a request across Bazaarvoice systems.
+rate_limit_signaling:
+  detail: >-
+    Responses on the universal domains include rate-limit headers identifying the
+    QPM allotment and current usage plus the hourly quota. See
+    rate-limits/bazaarvoice-rate-limits.yml.
+  headers:
+  - X-Bazaarvoice-QPM-Allotted
+  - X-Bazaarvoice-QPM-Current
+  - X-Bazaarvoice-Quota-Allotted
+  - X-Bazaarvoice-Quota-Current
+  - X-Bazaarvoice-Quota-Reset
+  - X-Bazaarvoice-Error-Detail
+pagination:
+  style: offset-limit
+  detail: >-
+    Conversations/Content Search queries page with Offset and Limit parameters and
+    return TotalResults so clients can page through UGC result sets.
+  params: [Offset, Limit]
+  response_fields: [TotalResults, Results]
+idempotency:
+  supported: false
+  detail: >-
+    Bazaarvoice does not document an idempotency-key mechanism for write operations;
+    submissions are guarded by the submission workflow (fingerprinting/duplicate
+    detection) rather than a client-supplied idempotency key.
+errors:
+  detail: >-
+    Standard HTTP status codes; error detail is returned in the response body and, for
+    rate-limit rejections, in the X-Bazaarvoice-Error-Detail header. See
+    errors/bazaarvoice-problem-types.yml.
+cross_reference:
+  errors: errors/bazaarvoice-problem-types.yml
+  lifecycle: lifecycle/bazaarvoice-lifecycle.yml
+  authentication: authentication/bazaarvoice-authentication.yml
+  rate_limits: rate-limits/bazaarvoice-rate-limits.yml

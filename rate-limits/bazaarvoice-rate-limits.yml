@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+source: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+model: per-api-key
+signaling: response-headers
+description: >-
+  Bazaarvoice rate-limits each API key by queries-per-minute (QPM) plus an hourly
+  quota. Actual numeric allotments are set per key and are not published as universal
+  defaults; clients read their current allotment and usage from response headers.
+headers:
+- name: X-Bazaarvoice-QPM-Allotted
+  meaning: Maximum queries-per-minute capacity set on the API key.
+- name: X-Bazaarvoice-QPM-Current
+  meaning: Current count of calls applied against the QPM limit.
+- name: X-Bazaarvoice-Quota-Allotted
+  meaning: Maximum number of calls allowed on an hourly basis.
+- name: X-Bazaarvoice-Quota-Current
+  meaning: Current count of calls made in the current hourly period.
+- name: X-Bazaarvoice-Quota-Reset
+  meaning: Time at which the current quota window resets.
+- name: X-Bazaarvoice-Error-Detail
+  meaning: Error message returned when a limit is exceeded.
+deprecated_headers:
+- X-Bazaarvoice-QPS-Allotted
+- X-Bazaarvoice-QPS-Current
+limits: []
+notes: >-
+  QPS-based headers are deprecated in favor of QPM. Numeric limits vary per key;
+  the docs example (60 QPM) is one client's configuration, not a default.

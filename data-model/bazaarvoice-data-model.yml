@@ -1,0 +1,254 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bazaarvoice-content-search-openapi.json
+entities:
+- LookaheadRequest
+- LookaheadResponse
+- LookaheadMatch
+- ContributorSearchResult
+- ContributorRequest
+- ContributorResponse
+- ContributorMatch
+- Product
+- Video
+- Photo
+- Coordinate
+- PrrUpdate
+- QuestionContributor
+- SingleQuestionDocument
+- Question
+- AllAnswers
+- Statistics
+- Answer
+- AnswerQueryResponse
+- AnswerFilters
+- Review
+- ReviewCdvs
+- SecondaryRatings
+- Stats
+- Response
+- Comment
+- CommentStats
+- ReviewContributor
+- JsonLdResponseScript
+- JsonLdResponseJSONFormat
+- MicrodataResponse
+- ErrorResponse
+- ContributorQuery
+- ContributorFilters
+- ContributorSort
+- ContributorSearchResponse
+- TimeRange
+- QuestionQueryResponse
+- QuestionFilters
+- QuestionQuery
+- QuestionSort
+- ReviewFilters
+- ReviewQuery
+- ReviewSort
+- ReviewQueryResponse
+relationships:
+- from: QuestionContributor
+  to: Photo
+  kind: has_many
+  via: photos
+- from: QuestionContributor
+  to: Photo
+  kind: has_one
+  via: avatarPhoto
+- from: QuestionContributor
+  to: Coordinate
+  kind: has_many
+  via: productReferences
+- from: QuestionContributor
+  to: Video
+  kind: has_many
+  via: videos
+- from: QuestionContributor
+  to: PrrUpdate
+  kind: has_one
+  via: displayLastUpdate
+- from: SingleQuestionDocument
+  to: Question
+  kind: has_one
+  via: question
+- from: SingleQuestionDocument
+  to: QuestionContributor
+  kind: has_one
+  via: contributor
+- from: SingleQuestionDocument
+  to: Product
+  kind: has_one
+  via: product
+- from: SingleQuestionDocument
+  to: Statistics
+  kind: has_one
+  via: statistics
+- from: SingleQuestionDocument
+  to: AllAnswers
+  kind: has_many
+  via: answers
+- from: Question
+  to: Photo
+  kind: has_many
+  via: photos
+- from: Question
+  to: Photo
+  kind: has_one
+  via: avatarPhoto
+- from: Question
+  to: Video
+  kind: has_many
+  via: videos
+- from: Question
+  to: Coordinate
+  kind: has_many
+  via: productReferences
+- from: Question
+  to: Coordinate
+  kind: has_one
+  via: bestAnswer
+- from: Question
+  to: PrrUpdate
+  kind: has_one
+  via: displayLastUpdate
+- from: Question
+  to: Coordinate
+  kind: has_one
+  via: contributor
+- from: Question
+  to: Coordinate
+  kind: has_one
+  via: about
+- from: AllAnswers
+  to: Answer
+  kind: has_one
+  via: answer
+- from: AllAnswers
+  to: QuestionContributor
+  kind: has_one
+  via: contributor
+- from: AllAnswers
+  to: Statistics
+  kind: has_one
+  via: statistics
+- from: Answer
+  to: Photo
+  kind: has_many
+  via: photos
+- from: Answer
+  to: Video
+  kind: has_many
+  via: videos
+- from: Answer
+  to: Coordinate
+  kind: has_many
+  via: productReferences
+- from: Answer
+  to: Coordinate
+  kind: has_one
+  via: contributor
+- from: Answer
+  to: Coordinate
+  kind: has_one
+  via: question
+- from: AnswerQueryResponse
+  to: AllAnswers
+  kind: has_many
+  via: results
+- from: Review
+  to: Product
+  kind: has_one
+  via: product
+- from: Review
+  to: Video
+  kind: has_many
+  via: videos
+- from: Review
+  to: Photo
+  kind: has_many
+  via: photos
+- from: Review
+  to: Stats
+  kind: has_one
+  via: stats
+- from: Review
+  to: Response
+  kind: has_many
+  via: responses
+- from: Review
+  to: ReviewContributor
+  kind: has_one
+  via: contributor
+- from: Review
+  to: ReviewCdvs
+  kind: has_one
+  via: cdvs
+- from: Review
+  to: SecondaryRatings
+  kind: has_one
+  via: secondaryRatings
+- from: Review
+  to: Comment
+  kind: has_many
+  via: comments
+- from: Comment
+  to: ReviewContributor
+  kind: has_one
+  via: contributor
+- from: Comment
+  to: CommentStats
+  kind: has_one
+  via: stats
+- from: ContributorQuery
+  to: ContributorSort
+  kind: has_one
+  via: sort
+- from: ContributorQuery
+  to: ContributorFilters
+  kind: has_one
+  via: filters
+- from: ContributorSearchResponse
+  to: ContributorSearchResult
+  kind: has_many
+  via: results
+- from: QuestionQueryResponse
+  to: Question
+  kind: has_many
+  via: results
+- from: QuestionFilters
+  to: TimeRange
+  kind: has_one
+  via: submissionTime
+- from: QuestionFilters
+  to: TimeRange
+  kind: has_one
+  via: moderationTime
+- from: QuestionQuery
+  to: QuestionSort
+  kind: has_one
+  via: sort
+- from: QuestionQuery
+  to: QuestionFilters
+  kind: has_one
+  via: filters
+- from: ReviewFilters
+  to: TimeRange
+  kind: has_one
+  via: submissionTime
+- from: ReviewFilters
+  to: TimeRange
+  kind: has_one
+  via: moderationTime
+- from: ReviewQuery
+  to: ReviewSort
+  kind: has_one
+  via: sort
+- from: ReviewQuery
+  to: ReviewFilters
+  kind: has_one
+  via: filters
+- from: ReviewQueryResponse
+  to: Review
+  kind: has_many
+  via: results

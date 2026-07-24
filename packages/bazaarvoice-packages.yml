@@ -1,0 +1,67 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/bazaarvoice
+packages:
+- language: swift
+  registry: github
+  name: bv-ios-swift-sdk
+  url: https://github.com/bazaarvoice/bv-ios-swift-sdk
+  install: "Swift Package Manager / CocoaPods"
+  official: true
+  description: Bazaarvoice Swift SDK for iOS (Conversations, Product Recommendations).
+- language: objective-c
+  registry: github
+  name: bv-ios-sdk
+  url: https://github.com/bazaarvoice/bv-ios-sdk
+  install: "CocoaPods: pod 'BVSDK'"
+  official: true
+  description: Bazaarvoice iOS SDK for Developers.
+- language: java
+  registry: github
+  name: bv-android-sdk
+  url: https://github.com/bazaarvoice/bv-android-sdk
+  install: "Gradle: implementation 'com.bazaarvoice.bvandroidsdk:...'"
+  official: true
+  description: Bazaarvoice Android SDK for Developers.
+- language: javascript
+  registry: npm
+  name: bv-ui-core
+  url: https://www.npmjs.com/package/bv-ui-core
+  install: npm install bv-ui-core
+  official: true
+  description: Node module of common Bazaarvoice UI code (latest 2.9.12).
+- language: php
+  registry: github
+  name: seo_sdk_php
+  url: https://github.com/bazaarvoice/seo_sdk_php
+  install: "composer"
+  official: true
+  description: Bazaarvoice SEO SDK for PHP.
+- language: java
+  registry: github
+  name: seo_sdk_java
+  url: https://github.com/bazaarvoice/seo_sdk_java
+  install: "Maven / Gradle"
+  official: true
+  description: Bazaarvoice SEO SDK for Java.
+- language: csharp
+  registry: github
+  name: seo_sdk_dotnet
+  url: https://github.com/bazaarvoice/seo_sdk_dotnet
+  install: "NuGet"
+  official: true
+  description: Bazaarvoice SEO SDK for .NET.
+- language: php
+  registry: github
+  name: magento2-extension
+  url: https://github.com/bazaarvoice/magento2-extension
+  install: "composer require bazaarvoice/module-connector"
+  official: true
+  description: Official Magento 2 extension for Bazaarvoice.
+- language: javascript
+  registry: github
+  name: bv-salesforce-cartridge
+  url: https://github.com/bazaarvoice/bv-salesforce-cartridge
+  install: "Salesforce B2C Commerce cartridge"
+  official: true
+  description: Bazaarvoice cartridge for Salesforce Commerce Cloud.

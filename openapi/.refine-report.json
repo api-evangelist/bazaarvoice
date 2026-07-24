@@ -1,0 +1,24 @@
+{
+  "provider": "bazaarvoice",
+  "sources": [
+    "bazaarvoice-answers-api-openapi.yml",
+    "bazaarvoice-clients-api-openapi.yml",
+    "bazaarvoice-contributor-api-openapi.yml",
+    "bazaarvoice-lookahead-api-openapi.yml",
+    "bazaarvoice-questions-api-openapi.yml",
+    "bazaarvoice-reviews-api-openapi.yml"
+  ],
+  "outputs": [
+    "bazaarvoice-answers-api-openapi.yml",
+    "bazaarvoice-clients-api-openapi.yml",
+    "bazaarvoice-contributor-api-openapi.yml",
+    "bazaarvoice-lookahead-api-openapi.yml",
+    "bazaarvoice-questions-api-openapi.yml",
+    "bazaarvoice-reviews-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

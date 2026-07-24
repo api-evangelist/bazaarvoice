@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bazaarvoice Content Search API
+  version: 1.0.0
+extends: openapi/bazaarvoice-content-search-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: true
+    x-apievangelist-provider: bazaarvoice
+    x-apievangelist-auth: api-passkey (Bv-Passkey header)
+    x-apievangelist-rate-limit-headers:
+    - X-Bazaarvoice-QPM-Allotted
+    - X-Bazaarvoice-Quota-Allotted
+- target: $.info
+  update:
+    x-apievangelist-notes: >-
+      Servers harvested from the published per-operation OpenAPI definitions include
+      QA/staging hosts (content-search.*.qa.bazaarvoice.com); the production Content
+      Search surface is fronted by Bazaarvoice's universal API domains. Structured-data
+      operations run on seo.bazaarvoice.com.

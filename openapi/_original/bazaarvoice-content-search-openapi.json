@@ -1,0 +1,2953 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Bazaarvoice Content Search API",
+    "description": "Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.",
+    "version": "2.0",
+    "contact": {
+      "name": "Bazaarvoice Developer Support",
+      "url": "https://developers.bazaarvoice.com/support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/",
+      "description": "QA | Content Search"
+    },
+    {
+      "url": "https://seo-stg.bazaarvoice.com/structured-data/v1",
+      "description": "Staging Server"
+    },
+    {
+      "url": "https://seo.bazaarvoice.com/structured-data/v1",
+      "description": "Production Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Reviews",
+      "description": "Search for reviews"
+    }
+  ],
+  "paths": {
+    "/lookahead": {
+      "post": {
+        "tags": [
+          "Lookahead"
+        ],
+        "summary": "Lookahead Search",
+        "operationId": "catalogLookaheadSearch",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookaheadRequest"
+              }
+            }
+          },
+          "description": "Catalog Lookahead search"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookaheadResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/{clientId}/contributors/{contributorExternalId}": {
+      "get": {
+        "tags": [
+          "Contributor"
+        ],
+        "summary": "Contributor Search",
+        "operationId": "clientGetSingularContributor",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contributorExternalId",
+            "in": "path",
+            "description": "Contributor's external Id (not the internal legacy Id), use - when using the body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContributorSearchResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/contributor": {
+      "post": {
+        "tags": [
+          "Contributor"
+        ],
+        "summary": "Contributor Search",
+        "operationId": "contributorLookaheadSearch",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContributorRequest"
+              }
+            }
+          },
+          "description": "Contributor Lookahead search"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContributorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/questions/{legacyInternalId}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get question",
+        "operationId": "getQuestionById",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Question Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "header",
+            "description": "Offset for answers",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "header",
+            "description": "Number of answers to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "legacyInternalId",
+            "in": "path",
+            "description": "Question's legacy internal id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "questionClientId",
+            "in": "query",
+            "description": "client that owns the question, when not the client specified by the clientId header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleQuestionDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing clientId header"
+          },
+          "404": {
+            "description": "Question not found"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/{clientId}/questions/{legacyInternalId}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get question",
+        "operationId": "getQuestionByIdAndClientId",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "legacyInternalId",
+            "in": "path",
+            "description": "Question's legacy internal id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleQuestionDocument"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Question not found"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/questions/{legacyInternalId}/answers": {
+      "post": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "getAnswers",
+        "operationId": "getQuestionsUsingPOSTAndQuestionId",
+        "parameters": [
+          {
+            "name": "legacyInternalId",
+            "in": "path",
+            "description": "Question's legacy internal ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnswerFilters"
+              }
+            }
+          },
+          "description": "Page, Filter & Sort"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/reviews/{legacyInternalId}": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get review",
+        "operationId": "getReviewById",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "legacyInternalId",
+            "in": "path",
+            "description": "Review's legacy internal id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reviewClientId",
+            "in": "query",
+            "description": "client that owns the review, when not the client specified by the clientId header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing clientId header"
+          },
+          "404": {
+            "description": "Review not found"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/{clientId}/reviews/{legacyInternalId}": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get review",
+        "operationId": "getReviewByIdAndClientId",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "legacyInternalId",
+            "in": "path",
+            "description": "Review's legacy internal id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Review not found"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/contributors/{contributorExternalId}": {
+      "get": {
+        "tags": [
+          "Contributor"
+        ],
+        "summary": "Contributor Search",
+        "operationId": "getSingularContributor",
+        "parameters": [
+          {
+            "name": "contributorExternalId",
+            "in": "path",
+            "description": "Contributor's external Id (not the internal legacy Id), use - when using the body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContributorSearchResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contributor"
+        ],
+        "summary": "Contributor Search",
+        "operationId": "searchContributors",
+        "parameters": [
+          {
+            "name": "contributorExternalId",
+            "in": "path",
+            "description": "Contributor's external Id (not the internal legacy Id), use - when using the body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContributorQuery"
+              }
+            }
+          },
+          "description": "Contributor search"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContributorSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/clients/{client-id}/ugc": {
+      "get": {
+        "summary": "Fetch Structured Data (JSON-LD or Microdata)",
+        "description": "Retrieves structured data for a specific product. This is the recommended endpoint that accepts product-id as a query parameter.",
+        "operationId": "getStructuredDataV2",
+        "security": [
+          {
+            "Bv-Passkey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "client-id",
+            "in": "path",
+            "description": "The name of the client. Can contain special characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "yourclientid"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "The ID of the product. Can contain special characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "product1"
+          },
+          {
+            "name": "Bv-Forwarded-User-Agent",
+            "in": "header",
+            "description": "Clients will need to send User-Agent of consumers accessing the PDP page",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot"
+            }
+          },
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "description": "Clients will need to send User-Agent of their backend http client",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9\\s\\(\\)\\[\\]\\{\\}\\/\\.\\-_;:,+]+$",
+              "minLength": 10,
+              "maxLength": 500,
+              "example": "Apache-HttpClient/4.5.8 (Java/1.8.0_191)"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Accept header must be empty or omitted. The API will return the default content type (text/javascript) for now, in future this might change.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 0,
+              "example": ""
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A JSON-encoded query object containing parameters for various content types. Refer to Bazaarvoice CV2 documentation for specific filter and sort values.\n",
+            "required": false,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reviews": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "properties": {
+                        "sort": {
+                          "type": "string"
+                        },
+                        "filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "limit": {
+                          "type": "string"
+                        },
+                        "offset": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ratings": {
+                      "type": "object",
+                      "properties": {
+                        "filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "questions": {
+                      "type": "object",
+                      "nullable": true
+                    },
+                    "reviewSummary": {
+                      "type": "object",
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "reviews": {
+                    "filter": [
+                      "productid:eq:product1"
+                    ],
+                    "limit": "1",
+                    "offset": "0",
+                    "sort": "submissiontime:desc"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "canonical",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "The exact identifier string used in your Product Schema's `@id` field. **CRITICAL REQUIREMENT:** For search engines to associate these reviews with your product, the string you send here **MUST BE IDENTICAL** (character-for-character) to the `@id` you assign to the Product object in your own schema generation. **Recommended Format:** Product Canonical URL + `#product` fragment.",
+            "example": "https://www.example.com/running-shoe#product"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "en_US"
+            }
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Site ID of the implementation, default will be main_site",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "main_site"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns JSONLD by default for reviews and ratings.\n",
+            "headers": {
+              "Vary": {
+                "description": "Indicates which request headers affect the response",
+                "schema": {
+                  "type": "string",
+                  "example": "Origin, Accept-Encoding, Accept"
+                }
+              },
+              "Cache-Control": {
+                "description": "Caching directives (default 55 minutes)",
+                "schema": {
+                  "type": "string",
+                  "example": "public, max-age=3300"
+                }
+              }
+            },
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonLdResponseJSONFormat"
+                }
+              },
+              "text/javascript": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonLdResponseScript"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrodataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request, Validation failed for the request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "type": "/problems/bad-request",
+                  "title": "Bad Request",
+                  "status": 400,
+                  "detail": "Bv-passkey is required",
+                  "instance": "/clients/clientid/ugc"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "<html>\n  <head><title>400 Bad Request</title></head>\n  <body>\n    <h1>Bad Request</h1>\n    <p><strong>Status:</strong> 400</p>\n    <p><strong>Detail:</strong> Bv-passkey is required</p>\n    <p><strong>Type:</strong> /problems/bad-request </p>\n    <p><strong>Instance:</strong> /clients/clientid/ugc</p>\n  </body>\n</html>\n"
+              },
+              "text/javascript": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "<script type=\"application/json\" id=\"bv-error-data\">\n{\n  \"type\": \"/problems/bad-request\",\n  \"status\": 400,\n  \"title\": \"Bad Request\",\n  \"detail\": \"Bv-Passkey is required\",\n  \"instance\": \"/clients/clientid/ugc\"\n}\n</script>\n"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "type": "/problems/unauthorized",
+                  "title": "Unauthorized",
+                  "status": 401,
+                  "detail": "Invalid Bv-Passkey",
+                  "instance": "/clients/clientid/ugc"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "<html>\n  <head><title>401 Unauthorized</title></head>\n  <body>\n    <h1>Unauthorized</h1>\n    <p><strong>Status:</strong> 401</p>\n    <p><strong>Detail:</strong> Invalid Bv-Passkey</p>\n    <p><strong>Type:</strong> /problems/unauthorized</p>\n    <p><strong>Instance:</strong> /clients/clientid/ugc</p>\n  </body>\n</html>\n"
+              },
+              "text/javascript": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "<script type=\"application/json\" id=\"bv-error-data\">\n{\n  \"type\": \"/problems/unauthorized\",\n  \"status\": 401,\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid Bv-Passkey\",\n  \"instance\": \"/clients/clientid/ugc\"\n}\n</script>\n"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "type": "/problems/unexpected-error",
+                  "title": "Internal Server Error",
+                  "status": 500,
+                  "detail": "Internal Server Error",
+                  "instance": "/clients/clientid/ugc"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "<html>\n  <head><title>500 Internal Server Error</title></head>\n  <body>\n    <h1>Internal Server Error</h1>\n    <p><strong>Status:</strong> 500</p>\n    <p><strong>Detail:</strong> Internal Server Error</p>\n    <p><strong>Type:</strong>/problems/unexpected-error</p>\n    <p><strong>Instance:</strong> /clients/clientid/ugc</p>\n  </body>\n</html>\n"
+              },
+              "text/javascript": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "<script type=\"application/json\" id=\"bv-error-data\">\n  {\n    \"type\": \"/problems/unexpected-error\",\n    \"status\": 500,\n    \"title\": \"Internal Server Error\",\n    \"detail\": \"Internal Server Error\",\n    \"instance\": \"/clients/clientid/ugc\"\n  }\n</script>\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/questions": {
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "searchQuestions",
+        "operationId": "searchQuestionsUsingPOST",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionQuery"
+              }
+            }
+          },
+          "description": "Page, Filter & Sort"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/{clientId}/questions": {
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "searchQuestions",
+        "operationId": "searchQuestionsUsingPOSTAndClientId",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionQuery"
+              }
+            }
+          },
+          "description": "Page, Filter & Sort"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/reviews": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "searchReviews",
+        "operationId": "searchReviewsUsingPOST",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "header",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewQuery"
+              }
+            }
+          },
+          "description": "Page, Filter & Sort"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body, or missing clientId header"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    },
+    "/{clientId}/reviews": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "searchReviews",
+        "operationId": "searchReviewsUsingPOSTAndClientId",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "Client ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "description": "Correlation ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewQuery"
+              }
+            }
+          },
+          "description": "Page, Filter & Sort"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "500": {
+            "description": "Unexpected internal error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LookaheadRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "term": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          }
+        }
+      },
+      "LookaheadResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/LookaheadMatch"
+        }
+      },
+      "LookaheadMatch": {
+        "type": "object",
+        "properties": {
+          "hierachy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          }
+        }
+      },
+      "ContributorSearchResult": {
+        "type": "object",
+        "properties": {
+          "clearTextExternalId": {
+            "type": "string"
+          },
+          "legacyInternalId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "merit": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "string"
+          },
+          "affiliation": {
+            "type": "string"
+          },
+          "meritBadgeEligible": {
+            "type": "string"
+          },
+          "hyperlinkingEnabled": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "firstPublishTime": {
+            "type": "string"
+          },
+          "lastPublishTime": {
+            "type": "string"
+          }
+        }
+      },
+      "ContributorRequest": {
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          }
+        }
+      },
+      "ContributorResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ContributorMatch"
+        }
+      },
+      "ContributorMatch": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "legacyInternalID": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "brandId": {
+            "type": "string"
+          },
+          "brandName": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "productPageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "Video": {
+        "type": "object",
+        "properties": {
+          "legacyInternalId": {
+            "type": "string"
+          },
+          "rawUrlInput": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "videoHost": {
+            "type": "string"
+          },
+          "videoId": {
+            "type": "string"
+          },
+          "uploadStatus": {
+            "type": "string"
+          },
+          "thumbnailUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "Photo": {
+        "type": "object",
+        "properties": {
+          "caption": {
+            "type": "string"
+          },
+          "mediumImageId": {
+            "type": "string"
+          },
+          "thumbnailImageId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "thumbnailUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "Coordinate": {
+        "type": "object",
+        "properties": {
+          "table": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "PrrUpdate": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+      "QuestionContributor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "table": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "firstUpdateAt": {
+            "type": "string"
+          },
+          "lastUpdateAt": {
+            "type": "string"
+          },
+          "lastMutateAt": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "legacyInternalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clearTextExternalId": {
+            "type": "string"
+          },
+          "anonymous": {
+            "type": "boolean"
+          },
+          "rank": {
+            "type": "string"
+          },
+          "merit": {
+            "type": "string"
+          },
+          "affiliation": {
+            "type": "string"
+          },
+          "contributorBadgeEnabled": {
+            "type": "boolean"
+          },
+          "contributorLocation": {
+            "type": "string"
+          },
+          "campaignId": {
+            "type": "string"
+          },
+          "contentOriginId": {
+            "type": "string"
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "firstPublishTime": {
+            "type": "string"
+          },
+          "lastPublishTime": {
+            "type": "string"
+          },
+          "displayCode": {
+            "type": "string"
+          },
+          "displayLocale": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "submissionId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "agreedToTermsAndConditions": {
+            "type": "boolean"
+          },
+          "cdvOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ratingOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Photo"
+            }
+          },
+          "avatarPhoto": {
+            "$ref": "#/components/schemas/Photo"
+          },
+          "productReferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            }
+          },
+          "videos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Video"
+            }
+          },
+          "displayLastUpdate": {
+            "$ref": "#/components/schemas/PrrUpdate"
+          },
+          "customProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "cdvProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "ratingProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "externalId": {
+            "type": "string"
+          }
+        }
+      },
+      "SingleQuestionDocument": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "$ref": "#/components/schemas/Question"
+          },
+          "contributor": {
+            "$ref": "#/components/schemas/QuestionContributor"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "statistics": {
+            "$ref": "#/components/schemas/Statistics"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllAnswers"
+            }
+          },
+          "totalQueriedAnswers": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Question": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstUpdateAt": {
+            "type": "string"
+          },
+          "lastUpdateAt": {
+            "type": "string"
+          },
+          "lastMutateAt": {
+            "type": "string"
+          },
+          "client": {
+            "type": "string"
+          },
+          "legacyInternalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moderationContentID": {
+            "type": "string"
+          },
+          "moderationVersionID": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "contributorNickname": {
+            "type": "string"
+          },
+          "sendEmailAlertWhenPublished": {
+            "type": "boolean"
+          },
+          "sendEmailAlertWhenAnswered": {
+            "type": "boolean"
+          },
+          "contributorLocation": {
+            "type": "string"
+          },
+          "displayAsAnonymous": {
+            "type": "boolean"
+          },
+          "questionSummary": {
+            "type": "string"
+          },
+          "questionDetails": {
+            "type": "string"
+          },
+          "campaignId": {
+            "type": "string"
+          },
+          "contentOriginId": {
+            "type": "string"
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "firstPublishTime": {
+            "type": "string"
+          },
+          "lastPublishTime": {
+            "type": "string"
+          },
+          "displayLocale": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "submissionId": {
+            "type": "string"
+          },
+          "externalQuestionId": {
+            "type": "string"
+          },
+          "externalProductId": {
+            "type": "string"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Photo"
+            }
+          },
+          "avatarPhoto": {
+            "$ref": "#/components/schemas/Photo"
+          },
+          "videos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Video"
+            }
+          },
+          "cdvOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cdvProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "tagOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tagProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "customProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "productReferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            }
+          },
+          "bestAnswer": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "displayLastUpdate": {
+            "$ref": "#/components/schemas/PrrUpdate"
+          },
+          "contributor": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "about": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "statusGroup": {
+            "type": "string"
+          }
+        }
+      },
+      "AllAnswers": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "$ref": "#/components/schemas/Answer"
+          },
+          "contributor": {
+            "$ref": "#/components/schemas/QuestionContributor"
+          },
+          "statistics": {
+            "$ref": "#/components/schemas/Statistics"
+          }
+        }
+      },
+      "Statistics": {
+        "type": "object",
+        "properties": {
+          "positiveFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "negativeFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "helpfulnessScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "characterCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productReferenceCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inappropriateFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numPhotos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numVideos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPhotos": {
+            "type": "boolean"
+          },
+          "hasVideos": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Answer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstUpdateAt": {
+            "type": "string"
+          },
+          "lastUpdateAt": {
+            "type": "string"
+          },
+          "lastMutateAt": {
+            "type": "string"
+          },
+          "client": {
+            "type": "string"
+          },
+          "legacyInternalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moderationContentID": {
+            "type": "string"
+          },
+          "moderationVersionID": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "contributorNickname": {
+            "type": "string"
+          },
+          "sendEmailAlertWhenPublished": {
+            "type": "boolean"
+          },
+          "displayAsAnonymous": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          },
+          "campaignId": {
+            "type": "string"
+          },
+          "contentOriginId": {
+            "type": "string"
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "firstPublishTime": {
+            "type": "string"
+          },
+          "lastPublishTime": {
+            "type": "string"
+          },
+          "displayLocale": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "submissionId": {
+            "type": "string"
+          },
+          "externalAnswerId": {
+            "type": "string"
+          },
+          "externalProductId": {
+            "type": "string"
+          },
+          "cdvOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tagOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Photo"
+            }
+          },
+          "videos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Video"
+            }
+          },
+          "cdvProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "productReferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            }
+          },
+          "tagProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "customProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "contributor": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "question": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "submissionInstant": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statusGroup": {
+            "type": "string"
+          }
+        }
+      },
+      "AnswerQueryResponse": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalQueriedAnswers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllAnswers"
+            }
+          }
+        }
+      },
+      "AnswerFilters": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "string"
+          }
+        }
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "legacyInternalId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ratingsOnly": {
+            "type": "boolean"
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "submissionId": {
+            "type": "string"
+          },
+          "moderationTime": {
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "videos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Video"
+            }
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Photo"
+            }
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stats"
+          },
+          "responses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Response"
+            }
+          },
+          "recommend": {
+            "type": "boolean"
+          },
+          "contributor": {
+            "$ref": "#/components/schemas/ReviewContributor"
+          },
+          "contributorLocation": {
+            "type": "string"
+          },
+          "contributorNickname": {
+            "type": "string"
+          },
+          "displayLocale": {
+            "type": "string"
+          },
+          "displayCode": {
+            "type": "string"
+          },
+          "client": {
+            "type": "string"
+          },
+          "cdvs": {
+            "$ref": "#/components/schemas/ReviewCdvs"
+          },
+          "secondaryRatings": {
+            "$ref": "#/components/schemas/SecondaryRatings"
+          },
+          "moderationStatus": {
+            "type": "string"
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "campaignId": {
+            "type": "string"
+          },
+          "moderationContentID": {
+            "type": "string"
+          },
+          "moderationVersionID": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "customProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "moderationStatusGroup": {
+            "type": "string"
+          },
+          "tagOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tagProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "ReviewCdvs": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SecondaryRatings": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Stats": {
+        "type": "object",
+        "properties": {
+          "characterCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commentsApprovedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commentsPendingCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commentsRejectedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commentsExpiredCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasApprovedComment": {
+            "type": "boolean"
+          },
+          "hasPendingComment": {
+            "type": "boolean"
+          },
+          "hasRejectedComment": {
+            "type": "boolean"
+          },
+          "hasExpiredComment": {
+            "type": "boolean"
+          },
+          "inappropriateFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "negativeFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "photoCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "positiveFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productReferenceCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "videoCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "responseCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasResponses": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "legacyInternalId": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "department": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "responderClient": {
+            "type": "string"
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "legacyInternalId": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "submissionTime": {
+            "type": "string"
+          },
+          "moderationTime": {
+            "type": "string"
+          },
+          "contributor": {
+            "$ref": "#/components/schemas/ReviewContributor"
+          },
+          "moderationStatus": {
+            "type": "string"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/CommentStats"
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "moderationContentID": {
+            "type": "string"
+          },
+          "moderationVersionID": {
+            "type": "string"
+          },
+          "moderationStatusGroup": {
+            "type": "string"
+          }
+        }
+      },
+      "CommentStats": {
+        "type": "object",
+        "properties": {
+          "positiveFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "negativeFeedbackCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ReviewContributor": {
+        "type": "object",
+        "properties": {
+          "clearTextExternalId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "merit": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "string"
+          },
+          "affiliation": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonLdResponseScript": {
+        "type": "string",
+        "description": "JSON-LD structured data object inside script tag, Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating",
+        "example": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://www.example.com/skincare/acne/blemish-patches\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
+      },
+      "JsonLdResponseJSONFormat": {
+        "type": "object",
+        "description": "JSON-LD structured data object inside script tag",
+        "properties": {
+          "reviews": {
+            "type": "object",
+            "description": "contains https://schema.org/Review schema in form of array"
+          },
+          "questions": {
+            "type": "object",
+            "description": "contains https://schema.org/FAQPage"
+          },
+          "ratings": {
+            "type": "object",
+            "description": "contains https://schema.org/AggregateRating"
+          },
+          "reviewSummary": {
+            "type": "object",
+            "description": "contains https://schema.org/Review schema in form of array"
+          }
+        },
+        "example": {
+          "ratings": {
+            "@context": "https://schema.org/",
+            "@id": "https://www.example.com/skincare/acne/blemish-patches",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": 873,
+              "bestRating": 5
+            }
+          }
+        }
+      },
+      "MicrodataResponse": {
+        "type": "string",
+        "description": "HTML containing Microdata tags. Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating",
+        "example": "<div itemscope itemtype=\"https://schema.org/IndividualProduct\" itemid=\"https://www.example.com/skincare/acne/blemish-patches\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://schema.org/AggregateRating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "instance"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string"
+          }
+        }
+      },
+      "ContributorQuery": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/ContributorSort"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filters": {
+            "$ref": "#/components/schemas/ContributorFilters"
+          }
+        }
+      },
+      "ContributorFilters": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "legacyInternalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayName": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "affiliation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "staff badges"
+          },
+          "rank": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "staff badges"
+          },
+          "merit": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "TOP_250, TOP_100 etc."
+          },
+          "meritBadgeEligible": {
+            "type": "boolean"
+          },
+          "hyperlinkingEnabled": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "description": "basic moderation status, APPROVED, REJECTED, PENDING, EXPIRED, SUBMITTED, AUTOMTEDHOLD etc"
+          },
+          "statusGroup": {
+            "type": "string",
+            "description": "Grouped moderation status, APPROVED, REJECTED, PENDING, EXPIRED"
+          }
+        }
+      },
+      "ContributorSort": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          }
+        },
+        "example": [
+          {
+            "field": "lastPublishTime",
+            "direction": "desc"
+          },
+          {
+            "field": "submissionTime",
+            "direction": "asc"
+          },
+          {
+            "field": "legacyInternalId",
+            "direction": "desc"
+          },
+          {
+            "field": "status",
+            "direction": "desc"
+          },
+          {
+            "field": "externalId",
+            "direction": "asc"
+          },
+          {
+            "field": "displayName",
+            "direction": "asc"
+          }
+        ]
+      },
+      "ContributorSearchResponse": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalQueriedAnswers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContributorSearchResult"
+            }
+          }
+        }
+      },
+      "TimeRange": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          }
+        }
+      },
+      "QuestionQueryResponse": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Question"
+            }
+          }
+        }
+      },
+      "QuestionFilters": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "submissionTime": {
+            "$ref": "#/components/schemas/TimeRange"
+          },
+          "moderationTime": {
+            "$ref": "#/components/schemas/TimeRange"
+          },
+          "brandId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categoryId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "activeProduct": {
+            "type": "boolean"
+          },
+          "displayLocale": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "questionModerationStatusGroup": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "questionModerationStatus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerModerationStatusGroup": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerModerationStatus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "globalSearch": {
+            "type": "string"
+          },
+          "contributorExternalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contributorDisplayName": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contributorRank": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerLegacyInternalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerContentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerContributorExternalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerContributorNickname": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answerCampaignSource": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "withApprovedAnswers": {
+            "type": "boolean"
+          },
+          "withRejectedAnswers": {
+            "type": "boolean"
+          },
+          "withPendingAnswers": {
+            "type": "boolean"
+          },
+          "withExpiredAnswers": {
+            "type": "boolean"
+          },
+          "questionHasPhotos": {
+            "type": "boolean"
+          },
+          "questionHasVideos": {
+            "type": "boolean"
+          },
+          "answerHasPhotos": {
+            "type": "boolean"
+          },
+          "answerHasVideos": {
+            "type": "boolean"
+          },
+          "withAnswers": {
+            "type": "boolean"
+          }
+        }
+      },
+      "QuestionQuery": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/QuestionSort"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filters": {
+            "$ref": "#/components/schemas/QuestionFilters"
+          }
+        }
+      },
+      "QuestionSort": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          }
+        }
+      },
+      "ReviewFilters": {
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categoryId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contentCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayLocale": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "legacyInternalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "moderationStatusGroup": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "moderationStatus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "activeProduct": {
+            "type": "boolean"
+          },
+          "productName": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rating": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "ratingsOnly": {
+            "type": "boolean"
+          },
+          "productAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "globalSearch": {
+            "type": "string"
+          },
+          "submissionTime": {
+            "$ref": "#/components/schemas/TimeRange"
+          },
+          "moderationTime": {
+            "$ref": "#/components/schemas/TimeRange"
+          },
+          "withClientResponse": {
+            "type": "boolean"
+          },
+          "hasPhoto": {
+            "type": "boolean"
+          },
+          "hasVideo": {
+            "type": "boolean"
+          },
+          "includeNetwork": {
+            "type": "boolean"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "campaignId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contributorExternalId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ReviewQuery": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/ReviewSort"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filters": {
+            "$ref": "#/components/schemas/ReviewFilters"
+          }
+        }
+      },
+      "ReviewSort": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          }
+        },
+        "example": [
+          {
+            "field": "moderationTime",
+            "direction": "desc"
+          },
+          {
+            "field": "submissionTime",
+            "direction": "desc"
+          },
+          {
+            "field": "rating",
+            "direction": "desc"
+          },
+          {
+            "field": "legacyInternalId",
+            "direction": "desc"
+          }
+        ]
+      },
+      "ReviewQueryResponse": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bv-Passkey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Bv-Passkey",
+        "description": "GEO API key for authentication"
+      }
+    }
+  }
+}

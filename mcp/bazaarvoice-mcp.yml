@@ -1,0 +1,55 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/bazaarvoice-content-search-openapi.json
+note: Candidate MCP tool list derived from OpenAPI operations. Bazaarvoice publishes no official hosted MCP server as of this
+  writing.
+server:
+  name: bazaarvoice
+  transport: stdio
+tools:
+- name: catalogLookaheadSearch
+  description: Lookahead Search
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#catalogLookaheadSearch
+- name: clientGetSingularContributor
+  description: Contributor Search
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#clientGetSingularContributor
+- name: contributorLookaheadSearch
+  description: Contributor Search
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#contributorLookaheadSearch
+- name: getQuestionById
+  description: Get question
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getQuestionById
+- name: getQuestionByIdAndClientId
+  description: Get question
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getQuestionByIdAndClientId
+- name: getQuestionsUsingPOSTAndQuestionId
+  description: getAnswers
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getQuestionsUsingPOSTAndQuestionId
+- name: getReviewById
+  description: Get review
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getReviewById
+- name: getReviewByIdAndClientId
+  description: Get review
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getReviewByIdAndClientId
+- name: getSingularContributor
+  description: Contributor Search
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getSingularContributor
+- name: searchContributors
+  description: Contributor Search
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchContributors
+- name: getStructuredDataV2
+  description: Fetch Structured Data (JSON-LD or Microdata)
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#getStructuredDataV2
+- name: searchQuestionsUsingPOST
+  description: searchQuestions
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchQuestionsUsingPOST
+- name: searchQuestionsUsingPOSTAndClientId
+  description: searchQuestions
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchQuestionsUsingPOSTAndClientId
+- name: searchReviewsUsingPOST
+  description: searchReviews
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchReviewsUsingPOST
+- name: searchReviewsUsingPOSTAndClientId
+  description: searchReviews
+  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchReviewsUsingPOSTAndClientId

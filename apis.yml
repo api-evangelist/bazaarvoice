@@ -1,8 +1,16 @@
 aid: bazaarvoice
 name: Bazaarvoice
-description: Bazaarvoice is a company surfaced as a portfolio company of battery-ventures and added to
-  the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Bazaarvoice operates a retail and brand user-generated-content network that collects,
+  moderates, and syndicates ratings, reviews, questions and answers, and product-sampling
+  content across thousands of brand and retailer sites. Its developer platform exposes a
+  family of APIs - the flagship Conversations API for retrieving and submitting UGC, the
+  V2.0 Content Search API for searching reviews/questions/answers/contributors and product
+  catalog lookahead, plus the Transactions, Response, Social Commerce, and Authentic
+  Discovery APIs, and structured-data (JSON-LD/Microdata) endpoints for SEO. APIs
+  authenticate with a Bazaarvoice Portal-managed passkey (Bv-Passkey header) or, for the
+  Transactions and Response APIs, 2-legged OAuth2 client credentials. Official iOS, Android,
+  SEO, Magento, and Salesforce Commerce SDKs are published on GitHub.
 url: https://raw.githubusercontent.com/api-evangelist/bazaarvoice/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,14 +18,182 @@ x-backed-by:
 - battery-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://github.com/bazaarvoice.png
 tags:
 - Company
-apis: []
+- Reviews
+- Ratings
+- User Generated Content
+- Retail
+- eCommerce
+- Product Reviews
+- Syndication
+- Social Commerce
+- SEO
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: bazaarvoice:bazaarvoice-answers-api
+  name: Bazaarvoice Answers API
+  description: The Answers API from Bazaarvoice — 1 operation(s) for answers.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Answers
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-answers-api-openapi.yml
+  - type: APIReference
+    url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-clients-api
+  name: Bazaarvoice Clients API
+  description: The Clients API from Bazaarvoice — 1 operation(s) for clients.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-clients-api-openapi.yml
+  - type: APIReference
+    url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-contributor-api
+  name: Bazaarvoice Contributor API
+  description: The Contributor API from Bazaarvoice — 3 operation(s) for contributor.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Contributor
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-contributor-api-openapi.yml
+  - type: APIReference
+    url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-lookahead-api
+  name: Bazaarvoice Lookahead API
+  description: The Lookahead API from Bazaarvoice — 1 operation(s) for lookahead.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Lookahead
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-lookahead-api-openapi.yml
+  - type: APIReference
+    url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-questions-api
+  name: Bazaarvoice Questions API
+  description: The Questions API from Bazaarvoice — 4 operation(s) for questions.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Questions
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-questions-api-openapi.yml
+  - type: APIReference
+    url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-reviews-api
+  name: Bazaarvoice Reviews API
+  description: Search for reviews
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Reviews
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-reviews-api-openapi.yml
+  - type: APIReference
+    url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+common:
+- type: DeveloperPortal
+  url: https://developers.bazaarvoice.com/
+- type: Documentation
+  url: https://developers.bazaarvoice.com/
+- type: APIReference
+  url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
+- type: GettingStarted
+  url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- type: Support
+  url: https://developer.bazaarvoice.com/conversations-api/getting-help
+- type: Blog
+  url: https://blog.developer.bazaarvoice.com/
+- type: GitHubOrganization
+  url: https://github.com/bazaarvoice
+- type: Pricing
+  url: https://www.bazaarvoice.com/pricing/
+- type: TermsOfService
+  url: https://www.bazaarvoice.com/legal/terms-of-use/api/
+- type: PrivacyPolicy
+  url: https://www.bazaarvoice.com/legal/privacy-policy/
+- type: StatusPage
+  url: https://status.bazaarvoice.com
+- type: Deprecation
+  url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide
+- type: Authentication
+  url: authentication/bazaarvoice-authentication.yml
+- type: Packages
+  url: packages/bazaarvoice-packages.yml
+- type: SDKs
+  url: packages/bazaarvoice-packages.yml
+- type: MCPServer
+  url: mcp/bazaarvoice-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/bazaarvoice-agentic-access.yml
+- type: DomainSecurity
+  url: security/bazaarvoice-domain-security.yml
+- type: Conventions
+  url: conventions/bazaarvoice-conventions.yml
+- type: ErrorCatalog
+  url: errors/bazaarvoice-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/bazaarvoice-lifecycle.yml
+- type: ChangeLog
+  url: changelog/bazaarvoice-changelog.yml
+- type: RateLimits
+  url: rate-limits/bazaarvoice-rate-limits.yml
+- type: Conformance
+  url: conformance/bazaarvoice-conformance.yml
+- type: DataModel
+  url: data-model/bazaarvoice-data-model.yml
+- type: Overlay
+  url: overlays/bazaarvoice-content-search-overlay.yaml
+- type: LLMsTxt
+  url: llms/bazaarvoice-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
