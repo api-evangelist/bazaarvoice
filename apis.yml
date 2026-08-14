@@ -1,23 +1,26 @@
 aid: bazaarvoice
 name: Bazaarvoice
-description: >-
-  Bazaarvoice operates a retail and brand user-generated-content network that collects,
-  moderates, and syndicates ratings, reviews, questions and answers, and product-sampling
-  content across thousands of brand and retailer sites. Its developer platform exposes a
-  family of APIs - the flagship Conversations API for retrieving and submitting UGC, the
-  V2.0 Content Search API for searching reviews/questions/answers/contributors and product
-  catalog lookahead, plus the Transactions, Response, Social Commerce, and Authentic
-  Discovery APIs, and structured-data (JSON-LD/Microdata) endpoints for SEO. APIs
-  authenticate with a Bazaarvoice Portal-managed passkey (Bv-Passkey header) or, for the
-  Transactions and Response APIs, 2-legged OAuth2 client credentials. Official iOS, Android,
-  SEO, Magento, and Salesforce Commerce SDKs are published on GitHub.
+description: 'Bazaarvoice operates a retail and brand user-generated-content network that collects, moderates,
+  syndicates and now makes machine-discoverable the ratings, reviews, questions and answers, and visual
+  content published across thousands of brand and retailer sites. Its developer portal publishes twelve
+  product sections and eleven distinct OpenAPI documents: the Conversations Display and Conversations
+  Submission APIs for retrieving and posting UGC, the V2.0 Content Search API, the Response API for brand
+  replies, the Transactions API for scheduling review requests, the Product Sentiment API for NLP-derived
+  feature insight, the Notifications Subscriptions and Privacy APIs, the Social Commerce Display API for
+  visual UGC, bulk Displayable Content and Product Sentiment exports, and the Authentic Discovery API,
+  which returns Schema.org JSON-LD so AI crawlers that do not run JavaScript can read a product''s reviews.
+  Authentication varies by product - a Portal-managed passkey (Bv-Passkey header or Passkey query parameter),
+  HTTP bearer tokens from 2-legged or 3-legged OAuth2, or an X-Curalate-Api-Key header on the acquired
+  Curalate social-commerce platform. Bazaarvoice serves a real llms.txt on every documentation section,
+  publishes first-party Postman collections and iOS, Android, SEO, Magento and Salesforce Commerce SDKs
+  on GitHub, and is ISO/IEC 27001 certified with a HackerOne vulnerability disclosure policy.'
 url: https://raw.githubusercontent.com/api-evangelist/bazaarvoice/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: eleven provider-published OpenAPI documents harvested; full artifact set
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -32,7 +35,7 @@ accessModel:
   method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-13'
 image: https://github.com/bazaarvoice.png
 tags:
 - Company
@@ -135,6 +138,286 @@ apis:
     url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-conversations-display-api
+  name: Bazaarvoice Conversations Display API
+  description: The Conversations Display API returns published user-generated content for a product or
+    catalog - reviews, review comments, questions, answers, author profiles, products, categories and
+    aggregate statistics - as JSON or XML, selected with the ApiVersion query parameter and a client passkey.
+  humanURL: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Reviews
+  - Questions
+  - Answers
+  - Display
+  - User Generated Content
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-conversations-display-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-conversations-display-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-conversations-display-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+- aid: bazaarvoice:bazaarvoice-conversations-submission-api
+  name: Bazaarvoice Conversations Submission API
+  description: 'The Conversations Submission API accepts shopper-generated content: reviews, review comments,
+    questions, answers and feedback, plus photo and video upload, author authentication and progressive
+    submission. Form previews describe the fields each client requires before a submission is posted.'
+  humanURL: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Reviews
+  - Submission
+  - User Generated Content
+  - Media Upload
+  - Moderation
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-conversations-submission-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-conversations-submission-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-conversations-submission-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+- aid: bazaarvoice:bazaarvoice-response-api
+  name: Bazaarvoice Response API
+  description: The Response API lets a brand publish, edit and remove its official response to a review,
+    and read the review and author behind a response. It authenticates with an HTTP bearer token obtained
+    through the Bazaarvoice identity portal rather than with a passkey.
+  humanURL: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Reviews
+  - Brand Response
+  - Moderation
+  - Customer Service
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-response-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-response-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-response-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+- aid: bazaarvoice:bazaarvoice-response-count-api
+  name: Bazaarvoice Response Count API
+  description: A separately published single-operation contract that takes a list of review identifiers
+    and returns how many brand responses each review already has - the bulk triage counterpart to the
+    Response API.
+  humanURL: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Reviews
+  - Brand Response
+  - Bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-response-count-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-response-count-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-response-count-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+- aid: bazaarvoice:bazaarvoice-notifications-subscriptions-api
+  name: Bazaarvoice Notifications Subscriptions API
+  description: The Notifications Subscriptions API manages shopper email subscription state for Bazaarvoice
+    notification emails - paging the opt-in and opt-out lists per email type and subscribing or unsubscribing
+    an address on the shopper's behalf. Email addresses are encrypted with a shared secret key.
+  humanURL: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Notifications
+  - Email
+  - Consent
+  - Subscriptions
+  - Privacy
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-notifications-subscriptions-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-notifications-subscriptions-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+- aid: bazaarvoice:bazaarvoice-transactions-api
+  name: Bazaarvoice Transactions API
+  description: The Transactions API ingests purchase transaction records - single or bulk - so Bazaarvoice
+    can schedule post-interaction review-request notifications, and invalidates a transaction when an
+    order is cancelled. It authenticates with 2-legged OAuth2 client credentials and returns RFC 9457
+    problem documents on error.
+  humanURL: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Transactions
+  - Review Requests
+  - Notifications
+  - eCommerce
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-transactions-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-transactions-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-transactions-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+- aid: bazaarvoice:bazaarvoice-product-sentiment-api
+  name: Bazaarvoice Product Sentiment API
+  description: 'The Product Sentiment API returns NLP-derived consumer insight from review text: summarised
+    product features with best/worst weighting, the shopper quotes behind each feature, all detected features
+    for a product, top positive quotes, and the underlying expressions. It is the one Bazaarvoice contract
+    that declares its 429 response.'
+  humanURL: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  baseURL: https://api.bazaarvoice.com/sentiment/v1/
+  tags:
+  - Sentiment
+  - Natural Language Processing
+  - Insights
+  - Reviews
+  - AI
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-product-sentiment-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-product-sentiment-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+- aid: bazaarvoice:bazaarvoice-social-commerce-media-api
+  name: Bazaarvoice Social Commerce Display (Media) API
+  description: The Social Commerce Display API serves visual user-generated content - gallery media, top
+    images, recommendations, Instagram and Facebook sourcing, media upload and reporting, and Schema.org
+    structured data for galleries. Bazaarvoice's own Social Commerce documentation states that all endpoints
+    are served from edge.curalate.com, the platform of Curalate, the visual-commerce company Bazaarvoice
+    acquired; the API still authenticates with an X-Curalate-Api-Key header.
+  humanURL: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  baseURL: https://edge.curalate.com
+  tags:
+  - Social Commerce
+  - Visual UGC
+  - Galleries
+  - Instagram
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-social-commerce-media-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-social-commerce-media-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+- aid: bazaarvoice:bazaarvoice-authentic-discovery-api
+  name: Bazaarvoice Authentic Discovery API
+  description: 'The Authentic Discovery API is Bazaarvoice''s generative-engine-optimization surface:
+    a server-side call that returns a product''s ratings, reviews, review summaries and Q&A as Schema.org
+    JSON-LD or Microdata so it can be embedded in the initial HTML response and read by AI crawlers that
+    do not execute JavaScript.'
+  humanURL: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  baseURL: https://seo.bazaarvoice.com/structured-data/v1
+  tags:
+  - Structured Data
+  - JSON-LD
+  - SEO
+  - AI Discovery
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-authentic-discovery-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-authentic-discovery-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+- aid: bazaarvoice:bazaarvoice-displayable-content-export
+  name: Bazaarvoice Displayable Content Export
+  description: 'Displayable Content Export is a bulk HTTPS data interface: a client requests a manifest
+    file list, follows redirects to the manifest and then to the data files, and downloads the full set
+    of displayable user-generated content rather than paging it through the Conversations Display API.'
+  humanURL: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Bulk Export
+  - Data Feed
+  - User Generated Content
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-displayable-content-export-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-displayable-content-export-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-displayable-content-export-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+- aid: bazaarvoice:bazaarvoice-product-sentiment-export
+  name: Bazaarvoice Product Sentiment Export
+  description: 'Product Sentiment Export is the bulk counterpart to the Product Sentiment API: the same
+    manifest-then-download HTTPS flow used by Displayable Content Export, delivering sentiment insight
+    data as files instead of per-product API responses.'
+  humanURL: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Bulk Export
+  - Sentiment
+  - Data Feed
+  - Insights
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-product-sentiment-export-openapi.yml
+  - type: OpenAPI
+    name: Provider-published source document (verbatim)
+    url: openapi/_original/bazaarvoice-product-sentiment-export-openapi.json
+  - type: Overlay
+    url: overlays/bazaarvoice-product-sentiment-export-overlay.yaml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
 common:
 - type: DeveloperPortal
   url: https://developers.bazaarvoice.com/
@@ -192,8 +475,32 @@ common:
   url: overlays/bazaarvoice-content-search-overlay.yaml
 - type: LLMsTxt
   url: llms/bazaarvoice-llms.txt
+- type: Security
+  url: https://www.bazaarvoice.com/legal/vulnerability-disclosure-policy/
+- type: VulnerabilityDisclosure
+  url: security/bazaarvoice-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/bazaarvoice-trust-center.yml
+- type: Compliance
+  url: https://www.bazaarvoice.com/company/trust/security/
+- type: Sandbox
+  url: sandbox/bazaarvoice-sandbox.yml
+- type: Components
+  url: components/bazaarvoice-components.yml
+- type: Plans
+  url: plans/bazaarvoice-plans-pricing.yml
+- type: Postman
+  url: postman/_index.yml
+- type: Login
+  url: https://portal.bazaarvoice.com
+- type: Support
+  url: https://support.bazaarvoice.com/
+  name: Bazaarvoice Support Center
+- type: LLMsTxt
+  url: llms/_index.yml
+  name: Per-product llms.txt set (13 documents)
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 62
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
