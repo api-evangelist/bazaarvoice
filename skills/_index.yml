@@ -1,11 +1,41 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: generated
+note: >-
+  One packaged Agent Skill per marquee Bazaarvoice flow. Every operation named in every skill was
+  grepped out of a real published Bazaarvoice OpenAPI in openapi/_original/ - none is invented.
+  Bazaarvoice publishes no AGENTS.md or first-party skill files; these are API Evangelist
+  generations grounded in the provider's own contracts, conventions and error semantics.
 skills:
 - file: bazaarvoice-search-ugc.md
   name: Search Bazaarvoice UGC (reviews and questions)
-  api: openapi/bazaarvoice-content-search-openapi.json
+  api: openapi/_original/bazaarvoice-content-search-openapi.json
   operations: [searchReviewsUsingPOST, getReviewById, searchQuestionsUsingPOST, getQuestionsUsingPOSTAndQuestionId, searchContributors, catalogLookaheadSearch]
 - file: bazaarvoice-structured-data-seo.md
   name: Fetch Bazaarvoice structured data for SEO
-  api: openapi/bazaarvoice-content-search-openapi.json
+  api: openapi/_original/bazaarvoice-content-search-openapi.json
   operations: [getStructuredDataV2]
+- file: bazaarvoice-submit-review.md
+  name: Submit a review to Bazaarvoice
+  api: openapi/bazaarvoice-conversations-submission-openapi.yml
+  operations: [GetReviewPreview, SubmitReview, AuthenticateUser, UploadPhoto, SubmitFeedback]
+- file: bazaarvoice-respond-to-reviews.md
+  name: Respond to reviews as a brand
+  api: openapi/bazaarvoice-response-openapi.yml
+  operations: [getClientResponseForReview, createClientResponseForReview, getClientResponse, updateClientResponse, deleteClientResponse, getAuthor, getReview, countResponsesForReviews]
+- file: bazaarvoice-ingest-transactions.md
+  name: Send purchase transactions to trigger review requests
+  api: openapi/bazaarvoice-transactions-openapi.yml
+  operations: [ingestTransaction, ingestBulkTransaction, invalidateTransaction]
+- file: bazaarvoice-authentic-discovery-jsonld.md
+  name: Make UGC visible to AI crawlers with Authentic Discovery
+  api: openapi/bazaarvoice-authentic-discovery-openapi.yml
+  operations: [getStructuredDataV2]
+- file: bazaarvoice-product-sentiment.md
+  name: Read AI product-sentiment features and quotes
+  api: openapi/bazaarvoice-product-sentiment-openapi.yml
+  operations: [getTopFeatureQuotes, getSummarisedFeaturesWithQuotes, getAllFeaturesForProduct, getProductQuotes, getFeatureExpressions]
+- file: bazaarvoice-notification-subscriptions.md
+  name: Manage email notification opt-in and opt-out lists
+  api: openapi/bazaarvoice-notifications-subscriptions-openapi.yml
+  operations: [fetchOptInByPage, fetchOptOutByPage, subscribe, unsubscribe]
+skill_count: 8

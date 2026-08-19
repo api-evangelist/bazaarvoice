@@ -1,0 +1,2914 @@
+{
+  "item": [
+    {
+      "id": "d2df6757-ebc4-4d3a-9e62-d5769f5ac073",
+      "name": "Author",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6d99ac6-c202-47db-9c15-421aff0b16a1",
+          "name": "Get a given client response record's author details",
+          "request": {
+            "name": "Get a given client response record's author details",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid",
+                "relationships",
+                "author"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "994064cd-a1c9-4279-b86e-8c2ca080d9b3",
+              "name": "Successful retrieval of an author relationship",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"author\",\n    \"id\": \"1\"\n  },\n  \"links\": {\n    \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/author\",\n    \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/author\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f00f34c3-062b-4350-9cbc-a50e0583fb23",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1964715-e0f2-407f-959f-ce8fb99039ce",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f65d8d80-27c7-4bb4-98f7-4fcfb3d1b293",
+              "name": "Unknown or invalid response guid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 404,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}/relationships/author\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"id\",\n      \"message\": \"Client Response Id does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "462661c3-f2bb-4fff-becc-13280914a721",
+          "name": "Get a given client response record's author details",
+          "request": {
+            "name": "Get a given client response record's author details",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid",
+                "author"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f50ef945-56d8-4fbb-a781-f9fb52da91fe",
+              "name": "Successful retrieval of an author relationship",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"author\",\n    \"id\": \"1\"\n  },\n  \"links\": {\n    \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/author\",\n    \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/author\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4590a0af-af55-4706-9d05-4b922f3985f8",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9713eb0-8071-4974-bf7e-c0aa7fbdf4c4",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9be8def3-bf1e-44e9-ae2b-ebe5e4697ae8",
+              "name": "Unknown or invalid response guid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "author"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 404,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}/author\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"id\",\n      \"message\": \"Client Response Id does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ec99e021-3899-4d0c-9e12-2da729ae321c",
+      "name": "Client Response",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2fdd357d-d913-424d-ad46-bf004f7aaca9",
+          "name": "Get a given client response record",
+          "request": {
+            "name": "Get a given client response record",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ddea44d-6b51-4477-8b19-59eba70ddd23",
+              "name": "Successful retrieval of a client response record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"clientResponse\",\n  \"id\": \"{responseGuid}\",\n  \"attributes\": {\n    \"department\": \"Department name specified by the user\",\n    \"response\": \"Response specified by the user\",\n    \"responseBy\": \"Optional responder name specified by the user\",\n    \"responseSource\": \"Name of Application created for OAuth\",\n    \"responderClient\": \"responderClient\",\n    \"created\": \"XXXX-XX-XXTXX:XX:XXZ\",\n    \"updated\": \"XXXX-XX-XXTXX:XX:XXZ\"\n  },\n  \"relationships\": {\n    \"review\": {\n      \"data\": {\n        \"type\": \"review\",\n        \"id\": \"XXXXXXX\",\n        \"clientName\": \"XXXXXXXXXXXX\"\n      },\n      \"links\": {\n        \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review\",\n        \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review\"\n      }\n    }\n  },\n  \"links\": {\n    \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d12f5b42-16ce-4842-9f15-770daf4b5913",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bdc108b-047f-4c1c-a3cb-63e5e7ee7926",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6391ae5-04e6-466d-b56b-1241c9d07029",
+              "name": "Unknown or invalid response guid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 404,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"id\",\n      \"message\": \"Client Response Id does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "195b2514-ad5c-49cf-b971-d709704f1186",
+          "name": "Delete a given client response record",
+          "request": {
+            "name": "Delete a given client response record",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3ad9d224-4452-479b-9de4-c69bac70628e",
+              "name": "Successful deletion of a client response record (204 returned whether the responseGuid exists or not)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83a6c505-c18f-44df-acce-18845ee147fe",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73f22a7a-2a00-44b3-ab05-05408354b7a8",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbaaba8c-d8f3-4dee-9ff5-e3d7569081c5",
+          "name": "Update a given client response record",
+          "request": {
+            "name": "Update a given client response record",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "512db4a0-dd9a-4109-83af-e60e918c845b",
+              "name": "Successful update of a client response record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"clientResponse\",\n  \"id\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\",\n  \"attributes\": {\n    \"department\": \"Department name specified by the user\",\n    \"response\": \"Response specified by the user\",\n    \"responseBy\": \"Optional responder name specified by the user\",\n    \"responseSource\": \"Name of Application created for OAuth\",\n    \"created\": \"2018-06-22T19:55:03Z\",\n    \"updated\": \"2018-06-27T14:32:15Z\"\n  },\n  \"relationships\": {\n    \"author\": {\n      \"data\": {\n        \"type\": \"author\",\n        \"id\": \"Dav OAuth\"\n      },\n      \"links\": {\n        \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author\",\n        \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author\"\n      }\n    },\n    \"review\": {\n      \"data\": {\n        \"type\": \"review\",\n        \"id\": \"75266\",\n        \"clientName\": \"apitestcustomer\"\n      },\n      \"links\": {\n        \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review\",\n        \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review\"\n      }\n    }\n  },\n  \"links\": {\n    \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dc218b4-ce8a-4e48-a9db-1275c1668565",
+              "name": "Duplicate response text",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 400,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"response\",\n      \"message\": \"Duplicate '{response text}' detected for ClientResponse.response\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50322555-cb02-4ad9-85ac-615443cd44d9",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceed4dd6-46b0-48f4-a817-3fd5e3689712",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "782b2d92-d8ad-4702-8e3e-0077d3a988a9",
+              "name": "Unknown or invalid response guid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 404,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"id\",\n      \"message\": \"Client Response Id does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7725b727-adba-437c-8ee7-f173fd6491a4",
+          "name": "Get all client response records for the specified review",
+          "request": {
+            "name": "Get all client response records for the specified review",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":client",
+                "reviews",
+                ":reviewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client",
+                  "description": "(Required) Specify a client name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reviewId",
+                  "description": "(Required) Specify a review id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f58e69e-c14b-4195-9b3c-fb45c245ffda",
+              "name": "Successful retrieval of a client response record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"clientResponse\",\n      \"id\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\",\n      \"attributes\": {\n        \"department\": \"Department name specified by the user\",\n        \"response\": \"Response specified by the user\",\n        \"responseBy\": \"Optional responder name specified by the user\",\n        \"responseSource\": \"Name of Application created for OAuth\",\n        \"created\": \"XXXX-XX-XXTXX:XX:XXZ\",\n        \"updated\": \"XXXX-XX-XXTXX:XX:XXZ\"\n      },\n      \"relationships\": {\n        \"author\": {\n          \"data\": {\n            \"type\": \"author\",\n            \"id\": \"Dav OAuth\"\n          },\n          \"links\": {\n            \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author\",\n            \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author\"\n          }\n        },\n        \"review\": {\n          \"data\": {\n            \"type\": \"review\",\n            \"id\": \"{reviewId}\",\n            \"clientName\": \"{client}\"\n          },\n          \"links\": {\n            \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review\",\n            \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://qa.api.bazaarvoice.com/response/v1/response/v1/clientResponses/apitestcustomer/reviews/XXXXXXX\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f603279e-e9c7-435c-b824-15a2b23a7841",
+              "name": "Incorrect or unknown review id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 400,\n  \"requestURI\": \"/response/v1/clientResponses/{client}/reviews/{reviewId}\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"reviewId\",\n      \"message\": \"Review Id does not exist for client\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abc53ee0-0e73-4b62-a498-b18bd24fca4e",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37dae616-5aae-470a-a9b2-f3327ed50999",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79ab8ede-848e-4ad4-9666-ce614f79028d",
+          "name": "Submit a client response for a given review",
+          "request": {
+            "name": "Submit a client response for a given review",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":client",
+                "reviews",
+                ":reviewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client",
+                  "description": "(Required) Specify a client name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reviewId",
+                  "description": "(Required) Specify a review id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a79acaf4-956d-4509-a0cd-04e906752286",
+              "name": "Successful retrieval of a client response record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"clientResponse\",\n      \"id\": \"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\",\n      \"attributes\": {\n        \"department\": \"Department name specified by the user\",\n        \"response\": \"Response specified by the user\",\n        \"responseBy\": \"Optional responder name specified by the user\",\n        \"responseSource\": \"Name of Application created for OAuth\",\n        \"created\": \"2018-06-22T19:55:03Z\",\n        \"updated\": \"2018-06-22T19:55:03Z\"\n      },\n      \"relationships\": {\n        \"author\": {\n          \"data\": {\n            \"type\": \"author\",\n            \"id\": \"Dav OAuth\"\n          },\n          \"links\": {\n            \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author\",\n            \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author\"\n          }\n        },\n        \"review\": {\n          \"data\": {\n            \"type\": \"review\",\n            \"id\": \"{reviewId}\",\n            \"clientName\": \"{client}\"\n          },\n          \"links\": {\n            \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review\",\n            \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review\"\n          }\n        }\n      },\n      \"links\": {\n        \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f649df01-0254-4b86-a141-f88e25bc3291",
+              "name": "Incorrect or unknown review id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 400,\n  \"requestURI\": \"/response/v1/clientResponses/{client}/reviews/{reviewId}\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"reviewId\",\n      \"message\": \"Review Id does not exist for client\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7368582a-9917-43e2-9ae0-d6d3c33eb17a",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5795100a-c4dd-470a-b8ac-194a6639286b",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":client",
+                    "reviews",
+                    ":reviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Specify a client name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reviewId",
+                      "description": "(Required) Specify a review id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributes\": {\n    \"department\": \"<string>\",\n    \"response\": \"<string>\",\n    \"responseBy\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7bc02d7d-dea3-46d2-b05a-72997a58d9b4",
+      "name": "Review",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccc7ffcf-445f-4129-aceb-c99b31855bb6",
+          "name": "Get a given client response record's review details",
+          "request": {
+            "name": "Get a given client response record's review details",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid",
+                "review"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8dc0006c-2df8-4c43-9e3c-a3d790e08a81",
+              "name": "Successful retrieval of an author relationship",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"review\",\n    \"id\": 12345,\n    \"clientName\": \"clientName\"\n  },\n  \"links\": {\n    \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review\",\n    \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "065a1b11-3c5d-4e8d-a31a-f9c8521d1e9b",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0ac6c61-e424-4526-b95e-01873f680319",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d5378b11-bdb3-44b3-a64b-2e373118e74c",
+              "name": "Unknown or invalid response guid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 404,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}/review\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"id\",\n      \"message\": \"Client Response Id does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1744c5d5-ff90-4c6d-9a0e-ed4060a93c1e",
+          "name": "Get a given client response record's review details",
+          "request": {
+            "name": "Get a given client response record's review details",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                ":responseGuid",
+                "relationships",
+                "review"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responseGuid",
+                  "description": "(Required) Specify a string Client Response Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77b0ec23-7422-41de-9f6f-17df7d43318b",
+              "name": "Successful retrieval of an author relationship",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"review\",\n    \"id\": 12345,\n    \"clientName\": \"clientName\"\n  },\n  \"links\": {\n    \"self\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review\",\n    \"related\": \"https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb996055-1340-4181-8009-024bec81d7c9",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9327c98e-9ec0-4cfa-94b0-dc203a424f84",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b89d6760-359a-4e6d-92ac-cb1dce353181",
+              "name": "Unknown or invalid response guid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    ":responseGuid",
+                    "relationships",
+                    "review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responseGuid",
+                      "description": "(Required) Specify a string Client Response Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": 404,\n  \"requestURI\": \"/response/v1/clientResponses/{responseGuid}/relationships/review\",\n  \"errors\": [\n    {\n      \"code\": \"INVALID_PROPERTY_VALUE\",\n      \"field\": \"id\",\n      \"message\": \"Client Response Id does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://stg.api.bazaarvoice.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3134efdc-76b1-41ad-90e8-98ba1d1cc904",
+    "name": "Response API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bazaarvoice Response API lets you programmatically manage review responses.\n\nContact Support:\n Name: Response API Team\n Email: support@bazaarvoice.com",
+      "type": "text/plain"
+    }
+  }
+}

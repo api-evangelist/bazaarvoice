@@ -1,0 +1,61 @@
+generated: '2026-08-13'
+method: probed
+source: live probes of every apis.yml baseURL host, every OpenAPI servers[] host, and the docs host
+note: >-
+  Every /.well-known/ path was probed on every Bazaarvoice host in this profile and NONE returned
+  a document. www.bazaarvoice.com answers 404 with the marketing-site HTML shell for all of them;
+  api.bazaarvoice.com answers a bare 404; developers.bazaarvoice.com (ReadMe-hosted) answers 404;
+  seo.bazaarvoice.com is an S3/CloudFront origin that answers 403 AccessDenied to any path outside
+  /structured-data/v1; developer.bazaarvoice.com answers 429 with a bot-challenge interstitial to
+  every automated request. NO WellKnown or SecurityTxt pointer is emitted from this file - it
+  records a verified ABSENCE, not a presence. Bazaarvoice does publish a vulnerability disclosure
+  policy and a security@ contact, just not as an RFC 9116 security.txt; see
+  security/bazaarvoice-vulnerability-disclosure.yml.
+hosts:
+- host: https://www.bazaarvoice.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, body: html-shell}
+  - {path: /.well-known/openid-configuration, status: 404, body: html-shell}
+  - {path: /.well-known/oauth-authorization-server, status: 404, body: html-shell}
+  - {path: /.well-known/api-catalog, status: 404, body: html-shell}
+  - {path: /.well-known/ai-plugin.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent-card.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent.json, status: 404, body: html-shell}
+- host: https://api.bazaarvoice.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://developers.bazaarvoice.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404, body: html-shell}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent-card.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent.json, status: 404, body: html-shell}
+- host: https://developer.bazaarvoice.com
+  note: legacy ReadMe docs host; every automated request answered 429 with a bot-challenge page
+  documents:
+  - {path: /.well-known/security.txt, status: 429, body: bot-challenge}
+  - {path: /.well-known/agent-card.json, status: 429, body: bot-challenge}
+  - {path: /.well-known/agent.json, status: 429, body: bot-challenge}
+- host: https://seo.bazaarvoice.com
+  note: OpenAPI servers[] host for the Authentic Discovery / structured-data API; S3-backed origin
+  documents:
+  - {path: /.well-known/security.txt, status: 403, body: s3-access-denied}
+  - {path: /.well-known/agent-card.json, status: 403, body: s3-access-denied}
+  - {path: /.well-known/agent.json, status: 403, body: s3-access-denied}
+summary:
+  paths_probed: 27
+  documents_found: 0
+  security_txt: false
+  agent_card: false
+  api_catalog: false
+  openid_configuration: false
+  oauth_authorization_server: false

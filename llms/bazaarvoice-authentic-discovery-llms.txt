@@ -1,0 +1,19 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Understanding the Authentic Discovery API](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home.md): This section explains what is Authentic Discovery<sup>TM</sup> API and its role in helping AI bots discover your User Generated Content (UGC).
+- [Getting Started with Authentic Discovery API](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/implementation-guide.md): This section provides step-by-step instructions for implementing the Authentic Discovery API.
+- [API Technical specifications](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/parameters.md): This section outlines the technical specifications of the Authentic Discovery API.
+- [What is Galleries Structured Data?](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/what-is-galleries-structured-data.md)
+- [Implementation Guide - Galleries Structured Data](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/implementation-guide-galleries-structured-data.md): This page lists out directions to implement Gallery Structured data for your Vibe media gallery.
+- [Retrieve data in JSON-LD](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retrieve-data-in-json-ld.md): This section provides sample requests to retrieve structured data in JSON-LD format.
+- [Retrieve data in Microdata](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retrieve-data-in-microdata.md): This section provides sample request to retrieve structured data in Microdata format.
+- [Retrieve data in JSON](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retrieve-data-in-json.md): This section provides sample request to retrieve structured data in the JSON format.
+
+## API Reference
+- [Fetch Structured Data (JSON-LD or Microdata)](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata.md): Retrieves structured data for a specific product. This is the recommended endpoint that accepts productId as a query parameter.
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/page/support.md)

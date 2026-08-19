@@ -1,0 +1,27 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Overview](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api.md): The Bazaarvoice Notifications Subscriptions API enables you to manage end-user subscriptions to email notifications triggered by the Bazaarvoice platform.
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/security-impearatives.md): Security Fundamentals for HTTPS and TLS.
+- [Getting Started](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/getting-started.md): This page contains information that will get you started using the Notifications Subscriptions API quickly and correctly.
+- [Creating the Email Authentication Token](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/creating-the-email-authentication-token.md): This page explains how to create an email address message authentication code (MAC) for submission to the Bazaarvoice platform using the Notifications Subscriptions API.
+- [Add Email Address to Opt-In List](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/add-email-address-to-opt-in-list.md): This page explains how to subscribe users to email notifications sent by the Bazaarvoice platform.
+- [Add Email Address to Opt-Out List](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/add-email-address-to-opt-out-list.md): This page explains how to unsubscribe users from email notifications sent by the Bazaarvoice platform.
+- [Request Opt-In List](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/request-opt-in-list.md): This page explains how to request a list of email addresses that have been explicitly subscribed to a particular email type.
+- [Request Opt-Out List](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/request-opt-out-list.md): This page explains how to request a list of email addresses that have been explicitly unsubscribed from a particular email type.
+- [Decrypting Email Addresses](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/decrypting-email-addresses.md): This page explains how to decrypt an email address returned by the Notifications Subscriptions API.
+- [Notification Types](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notification-types.md): The Notifications Subscriptions API supports managing subscriptions to the following notification types
+- [Tools](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/tools.md): The list below is a collection of tools the Development Team at Bazaarvoice has created to assist users working with the Notifications Subscriptions API. These tools are maintained by Bazaarvoice.
+- [Troubleshooting](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/troubleshooting.md): Use the following table to help you troubleshoot the errors you receive from the API.
+- [FAQs](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/faqs.md)
+
+## API Reference
+- [Retrieve opt-in email list](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email.md): Request a list of email addresses that have been explicitly subscribed to particular email type
+- [Retrieve opt-out email list](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-out-email.md): Request a list of email addresses that have been explicitly unsubscribed to particular email type
+- [Add email to opt-in list](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-subscribe-email.md): On success, returns the updated/inserted subscription
+- [Add email to opt-out list](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-unsubscribe-email.md): On success, returns the updated/inserted subscription
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-NotificationsAPI/page/support.md)

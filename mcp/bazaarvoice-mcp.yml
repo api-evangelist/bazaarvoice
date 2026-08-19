@@ -1,55 +1,436 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: derived
 status: candidate
-source: openapi/bazaarvoice-content-search-openapi.json
-note: Candidate MCP tool list derived from OpenAPI operations. Bazaarvoice publishes no official hosted MCP server as of this
-  writing.
+source:
+- openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+- openapi/_original/bazaarvoice-content-search-openapi.json
+- openapi/_original/bazaarvoice-conversations-display-openapi.json
+- openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- openapi/_original/bazaarvoice-displayable-content-export-openapi.json
+- openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- openapi/_original/bazaarvoice-product-sentiment-export-openapi.json
+- openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- openapi/_original/bazaarvoice-response-count-openapi.json
+- openapi/_original/bazaarvoice-response-openapi.json
+- openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- openapi/_original/bazaarvoice-transactions-openapi.json
+note: 'Candidate MCP tool list derived from every operation across the eleven OpenAPI documents Bazaarvoice
+  publishes on developers.bazaarvoice.com. Bazaarvoice ships NO MCP server of any kind - no hosted endpoint,
+  no npm/PyPI stdio package, nothing in its GitHub org or docs. Searches that appear to show an "official
+  Bazaarvoice MCP server" resolve to this very file republished on apis.io, and to third-party connector
+  vendors; neither is a Bazaarvoice product and neither is treated as evidence here. Bazaarvoice''s actual
+  agent-facing investment is elsewhere: a per-project llms.txt on every developer-portal section and the
+  Authentic Discovery API, which returns JSON-LD for AI crawlers.'
 server:
   name: bazaarvoice
   transport: stdio
+deployment:
+  mode: none
+  auth: api-key
+  verified: searched
+  checked: '2026-08-13'
+  searched:
+  - https://developers.bazaarvoice.com/
+  - https://github.com/bazaarvoice
+  - npm registry search "bazaarvoice"
+  - PyPI
+  - web search for a Bazaarvoice MCP server
+  note: No remote endpoint and no stdio package exist. Nothing to install and nothing for an agent to
+    POST to.
+tool_count: 79
 tools:
-- name: catalogLookaheadSearch
-  description: Lookahead Search
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#catalogLookaheadSearch
-- name: clientGetSingularContributor
-  description: Contributor Search
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#clientGetSingularContributor
-- name: contributorLookaheadSearch
-  description: Contributor Search
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#contributorLookaheadSearch
-- name: getQuestionById
-  description: Get question
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getQuestionById
-- name: getQuestionByIdAndClientId
-  description: Get question
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getQuestionByIdAndClientId
-- name: getQuestionsUsingPOSTAndQuestionId
-  description: getAnswers
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getQuestionsUsingPOSTAndQuestionId
-- name: getReviewById
-  description: Get review
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getReviewById
-- name: getReviewByIdAndClientId
-  description: Get review
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getReviewByIdAndClientId
-- name: getSingularContributor
-  description: Contributor Search
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getSingularContributor
-- name: searchContributors
-  description: Contributor Search
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchContributors
 - name: getStructuredDataV2
   description: Fetch Structured Data (JSON-LD or Microdata)
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#getStructuredDataV2
+  method: GET
+  path: /clients/{clientId}/ugc
+  source_operation: openapi/_original/bazaarvoice-authentic-discovery-openapi.json#getStructuredDataV2
+- name: catalogLookaheadSearch
+  description: Lookahead Search
+  method: POST
+  path: /lookahead
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#catalogLookaheadSearch
+- name: clientGetSingularContributor
+  description: Contributor Search
+  method: GET
+  path: /{clientId}/contributors/{contributorExternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#clientGetSingularContributor
+- name: contributorLookaheadSearch
+  description: Contributor Search
+  method: POST
+  path: /contributor
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#contributorLookaheadSearch
+- name: getQuestionById
+  description: Get question
+  method: GET
+  path: /questions/{legacyInternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getQuestionById
+- name: getQuestionByIdAndClientId
+  description: Get question
+  method: GET
+  path: /{clientId}/questions/{legacyInternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getQuestionByIdAndClientId
+- name: getQuestionsUsingPOSTAndQuestionId
+  description: getAnswers
+  method: POST
+  path: /questions/{legacyInternalId}/answers
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getQuestionsUsingPOSTAndQuestionId
+- name: getReviewById
+  description: Get review
+  method: GET
+  path: /reviews/{legacyInternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getReviewById
+- name: getReviewByIdAndClientId
+  description: Get review
+  method: GET
+  path: /{clientId}/reviews/{legacyInternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getReviewByIdAndClientId
+- name: getSingularContributor
+  description: Contributor Search
+  method: GET
+  path: /contributors/{contributorExternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getSingularContributor
+- name: searchContributors
+  description: Contributor Search
+  method: POST
+  path: /contributors/{contributorExternalId}
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#searchContributors
+- name: getStructuredDataV2
+  description: Fetch Structured Data (JSON-LD or Microdata)
+  method: GET
+  path: /clients/{client-id}/ugc
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#getStructuredDataV2
 - name: searchQuestionsUsingPOST
   description: searchQuestions
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchQuestionsUsingPOST
+  method: POST
+  path: /questions
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#searchQuestionsUsingPOST
 - name: searchQuestionsUsingPOSTAndClientId
   description: searchQuestions
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchQuestionsUsingPOSTAndClientId
+  method: POST
+  path: /{clientId}/questions
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#searchQuestionsUsingPOSTAndClientId
 - name: searchReviewsUsingPOST
   description: searchReviews
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchReviewsUsingPOST
+  method: POST
+  path: /reviews
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#searchReviewsUsingPOST
 - name: searchReviewsUsingPOSTAndClientId
   description: searchReviews
-  source_operation: openapi/bazaarvoice-content-search-openapi.json#searchReviewsUsingPOSTAndClientId
+  method: POST
+  path: /{clientId}/reviews
+  source_operation: openapi/_original/bazaarvoice-content-search-openapi.json#searchReviewsUsingPOSTAndClientId
+- name: get_data_reviews_json
+  description: Retrieve Reviews
+  method: GET
+  path: /data/reviews.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_reviews_json
+- name: get_data_reviewcomments_json
+  description: Retrieve Comments
+  method: GET
+  path: /data/reviewcomments.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_reviewcomments_json
+- name: get_data_questions_json
+  description: Retrieve Questions
+  method: GET
+  path: /data/questions.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_questions_json
+- name: get_data_answers_json
+  description: Retrieve Answers
+  method: GET
+  path: /data/answers.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_answers_json
+- name: get_data_authors_json
+  description: Retrieve Profiles
+  method: GET
+  path: /data/authors.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_authors_json
+- name: get_data_products_json
+  description: Retrieve Products
+  method: GET
+  path: /data/products.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_products_json
+- name: get_data_categories_json
+  description: Retrieve Product Categories
+  method: GET
+  path: /data/categories.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_categories_json
+- name: get_data_statistics_json
+  description: Retrieve Statistics
+  method: GET
+  path: /data/statistics.json
+  source_operation: openapi/_original/bazaarvoice-conversations-display-openapi.json#get_data_statistics_json
+- name: GetReviewPreview
+  description: Preview Review Form
+  method: GET
+  path: /data/submitreview.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#GetReviewPreview
+- name: SubmitReview
+  description: Submit a review
+  method: POST
+  path: /data/submitreview.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#SubmitReview
+- name: post_data_initiatesubmit_json
+  description: initiateSubmit
+  method: POST
+  path: /data/initiateSubmit.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#post_data_initiatesubmit_json
+- name: post_data_progressivesubmit_json
+  description: progressiveSubmit
+  method: POST
+  path: /data/progressiveSubmit.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#post_data_progressivesubmit_json
+- name: GetComment
+  description: Preview Comments Form
+  method: GET
+  path: /data/submitreviewcomment.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#GetComment
+- name: SubmitComment
+  description: Submit a comment
+  method: POST
+  path: /data/submitreviewcomment.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#SubmitComment
+- name: GetQuestion
+  description: Preview a question submission
+  method: GET
+  path: /data/submitquestion.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#GetQuestion
+- name: SubmitQuestion
+  description: Submit a question
+  method: POST
+  path: /data/submitquestion.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#SubmitQuestion
+- name: GetAnswer
+  description: Preview an answer submission
+  method: GET
+  path: /data/submitanswer.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#GetAnswer
+- name: SubmitAnswer
+  description: Submit an answer
+  method: POST
+  path: /data/submitanswer.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#SubmitAnswer
+- name: AuthenticateUser
+  description: Authenticate a user
+  method: POST
+  path: /data/authenticateuser.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#AuthenticateUser
+- name: SubmitFeedback
+  description: Submit a feedback
+  method: POST
+  path: /data/submitfeedback.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#SubmitFeedback
+- name: DsaFeedabackUrl
+  description: Generate a form URL for DSA.
+  method: POST
+  path: /data/dsafeedbackurl.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#DsaFeedabackUrl
+- name: UploadPhoto
+  description: Upload a photo
+  method: POST
+  path: /data/uploadphoto.json
+  source_operation: openapi/_original/bazaarvoice-conversations-submission-openapi.json#UploadPhoto
+- name: requestmanifestfilelist
+  description: Step 1 - GET manifest file list
+  method: GET
+  path: /dce/v3/data
+  source_operation: openapi/_original/bazaarvoice-displayable-content-export-openapi.json#requestmanifestfilelist
+- name: fetchOptInByPage
+  description: Retrieve opt-in email list
+  method: GET
+  path: /notifications/{client}/subscriptions/by_page/{emailType}/OPT_IN
+  source_operation: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json#fetchOptInByPage
+- name: fetchOptOutByPage
+  description: Retrieve opt-out email list
+  method: GET
+  path: /notifications/{client}/subscriptions/by_page/{emailType}/OPT_OUT
+  source_operation: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json#fetchOptOutByPage
+- name: subscribe
+  description: Add email to opt-in list
+  method: POST
+  path: /notifications/{client}/subscriptions/subscribe
+  source_operation: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json#subscribe
+- name: unsubscribe
+  description: Add email to opt-out list
+  method: POST
+  path: /notifications/{client}/subscriptions/unsubscribe
+  source_operation: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json#unsubscribe
+- name: requestmanifestfilelist
+  description: Step 1 - GET manifest file list
+  method: GET
+  path: /psi/v1/data
+  source_operation: openapi/_original/bazaarvoice-product-sentiment-export-openapi.json#requestmanifestfilelist
+- name: getTopFeatureQuotes
+  description: Provides best and worst features along with their quotes for a product
+  method: GET
+  path: /summarised-features
+  source_operation: openapi/_original/bazaarvoice-product-sentiment-openapi.json#getTopFeatureQuotes
+- name: getSummarisedFeaturesWithQuotes
+  description: Provides quotes for a specific feature
+  method: GET
+  path: /summarised-features/{featureId}/quotes
+  source_operation: openapi/_original/bazaarvoice-product-sentiment-openapi.json#getSummarisedFeaturesWithQuotes
+- name: getProductQuotes
+  description: Provides top 25 positive quotes for a product
+  method: GET
+  path: /quotes
+  source_operation: openapi/_original/bazaarvoice-product-sentiment-openapi.json#getProductQuotes
+- name: getAllFeaturesForProduct
+  description: Provides all features for a product
+  method: GET
+  path: /features
+  source_operation: openapi/_original/bazaarvoice-product-sentiment-openapi.json#getAllFeaturesForProduct
+- name: getFeatureExpressions
+  description: Provides all expressions for a product
+  method: GET
+  path: /expressions
+  source_operation: openapi/_original/bazaarvoice-product-sentiment-openapi.json#getFeatureExpressions
+- name: countResponsesForReviews
+  description: Get the count of responses for a list of reviews
+  method: POST
+  path: /response/v1/clientResponses/reviews/-/responses
+  source_operation: openapi/_original/bazaarvoice-response-count-openapi.json#countResponsesForReviews
+- name: getAuthorRelationship
+  description: Get a given client response record's author details
+  method: GET
+  path: /response/v1/clientResponses/{responseGuid}/relationships/author
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#getAuthorRelationship
+- name: getAuthor
+  description: Get a given client response record's author details
+  method: GET
+  path: /response/v1/clientResponses/{responseGuid}/author
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#getAuthor
+- name: getClientResponse
+  description: Get a given client response record
+  method: GET
+  path: /response/v1/clientResponses/{responseGuid}
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#getClientResponse
+- name: deleteClientResponse
+  description: Delete a given client response record
+  method: DELETE
+  path: /response/v1/clientResponses/{responseGuid}
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#deleteClientResponse
+- name: updateClientResponse
+  description: Update a given client response record
+  method: PATCH
+  path: /response/v1/clientResponses/{responseGuid}
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#updateClientResponse
+- name: getClientResponseForReview
+  description: Get all client response records for the specified review
+  method: GET
+  path: /response/v1/clientResponses/{client}/reviews/{reviewId}
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#getClientResponseForReview
+- name: createClientResponseForReview
+  description: Submit a client response for a given review
+  method: POST
+  path: /response/v1/clientResponses/{client}/reviews/{reviewId}
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#createClientResponseForReview
+- name: getReview
+  description: Get a given client response record's review details
+  method: GET
+  path: /response/v1/clientResponses/{responseGuid}/review
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#getReview
+- name: getReviewRelationship
+  description: Get a given client response record's review details
+  method: GET
+  path: /response/v1/clientResponses/{responseGuid}/relationships/review
+  source_operation: openapi/_original/bazaarvoice-response-openapi.json#getReviewRelationship
+- name: get_v1_media_datasourceid
+  description: Get media
+  method: GET
+  path: /v1/media/{dataSourceId}
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_media_datasourceid
+- name: get_v1_media_datasourceid_items_itemid
+  description: Get media item
+  method: GET
+  path: /v1/media/{dataSourceId}/items/{itemId}
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_media_datasourceid_items_itemid
+- name: get_v1_media_datasourceid_items_itemid_recommendations
+  description: Get media item recommendations
+  method: GET
+  path: /v1/media/{dataSourceId}/items/{itemId}/recommendations
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_media_datasourceid_items_itemid_recommendations
+- name: get_v1_media_datasourceid_images_top
+  description: Get top media image for a data source
+  method: GET
+  path: /v1/media/{dataSourceId}/images/top
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_media_datasourceid_images_top
+- name: post_v1_media_report_datasourceid_items_itemid
+  description: Allows end users to report media
+  method: POST
+  path: /v1/media/report/{dataSourceId}/items/{itemId}
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#post_v1_media_report_datasourceid_items_itemid
+- name: post_v1_upload_datasourceid
+  description: Upload media items
+  method: POST
+  path: /v1/upload/{dataSourceId}
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#post_v1_upload_datasourceid
+- name: post_v1_upload_datasourceid_submit
+  description: Submits uploaded content
+  method: POST
+  path: /v1/upload/{dataSourceId}/submit
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#post_v1_upload_datasourceid_submit
+- name: get_v1_upload_datasourceid_video_status_videoid
+  description: Check on transcode job status for a given video
+  method: GET
+  path: /v1/upload/{dataSourceId}/video-status/{videoId}
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_upload_datasourceid_video_status_videoid
+- name: get_v1_instagram_media
+  description: Retrieve Instagram media items for the user
+  method: GET
+  path: /v1/instagram/media
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_instagram_media
+- name: get_v1_facebook_media
+  description: Retrieve Facebook media items for the user
+  method: GET
+  path: /v1/facebook/media
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_facebook_media
+- name: get_v1_facebook_albums
+  description: Retrieve Facebook media items for the user
+  method: GET
+  path: /v1/facebook/albums
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_facebook_albums
+- name: get_v1_facebook_albums_albumid_media
+  description: Retrieve Facebook media items from the specified album
+  method: GET
+  path: /v1/facebook/albums/{albumId}/media
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_facebook_albums_albumid_media
+- name: get_v1_facebook_auth_accesstoken_validation
+  description: Validate a Facebook OAuth token
+  method: GET
+  path: /v1/facebook/auth/{accessToken}/validation
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_facebook_auth_accesstoken_validation
+- name: get_v1_instagram_auth_accesstoken_validation
+  description: Validate an Instagram OAuth token
+  method: GET
+  path: /v1/instagram/auth/{accessToken}/validation
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_instagram_auth_accesstoken_validation
+- name: get_v1_instagram_auth_code_exchange
+  description: Exchange an Instagram auth code for a long-life token
+  method: GET
+  path: /v1/instagram/auth/{code}/exchange
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_instagram_auth_code_exchange
+- name: get_v1_structured_data_content
+  description: Get structured data for multiple galleries
+  method: GET
+  path: /v1/structured-data/content
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_v1_structured_data_content
+- name: get_api_v1_version
+  description: Get the current running version of this server
+  method: GET
+  path: /api/v1/version
+  source_operation: openapi/_original/bazaarvoice-social-commerce-media-openapi.json#get_api_v1_version
+- name: ingestTransaction
+  description: Create a Transaction
+  method: POST
+  path: /customer-transactions/transactions
+  source_operation: openapi/_original/bazaarvoice-transactions-openapi.json#ingestTransaction
+- name: ingestBulkTransaction
+  description: Create Bulk Transactions
+  method: POST
+  path: /customer-transactions/bulk-transactions
+  source_operation: openapi/_original/bazaarvoice-transactions-openapi.json#ingestBulkTransaction
+- name: invalidateTransaction
+  description: Invalidate a Transaction
+  method: PATCH
+  path: /customer-transactions/transactions/{id}
+  source_operation: openapi/_original/bazaarvoice-transactions-openapi.json#invalidateTransaction

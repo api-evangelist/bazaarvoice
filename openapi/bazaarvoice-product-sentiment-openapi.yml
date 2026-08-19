@@ -1,0 +1,602 @@
+openapi: 3.0.1
+info:
+  title: Product Sentiment API
+  description: Sentiment Insights for Bazaarvoice Reviews
+  contact:
+    name: Content Intelligence
+    email: content-intelligence-dev@bazaarvoice.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+  x-audience:
+    x-audience: external-public
+  x-api-id:
+    x-api-id: 0a0913f4-76e3-4a84-8560-b09aa65823e9
+servers:
+- url: https://stg.api.bazaarvoice.com/sentiment/v1/
+  description: STG
+- url: https://api.bazaarvoice.com/sentiment/v1/
+  description: PROD
+paths:
+  /summarised-features:
+    get:
+      tags:
+      - features
+      summary: Provides best and worst features along with their quotes for a product
+      operationId: getTopFeatureQuotes
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: embed
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - quotes
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+          - fr
+          - de
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopFeaturesQuotesGroupedResponse'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+  /summarised-features/{featureId}/quotes:
+    get:
+      tags:
+      - features
+      summary: Provides quotes for a specific feature
+      operationId: getSummarisedFeaturesWithQuotes
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: featureId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+          - fr
+          - de
+          - es
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddedQuotes'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+  /quotes:
+    get:
+      tags:
+      - quotes
+      summary: Provides top 25 positive quotes for a product
+      operationId: getProductQuotes
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+          - fr
+          - de
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopPositiveQuotesResponse'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+  /features:
+    get:
+      tags:
+      - features
+      summary: Provides all features for a product
+      operationId: getAllFeaturesForProduct
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+          - fr
+          - de
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductFeaturesResponse'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+  /expressions:
+    get:
+      tags:
+      - expressions
+      summary: Provides all expressions for a product
+      operationId: getFeatureExpressions
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: feature
+        in: query
+        required: true
+        schema:
+          maxLength: 50
+          minLength: 1
+          type: string
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureExpressionsResponse'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+components:
+  schemas:
+    AverageRatingReviews:
+      type: object
+      properties:
+        positive:
+          type: number
+          format: float
+          example: 5.5
+        negative:
+          type: number
+          format: float
+          example: 0
+        incentivized:
+          type: number
+          format: float
+          example: 0
+    EmbeddedQuotes:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quotes'
+    FeaturesQuotesGrouped:
+      type: object
+      properties:
+        featureId:
+          type: string
+        feature:
+          type: string
+        percentPositive:
+          type: number
+          format: float
+        nativeFeature:
+          type: string
+        reviewsMentioned:
+          $ref: '#/components/schemas/ReviewsMentioned'
+        averageRatingReviews:
+          $ref: '#/components/schemas/AverageRatingReviews'
+        _embedded:
+          $ref: '#/components/schemas/EmbeddedQuotes'
+    Quotes:
+      type: object
+      properties:
+        quoteId:
+          type: string
+          example: EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=
+        text:
+          type: string
+          example: Lovely fitting look nice and the quality of the leggings is lovely they wash well too!
+        emotion:
+          type: string
+          example: joy
+        reviewRating:
+          type: number
+          format: float
+          example: 5
+        reviewId:
+          type: string
+          example: 59902a9d-a6d8-5798-aa46-cde93d80e666
+        reviewedAt:
+          type: string
+          format: date
+          example: '2021-05-03'
+        translatedText:
+          type: string
+          example: Lovely fitting look nice and the quality of the leggings is lovely they wash well too!
+        nativeLanguage:
+          type: string
+          example: en-US
+        incentivised:
+          type: boolean
+          example: false
+        reviewType:
+          type: string
+          example: NATIVE
+          enum:
+          - native
+          - family
+          - syndicated
+    ReviewsMentioned:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+          example: 90
+        positive:
+          type: integer
+          format: int32
+          example: 84
+        negative:
+          type: integer
+          format: int32
+          example: 0
+        incentivized:
+          type: integer
+          format: int32
+          example: 0
+    TopFeaturesQuotesGroupedResponse:
+      type: object
+      properties:
+        bestFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesQuotesGrouped'
+        worstFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesQuotesGrouped'
+    QuoteResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: PaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAld5G1g8whdUcpC5Em3cYzBUnPaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAleT4avVT2RAUQ==
+        text:
+          type: string
+          example: Lovely soft material, great fitting and comfortable.
+        reviewRating:
+          type: number
+          format: float
+          example: 5
+        reviewId:
+          type: string
+          example: 559ee070-65d4-54a1-960b-9bed94695a90
+        reviewedAt:
+          type: string
+          format: date
+        nativeLanguage:
+          type: string
+          example: en-US
+        highlightedText:
+          type: string
+          example: Lovely <strong>soft</strong> material, great fitting and comfortable.
+        incentivised:
+          type: boolean
+          example: false
+        translatedText:
+          type: string
+          example: Lovely soft material, great fitting and comfortable.
+        reviewType:
+          type: string
+          example: NATIVE
+          enum:
+          - native
+          - family
+          - syndicated
+    TopPositiveQuotesResponse:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteResponse'
+    FeaturesResponse:
+      type: object
+      properties:
+        feature:
+          type: string
+          example: comfort
+        nativeFeature:
+          type: string
+          example: comfort
+    ProductFeaturesResponse:
+      type: object
+      properties:
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesResponse'
+    FeatureExpressionsResponse:
+      type: object
+      properties:
+        nativeFeature:
+          type: string
+          example: comfort
+        expressions:
+          type: array
+          example:
+          - comforted
+          - relieved
+          - tranquility
+          items:
+            type: string
+            example: '["comforted","relieved","tranquility"]'
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

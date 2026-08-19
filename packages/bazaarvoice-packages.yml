@@ -1,67 +1,175 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
-source: https://github.com/bazaarvoice
+source:
+- https://github.com/bazaarvoice
+- https://registry.npmjs.org/bv-ui-core
+- https://search.maven.org/solrsearch/select?q=g:com.bazaarvoice.bvandroidsdk
+- https://trunk.cocoapods.org/api/v1/pods/BVSDK
+- https://api.github.com/repos/bazaarvoice
+note: >-
+  Versions and dates below were read from the registry metadata endpoints (npm registry, Maven
+  Central solrsearch, CocoaPods trunk, GitHub releases) on 2026-08-13, not from prose. Three of the
+  SEO SDKs are ARCHIVED on GitHub and have no registry release at all - that is the abandonment
+  signal, recorded rather than smoothed over. Bazaarvoice publishes no first-party client library
+  for Python, Ruby, Go, Rust or .NET (checked PyPI, RubyGems, crates.io, pkg.go.dev, NuGet).
 packages:
 - language: swift
   registry: github
   name: bv-ios-swift-sdk
   url: https://github.com/bazaarvoice/bv-ios-swift-sdk
-  install: "Swift Package Manager / CocoaPods"
+  install: Swift Package Manager / CocoaPods
   official: true
-  description: Bazaarvoice Swift SDK for iOS (Conversations, Product Recommendations).
+  version: 2.3.0
+  published: '2026-08-13'
+  version_source: https://api.github.com/repos/bazaarvoice/bv-ios-swift-sdk/releases/latest
+  description: Bazaarvoice Swift SDK for iOS (Conversations, Product Recommendations, Curations).
 - language: objective-c
-  registry: github
-  name: bv-ios-sdk
+  registry: cocoapods
+  name: BVSDK
   url: https://github.com/bazaarvoice/bv-ios-sdk
-  install: "CocoaPods: pod 'BVSDK'"
+  install: "pod 'BVSDK'"
   official: true
-  description: Bazaarvoice iOS SDK for Developers.
+  version: 9.4.0
+  published: '2026-08-13'
+  version_source: https://trunk.cocoapods.org/api/v1/pods/BVSDK
+  description: Bazaarvoice iOS SDK (Objective-C).
+- language: java
+  registry: maven
+  name: com.bazaarvoice.bvandroidsdk:conversations
+  url: https://central.sonatype.com/artifact/com.bazaarvoice.bvandroidsdk/conversations
+  install: "implementation 'com.bazaarvoice.bvandroidsdk:conversations:8.19.0'"
+  official: true
+  version: 8.19.0
+  published: '2025-05-23'
+  version_source: https://search.maven.org/solrsearch/select?q=g:com.bazaarvoice.bvandroidsdk
+  description: >-
+    Bazaarvoice Android SDK, Conversations module. The Android SDK ships as twelve Maven Central
+    modules all released together at 8.19.0 - analytics, auth-iovation, common, conversations,
+    conversations-ui, curations, curations-ui, location, notifications, productsentiments,
+    recommendations, store-notifications.
+  note: >-
+    Maven Central lags the source repository: github.com/bazaarvoice/bv-android-sdk is tagged
+    v8.23.0 (2026-08-12) while the newest artifact published to Maven Central is 8.19.0
+    (2025-05-23). A consumer taking the Gradle dependency is roughly fifteen months and four minor
+    versions behind the SDK's own release tags.
 - language: java
   registry: github
   name: bv-android-sdk
   url: https://github.com/bazaarvoice/bv-android-sdk
-  install: "Gradle: implementation 'com.bazaarvoice.bvandroidsdk:...'"
+  install: Gradle (via Maven Central artifacts above)
   official: true
-  description: Bazaarvoice Android SDK for Developers.
+  version: v8.23.0
+  published: '2026-08-12'
+  version_source: https://api.github.com/repos/bazaarvoice/bv-android-sdk/releases/latest
+  description: Source repository and release tags for the Bazaarvoice Android SDK.
 - language: javascript
   registry: npm
   name: bv-ui-core
   url: https://www.npmjs.com/package/bv-ui-core
   install: npm install bv-ui-core
   official: true
-  description: Node module of common Bazaarvoice UI code (latest 2.9.12).
+  version: 2.9.12
+  published: '2026-03-27'
+  version_source: https://registry.npmjs.org/bv-ui-core
+  description: Node module of common Bazaarvoice UI code used by the hosted display layer.
+- language: javascript
+  registry: npm
+  name: swat-proxy
+  url: https://www.npmjs.com/package/swat-proxy
+  install: npm install swat-proxy
+  official: true
+  version: 1.1.0
+  published: '2016-09-29'
+  version_source: https://registry.npmjs.org/swat-proxy
+  description: >-
+    First-party proxy tool for injecting and testing Bazaarvoice SEO/display markup against a live
+    page. Last published 2016 - a decade stale, and the only local testing tool Bazaarvoice ships.
 - language: php
   registry: github
   name: seo_sdk_php
   url: https://github.com/bazaarvoice/seo_sdk_php
-  install: "composer"
+  install: git clone / manual include
   official: true
+  version: null
+  published: null
+  version_note: >-
+    No Packagist package exists (bazaarvoice/* returns 404 on repo.packagist.org) and the repository
+    publishes no GitHub releases, so there is no registry version to read. The repository is
+    ARCHIVED on GitHub; last push 2024-03-25.
+  status: archived
   description: Bazaarvoice SEO SDK for PHP.
 - language: java
   registry: github
   name: seo_sdk_java
   url: https://github.com/bazaarvoice/seo_sdk_java
-  install: "Maven / Gradle"
+  install: Maven / Gradle from source
   official: true
+  version: null
+  published: null
+  version_note: >-
+    Not published to Maven Central under any com.bazaarvoice coordinate and no GitHub releases.
+    Repository is ARCHIVED; last push 2017-05-03.
+  status: archived
   description: Bazaarvoice SEO SDK for Java.
 - language: csharp
   registry: github
   name: seo_sdk_dotnet
   url: https://github.com/bazaarvoice/seo_sdk_dotnet
-  install: "NuGet"
+  install: build from source
   official: true
+  version: null
+  published: null
+  version_note: >-
+    Not on NuGet (api.nuget.org returns 404 for bvseosdk) and no GitHub releases. Repository is
+    ARCHIVED; last push 2022-07-05.
+  status: archived
   description: Bazaarvoice SEO SDK for .NET.
 - language: php
   registry: github
   name: magento2-extension
   url: https://github.com/bazaarvoice/magento2-extension
-  install: "composer require bazaarvoice/module-connector"
+  install: composer require bazaarvoice/module-connector
   official: true
-  description: Official Magento 2 extension for Bazaarvoice.
+  version: null
+  published: null
+  version_note: >-
+    The documented composer package bazaarvoice/module-connector is not listed on Packagist
+    (404), so no registry version or date is readable; the repository publishes no GitHub
+    releases either. Last push 2025-11-18.
+  description: Official Magento 2 connector extension for Bazaarvoice.
 - language: javascript
   registry: github
   name: bv-salesforce-cartridge
   url: https://github.com/bazaarvoice/bv-salesforce-cartridge
-  install: "Salesforce B2C Commerce cartridge"
+  install: Salesforce B2C Commerce cartridge import
   official: true
+  version: null
+  published: null
+  version_note: >-
+    Distributed as a Salesforce B2C Commerce cartridge, which has no public package registry.
+    No GitHub releases; last push 2026-08-13.
   description: Bazaarvoice cartridge for Salesforce Commerce Cloud.
+- language: python
+  registry: pypi
+  name: qtype
+  url: https://pypi.org/project/qtype/
+  install: pip install qtype
+  official: true
+  version: 0.1.18
+  published: '2026-02-19'
+  version_source: https://pypi.org/pypi/qtype/json
+  description: >-
+    Bazaarvoice's open-source AI prototyping framework (github.com/bazaarvoice/qtype). First-party
+    and current, but NOT a client library for the Bazaarvoice APIs - included so the Python entry
+    is not read as SDK coverage that does not exist.
+  api_client: false
+registries_checked:
+  npm: found
+  maven: found
+  cocoapods: found
+  pypi: found (qtype only, not an API client)
+  packagist: not-found
+  nuget: not-found
+  rubygems: not-found
+  crates_io: not-found
+  go_modules: not-found

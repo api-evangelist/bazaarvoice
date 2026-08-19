@@ -1,0 +1,672 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Media API",
+    "version": "V1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get media",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/media/:dataSourceId",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "productMetadata",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "requireProduct",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parameterizeProducts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "networkSource",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "noExpired",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skipMetrics",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "showRatings",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rid",
+                "value": "",
+                "type": "query",
+                "description": "Request id used to identify items within a single request"
+              },
+              {
+                "name": "src",
+                "value": "",
+                "type": "query",
+                "description": "Source url of the requesting content"
+              },
+              {
+                "name": "fpcuid",
+                "value": "",
+                "type": "query",
+                "description": "First party cookie id of the requesting user"
+              },
+              {
+                "name": "eid",
+                "value": "",
+                "type": "query",
+                "description": "Experiment id for the user's experiment"
+              },
+              {
+                "name": "vid",
+                "value": "",
+                "type": "query",
+                "description": "Variation id for the user's experiment"
+              }
+            ]
+          },
+          "docs": "Gets media items for a data source"
+        },
+        {
+          "info": {
+            "name": "Get media item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/media/:dataSourceId/items/:itemId",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "productMetadata",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "parameterizeProducts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "noExpired",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "showRatings",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get media item"
+        },
+        {
+          "info": {
+            "name": "Get media item recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/media/:dataSourceId/items/:itemId/recommendations",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get media item recommendations"
+        },
+        {
+          "info": {
+            "name": "Get top media image for a data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/media/:dataSourceId/images/top",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fallbackImage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "networkSource",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get top media image for a data source"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allows end users to report media",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.curalate.com/v1/media/report/:dataSourceId/items/:itemId",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows end users to report media"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload media items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.curalate.com/v1/upload/:dataSourceId",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "mediaItem",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload media items"
+        },
+        {
+          "info": {
+            "name": "Submits uploaded content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge.curalate.com/v1/upload/:dataSourceId/submit",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits uploaded content"
+        },
+        {
+          "info": {
+            "name": "Check on transcode job status for a given video",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/upload/:dataSourceId/video-status/:videoId",
+            "params": [
+              {
+                "name": "dataSourceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "videoId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check on transcode job status for a given video"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Instagram",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Instagram media items for the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/instagram/media",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve Instagram media items for the user"
+        },
+        {
+          "info": {
+            "name": "Validate an Instagram OAuth token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/instagram/auth/:accessToken/validation",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validate an Instagram OAuth token"
+        },
+        {
+          "info": {
+            "name": "Exchange an Instagram auth code for a long-life token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/instagram/auth/:code/exchange",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "redirectUri",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Exchange an Instagram auth code for a long-life token"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Facebook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Facebook media items for the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/facebook/media",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve Facebook media items for the user"
+        },
+        {
+          "info": {
+            "name": "Retrieve Facebook media items for the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/facebook/albums",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve Facebook media items for the user"
+        },
+        {
+          "info": {
+            "name": "Retrieve Facebook media items from the specified album",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/facebook/albums/:albumId/media",
+            "params": [
+              {
+                "name": "albumId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve Facebook media items from the specified album"
+        },
+        {
+          "info": {
+            "name": "Validate a Facebook OAuth token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/facebook/auth/:accessToken/validation",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validate a Facebook OAuth token"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Structured Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get structured data for multiple galleries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/v1/structured-data/content",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "JSON object specifying gallery configurations. Must be URL-encoded.\n\nFormat: {\"galleries\":[{\"dataSourceId\":\"abc123\",\"filter\":\"productId:SKU123\",\"limit\":10,\"sort\":\"Latest\"}]}\n\nGallery config fields:\n- dataSourceId (required): Unique gallery ID\n- filter: Filters the requested content. Filters are composed of one or more key-value pairs combined with boolean operators and parenthetical groupings.\n- limit: Maximum number of items to return (default: 10)\n- sort: Sorts - Latest, Likes, Moderation, Optimized, LastUpdated\n- offset: Pagination offset\n- before/after: Cursor-based pagination\n- requireProduct: Only return items with products\n- networkSource: Filter by social network source\n- productMetadata: Additional product fields to include\n"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Locale for product metadata"
+              },
+              {
+                "name": "canonical",
+                "value": "",
+                "type": "query",
+                "description": "Page canonical URL for @id injection in JSON-LD output. Max 2048 characters."
+              },
+              {
+                "name": "skipCache",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to bypass edge caching"
+              }
+            ]
+          },
+          "docs": "Returns Schema.org structured data for multiple galleries via GET. Response format depends on the Accept header."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Meta",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the current running version of this server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge.curalate.com/api/v1/version"
+          },
+          "docs": "Get the current running version of this server"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

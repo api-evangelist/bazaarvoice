@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Step 1",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Step 1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Step 1 - GET manifest file list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/psi/v1/data",
+            "headers": [
+              {
+                "name": "X-Bazaarvoice-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Bazaarvoice-Timestamp",
+                "value": ""
+              },
+              {
+                "name": "X-Bazaarvoice-Passkey",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Step 1 - GET manifest file list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

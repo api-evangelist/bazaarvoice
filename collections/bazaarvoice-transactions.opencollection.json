@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transactions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/customer-transactions/transactions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "It creates the single transaction's record into the system.Bazaarvoice using this input will schedule Review Requests Notifications."
+        },
+        {
+          "info": {
+            "name": "Create Bulk Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/customer-transactions/bulk-transactions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "It creates transactions' records into the system.Bazaarvoice using this input will schedule Review Requests Notifications."
+        },
+        {
+          "info": {
+            "name": "Invalidate a Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://stg.api.bazaarvoice.com/customer-transactions/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "It submits a request to invalidate the transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

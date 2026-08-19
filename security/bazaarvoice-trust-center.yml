@@ -1,0 +1,45 @@
+generated: '2026-08-13'
+method: searched
+probe: true
+url: https://www.bazaarvoice.com/company/trust/
+source:
+- https://www.bazaarvoice.com/company/trust/security/
+- https://www.bazaarvoice.com/company/trust/faq/
+note: >-
+  Bazaarvoice runs its trust surface as a section of its own marketing site (/company/trust/)
+  rather than a hosted trust-center product; trust.bazaarvoice.com and security.bazaarvoice.com
+  do not resolve. Only certifications Bazaarvoice itself names on those pages are recorded here.
+  Third-party vendor-risk sites list SOC 2, PCI, HIPAA and FedRAMP for Bazaarvoice; none of those
+  appear on Bazaarvoice's own trust pages, so they are NOT recorded as claimed.
+pages:
+- {name: Trust, url: 'https://www.bazaarvoice.com/company/trust/', http_status: 200}
+- {name: Security, url: 'https://www.bazaarvoice.com/company/trust/security/', http_status: 200}
+- {name: Trust FAQ, url: 'https://www.bazaarvoice.com/company/trust/faq/', http_status: 200}
+- {name: Authenticity Policy, url: 'https://www.bazaarvoice.com/legal/authenticity-policy/'}
+certifications:
+- name: ISO/IEC 27001:2013
+  status: certified
+  auditor: Schellman Compliance LLC
+  certificate: 1667990-1
+  issued: '2022-11-17'
+  scope: Information Security Management System (ISMS)
+  source: https://www.bazaarvoice.com/company/trust/security/
+- name: CSA CAIQ
+  status: published
+  detail: Cloud Security Alliance Consensus Assessment Initiative Questionnaire completed and made available.
+  source: https://www.bazaarvoice.com/company/trust/security/
+- name: GDPR
+  status: compliance-claimed
+  source: https://www.bazaarvoice.com/company/trust/faq/
+- name: CCPA
+  status: compliance-claimed
+  source: https://www.bazaarvoice.com/company/trust/faq/
+practices:
+- annual third-party penetration testing (executive summaries available under NDA)
+- vulnerability management program
+- documented incident response plan
+- dedicated information security staff
+- data stored in AWS data centers in US and EU regions
+evidence:
+- {source: 'https://www.bazaarvoice.com/company/trust/security/', http_status: 200, keywords: [iso/iec 27001, schellman, csa caiq, penetration testing]}
+- {source: 'https://www.bazaarvoice.com/company/trust/faq/', http_status: 200, keywords: [gdpr, ccpa, security@bazaarvoice.com]}

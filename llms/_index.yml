@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+note: Bazaarvoice serves a real llms.txt on the developer-portal root AND on every one of its twelve product
+  sections. All thirteen were fetched verbatim on 2026-08-13 and each returned HTTP 200 with genuine llms.txt
+  content (H1, blockquote summary, then Guides / API Reference / Pages link lists pointing at .md renderings
+  of every doc and reference page). This is the strongest agent-facing surface Bazaarvoice ships - it
+  has no MCP server and no agent card, but its documentation is machine-readable by design.
+documents:
+- file: bazaarvoice-llms.txt
+  scope: Developer Space root (Content Search)
+  source: https://developers.bazaarvoice.com/llms.txt
+  method: searched
+- file: bazaarvoice-conversations-llms.txt
+  scope: ConversationsAPI
+  source: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/llms.txt
+  http_status: 200
+  bytes: 25649
+  method: searched
+- file: bazaarvoice-privacy-llms.txt
+  scope: PrivacyAPI
+  source: https://developers.bazaarvoice.com/v1.0-PrivacyAPI/llms.txt
+  http_status: 200
+  bytes: 4390
+  method: searched
+- file: bazaarvoice-response-llms.txt
+  scope: ResponseAPI
+  source: https://developers.bazaarvoice.com/v1.0-ResponseAPI/llms.txt
+  http_status: 200
+  bytes: 4539
+  method: searched
+- file: bazaarvoice-notifications-llms.txt
+  scope: NotificationsAPI
+  source: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/llms.txt
+  http_status: 200
+  bytes: 3975
+  method: searched
+- file: bazaarvoice-product-sentiment-llms.txt
+  scope: SentimentsAPI
+  source: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/llms.txt
+  http_status: 200
+  bytes: 2053
+  method: searched
+- file: bazaarvoice-transactions-llms.txt
+  scope: TransactionsAPI
+  source: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/llms.txt
+  http_status: 200
+  bytes: 2576
+  method: searched
+- file: bazaarvoice-social-commerce-llms.txt
+  scope: SocialCommerceAPI
+  source: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/llms.txt
+  http_status: 200
+  bytes: 3394
+  method: searched
+- file: bazaarvoice-authentic-discovery-llms.txt
+  scope: AuthenticDiscoveryAPI
+  source: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/llms.txt
+  http_status: 200
+  bytes: 2251
+  method: searched
+- file: bazaarvoice-displayable-content-export-llms.txt
+  scope: DCE
+  source: https://developers.bazaarvoice.com/v1.0-DCE/llms.txt
+  http_status: 200
+  bytes: 10278
+  method: searched
+- file: bazaarvoice-product-sentiment-export-llms.txt
+  scope: PS-Export
+  source: https://developers.bazaarvoice.com/v1.0-PS-Export/llms.txt
+  http_status: 200
+  bytes: 4403
+  method: searched
+- file: bazaarvoice-conversations-prr-llms.txt
+  scope: PRR
+  source: https://developers.bazaarvoice.com/v1.0-PRR/llms.txt
+  http_status: 200
+  bytes: 2538
+  method: searched
+- file: bazaarvoice-mobile-sdk-llms.txt
+  scope: MobileSDK
+  source: https://developers.bazaarvoice.com/v1.0-MobileSDK/llms.txt
+  http_status: 200
+  bytes: 10391
+  method: searched
+document_count: 13

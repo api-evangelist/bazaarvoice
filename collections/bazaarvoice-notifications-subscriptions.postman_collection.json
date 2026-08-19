@@ -1,0 +1,1441 @@
+{
+  "item": [
+    {
+      "id": "ba350832-a799-4e62-ab25-05dd06e0cf91",
+      "name": "notifications/{client}/subscriptions",
+      "description": {
+        "content": "Enables clients to manage end-user subscriptions to email notifications.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42527e3a-6cc0-4402-899b-2838b271e24b",
+          "name": "Retrieve opt-in email list",
+          "request": {
+            "name": "Retrieve opt-in email list",
+            "description": {
+              "content": "Request a list of email addresses that have been explicitly subscribed to particular email type",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":client",
+                "subscriptions",
+                "by_page",
+                ":emailType",
+                "OPT_IN"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Optional. Count of email address to return. Max value of 1000 is supported"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<string>",
+                  "description": "Required after 1st request. A token, provided in each API response, to be used in the next request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client",
+                  "description": "(Required) Customer name associated with API key"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "emailType",
+                  "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4f0c111-100c-4225-9bdd-06e616610a5b",
+              "name": "**OK**",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_IN"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offset\": \"NjUzODgxNTY4MWU1NzJiNjRjOTZlMmM0\",\n  \"data\": [\n    {\n      \"emailAddress\": \"b3eca1d1246ac3bd150d4ef0fbe59d9b5c772139f003bf7d146c61f0255ac48f\",\n      \"timestamp\": \"2023-02-14T22:11:03.501Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa458d3f-b207-45ee-b125-684ce341a3eb",
+              "name": "**Forbidden** - API key missing from request or not enabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_IN"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 403,\n  \"message\": \"User not authorized.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45f95309-d74c-4efa-9f20-1ce966547aa8",
+              "name": "**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.\n\nEnsure email type is correct, all caps\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_IN"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Invalid email type: pie",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfb05ea7-98e0-4b32-902a-81de6cbfe427",
+              "name": "**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_IN"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 405,\n  \"message\": \"HTTP 405 Method Not Allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e611a142-b386-4952-b434-91ab518b76d5",
+          "name": "Retrieve opt-out email list",
+          "request": {
+            "name": "Retrieve opt-out email list",
+            "description": {
+              "content": "Request a list of email addresses that have been explicitly unsubscribed to particular email type",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":client",
+                "subscriptions",
+                "by_page",
+                ":emailType",
+                "OPT_OUT"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Optional. Count of email address to return. Max value of 1000 is supported"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<string>",
+                  "description": "Required after 1st request. A token, provided in each API response, to be used in the next request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client",
+                  "description": "(Required) Customer name associated with API key"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "emailType",
+                  "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86291a88-43c9-4ac8-8ebf-4ac25bb17b76",
+              "name": "**OK**",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_OUT"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offset\": \"NjUzODgxNTY4MWU1NzJiNjRjOTZlMmM0\",\n  \"data\": [\n    {\n      \"emailAddress\": \"b3eca1d1246ac3bd150d4ef0fbe59d9b5c772139f003bf7d146c61f0255ac48f\",\n      \"timestamp\": \"2023-02-14T22:11:03.501Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b3caf47-a0c0-4575-b707-923845884951",
+              "name": "**Forbidden** - API key missing from request or not enabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_OUT"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 403,\n  \"message\": \"User not authorized.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "584742ea-5423-4bbc-8a8f-deea679e267c",
+              "name": "**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.\n\nEnsure email type is correct, all caps\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_OUT"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Invalid email type: pie",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8f8a291-4694-4d40-8e31-d75d2ab4069e",
+              "name": "**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "by_page",
+                    ":emailType",
+                    "OPT_OUT"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "emailType",
+                      "description": "(Required) Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 405,\n  \"message\": \"HTTP 405 Method Not Allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5882d707-849c-45e1-aa59-901a5be72911",
+          "name": "Add email to opt-in list",
+          "request": {
+            "name": "Add email to opt-in list",
+            "description": {
+              "content": "On success, returns the updated/inserted subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":client",
+                "subscriptions",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "usertoken",
+                  "value": "<string>",
+                  "description": "See [Creating the Email Authentication Token](https://developer.bazaarvoice.com/notifications-subscriptions-api/submitting-email-addresses/creating-email-authentication-token)"
+                },
+                {
+                  "description": {
+                    "content": "Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)",
+                    "type": "text/plain"
+                  },
+                  "key": "emailtype",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client",
+                  "description": "(Required) Customer name associated with API key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3bd3bb3-d3d2-471f-8a9e-9fc658adb493",
+              "name": "Created/updated subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"emailAddressHash\": \"94ce81d7ddd4a7018f348a68cfa52d44342faf961d02ec6177ad9eca75507e09\",\n  \"phoneNumberHash\": \"ea500eaf0e707a7d06774bf3d316ad2e36e3df2deaf0664e6a3fcd30a227312d\",\n  \"_id\": \"6538fdfb81e572b64c1aa3bc\",\n  \"client\": \"test-client\",\n  \"emailAddress\": \"5cf5bf6f05083cfad82828ec069cf3b25874936b37d87fe1dc6588afd80f0c1e\",\n  \"phoneNumber\": \"f64243381b03effff8e32cde515498a3\",\n  \"channel\": [\n    \"EMAIL\"\n  ],\n  \"subscriptionType\": \"OPT_IN\",\n  \"emailType\": \"PIE\",\n  \"time\": \"2023-10-25T14:38:57.461Z\",\n  \"lastUpdatedTimestamp\": \"2023-10-25T14:38:57.461Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7571a2a0-512f-4ddb-998a-bd1513fc5585",
+              "name": "**Bad Request** Incorrectly constructed or missing email authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "the userToken could not be decoded",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95ca28d6-52bb-4826-a586-3fc2209b83af",
+              "name": "**Forbidden** - API key missing from request or not enabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 403,\n  \"message\": \"User not authorized.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6bb897b-4b19-484c-b5ff-65099108bf81",
+              "name": "**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.\n\nEnsure email type is correct, all caps\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Invalid email type: pie",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dafef48c-f082-4863-b878-71dfaadfd938",
+              "name": "**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 405,\n  \"message\": \"HTTP 405 Method Not Allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b699678-e6fc-411b-b7de-bcaef62becbf",
+          "name": "Add email to opt-out list",
+          "request": {
+            "name": "Add email to opt-out list",
+            "description": {
+              "content": "On success, returns the updated/inserted subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":client",
+                "subscriptions",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "usertoken",
+                  "value": "<string>",
+                  "description": "See [Creating the Email Authentication Token](https://developer.bazaarvoice.com/notifications-subscriptions-api/submitting-email-addresses/creating-email-authentication-token)"
+                },
+                {
+                  "description": {
+                    "content": "Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)",
+                    "type": "text/plain"
+                  },
+                  "key": "emailtype",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client",
+                  "description": "(Required) Customer name associated with API key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01d7d1d4-bed8-4628-80f3-28da32e36190",
+              "name": "Created/updated subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"emailAddressHash\": \"94ce81d7ddd4a7018f348a68cfa52d44342faf961d02ec6177ad9eca75507e09\",\n  \"phoneNumberHash\": \"ea500eaf0e707a7d06774bf3d316ad2e36e3df2deaf0664e6a3fcd30a227312d\",\n  \"_id\": \"6538fdfb81e572b64c1aa3bc\",\n  \"client\": \"test-client\",\n  \"emailAddress\": \"5cf5bf6f05083cfad82828ec069cf3b25874936b37d87fe1dc6588afd80f0c1e\",\n  \"phoneNumber\": \"f64243381b03effff8e32cde515498a3\",\n  \"channel\": [\n    \"EMAIL\"\n  ],\n  \"subscriptionType\": \"OPT_OUT\",\n  \"emailType\": \"PIE\",\n  \"time\": \"2023-10-25T14:38:57.461Z\",\n  \"lastUpdatedTimestamp\": \"2023-10-25T14:38:57.461Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02a48acd-6d83-4483-b5d9-22203b5a2f54",
+              "name": "**Bad Request** Incorrectly constructed or missing email authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "the userToken could not be decoded",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cdec9a8-7223-463d-8c54-49f71d4599b7",
+              "name": "**Forbidden** - API key missing from request or not enabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 403,\n  \"message\": \"User not authorized.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbce6642-a8da-4e10-b850-72fd82b37425",
+              "name": "**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.\n\nEnsure email type is correct, all caps\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Invalid email type: pie",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32733dbb-afc2-4714-b199-b982f6714b09",
+              "name": "**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":client",
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usertoken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailtype",
+                      "value": ""
+                    },
+                    {
+                      "key": "passkey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client",
+                      "description": "(Required) Customer name associated with API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 405,\n  \"message\": \"HTTP 405 Method Not Allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://stg.api.bazaarvoice.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "passkey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95adcd32-931c-432c-8572-19bf842df6eb",
+    "name": "Notifications Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Notifications Subscription API enables clients to manage end-user subscriptions to email notifications triggered by the Bazaarvoice platform.\n\nContact Support:\n Name: Notifications Team\n Email: notifications20team@bazaarvoice.com",
+      "type": "text/plain"
+    }
+  }
+}

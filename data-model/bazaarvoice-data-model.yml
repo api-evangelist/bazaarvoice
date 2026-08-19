@@ -1,254 +1,1411 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: derived
-source: openapi/bazaarvoice-content-search-openapi.json
+source:
+- openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+- openapi/_original/bazaarvoice-content-search-openapi.json
+- openapi/_original/bazaarvoice-conversations-display-openapi.json
+- openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- openapi/_original/bazaarvoice-displayable-content-export-openapi.json
+- openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- openapi/_original/bazaarvoice-product-sentiment-export-openapi.json
+- openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- openapi/_original/bazaarvoice-response-count-openapi.json
+- openapi/_original/bazaarvoice-response-openapi.json
+- openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- openapi/_original/bazaarvoice-transactions-openapi.json
+note: Entity-relationship graph derived from components.schemas $ref links across all eleven published
+  Bazaarvoice OpenAPI documents. Cardinality is read from the shape of the reference ($ref = has_one,
+  array-of-$ref = has_many); nothing here is inferred from prose.
+entity_count: 172
+relationship_count: 136
 entities:
-- LookaheadRequest
-- LookaheadResponse
-- LookaheadMatch
-- ContributorSearchResult
-- ContributorRequest
-- ContributorResponse
-- ContributorMatch
-- Product
-- Video
-- Photo
-- Coordinate
-- PrrUpdate
-- QuestionContributor
-- SingleQuestionDocument
-- Question
-- AllAnswers
-- Statistics
-- Answer
-- AnswerQueryResponse
-- AnswerFilters
-- Review
-- ReviewCdvs
-- SecondaryRatings
-- Stats
-- Response
-- Comment
-- CommentStats
-- ReviewContributor
-- JsonLdResponseScript
-- JsonLdResponseJSONFormat
-- MicrodataResponse
-- ErrorResponse
-- ContributorQuery
-- ContributorFilters
-- ContributorSort
-- ContributorSearchResponse
-- TimeRange
-- QuestionQueryResponse
-- QuestionFilters
-- QuestionQuery
-- QuestionSort
-- ReviewFilters
-- ReviewQuery
-- ReviewSort
-- ReviewQueryResponse
+- name: AddSubscriptionResponse
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: AllAnswers
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Answer
+  fields: 37
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: AnswerFilters
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: AnswerQueryResponse
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: AppId
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: AuthenticateUser
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: Author
+  fields: 8
+  specs:
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: AuthorData
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: AuthorRelationship
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: AverageRatingReviews
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: BadRequestErrorResponseSchema
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: BatchStatus
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: BookmarkQuery
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: BulkTransactionsResponseItem
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: Category
+  fields: 8
+  specs:
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: Clickthrough
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ClientResponse
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ClientResponseRelationships
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ClientResponseRequest
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ClientResponseResponseModel
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: Comment
+  fields: 11
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: CommentStats
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContentSource
+  fields: 14
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ContributorFilters
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorMatch
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorQuery
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorRequest
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorResponse
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorSearchResponse
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorSearchResult
+  fields: 15
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ContributorSort
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Coordinate
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Cursors
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: DSAFeedbackRequest
+  fields: 21
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: DataSourceId
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: DeetsItemId
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: DsaFeedbackUrlRequest
+  fields: 6
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: EmailType
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: EmbeddedQuotes
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: Error
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ErrorCode
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ErrorPayload
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ErrorResponse
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+  - openapi/_original/bazaarvoice-response-count-openapi.json
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ExchangeCodeResponse
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ExternalMedia
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: FacebookAlbum
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: FeatureExpressionsResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: FeaturesQuotesGrouped
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: FeaturesResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: FilterQuery
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetAnswer
+  fields: 13
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: GetComment
+  fields: 13
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: GetFacebookAlbumsData
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetFacebookAlbumsResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetFacebookMediaData
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetFacebookMediaResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetInstagramMediaData
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetInstagramMediaResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetMediaItemResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetMediaResponse
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetQuestion
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: GetRecommendedMediaResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: GetReview
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: GetVideoStatusResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: Image
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: IncorrectApiKey
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+  - openapi/_original/bazaarvoice-response-count-openapi.json
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: IncorrectHttpMethod
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: IngestBulkTransactionsRequest
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: IngestBulkTransactionsResponse
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: IngestTransactionRequest
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: IngestTransactionResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: InvalidUserToken
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: InvalidateTransactionRequest
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: InvalidateTransactionResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: JsonLdResponseJSONFormat
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: JsonLdResponseScript
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Links
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: LocaleString
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: LocationDetails
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: LookaheadMatch
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: LookaheadRequest
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: LookaheadResponse
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: MediaApiMetadata
+  fields: 6
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: MediaApiPaging
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: MediaItem
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: MediaItemData
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: MediaItemsData
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: MicrodataResponse
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Money
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: NetworkGif
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: NetworkMedia
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: NetworkPhoto
+  fields: 11
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: NetworkUser
+  fields: 6
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: NetworkVideo
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: OAuthAccessToken
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: OAuthCode
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: PaginatedResultsSubscriptionResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: PdpMetadata
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: Photo
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Price
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: Problem
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: Product
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: ProductDetails
+  fields: 8
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ProductFeaturesResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: ProductMetadataQuery
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: PrrUpdate
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Question
+  fields: 42
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: QuestionContributor
+  fields: 42
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: QuestionFilters
+  fields: 31
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: QuestionQuery
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: QuestionQueryResponse
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: QuestionSort
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: QuoteResponse
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: Quotes
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: ReportMediaRequestBody
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ReportMediaResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: Response
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Review
+  fields: 34
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: ReviewCdvs
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ReviewContributor
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ReviewData
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ReviewFilters
+  fields: 23
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ReviewQuery
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ReviewQueryResponse
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ReviewRelationship
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ReviewResponseCountRequest
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-response-count-openapi.json
+- name: ReviewResponseCountResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-response-count-openapi.json
+- name: ReviewSort
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: ReviewStat
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: ReviewsMentioned
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: SecondaryRatings
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: SingleQuestionDocument
+  fields: 6
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: SpatialTag
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: Statistics
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Stats
+  fields: 17
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: SubmitAnswer
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: SubmitComment
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: SubmitDsaFeedbackUrl
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: SubmitFeedback
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: SubmitMediaRequestBody
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: SubmitMediaResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: SubmitQuestion
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: SubmitReview
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: SubmittedMedia
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: SubscriptionResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: ThumbnailPhoto
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: TimeRange
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: TooManyRequestErrorResponseSchema
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: TopFeaturesQuotesGroupedResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: TopPositiveQuotesResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- name: Transaction
+  fields: 9
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: TransactionStatus
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: UnauthorizedErrorResponseSchema
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: UnknownErrorResponseSchema
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-conversations-display-openapi.json
+- name: UploadData
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: UploadError
+  fields: 3
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: UploadPhoto
+  fields: 10
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: UploadResponse
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: UploadVideoResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: UserNotAuthorised
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+  - openapi/_original/bazaarvoice-response-count-openapi.json
+  - openapi/_original/bazaarvoice-response-openapi.json
+- name: ValidTokenResponse
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: VersionResponse
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: Video
+  fields: 7
+  specs:
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: VideoId
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: VideoProcessingStatusData
+  fields: 1
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: VideoProcessingVersion
+  fields: 5
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: VideoProcessingVideo
+  fields: 4
+  specs:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- name: intiateSubmit
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- name: limit
+  fields: 0
+  specs:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: manifests
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-displayable-content-export-openapi.json
+  - openapi/_original/bazaarvoice-product-sentiment-export-openapi.json
+- name: progressiveSubmit
+  fields: 2
+  specs:
+  - openapi/_original/bazaarvoice-conversations-submission-openapi.json
 relationships:
-- from: QuestionContributor
-  to: Photo
-  kind: has_many
-  via: photos
-- from: QuestionContributor
-  to: Photo
-  kind: has_one
-  via: avatarPhoto
-- from: QuestionContributor
-  to: Coordinate
-  kind: has_many
-  via: productReferences
-- from: QuestionContributor
-  to: Video
-  kind: has_many
-  via: videos
-- from: QuestionContributor
-  to: PrrUpdate
-  kind: has_one
-  via: displayLastUpdate
-- from: SingleQuestionDocument
-  to: Question
-  kind: has_one
-  via: question
-- from: SingleQuestionDocument
-  to: QuestionContributor
-  kind: has_one
-  via: contributor
-- from: SingleQuestionDocument
-  to: Product
-  kind: has_one
-  via: product
-- from: SingleQuestionDocument
-  to: Statistics
-  kind: has_one
-  via: statistics
-- from: SingleQuestionDocument
-  to: AllAnswers
-  kind: has_many
-  via: answers
-- from: Question
-  to: Photo
-  kind: has_many
-  via: photos
-- from: Question
-  to: Photo
-  kind: has_one
-  via: avatarPhoto
-- from: Question
-  to: Video
-  kind: has_many
-  via: videos
-- from: Question
-  to: Coordinate
-  kind: has_many
-  via: productReferences
-- from: Question
-  to: Coordinate
-  kind: has_one
-  via: bestAnswer
-- from: Question
-  to: PrrUpdate
-  kind: has_one
-  via: displayLastUpdate
-- from: Question
-  to: Coordinate
-  kind: has_one
-  via: contributor
-- from: Question
-  to: Coordinate
-  kind: has_one
-  via: about
+- from: AddSubscriptionResponse
+  to: EmailType
+  cardinality: has_one
+  via: emailType
+  source: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
 - from: AllAnswers
   to: Answer
-  kind: has_one
+  cardinality: has_one
   via: answer
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: AllAnswers
   to: QuestionContributor
-  kind: has_one
+  cardinality: has_one
   via: contributor
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: AllAnswers
   to: Statistics
-  kind: has_one
+  cardinality: has_one
   via: statistics
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Answer
+  to: Coordinate
+  cardinality: has_one
+  via: contributor
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: Answer
   to: Photo
-  kind: has_many
+  cardinality: has_many
   via: photos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Answer
+  to: Coordinate
+  cardinality: has_many
+  via: productReferences
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Answer
+  to: Coordinate
+  cardinality: has_one
+  via: question
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: Answer
   to: Video
-  kind: has_many
+  cardinality: has_many
   via: videos
-- from: Answer
-  to: Coordinate
-  kind: has_many
-  via: productReferences
-- from: Answer
-  to: Coordinate
-  kind: has_one
-  via: contributor
-- from: Answer
-  to: Coordinate
-  kind: has_one
-  via: question
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: AnswerQueryResponse
   to: AllAnswers
-  kind: has_many
+  cardinality: has_many
   via: results
-- from: Review
-  to: Product
-  kind: has_one
-  via: product
-- from: Review
-  to: Video
-  kind: has_many
-  via: videos
-- from: Review
-  to: Photo
-  kind: has_many
-  via: photos
-- from: Review
-  to: Stats
-  kind: has_one
-  via: stats
-- from: Review
-  to: Response
-  kind: has_many
-  via: responses
-- from: Review
-  to: ReviewContributor
-  kind: has_one
-  via: contributor
-- from: Review
-  to: ReviewCdvs
-  kind: has_one
-  via: cdvs
-- from: Review
-  to: SecondaryRatings
-  kind: has_one
-  via: secondaryRatings
-- from: Review
-  to: Comment
-  kind: has_many
-  via: comments
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: AuthorRelationship
+  to: AuthorData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: AuthorRelationship
+  to: Links
+  cardinality: has_one
+  via: links
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: BulkTransactionsResponseItem
+  to: TransactionStatus
+  cardinality: has_one
+  via: status
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: ClientResponseRelationships
+  to: AuthorRelationship
+  cardinality: has_one
+  via: author
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: ClientResponseRelationships
+  to: ReviewRelationship
+  cardinality: has_one
+  via: review
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: ClientResponseResponseModel
+  to: ClientResponse
+  cardinality: has_one
+  via: attributes
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: ClientResponseResponseModel
+  to: Links
+  cardinality: has_one
+  via: links
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: ClientResponseResponseModel
+  to: ClientResponseRelationships
+  cardinality: has_one
+  via: relationships
+  source: openapi/_original/bazaarvoice-response-openapi.json
 - from: Comment
   to: ReviewContributor
-  kind: has_one
+  cardinality: has_one
   via: contributor
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: Comment
   to: CommentStats
-  kind: has_one
+  cardinality: has_one
   via: stats
-- from: ContributorQuery
-  to: ContributorSort
-  kind: has_one
-  via: sort
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ContentSource
+  to: LocationDetails
+  cardinality: has_one
+  via: location
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ContentSource
+  to: NetworkUser
+  cardinality: has_one
+  via: user
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
 - from: ContributorQuery
   to: ContributorFilters
-  kind: has_one
+  cardinality: has_one
   via: filters
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ContributorQuery
+  to: ContributorSort
+  cardinality: has_one
+  via: sort
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: ContributorSearchResponse
   to: ContributorSearchResult
-  kind: has_many
+  cardinality: has_many
   via: results
-- from: QuestionQueryResponse
-  to: Question
-  kind: has_many
-  via: results
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: EmbeddedQuotes
+  to: Quotes
+  cardinality: has_many
+  via: quotes
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: Error
+  to: ErrorCode
+  cardinality: has_one
+  via: code
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: ErrorResponse
+  to: Error
+  cardinality: has_many
+  via: errors
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: FeaturesQuotesGrouped
+  to: EmbeddedQuotes
+  cardinality: has_one
+  via: _embedded
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: FeaturesQuotesGrouped
+  to: AverageRatingReviews
+  cardinality: has_one
+  via: averageRatingReviews
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: FeaturesQuotesGrouped
+  to: ReviewsMentioned
+  cardinality: has_one
+  via: reviewsMentioned
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: GetFacebookAlbumsData
+  to: FacebookAlbum
+  cardinality: has_many
+  via: albums
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetFacebookAlbumsResponse
+  to: GetFacebookAlbumsData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetFacebookAlbumsResponse
+  to: MediaApiPaging
+  cardinality: has_one
+  via: paging
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetFacebookMediaData
+  to: ExternalMedia
+  cardinality: has_many
+  via: items
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetFacebookMediaResponse
+  to: GetFacebookMediaData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetFacebookMediaResponse
+  to: MediaApiPaging
+  cardinality: has_one
+  via: paging
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetInstagramMediaData
+  to: ExternalMedia
+  cardinality: has_many
+  via: items
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetInstagramMediaResponse
+  to: GetInstagramMediaData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetInstagramMediaResponse
+  to: MediaApiPaging
+  cardinality: has_one
+  via: paging
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetMediaItemResponse
+  to: MediaItemData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetMediaItemResponse
+  to: MediaApiMetadata
+  cardinality: has_one
+  via: metadata
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetMediaResponse
+  to: MediaItemsData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetMediaResponse
+  to: MediaApiMetadata
+  cardinality: has_one
+  via: metadata
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetMediaResponse
+  to: MediaApiPaging
+  cardinality: has_one
+  via: paging
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetRecommendedMediaResponse
+  to: MediaItem
+  cardinality: has_many
+  via: items
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetRecommendedMediaResponse
+  to: MediaApiMetadata
+  cardinality: has_one
+  via: metadata
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: GetVideoStatusResponse
+  to: VideoProcessingStatusData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: IngestBulkTransactionsRequest
+  to: Transaction
+  cardinality: has_many
+  via: transactions
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: IngestBulkTransactionsResponse
+  to: BatchStatus
+  cardinality: has_one
+  via: batchStatus
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: IngestBulkTransactionsResponse
+  to: BulkTransactionsResponseItem
+  cardinality: has_many
+  via: items
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: IngestTransactionRequest
+  to: Product
+  cardinality: has_many
+  via: products
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: IngestTransactionResponse
+  to: TransactionStatus
+  cardinality: has_one
+  via: responseMessage
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: InvalidateTransactionResponse
+  to: TransactionStatus
+  cardinality: has_one
+  via: transactionStatus
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: MediaApiMetadata
+  to: PdpMetadata
+  cardinality: has_one
+  via: pdpMetadata
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaApiPaging
+  to: Cursors
+  cardinality: has_one
+  via: cursors
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaItem
+  to: Clickthrough
+  cardinality: has_one
+  via: clickthrough
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaItem
+  to: NetworkMedia
+  cardinality: has_one
+  via: media
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaItem
+  to: ProductDetails
+  cardinality: has_many
+  via: products
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaItem
+  to: ContentSource
+  cardinality: has_one
+  via: source
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaItemData
+  to: MediaItem
+  cardinality: has_one
+  via: item
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: MediaItemsData
+  to: MediaItem
+  cardinality: has_many
+  via: items
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: extraLarge
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: extraLargeSquare
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: large
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: largeSquare
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: medium
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: mediumSquare
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: original
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: small
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkPhoto
+  to: Image
+  cardinality: has_one
+  via: smallSquare
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: NetworkUser
+  to: ThumbnailPhoto
+  cardinality: has_one
+  via: image
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: PaginatedResultsSubscriptionResponse
+  to: SubscriptionResponse
+  cardinality: has_many
+  via: data
+  source: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- from: Product
+  to: Money
+  cardinality: has_one
+  via: money
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: ProductDetails
+  to: NetworkPhoto
+  cardinality: has_many
+  via: images
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ProductDetails
+  to: Price
+  cardinality: has_one
+  via: price
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ProductDetails
+  to: ReviewStat
+  cardinality: has_one
+  via: reviewStatistic
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ProductDetails
+  to: SpatialTag
+  cardinality: has_one
+  via: spatialTag
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ProductFeaturesResponse
+  to: FeaturesResponse
+  cardinality: has_many
+  via: features
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: Question
+  to: Coordinate
+  cardinality: has_one
+  via: about
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: Photo
+  cardinality: has_one
+  via: avatarPhoto
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: Coordinate
+  cardinality: has_one
+  via: bestAnswer
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: Coordinate
+  cardinality: has_one
+  via: contributor
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: PrrUpdate
+  cardinality: has_one
+  via: displayLastUpdate
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: Photo
+  cardinality: has_many
+  via: photos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: Coordinate
+  cardinality: has_many
+  via: productReferences
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Question
+  to: Video
+  cardinality: has_many
+  via: videos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionContributor
+  to: Photo
+  cardinality: has_one
+  via: avatarPhoto
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionContributor
+  to: PrrUpdate
+  cardinality: has_one
+  via: displayLastUpdate
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionContributor
+  to: Photo
+  cardinality: has_many
+  via: photos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionContributor
+  to: Coordinate
+  cardinality: has_many
+  via: productReferences
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionContributor
+  to: Video
+  cardinality: has_many
+  via: videos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: QuestionFilters
   to: TimeRange
-  kind: has_one
-  via: submissionTime
-- from: QuestionFilters
-  to: TimeRange
-  kind: has_one
+  cardinality: has_one
   via: moderationTime
-- from: QuestionQuery
-  to: QuestionSort
-  kind: has_one
-  via: sort
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionFilters
+  to: TimeRange
+  cardinality: has_one
+  via: submissionTime
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: QuestionQuery
   to: QuestionFilters
-  kind: has_one
+  cardinality: has_one
   via: filters
-- from: ReviewFilters
-  to: TimeRange
-  kind: has_one
-  via: submissionTime
-- from: ReviewFilters
-  to: TimeRange
-  kind: has_one
-  via: moderationTime
-- from: ReviewQuery
-  to: ReviewSort
-  kind: has_one
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionQuery
+  to: QuestionSort
+  cardinality: has_one
   via: sort
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: QuestionQueryResponse
+  to: Question
+  cardinality: has_many
+  via: results
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ReportMediaResponse
+  to: MediaApiMetadata
+  cardinality: has_one
+  via: metadata
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: Review
+  to: ReviewCdvs
+  cardinality: has_one
+  via: cdvs
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: Comment
+  cardinality: has_many
+  via: comments
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: ReviewContributor
+  cardinality: has_one
+  via: contributor
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: Photo
+  cardinality: has_many
+  via: photos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: Product
+  cardinality: has_one
+  via: product
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: Response
+  cardinality: has_many
+  via: responses
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: SecondaryRatings
+  cardinality: has_one
+  via: secondaryRatings
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: Stats
+  cardinality: has_one
+  via: stats
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: Review
+  to: Video
+  cardinality: has_many
+  via: videos
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ReviewFilters
+  to: TimeRange
+  cardinality: has_one
+  via: moderationTime
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ReviewFilters
+  to: TimeRange
+  cardinality: has_one
+  via: submissionTime
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: ReviewQuery
   to: ReviewFilters
-  kind: has_one
+  cardinality: has_one
   via: filters
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ReviewQuery
+  to: ReviewSort
+  cardinality: has_one
+  via: sort
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
 - from: ReviewQueryResponse
   to: Review
-  kind: has_many
+  cardinality: has_many
   via: results
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: ReviewRelationship
+  to: ReviewData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: ReviewRelationship
+  to: Links
+  cardinality: has_one
+  via: links
+  source: openapi/_original/bazaarvoice-response-openapi.json
+- from: SingleQuestionDocument
+  to: AllAnswers
+  cardinality: has_many
+  via: answers
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: SingleQuestionDocument
+  to: QuestionContributor
+  cardinality: has_one
+  via: contributor
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: SingleQuestionDocument
+  to: Product
+  cardinality: has_one
+  via: product
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: SingleQuestionDocument
+  to: Question
+  cardinality: has_one
+  via: question
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: SingleQuestionDocument
+  to: Statistics
+  cardinality: has_one
+  via: statistics
+  source: openapi/_original/bazaarvoice-content-search-openapi.json
+- from: SubmitMediaRequestBody
+  to: SubmittedMedia
+  cardinality: has_many
+  via: media
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: SubmitMediaResponse
+  to: MediaApiMetadata
+  cardinality: has_one
+  via: metadata
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ThumbnailPhoto
+  to: Image
+  cardinality: has_one
+  via: medium
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ThumbnailPhoto
+  to: Image
+  cardinality: has_one
+  via: mediumSquare
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ThumbnailPhoto
+  to: Image
+  cardinality: has_one
+  via: original
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ThumbnailPhoto
+  to: Image
+  cardinality: has_one
+  via: small
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: ThumbnailPhoto
+  to: Image
+  cardinality: has_one
+  via: smallSquare
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: TopFeaturesQuotesGroupedResponse
+  to: FeaturesQuotesGrouped
+  cardinality: has_many
+  via: bestFeatures
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: TopFeaturesQuotesGroupedResponse
+  to: FeaturesQuotesGrouped
+  cardinality: has_many
+  via: worstFeatures
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: TopPositiveQuotesResponse
+  to: QuoteResponse
+  cardinality: has_many
+  via: quotes
+  source: openapi/_original/bazaarvoice-product-sentiment-openapi.json
+- from: Transaction
+  to: Product
+  cardinality: has_many
+  via: products
+  source: openapi/_original/bazaarvoice-transactions-openapi.json
+- from: UploadData
+  to: NetworkPhoto
+  cardinality: has_many
+  via: images
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: UploadData
+  to: UploadVideoResponse
+  cardinality: has_many
+  via: videos
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: UploadResponse
+  to: UploadData
+  cardinality: has_one
+  via: data
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: UploadResponse
+  to: UploadError
+  cardinality: has_many
+  via: errors
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: VideoProcessingStatusData
+  to: VideoProcessingVideo
+  cardinality: has_one
+  via: video
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+- from: VideoProcessingVideo
+  to: VideoProcessingVersion
+  cardinality: has_many
+  via: versions
+  source: openapi/_original/bazaarvoice-social-commerce-media-openapi.json

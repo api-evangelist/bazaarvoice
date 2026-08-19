@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "595865dc-0a41-4726-ae9d-de1bc57b8c1f",
+      "name": "Step 1",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9a81968-cfc5-4203-99ae-16d2f1e10f96",
+          "name": "Step 1 - GET manifest file list",
+          "request": {
+            "name": "Step 1 - GET manifest file list",
+            "description": {},
+            "url": {
+              "path": [
+                "psi",
+                "v1",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).",
+                "key": "X-Bazaarvoice-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp header.",
+                "key": "X-Bazaarvoice-Timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) This is the same value communicated with the X-Bazaarvoice-Passkey header.",
+                "key": "X-Bazaarvoice-Passkey",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8ff1552-5ae4-4b45-9488-c9704e2c4187",
+              "name": "Operation Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "psi",
+                    "v1",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).",
+                    "key": "X-Bazaarvoice-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp header.",
+                    "key": "X-Bazaarvoice-Timestamp",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) This is the same value communicated with the X-Bazaarvoice-Passkey header.",
+                    "key": "X-Bazaarvoice-Passkey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"manifests\": [\n    {\n      \"version\": \"v1\",\n      \"fulls\": [\n        {\n          \"date\": \"2019-01-07\",\n          \"path\": \"/manifests/full/2019-01-07/v1/manifest.json\"\n        },\n        {\n          \"date\": \"2019-01-08\",\n          \"path\": \"/manifests/full/2019-01-08/v1/manifest.json\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34b16b39-af97-40db-9d6a-169d740fe09f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "psi",
+                    "v1",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).",
+                    "key": "X-Bazaarvoice-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp header.",
+                    "key": "X-Bazaarvoice-Timestamp",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) This is the same value communicated with the X-Bazaarvoice-Passkey header.",
+                    "key": "X-Bazaarvoice-Passkey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8afd0fa-60b0-4dd1-ae1d-5d325c777174",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "psi",
+                    "v1",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).",
+                    "key": "X-Bazaarvoice-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp header.",
+                    "key": "X-Bazaarvoice-Timestamp",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) This is the same value communicated with the X-Bazaarvoice-Passkey header.",
+                    "key": "X-Bazaarvoice-Passkey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d295f3fc-d67f-45a2-a019-5e0d03ea940a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "psi",
+                    "v1",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).",
+                    "key": "X-Bazaarvoice-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp header.",
+                    "key": "X-Bazaarvoice-Timestamp",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) This is the same value communicated with the X-Bazaarvoice-Passkey header.",
+                    "key": "X-Bazaarvoice-Passkey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f555b0e5-55ff-4158-9d58-fd8693ab9646",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "psi",
+                    "v1",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).",
+                    "key": "X-Bazaarvoice-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp header.",
+                    "key": "X-Bazaarvoice-Timestamp",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) This is the same value communicated with the X-Bazaarvoice-Passkey header.",
+                    "key": "X-Bazaarvoice-Passkey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fault\": {\n    \"faultstring\": \"Raising fault. Fault name:- RFUnauthorized\",\n    \"detail\": {\n      \"errorcode\": \"steps.raisefault.RaiseFault\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://stg.api.bazaarvoice.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a9419ce6-6b38-434e-a76a-bfd6d5c180d1",
+    "name": "Step 1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Product Sentiment Export for Bazaarvoice Reviews",
+      "type": "text/plain"
+    }
+  }
+}

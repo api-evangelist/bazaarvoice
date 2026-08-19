@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source:
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-pixel-setup
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/rr-pdp-components
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/qa-pdp-components
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/intelligent-trustmark-on-products
+- https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/hosted-ui-overview
+- https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/deploy-galleries-on-your-store
+note: >-
+  Bazaarvoice's primary integration path for most clients is not the REST API at all - it is a
+  hosted client-side rendering layer ("Hosted UI" / "JS-API") loaded from the Bazaarvoice CDN. The
+  loader script is the entry point for every display, submission and analytics component below.
+loaders:
+- name: bv.js (BV Loader, v2 display integration)
+  registry: cdn
+  url_template: https://apps.bazaarvoice.com/deployments/{client_name}/{siteID}/{environment}/{locale}/bv.js
+  version: null
+  version_note: >-
+    Distribution is unpinned and per-client. The script path carries the client name, site id,
+    environment and locale but no version segment, and there is no CDN metadata endpoint for it,
+    so a consumer cannot tell which build they are being served either. Recorded as null after
+    checking, not skipped.
+  environments: [staging, production]
+  purpose: Loads the Bazaarvoice JavaScript library, renders hosted UI containers, and collects BV Pixel events.
+- name: bvapi.js (v1 display integration)
+  registry: cdn
+  version: null
+  status: superseded
+  version_note: >-
+    Legacy loader superseded by bv.js; Bazaarvoice recommends bv.js for performance and continued
+    support. Same unpinned per-client distribution shape, no version in the URL.
+families:
+- family: Ratings & Reviews PDP components
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/rr-pdp-components
+  components:
+  - {name: Inline Rating, detail: 'Average rating plus total review count, for category/search/PDP surfaces.'}
+  - {name: Reviews Display, detail: 'Full review list with sorting, filtering and pagination.'}
+  - {name: Review Submission Form, detail: 'Hosted review submission, full or progressive.'}
+  - {name: Review Highlights / Summary, detail: 'AI-generated review summary surface (Review Summarization API).'}
+- family: Questions & Answers PDP components
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/qa-pdp-components
+  components:
+  - {name: Questions Display, detail: 'Questions and answers for a product.'}
+  - {name: Question Submission Form}
+  - {name: Answer Submission Form}
+- family: Trust and authenticity
+  components:
+  - {name: Intelligent Trust Mark (ITMK), detail: 'Dynamic catalog/PDP-level trust mark broadcasting trustworthiness to shoppers.', docs: 'https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/intelligent-trustmark-on-products'}
+  - {name: Badges, detail: 'Contributor and content badges rendered alongside UGC.', docs: 'https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/badges'}
+  - {name: Verified Purchaser, docs: 'https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/verified-purchaser'}
+- family: Social Commerce galleries
+  docs: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/deploy-galleries-on-your-store
+  components:
+  - {name: Galleries, detail: 'Embeddable visual UGC galleries; Shopify and generic storefront deployments documented.'}
+  - {name: Social Commerce ONE page, detail: 'Hosted standalone social commerce page.'}
+  - {name: SPA Galleries, detail: 'Advanced single-page-application gallery integration.'}
+- family: Analytics
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-pixel-overview
+  components:
+  - {name: BV Pixel, detail: 'Event tracking layer carried by the BV loader; passive PDP events, trackEvent feature-used events, trackTransaction conversion events.'}
+- family: Mobile hosted UI
+  docs: https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/hosted-ui-overview
+  components:
+  - {name: Hosted UI (JS-API), detail: 'Bazaarvoice-hosted UI components embedded in iOS/Android apps via the mobile SDKs.'}
+  - {name: Conversations UI (Android), package: 'com.bazaarvoice.bvandroidsdk:conversations-ui'}
+  - {name: Curations UI (Android), package: 'com.bazaarvoice.bvandroidsdk:curations-ui'}
+related:
+  packages: packages/bazaarvoice-packages.yml

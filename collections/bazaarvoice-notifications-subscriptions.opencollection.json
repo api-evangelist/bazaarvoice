@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notifications Subscriptions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "passkey",
+      "value": "{{passkey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications/{client}/subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve opt-in email list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/notifications/:client/subscriptions/by_page/:emailType/OPT_IN",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "Customer name associated with API key"
+              },
+              {
+                "name": "emailType",
+                "value": "",
+                "type": "path",
+                "description": "Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Count of email address to return. Max value of 1000 is supported"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Required after 1st request. A token, provided in each API response, to be used in the next request"
+              }
+            ]
+          },
+          "docs": "Request a list of email addresses that have been explicitly subscribed to particular email type"
+        },
+        {
+          "info": {
+            "name": "Retrieve opt-out email list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/notifications/:client/subscriptions/by_page/:emailType/OPT_OUT",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "Customer name associated with API key"
+              },
+              {
+                "name": "emailType",
+                "value": "",
+                "type": "path",
+                "description": "Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Count of email address to return. Max value of 1000 is supported"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Required after 1st request. A token, provided in each API response, to be used in the next request"
+              }
+            ]
+          },
+          "docs": "Request a list of email addresses that have been explicitly unsubscribed to particular email type"
+        },
+        {
+          "info": {
+            "name": "Add email to opt-in list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/notifications/:client/subscriptions/subscribe",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "Customer name associated with API key"
+              },
+              {
+                "name": "usertoken",
+                "value": "",
+                "type": "query",
+                "description": "See [Creating the Email Authentication Token](https://developer.bazaarvoice.com/notifications-subscriptions-api/submitting-email-addresses/creating-email-authentication-token)"
+              },
+              {
+                "name": "emailtype",
+                "value": "",
+                "type": "query",
+                "description": "Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+              }
+            ]
+          },
+          "docs": "On success, returns the updated/inserted subscription"
+        },
+        {
+          "info": {
+            "name": "Add email to opt-out list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/notifications/:client/subscriptions/unsubscribe",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "Customer name associated with API key"
+              },
+              {
+                "name": "usertoken",
+                "value": "",
+                "type": "query",
+                "description": "See [Creating the Email Authentication Token](https://developer.bazaarvoice.com/notifications-subscriptions-api/submitting-email-addresses/creating-email-authentication-token)"
+              },
+              {
+                "name": "emailtype",
+                "value": "",
+                "type": "query",
+                "description": "Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)"
+              }
+            ]
+          },
+          "docs": "On success, returns the updated/inserted subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

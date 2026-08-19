@@ -1,0 +1,32 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Overview](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction.md)
+- [Social Commerce Display API](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/getting-started.md)
+- [API Endpoints](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints.md)
+- [Display Media](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/display-media.md)
+- [Retrieve Media - Top Image](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/retrieve-media-top-image.md)
+- [Media Filters](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/media-filters.md)
+- [Submit a Report on media](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/submit-a-report-on-media.md)
+- [Advanced Single Page Application (SPA) Galleries](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/advanced-single-page-application-spa-galleries.md)
+- [Configuring Product Catalog](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/configuring-product-catalog.md)
+- [Deploy Galleries on your Shopify Store](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/deploy-galleries-on-your-shopify-store.md)
+- [Deploy Galleries on your Store](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/deploy-galleries-on-your-store.md)
+- [Deploy the Social Commerce ONE Page on your store](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/deploy-socialcommerce-one-page.md)
+- [Setup Adobe Analytics](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/setup-adobe-analytics.md)
+- [Setup Engagement Metrics for Custom API builds](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/setup-engagement-metrics.md)
+- [Overview](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/geo-introduction.md): Server-side API guide for exposing Bazaarvoice C&C gallery content as Schema.org structured data so search engines and AI crawlers can discover, index, and connect visual UGC to product pages.
+- [Gallery Structured API](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/gallery-structured-api.md)
+- [Implementation Guide](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/implementation-guide.md): This page lists out directions to implement Gallery Structured API for your media gallery.
+- [API Specification - Gallery Structured API](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-specification-gallery-structured-api.md): Representative API Specification for Gally Structured Data API.
+- [Link Product Schema to Gallery Content](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/link-product-schema-to-gallery-content.md)
+- [FAQs](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/faqs.md)
+- [Catalog - Errors](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/catalog-errors.md)
+
+## API Reference
+- [Get structured data for multiple galleries](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/reference/get_v1-structured-data-content.md): Returns Schema.org structured data for multiple galleries via GET. Response format depends on the Accept header.
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/page/support.md)

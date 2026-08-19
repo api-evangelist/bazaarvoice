@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source:
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts
+- openapi/_original/bazaarvoice-transactions-openapi.json
+- openapi/_original/bazaarvoice-conversations-submission-openapi.json
+- postman/bazaarvoice-privacy-api.postman_collection.json
+model: separate-staging-host
+note: >-
+  Bazaarvoice separates test from live by HOST, not by key prefix. The staging host is documented
+  in the Conversations API platform concepts page and is the default servers[] entry in almost
+  every OpenAPI Bazaarvoice publishes on its developer portal, and it is the host hard-coded into
+  the first-party Postman collections Bazaarvoice distributes. No public test passkey is published:
+  keys are requested per client in the Bazaarvoice Portal API Key Management application and must
+  be activated by a Technical Administrator, so a sandbox key still requires an account.
+environments:
+- name: staging
+  host: https://stg.api.bazaarvoice.com
+  purpose: Used while developing your application.
+  behavior: >-
+    Content submitted to staging is automatically published approximately every 15 minutes,
+    so submission flows can be exercised end-to-end without waiting on human moderation.
+  source: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts
+- name: production
+  host: https://api.bazaarvoice.com
+  purpose: Used when your application is complete.
+  behavior: Content submitted to production is manually moderated in 72 business hours or less.
+  source: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts
+- name: staging (structured data / Authentic Discovery)
+  host: https://seo-stg.bazaarvoice.com/structured-data/v1
+  source: openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+- name: production (structured data / Authentic Discovery)
+  host: https://seo.bazaarvoice.com/structured-data/v1
+  source: openapi/_original/bazaarvoice-authentic-discovery-openapi.json
+credentials:
+  model: portal-issued
+  detail: >-
+    There is no published test passkey, test client_id, or magic test identifier. API passkeys are
+    requested through the API Key Management application in the Bazaarvoice Portal
+    (https://portal.bazaarvoice.com) and activated by a Technical Administrator; the same key
+    request flow covers staging and production.
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management
+  published_test_values: false
+tooling:
+- name: Postman collections
+  detail: >-
+    Bazaarvoice publishes first-party Postman collections for the Privacy, Response and
+    Notifications Subscriptions APIs, all pre-pointed at https://stg.api.bazaarvoice.com with
+    {{passkey}} / {{userToken}} / {{clientName}} left as collection variables for the developer
+    to fill in.
+  files:
+  - postman/bazaarvoice-privacy-api.postman_collection.json
+  - postman/bazaarvoice-response-api.postman_collection.json
+  - postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+- name: swat-proxy
+  detail: First-party npm tool for proxying and testing Bazaarvoice SEO/display markup against a live page.
+  url: https://github.com/bazaarvoice/swat-proxy
+test_clocks: false
+fixtures: false

@@ -1,0 +1,4741 @@
+openapi: 3.0.0
+info:
+  title: Conversation Submission API
+  x-api-id: 2b36747d-6cb9-42e2-a7d8-22c3979abeee
+  x-audience: external-public
+  description: The Conversation Submission API is a comprehensive platform for submitting and managing content such
+    as Reviews, Questions, Answers, Comments, Feedback, and media uploads, as well as handling Notifications for
+    CV2 clients.
+  version: 1.0.0
+  contact:
+    email: submission-team@bazaarvoice.com
+    name: Submission Team
+    url: https://developer.bazaarvoice.com/conversations-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Conversation-Submission API STG
+tags:
+- name: Submitreview
+- name: ProgressiveSubmit
+- name: Feedback
+- name: Comments
+- name: Questions
+- name: Answers
+- name: Authenticateuser
+- name: Uploadphoto
+paths:
+  /data/submitreview.json:
+    get:
+      tags:
+      - Submitreview
+      operationId: GetReviewPreview
+      summary: Preview Review Form
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product for which submission form is requested.
+        example: '1000001'
+      - name: Action
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The submission action to take
+        example: Preview
+      - name: Rating
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Value is positive integer between 1 and 5, and represents review overall rating.
+        example: 5
+      - name: ReviewText
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 50
+          maxLength: 10000
+        description: Value is review body text.The minimum length is configurable,  default is 50 but can be lower.
+        example: test review Text test review Text test review Text test review Text
+      - name: Title
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+        description: Value is content title text. The minimum and maximum lengths are configurable. The current
+          default is 50 characters, but can be lower to 1 or higher to 255.
+        example: test title
+      - name: UserNickname
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 4
+          maxLength: 25
+        description: User nickname display text.
+        example: test_nick_name
+      - name: agreedtotermsandconditions
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending
+          on the client's settings.
+        example: 'true'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReview'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERRROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    post:
+      tags:
+      - Submitreview
+      operationId: SubmitReview
+      summary: Submit a review
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  description: The submission action to take -- either 'Action=', 'Action=Preview' or 'Action=Submit'.
+                    'Action=' will show information that can be used to build a submission form, 'Action=Preview'
+                    will show a draft of the content to be submitted; 'Action=Submit' will submit the content. If
+                    'Action=Submit', the request must be an HTTP POST.
+                  example: Submit
+                AgreedToTermsAndConditions:
+                  type: boolean
+                  description: Boolean indicating whether or not the user agreed to the terms and conditions. Required
+                    depending on the client's settings.
+                  example: true
+                AdditionalField_<Dimension-External-Id>:
+                  type: string
+                  description: A concrete example of the parameter might be 'AdditionalField_Seat' with a value
+                    of '24F' (describing the seat number at a stadium or on a plane).
+                  example: dimension_1
+                campaignId:
+                  type: string
+                  description: Arbitrary text that may be saved alongside content to indicate vehicle by which content
+                    was captured, e.g. “post-purchase email”.
+                  example: campaign1
+                ContextDataValue_<Dimension-External-Id>:
+                  type: string
+                  description: 'Some examples of this parameter include the following. Each is followed by possible
+                    values.
+
+                    ContextDataValue_PurchaserRank - "top", "top10", "top100", "top1000"
+
+                    ContextDataValue_Purchaser - "yes", "no"
+
+                    ContextDataValue_Age - "under21", "21to34", "35to44", "45to54", "55to64", "over65"
+
+                    ContextDataValue_Gender - "male", "female"'
+                  example: under21
+                fp:
+                  type: string
+                  description: 'Fingerprint of content author''s device. See the Authenticity Tutorial for more
+                    information.
+
+                    Per the Bazaarvoice Authenticity Policy, you must send a device fingerprint attached to each
+                    submission. If you fail to send a device fingerprint with your submission, Bazaarvoice may take
+                    any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the
+                    network. Such actions may include but are not limited to: rejection of your content, halting
+                    syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation
+                    of your API license.
+
+                    Alert: Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: 0400Ia/vP4SUWbEXk1Rjuv1iJmSjiw6jjNGA14xr7X6xRXldg3Eo6XtD78oKt7mA8bo/mtBit
+                HostedAuthentication_AuthenticationEmail:
+                  type: string
+                  description: Email address where the submitter will receive the confirmation email. If you are
+                    configured to use hosted email authentication, this parameter is required. See the Authenticate
+                    User method for more information on hosted authentication.
+                  example: dummy@dummy.com
+                HostedAuthentication_CallbackUrl:
+                  type: string
+                  description: URL of the link contained in the user authentication email. This should point to
+                    a landing page where a web application exists to complete the user authentication process. The
+                    host for the URL must be one of the domains configured for the client. The link in the email
+                    will contain a user authentication token (authtoken) that is used to verify the submitter. If
+                    you are configured to use hosted email authentication, this parameter is required. See the hosted
+                    authentication tutorial for more information.
+                  example: https://dummy.com
+                isRecommended:
+                  type: boolean
+                  description: Value is true or false; default is null – "true" or "false" answer to "I would recommend
+                    this to a friend". Required dependent on client settings.
+                  example: 'false'
+                Locale:
+                  type: string
+                  description: 'Locale to display Labels, Configuration, Product Attributes and Category Attributes
+                    in. The default value is the locale defined in the display associated with the API key.
+
+                    Alert: Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: en_US
+                NetPromoterComment:
+                  type: string
+                  description: Value is text representing a user comment to explain numerical Net Promoter score.
+                  example: Dummy comment
+                NetPromoterScore:
+                  type: integer
+                  description: Value is positive integer between 1 and 10 representing a numerical rating in response
+                    to “How would you rate this company?”
+                  example: '5'
+                PhotoUrl_<n>:
+                  type: string
+                  description: Value is a Bazaarvoice URL of a photo uploaded using the Data API, where <n> is a
+                    non-negative integer. See our photo upload tutorial for more information.
+                  example: https://dummy.com/abc.jpg
+                PhotoCaption_<n>:
+                  type: string
+                  description: Value is caption text for the photo URL with the same value of <n>.
+                  example: Dummy caption for photo
+                rating:
+                  type: integer
+                  description: Value is positive integer between 1 and 5, and represents review overall rating.
+                  example: '5'
+                Rating_<Dimension-External-Id>:
+                  type: integer
+                  description: A concrete example might be Rating_Quality where the value would represent the user's
+                    opinion of the quality of the product. The value is a positive integer between 1 and 5 and represents
+                    rating dimension value.
+                  example: '3'
+                reviewText:
+                  type: string
+                  minLength: 50
+                  maxLength: 10000
+                  description: Value is review body text. If the text is less than 50 characters, it will be considered
+                    as a ratings-only review.
+                  example: Test review for testing review text.Test test test test
+                title:
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  description: Value is content title text. The minimum and maximum lengths are configurable. The
+                    current default is 50 characters, but can be lower to 1 or higher to 255.
+                  example: test title
+                tag_<Dimension-External-Id>_<n>:
+                  type: string
+                  description: A concrete example of the parameter might be 'tag_Pro_1'. Valid values could be any
+                    free-form text. <n> should be a non-negative integer starting at the number 1.
+                  example: EasyToUse
+                tagid_<Dimension-External-Id>/<Tag-Label>:
+                  type: boolean
+                  description: Boolean indicating whether or not the tag applies to the user. A concrete example
+                    might be 'tagid_Pro/EasyToUse=true'.
+                  example: 'true'
+                user:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated.
+                    Note that the UserId parameter does not contain authentication information and should not be
+                    used for hosted authentication. See the Authenticate User method for more information.
+                  example: 8bbecfb7aef71e0188119983bdbef197646174653d323032322d30372d3134267573657269643d
+                userId:
+                  type: string
+                  description: 'User''s external ID. It should only contain alphanumeric characters, hyphens (-),
+                    and underscores (_). No other special characters should be used. Can be encoded in UserToken
+                    or sent as plain text, depending on API key configuration. Must not contain any personally identifiable
+                    information (PII) data, particularly email address. '
+                  example: testi123
+                UserEmail:
+                  type: string
+                  description: User's email address.
+                  example: abc@dummy.com
+                userNickname:
+                  type: string
+                  minLength: 4
+                  maxLength: 25
+                  description: User nickname display text.
+                  example: dummyyy
+                UserLocation:
+                  type: string
+                  description: User location text.
+                  example: EU
+                SendEmailAlertWhenCommented:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when a comment is
+                    posted on the content.
+                  example: 'true'
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her content
+                    is published.
+                  example: 'false'
+                VideoUrl_1:
+                  type: string
+                  description: Value is valid URL to a YouTube video where <n> is a non-negative integer.
+                  example: https://google.com/test.mp4
+                VideoCaption_1:
+                  type: string
+                  description: Value is caption text for the video URL with the same value of <n>.
+                  example: Dummy caption for video
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from
+          your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission.
+          If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary
+          in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but
+          are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice
+          network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity
+          or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: apiversion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: passkey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The ID of the product that this content is being submitted on.
+        example: '1000001'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitReview'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Errror
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/initiateSubmit.json:
+    post:
+      tags:
+      - ProgressiveSubmit
+      summary: initiateSubmit
+      description: Endpoint to request product info for setting up a review submission form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  type: string
+                  description: Locale information
+                productIds:
+                  type: array
+                  items:
+                    type: string
+                  description: List of product identifiers
+            examples:
+              default:
+                value:
+                  locale: en_US
+                  productIds:
+                  - 1000001
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+      - name: apiVersion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+      - name: action
+        in: query
+        schema:
+          type: string
+        description: Action is always submit
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique id for user. It should only contain alphanumeric characters, hyphens (-), and underscores
+          (_). No other special characters should be used. Can be encoded in UserToken or sent as plain text, depending
+          on API key configuration. Must not contain any personally identifiable information (PII) data, particularly
+          email address.
+      - name: hostedauth
+        in: query
+        schema:
+          type: string
+        description: Indicates the action being performed, is using hosted authentication
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/bad-request
+                    title: Bad Request
+                    staus: 400
+                    ERROR_CODE: ERROR_BAD_REQUEST
+                    detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/unauthorized
+                    title: Unauthorized
+                    staus: 401
+                    ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                    detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/forbidden
+                    title: Forbidden
+                    staus: 403
+                    ERROR_CODE: ERROR_FORBIDDEN
+                    detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/not-found
+                    title: Not Found
+                    staus: 404
+                    ERROR_CODE: ERROR_NOT_FOUND
+                    detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    fault:
+                      faultstring: request line size exceeding 7,168
+                      detail:
+                        errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    type: /problems/unexpected-error
+                    title: Unexpected Error
+                    staus: 500
+                    ERROR_CODE: ERROR_UNKNOWN
+                    detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/progressiveSubmit.json:
+    post:
+      tags:
+      - ProgressiveSubmit
+      summary: progressiveSubmit
+      description: Endpoint for handling progressive submissions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  type: string
+                  description: Locale information
+                productId:
+                  type: string
+                  description: Product identifier
+                userId:
+                  type: string
+                  description: User identifier
+                submissionSessionToken:
+                  type: string
+                  description: Submission session token
+                submissionFields:
+                  type: object
+                  properties:
+                    rating:
+                      type: string
+                      description: Rating value
+                    agreedtotermsandconditions:
+                      type: string
+                      description: Agreement to terms and conditions
+                    reviewtext:
+                      type: string
+                      minLength: 50
+                      maxLength: 10000
+                      description: Review text. The minimum length is configurable,  default is 50 but can be lower.
+                    title:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                      description: Value is content title text. The minimum and maximum lengths are configurable.
+                        The current default is 50 characters, but can be lower to 1 or higher to 255.
+            example:
+              locale: en_US
+              productId: Product1
+              userId: testi2
+              submissionSessionToken: aJk5gwI0/fXmIlzX1QWQJB3dmiOlyFLkeESuVfSXLY+zm7079ZP2BS1KCUoqNam2xH1rv1VjOU8gMUq6isItxZ3az7z1lAhp/UkMFEmTvVM5vxe4f4KRc9NlIafxPotw
+              submissionFields:
+                rating: '5'
+                agreedtotermsandconditions: 'true'
+                reviewtext: 'Product 1: test test test test test test test test test test test test test test test
+                  test test test test test test test'
+                title: 'Product 1: Test'
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        example: application/json
+      - name: apiVersion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: action
+        in: query
+        schema:
+          type: string
+        description: Action is always submit
+        example: submit
+      - name: fields
+        in: query
+        schema:
+          type: boolean
+        description: A dictionary of form fields for a review form. Format depends on whether "extended" parameter
+          is set. fields will be pre-populated with previously submitted content.
+        example: 'true'
+      - name: passkey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      - name: hostedauth
+        in: query
+        schema:
+          type: string
+        description: Indicates the action being performed, is using hosted authentication
+        example: 'True'
+      - name: extended
+        in: query
+        schema:
+          type: string
+        description: This parameter is sent as a single key and does not need a value. When omitted, the fields
+          elements are returned in an ordered list that honors the submission field order as specified in the configuration
+          hub, with the exception that required fields are presented first in the ordered list. When included, fields
+          elements are returned in full submission-style format.
+        example: 'True'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/progressiveSubmit'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                status: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/submitreviewcomment.json:
+    get:
+      tags:
+      - Comments
+      operationId: GetComment
+      summary: Preview Comments Form
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ReviewId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the review that this comment is being submitted on. Required for review comments.
+        example: 47635347
+      - name: UserId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'User''s external ID. This value should come from your authentication system. See Client-Mastered
+          Authentication for more information.
+
+          Alert: Do not use an email address for this value.'
+        example: testi2
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComment'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Comment submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Errror
+                staus: 500
+                ERRPR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    post:
+      tags:
+      - Comments
+      operationId: SubmitComment
+      summary: Submit a comment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Action:
+                  type: string
+                  description: The submission action to take -- either 'Action=', 'Action=Preview' or 'Action=Submit'.
+                    'Action=' will show information that can be used to build a submission form, 'Action=Preview'
+                    will show a draft of the content to be submitted; 'Action=Submit' will submit the content. If
+                    'Action=Submit', the request must be an HTTP POST.
+                  example: submit
+                CommentText:
+                  type: string
+                  description: Contains the text of the comment.
+                  example: Testing for products
+                fp:
+                  type: string
+                  description: 'Fingerprint of content author''s device. See the Authenticity Tutorial for more
+                    information.
+
+                    Per the Bazaarvoice Authenticity Policy, you must send a device fingerprint attached to each
+                    submission. If you fail to send a device fingerprint with your submission, Bazaarvoice may take
+                    any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the
+                    network. Such actions may include but are not limited to: rejection of your content, halting
+                    syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation
+                    of your API license.
+
+                    Alert: Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: 0400Ia/vP4SUWbEXk1Rjuv1iJmSjiw6jjNGA14xr7X6xRXldg3Eo6XtD78oKt7mA8bo/mtBit
+                CampaignId:
+                  type: string
+                  description: Arbitrary text that may be saved alongside content to indicate vehicle by which content
+                    was captured, e.g. “post-purchase email”.
+                  example: campaign1
+                HostedAuthentication_AuthenticationEmail:
+                  type: string
+                  description: Email address where the submitter will receive the confirmation email. If you are
+                    configured to use hosted email authentication, this parameter is required. See the Authenticate
+                    User method for more information on hosted authentication.
+                  example: dummy@dummy.com
+                HostedAuthentication_CallbackUrl:
+                  type: string
+                  description: URL of the link contained in the user authentication email. This should point to
+                    a landing page where a web application exists to complete the user authentication process. The
+                    host for the URL must be one of the domains configured for the client. The link in the email
+                    will contain a user authentication token (authtoken) that is used to verify the submitter. If
+                    you are configured to use hosted email authentication, this parameter is required. See the hosted
+                    authentication tutorial for more information.
+                  example: https://dummy.com
+                Locale:
+                  type: string
+                  description: 'Locale to display Labels, Configuration, Product Attributes and Category Attributes
+                    in. The default value is the locale defined in the display associated with the API key.
+
+                    Alert: Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: en_US
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her content
+                    is published.
+                  example: 'true'
+                user:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated.
+                    Note that the UserId parameter does not contain authentication information and should not be
+                    used for hosted authentication. See the Authenticate User method for more information.
+                  example: 4bd24fd580c77ab1d86b3ea3738603db646174653d3230323330393232267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d3930267375626a6563746964733d70726f647563743031
+                userid:
+                  type: string
+                  description: User's external ID. This value should come from your authentication system. See Client-Mastered
+                    Authentication for more information.
+                  example: testi2
+                UserEmail:
+                  type: string
+                  description: User's email address.
+                  example: dummy@dummy.com
+                UserLocation:
+                  type: string
+                  description: User location text
+                  example: USA
+                UserNickname:
+                  type: string
+                  minLength: 4
+                  maxLength: 25
+                  description: User nickname display text.
+                  example: Josh
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from
+          your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission.
+          If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary
+          in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but
+          are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice
+          network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity
+          or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product that this content is being submitted on.
+        example: '1000001'
+      - name: reviewId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A ReviewId is required for all review comment submissions.
+        example: '47635347'
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitComment'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Comment submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Errror
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/submitquestion.json:
+    get:
+      tags:
+      - Questions
+      operationId: GetQuestion
+      summary: Preview a question submission
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product that this content is being submitted on.
+        example: product01
+      - name: Action
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The submission action to take
+        example: preview
+      - name: QuestionSummary
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Contains the text of the question summary. Only a single line of text is allowed.
+        example: How do I get it autoshipped every month?
+      - name: User
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated.
+          Note that the UserId parameter does not contain authentication information and should not be used for
+          hosted authentication. See the Authenticate User method for more information.
+        example: e4cd358f898194db893ff3905a40f64b646174653d3230323330393230267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d3930267375626a6563746964733d70726f647563743031
+      - name: agreedtotermsandconditions
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending
+          on the client's settings.
+        example: 'yes'
+      - name: usernickname
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 4
+          maxLength: 25
+        description: User nickname display text.
+        example: sheenu
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuestion'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Question submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERREO_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    post:
+      tags:
+      - Questions
+      operationId: SubmitQuestion
+      summary: Submit a question
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Action:
+                  type: string
+                  description: The submission action to take -- either 'Action=', 'Action=Preview' or 'Action=Submit'.
+                    'Action=' will show information that can be used to build a submission form, 'Action=Preview'
+                    will show a draft of the content to be submitted; 'Action=Submit' will submit the content. If
+                    'Action=Submit', the request must be an HTTP POST.
+                  example: preview
+                fp:
+                  type: string
+                  description: 'Fingerprint of content author''s device. See the Authenticity Tutorial for more
+                    information.
+
+
+                    Per the Bazaarvoice Authenticity Policy, you must send a device fingerprint attached to each
+                    submission. If you fail to send a device fingerprint with your submission, Bazaarvoice may take
+                    any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the
+                    network. Such actions may include but are not limited to: rejection of your content, halting
+                    syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation
+                    of your API license.
+
+
+                    Alert Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: 0400Ia/vP4SUWbEXk1Rjuv1iJmSjiw6jjNGA14xr7X6xRXldg3Eo6XtD78oKt7mA8bo/mtBit
+                AgreedToTermsAndConditions:
+                  type: boolean
+                  description: Boolean indicating whether or not the user agreed to the terms and conditions. Required
+                    depending on the client's settings.
+                  example: 'false'
+                CampaignId:
+                  type: string
+                  description: Arbitrary text that may be saved alongside content to indicate vehicle by which content
+                    was captured, e.g. “post-purchase email”.
+                  example: Campaign_1
+                HostedAuthentication_AuthenticationEmail:
+                  type: string
+                  description: Email address where the submitter will receive the confirmation email. If you are
+                    configured to use hosted email authentication, this parameter is required. See the Authenticate
+                    User method for more information on hosted authentication.
+                  example: dummy@dummy.com
+                HostedAuthentication_CallbackUrl:
+                  type: string
+                  description: URL of the link contained in the user authentication email. This should point to
+                    a landing page where a web application exists to complete the user authentication process. The
+                    host for the URL must be one of the domains configured for the client. The link in the email
+                    will contain a user authentication token (authtoken) that is used to verify the submitter. If
+                    you are configured to use hosted email authentication, this parameter is required. See the hosted
+                    authentication tutorial for more information.
+                  example: https://dummy.com
+                IsUserAnonymous:
+                  type: boolean
+                  description: Boolean value. If IsUserAnonymous is true, the user's display name will not be shown
+                    with the question. This parameter is unrelated to UserId. This parameter can be turned off on
+                    a per client basis.
+                  example: 'false'
+                Locale:
+                  type: string
+                  description: 'Locale to display Labels, Configuration, Product Attributes and Category Attributes
+                    in. The default value is the locale defined in the display associated with the API key.
+
+
+                    Alert Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: en_US
+                PhotoCaption_<n>:
+                  type: string
+                  description: Value is caption text for the photo URL with the same value of <n>.
+                  example: Dummy caption for photo
+                PhotoUrl_<n>:
+                  type: string
+                  description: Value is a Bazaarvoice URL of a photo uploaded using the Data API, where <n> is a
+                    non-negative integer.
+                  example: https://dummy.com/abc.jpg
+                QuestionDetails:
+                  type: string
+                  description: Contains the text of the question details. Multiple lines of text are allowed.
+                  example: About the quality and durability of product.
+                QuestionSummary:
+                  type: string
+                  description: Contains the text of the question summary. Only a single line of text is allowed.
+                  example: How do I get it autoshipped every month?
+                SendEmailAlertWhenAnswered:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her question
+                    is answered.
+                  example: 'false'
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her content
+                    is published.
+                  example: 'true'
+                User:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated.
+                    Note that the UserId parameter does not contain authentication information and should not be
+                    used for hosted authentication. See the Authenticate User method for more information.
+                  example: af0d220ddf1db8a9ed890aed409112a1646174653d3230323330393139267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d313030267375626a6563746964733d70726f647563743031
+                UserEmail:
+                  type: string
+                  description: User's email address.
+                  example: testshra@bv.com
+                UserId:
+                  type: string
+                  description: 'User''s external ID. This value should come from your authentication system. See
+                    Client-Mastered Authentication for more information.
+
+
+                    Alert Do not use an email address for this value.'
+                  example: testi2
+                UserLocation:
+                  type: string
+                  description: User location text.
+                  example: India
+                UserNickname:
+                  type: string
+                  minLength: 4
+                  maxLength: 25
+                  description: User nickname display text.
+                  example: Jack
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from
+          your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission.
+          If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary
+          in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but
+          are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice
+          network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity
+          or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product that this content is being submitted on.
+        example: product01
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: User's external ID. This value should come from you authentication system. See Client-Mastered
+          Authentication for more information.
+        example: testing2
+      - name: questionsummary
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Contains the text of the question summary. Only a single line of text is allowed.
+        example: Quality of product
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitQuestion'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Question submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR-UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/submitanswer.json:
+    get:
+      tags:
+      - Answers
+      operationId: GetAnswer
+      summary: Preview an answer submission
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: QuestionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the question that this answer is being submitted on.
+        example: '1483881'
+      - name: Action
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The submission action to take
+        example: preview
+      - name: AnswerText
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Contains the text of the answer.
+        example: HeyLetsDothis API key config has been changed to encrypted USERIDs
+      - name: agreedtotermsandconditions
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending
+          on the client's settings.
+        example: 'true'
+      - name: UserId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'User''s external ID. This value should come from your authentication system. See Client-Mastered
+          Authentication for more information.
+
+
+          Alert Do not use an email address for this value.'
+        example: testi2
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnswer'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Answer submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    post:
+      tags:
+      - Answers
+      operationId: SubmitAnswer
+      summary: Submit an answer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                QuestionId:
+                  type: string
+                  description: The id of the question that this answer is being submitted on.
+                  example: '1483881'
+                Action:
+                  type: string
+                  description: The submission action to take -- either 'Action=', 'Action=Preview' or 'Action=Submit'.
+                    'Action=' will show information that can be used to build a submission form, 'Action=Preview'
+                    will show a draft of the content to be submitted; 'Action=Submit' will submit the content. If
+                    'Action=Submit', the request must be an HTTP POST.
+                  example: submit
+                AnswerText:
+                  type: string
+                  description: Contains the text of the answer.
+                  example: Age is under 18
+                UserId:
+                  type: string
+                  description: 'User''s external ID. This value should come from your authentication system. See
+                    Client-Mastered Authentication for more information.
+
+
+                    Alert Do not use an email address for this value.'
+                  example: testi2
+                fp:
+                  type: string
+                  description: 'Fingerprint of content author''s device. See the Authenticity Tutorial for more
+                    information.
+
+
+                    Per the Bazaarvoice Authenticity Policy, you must send a device fingerprint attached to each
+                    submission. If you fail to send a device fingerprint with your submission, Bazaarvoice may take
+                    any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the
+                    network. Such actions may include but are not limited to: rejection of your content, halting
+                    syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation
+                    of your API license.
+
+
+                    Alert Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: 0400Ia/vP4SUWbEXk1Rjuv1iJmSjiw6jjNGA14xr7X6xRXldg3Eo6XtD78oKt7mA8bo/mtBit
+                AgreedToTermsAndConditions:
+                  type: boolean
+                  description: Boolean indicating whether or not the user agreed to the terms and conditions. Required
+                    depending on the client's settings.
+                  example: 'true'
+                CampaignId:
+                  type: string
+                  description: Arbitrary text that may be saved alongside content to indicate vehicle by which content
+                    was captured, e.g. “post-purchase email”.
+                  example: Campaignid1
+                HostedAuthentication_AuthenticationEmail:
+                  type: string
+                  description: Email address where the submitter will receive the confirmation email. If you are
+                    configured to use hosted email authentication, this parameter is required. See the Authenticate
+                    User method for more information on hosted authentication.
+                  example: dummy@dummy.com
+                HostedAuthentication_CallbackUrl:
+                  type: string
+                  description: URL of the link contained in the user authentication email. This should point to
+                    a landing page where a web application exists to complete the user authentication process. The
+                    host for the URL must be one of the domains configured for the client. The link in the email
+                    will contain a user authentication token (authtoken) that is used to verify the submitter. If
+                    you are configured to use hosted email authentication, this parameter is required. See the hosted
+                    authentication tutorial for more information
+                  example: https://dummy.com
+                Locale:
+                  type: string
+                  description: 'Locale to display Labels, Configuration, Product Attributes and Category Attributes
+                    in. The default value is the locale defined in the display associated with the API key.
+
+
+                    Alert Failure to submit this field will result in your content being ineligible for syndication,
+                    authenticity or other business processes.'
+                  example: en_US
+                PhotoCaption_<n>:
+                  type: string
+                  description: Value is caption text for the photo URL with the same value of <n>.
+                  example: Dummy caption for photo
+                PhotoUrl_<n>:
+                  type: string
+                  description: Value is a Bazaarvoice URL of a photo uploaded using the Data API, where <n> is a
+                    non-negative integer.
+                  example: https://dummy.com/abc.jpg
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her content
+                    is published.
+                  example: 'false'
+                User:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated.
+                    Note that the UserId parameter does not contain authentication information and should not be
+                    used for hosted authentication. See the Authenticate User method for more information.
+                  example: 4bd24fd580c77ab1d86b3ea3738603db646174653d3230323330393232267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d3930267375626a6563746964733d70726f647563743031
+                UserEmail:
+                  type: string
+                  description: User's email address.
+                  example: dummy@dummy.com
+                UserLocation:
+                  type: string
+                  description: User location text.
+                  example: USA
+                UserNickname:
+                  type: string
+                  minLength: 4
+                  maxLength: 25
+                  description: User nickname display text.
+                  example: Tommy
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from
+          your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission.
+          If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary
+          in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but
+          are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice
+          network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity
+          or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitAnswer'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Answer submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/authenticateuser.json:
+    post:
+      tags:
+      - Authenticateuser
+      operationId: AuthenticateUser
+      summary: Authenticate a user
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: authtoken
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Value of the authentication token that was received in a user's authentication email. See the
+          hostedauthentication_callbackurl parameter for more information.
+        example: '[authtoken]'
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticateUser'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/submitfeedback.json:
+    post:
+      tags:
+      - Feedback
+      operationId: SubmitFeedback
+      summary: Submit a feedback
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from
+          your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission.
+          If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary
+          in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but
+          are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice
+          network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity
+          or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ContentId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The ID of the content with which the feedback is associated.
+        example: '47645686'
+      - name: ContentType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The type of content with which the feedback is associated (review, question, answer, or review_comment).
+        example: review
+      - name: FeedbackType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Type of feedback (inappropriate, helpfulness).
+        example: helpfulness
+      - name: Vote
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Helpfulness vote for this content. Valid votes are: Positive, Negative. This parameter is
+          only required for FeedbackType=helpfulness.'
+        example: Positive
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission             to access a particular
+          client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitFeedback'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/dsafeedbackurl.json:
+    post:
+      tags:
+      - Feedback
+      summary: Generate a form URL for DSA.
+      operationId: DsaFeedabackUrl
+      description: This API generates a form URL for DSA feedback.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DsaFeedbackUrlRequest'
+        required: true
+      parameters:
+      - in: query
+        name: passkey
+        required: true
+        schema:
+          type: string
+          example: '[yourKey]'
+        description: Key required to authenticate API user and check permission to access particular client's data.
+      responses:
+        '200':
+          description: Successful response containing the generated form URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitDsaFeedbackUrl'
+        '400':
+          description: Bad Request error when invalid parameters are provided or required fields are missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                badRequest:
+                  summary: Bad Request Example
+                  value:
+                    instance: /data/dsafeedbackurl
+                    title: Bad Request
+                    status: 400
+                    detail: Content Type is missing. Ensure the request includes all required fields and try again.
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        '500':
+          description: Internal Server Error when something goes wrong while processing the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                internalServerError:
+                  summary: Internal Server Error Example
+                  value:
+                    instance: /data/dsafeedbackurl
+                    title: Internal Server Error
+                    status: 500
+                    detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/uploadphoto.json:
+    post:
+      tags:
+      - Uploadphoto
+      operationId: UploadPhoto
+      summary: Upload a photo
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Locale:
+                  type: string
+                  description: Locale to display Labels, Configuration, Product Attributes and Category Attributes
+                    in. The default value is the locale defined in the display associated with the API key.
+                  example: en_US
+                Photo:
+                  type: string
+                  description: A file representing the photo to be submitted. Note that the parameter name is case-sensitive
+                    and must be lowercase. Use either the photo or photoUrl parameter to define the photo to upload.
+                    An error is returned if both parameters are defined.
+                  example: -F 'Photo=@/path/to/your_image.jpg'
+                PhotoUrl:
+                  type: string
+                  description: URL of the photo to be uploaded. Use either the photo or photoUrl parameter to define
+                    the photo to upload. An error is returned if both parameters are defined. HTTP and HTTPS are
+                    the only protocols supported for the photoUrl parameter.
+                  example: https://upload.wikimedia.org/wikipedia/commons/b/ba/Flower_jtca001.jpg
+                User:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated.
+                    Note that the UserId parameter does not contain authentication information and should not be
+                    used for hosted authentication.
+                  example: 4d8f70f72a69b170556ecd0cbec0ee1e646174653d3230323330393132267573657269643d746573743126757365726e616d653d736b616872266d61786167653d3439
+                UserId:
+                  type: string
+                  description: User's external ID. This value should come from your authentication system
+                  example: testi2
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: contentType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The content type for which this media is being submitted. Valid values include review, question
+          or answer.
+        example: review
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's
+          data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPhoto'
+        '400':
+          description: Bad Request - Missing required parameter or using both Photo and PhotoUrl.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                status: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - ApiVersion or using both Photo and PhotoUrl is not allowed.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication
+            tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+components:
+  schemas:
+    GetReview:
+      type: object
+      properties:
+        Locale:
+          type: string
+          description: The locale of the review.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+            Groups:
+              type: object
+            FieldsOrder:
+              type: array
+              items:
+                type: string
+            GroupsOrder:
+              type: array
+              items:
+                type: string
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted
+        Review:
+          type: object
+          properties:
+            SendEmailAlertWhenCommented:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is commented on.
+            Rating:
+              type: number
+              description: The rating of the review.
+            SubmissionTime:
+              type: string
+              description: The submission time of the review.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2}$
+            ReviewText:
+              type: string
+              description: The text content of the review.
+            SubmissionId:
+              type: string
+              description: The submission ID of the review.
+            Title:
+              type: string
+              description: The title of the review.
+            IsRecommended:
+              type: boolean
+              description: Flag indicating whether the review is recommended.
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the review to be posted.
+            Id:
+              type: string
+              description: The ID of the review.
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is published.
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
+    SubmitReview:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Review:
+          type: object
+          properties:
+            Status:
+              type: number
+              description: The status of the review.
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is published.
+            SendEmailAlertWhenCommented:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is commented on.
+            SubmissionTime:
+              type: string
+              description: The submission time of the review.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            Rating:
+              type: number
+              description: The rating of the review.
+            IsRecommended:
+              type: boolean
+              description: Flag indicating whether the review is recommended.
+            ReviewText:
+              type: string
+              description: The text content of the review.
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the review to be posted.
+            Id:
+              type: string
+              description: The ID of the review.
+            SubmissionId:
+              type: string
+              description: The submission ID of the review.
+            Title:
+              type: string
+              description: The title of the review.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the review.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    intiateSubmit:
+      type: object
+      properties:
+        hasErrors:
+          type: boolean
+          example: false
+        response:
+          type: object
+          properties:
+            productFormData:
+              type: object
+              properties:
+                product1:
+                  type: object
+                  properties:
+                    review:
+                      type: object
+                      properties:
+                        submissionID:
+                          type: string
+                        productExternalID:
+                          type: string
+                        submissionTime:
+                          type: string
+                    fieldsOrder:
+                      type: array
+                      items:
+                        type: string
+                    fields:
+                      type: object
+                      properties:
+                        Quality:
+                          type: object
+                          properties:
+                            autoPopulate:
+                              type: boolean
+                            label:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                            required:
+                              type: boolean
+                        Value:
+                          type: object
+                          properties:
+                            autoPopulate:
+                              type: boolean
+                            label:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                            required:
+                              type: boolean
+                        rating:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                        authenticationemail:
+                          type: object
+                          properties:
+                            required:
+                              type: boolean
+                            hidden:
+                              type: boolean
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                        Gender:
+                          type: object
+                          properties:
+                            valuesLabels:
+                              type: object
+                              properties:
+                                Male:
+                                  type: string
+                                Female:
+                                  type: string
+                            autoPopulate:
+                              type: boolean
+                            label:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                            required:
+                              type: boolean
+                        title:
+                          type: object
+                          properties:
+                            required:
+                              type: boolean
+                            hidden:
+                              type: boolean
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                        reviewtext:
+                          type: object
+                          properties:
+                            required:
+                              type: boolean
+                            hidden:
+                              type: boolean
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                        Age:
+                          type: object
+                          properties:
+                            valuesLabels:
+                              type: object
+                              properties:
+                                17orUnder:
+                                  type: string
+                                18to24:
+                                  type: string
+                                25to34:
+                                  type: string
+                                35to44:
+                                  type: string
+                                45to54:
+                                  type: string
+                                55to64:
+                                  type: string
+                                65orOver:
+                                  type: string
+                            autoPopulate:
+                              type: boolean
+                            label:
+                              type: string
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                            required:
+                              type: boolean
+                        usernickname:
+                          type: object
+                          properties:
+                            required:
+                              type: boolean
+                            hidden:
+                              type: boolean
+                            id:
+                              type: string
+                            minLength:
+                              type: number
+                            type:
+                              type: string
+                            class:
+                              type: string
+                        useremail:
+                          type: object
+                          properties:
+                            required:
+                              type: boolean
+                            hidden:
+                              type: boolean
+                            id:
+                              type: string
+                            type:
+                              type: string
+                            class:
+                              type: string
+                    submissionSessionToken:
+                      type: string
+            userId:
+              type: string
+    progressiveSubmit:
+      type: object
+      properties:
+        hasErrors:
+          type: boolean
+          example: false
+        response:
+          type: object
+          properties:
+            review:
+              type: object
+              properties:
+                SendEmailAlertWhenCommented:
+                  type: boolean
+                  description: Flag indicating whether to send an email alert when the review is commented on.
+                Rating:
+                  type: number
+                  description: The rating of the review.
+                SubmissionTime:
+                  type: string
+                  description: The submission time of the review.
+                  pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+                ReviewText:
+                  type: string
+                  description: The text content of the review.
+                Title:
+                  type: string
+                  description: The title of the review.
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Flag indicating whether to send an email alert when the review is published.
+            submissionId:
+              type: string
+              description: The submission ID.
+            isFormComplete:
+              type: boolean
+              description: Flag indicating whether the form is complete.
+            SubmissionSessionToken:
+              type: string
+    GetComment:
+      type: object
+      properties:
+        Locale:
+          type: string
+        Comment:
+          type: object
+          properties:
+            SubmissionTime:
+              type: string
+              description: The submission time of the comment.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            CommentText:
+              type: string
+              description: The text content of the comment.
+            SubmissionId:
+              type: string
+              description: The submission ID of the comment.
+            Title:
+              type: string
+            TypicalHoursToPost:
+              type: string
+            Id:
+              type: string
+            SendEmailAlertWhenPublished:
+              type: boolean
+        Errors:
+          type: array
+          items:
+            type: object
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+              properties:
+                userlocationgeocode_latitude:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                commenttext:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_region:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                title:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                sendemailalertwhenpublished:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: string
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: string
+                    Default:
+                      type: string
+                userlocationgeocode_country:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_longitude:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_city:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                usernickname:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocation:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                useremail:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+        Groups:
+          type: object
+          properties:
+            userlocationgeocode:
+              type: object
+              properties:
+                Type:
+                  type: string
+                SubElements:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Type:
+                        type: string
+                      Id:
+                        type: string
+                Required:
+                  type: boolean
+                Label:
+                  type: string
+                Id:
+                  type: string
+        FieldsOrder:
+          type: array
+          items:
+            type: string
+        GroupsOrder:
+          type: array
+          items:
+            type: string
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a comment to be posted.
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
+    SubmitComment:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a comment to be posted.
+        Comment:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the comment is published.
+            SubmissionTime:
+              type: string
+              description: The submission time of the comment.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the comment to be posted.
+            Id:
+              type: string
+              description: The ID of the comment.
+            SubmissionId:
+              type: string
+              description: The submission ID of the comment.
+            CommentText:
+              type: string
+              description: The text content of the comment.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the comment.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    GetQuestion:
+      type: object
+      properties:
+        Locale:
+          type: string
+        Errors:
+          type: array
+          items:
+            type: object
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+              properties:
+                photourl_6:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_2:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_3:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_4:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_5:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                sendemailalertwhenanswered:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_2:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_1:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_6:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_5:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_4:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_1:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_3:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                hostedauthentication_authenticationemail:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                questiondetails:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                hostedauthentication_rememberme:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_region:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                questionsummary:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                displayasanonymous:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_country:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_longitude:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                usernickname:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocation:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_latitude:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                sendemailalertwhenpublished:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_city:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+            Groups:
+              type: object
+              properties:
+                photo_1:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_2:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_3:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_4:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                userlocationgeocode:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                hostedauthentication:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_5:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_6:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+            FieldsOrder:
+              type: array
+              items:
+                type: string
+            GroupsOrder:
+              type: array
+              items:
+                type: string
+        Question:
+          type: object
+          properties:
+            QuestionSummary:
+              type: string
+            SubmissionTime:
+              type: string
+            SubmissionId:
+              type: string
+            SendEmailAlertWhenAnswered:
+              type: boolean
+            TypicalHoursToPost:
+              type: string
+            QuestionDetails:
+              type: string
+            Id:
+              type: string
+            SendEmailAlertWhenPublished:
+              type: boolean
+        TypicalHoursToPost:
+          type: integer
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
+          example: false
+    SubmitQuestion:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Question:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is published.
+            SendEmailAlertWhenAnswered:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is answered.
+            QuestionSummary:
+              type: string
+              description: The summary of the question.
+            SubmissionTime:
+              type: string
+              description: The submission time of the question.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the question to be posted.
+            SubmissionId:
+              type: string
+              description: The submission ID of the question.
+            QuestionDetails:
+              type: string
+              description: The details of the question.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the question.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    GetAnswer:
+      type: object
+      properties:
+        Locale:
+          type: string
+        Answer:
+          type: object
+          properties:
+            SubmissionTime:
+              type: string
+            SubmissionId:
+              type: string
+            AnswerText:
+              type: string
+            TypicalHoursToPost:
+              type: string
+            Id:
+              type: string
+            SendEmailAlertWhenPublished:
+              type: boolean
+        Errors:
+          type: array
+          items:
+            type: string
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  Options:
+                    type: array
+                    items:
+                      type: string
+                  Type:
+                    type: string
+                  Required:
+                    type: boolean
+                  Label:
+                    type: string
+                  Value:
+                    type: string
+                  MinLength:
+                    type: number
+                  Id:
+                    type: string
+                  MaxLength:
+                    type: number
+                  Default:
+                    type: string
+        Groups:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              Type:
+                type: string
+              SubElements:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    Id:
+                      type: string
+              Required:
+                type: boolean
+              Label:
+                type: string
+              Id:
+                type: string
+        FieldsOrder:
+          type: array
+          items:
+            type: string
+        GroupsOrder:
+          type: array
+          items:
+            type: string
+        TypicalHoursToPost:
+          type: integer
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
+          example: false
+    SubmitAnswer:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Answer:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the answer is published.
+            SubmissionTime:
+              type: string
+              description: The submission time of the answer.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the answer to be posted.
+            Id:
+              type: string
+              description: The ID of the answer.
+            SubmissionId:
+              type: string
+              description: The submission ID of the answer.
+            AnswerText:
+              type: string
+              description: The text content of the answer.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the answer.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    AuthenticateUser:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a user authentication request to be processed.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the user authentication request.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+        Authentication:
+          type: object
+          properties:
+            User:
+              type: string
+              description: The user identifier.
+    SubmitFeedback:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        TypicalHoursToPost:
+          type: object
+          description: The typical number of hours it takes for a feedback submission to be processed.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Feedback:
+          type: object
+          properties:
+            Inappropriate:
+              type: object
+              properties:
+                ReasonText:
+                  type: string
+                  description: The reason for flagging as inappropriate.
+                AuthorId:
+                  type: string
+                  description: The ID of the author flagging as inappropriate.
+            Helpfulness:
+              type: object
+              properties:
+                ReasonText:
+                  type: string
+                  description: The reason for flagging as helpful.
+                AuthorId:
+                  type: string
+                  description: The ID of the author flagging as helpful.
+        Locale:
+          type: string
+          description: The locale of the feedback submission.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    UploadPhoto:
+      type: object
+      properties:
+        Data:
+          type: object
+          description: Additional data associated with the response. This can be an empty object or may contain
+            specific data as needed.
+        HasErrors:
+          type: boolean
+          description: Indicates whether there are any errors in the response.
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+          description: An array of form data. This can be an empty array or may contain specific data as needed.
+        AuthorSubmissionToken:
+          type: string
+          nullable: true
+          description: The author submission token, if applicable.
+        FormErrors:
+          type: object
+          description: Errors related to the form submission, if any.
+        TypicalHoursToPost:
+          type: object
+          nullable: true
+          description: The typical number of hours it takes for a photo submission to be processed.
+        SubmissionId:
+          type: string
+          nullable: true
+          description: The ID associated with the photo submission, if applicable.
+        Locale:
+          type: string
+          description: The locale of the photo submission.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+          description: An array of errors, if any. This can be an empty array or may contain specific error objects
+            as needed.
+        Photo:
+          type: object
+          properties:
+            Caption:
+              type: string
+              nullable: true
+              description: The caption associated with the photo, if provided.
+            Sizes:
+              type: object
+              properties:
+                thumbnail:
+                  type: object
+                  properties:
+                    Url:
+                      type: string
+                      description: The URL of the thumbnail size photo.
+                    Id:
+                      type: string
+                      description: The ID associated with the thumbnail size photo.
+                normal:
+                  type: object
+                  properties:
+                    Url:
+                      type: string
+                      description: The URL of the normal size photo.
+                    Id:
+                      type: string
+                      description: The ID associated with the normal size photo.
+              description: An object containing different photo sizes and their corresponding URLs and IDs.
+            SizesOrder:
+              type: array
+              items:
+                type: string
+              description: An array specifying the order of different photo sizes.
+            Id:
+              type: string
+              description: The ID of the uploaded photo.
+    DsaFeedbackUrlRequest:
+      type: object
+      required:
+      - url
+      - domain
+      - contentId
+      - lang
+      - parameters
+      properties:
+        url:
+          type: string
+          example: www.abc.com
+          description: URL of the reported content.
+        domain:
+          type: string
+          example: abc.com
+          description: Domain if loaded via iframe (CSP).
+        contentId:
+          type: string
+          example: 54e
+          description: The ID of the content with which the feedback is associated.
+        lang:
+          type: string
+          example: en_US
+          description: Language in which the page should be rendered.
+        subject:
+          type: string
+          example: ID123456
+          description: Subject (optional)
+        parameters:
+          type: object
+          required:
+          - contentType
+          - client
+          - displayCode
+          - destSiteId
+          - contentLocale
+          - destLocale
+          properties:
+            contentType:
+              type: string
+              example: review
+              description: The type of content with which the feedback is associated (review, question, answer,
+                or review_comment).
+            client:
+              type: string
+              example: '[ClientName]'
+              description: BV onboarded client.
+            displayCode:
+              type: string
+              example: '[DisplayCode]'
+              description: Code representing the display of the content submission, such as for UI purposes.
+            sourceClient:
+              type: string
+              example: '[SourceClient]'
+              description: The source client identifier, representing where the content originated. (optional)
+            product:
+              type: string
+              example: rnr
+              description: The product type. If not specified, default value will be "rnr".
+            destSiteId:
+              type: string
+              example: 23675
+              description: Identifies the origin of the report.
+            contentLocale:
+              type: string
+              example: en_US
+              description: Language of the content.
+            destLocale:
+              type: string
+              example: en_US
+              description: Language of the originated content.
+    SubmitDsaFeedbackUrl:
+      type: object
+      properties:
+        formUrl:
+          type: string
+          example: https://test.dsacompliance.bazaarvoice.com/dsa/iframe/28/e9912a6e1569/?reference=1617911&url=https%3A%2F%2Fapps-qa.bazaarvoice.com%2Ftemp%2Fdsa_iframe%2Ftest_dsa_iframe_v2.html%3FbvmessageType%3DREVIEW_CONTENT%26bvTriggerer%3Ddsa_workflow%23review%2F1617911&hash=0d65f9021a42757913016c9db25bf16d2a5a894245eba0fefee171cc3e9a8915¶meters=%7B%22client%22%3A%22testcustomer-fast-prs-qa%22%2C%22displayCode%22%3A%2214176-en_us%22%2C%22contentType%22%3A%22review%22%2C%22destSiteId%22%3A%22main_site%22%2C%22contentLocale%22%3A%22en_US%22%2C%22product%22%3A%22rnr%22%7D&subject=testcustomer-fast-prs-qa_review_1617911&dhash=3406bda02f8a4ab45e3c14439bfd3326c6e900476b01175db717159323f969c1&domain=apps-qa.bazaarvoice.com
+          description: URL to the DSA feedback form, including parameters like locale, client, sourceClient, and
+            contentType.
+    DSAFeedbackRequest:
+      type: object
+      required:
+      - contentType
+      - contentId
+      - client
+      - sourceClient
+      - lang
+      - destSiteId
+      - caseId
+      - contentLocale
+      - category
+      - subcategory
+      - reasonText
+      - contentLocationOrUrl
+      - offenseInvolvement
+      - threatSuspicion
+      - displayCode
+      properties:
+        contentType:
+          type: string
+          description: Type of content with which the feedback is associated (e.g. review, question, answer, or
+            review_comment).
+          example: review
+        contentId:
+          type: string
+          description: ID of the content with which the feedback is associated.
+          example: 23147328
+        client:
+          type: string
+          description: The client identifier for the entity submitting the content.
+          example: '[ClientName]'
+        sourceClient:
+          type: string
+          description: The source client identifier, representing where the content originated.
+          example: '[SourceClient]'
+        subject:
+          type: string
+          description: Subject of the feedback, if applicable.
+          example: ''
+        lang:
+          type: string
+          description: Language of the content.
+          example: en_US
+        product:
+          type: string
+          description: Type of product, either 'rnr' or 'soco'.
+          x-extensible-enum:
+          - RNR
+          - SOCO
+        timestamp:
+          type: string
+          description: It is a sequence of characters or encoded information that represents a specific date and
+            time.
+          example: '2024-10-14T15:30:00.000Z'
+        caseId:
+          type: string
+          description: It is a unique id created for the report.
+          example: '123'
+        destSiteId:
+          type: string
+          description: Identifies the origin of the report.
+          example: '3445'
+        contentLocale:
+          type: string
+          description: Language of the content.
+          example: en_US
+        destLocale:
+          type: string
+          description: Language of the originated content.
+          example: en_US
+        category:
+          type: string
+          description: The reported content's type of illegality.
+          example: animal welfare
+        subcategory:
+          type: string
+          description: Further details to specify the type of illegality based on the category chosen.
+          example: cruelty to animals
+        reasonText:
+          type: string
+          description: Justify/explain why the reported content is illegal, such as legal grounds for reporting.
+          example: The content violates local animal rights laws.
+        contentLocationOrUrl:
+          type: string
+          description: URL(s) or location(s) of the reported content.
+          example: https://example.com/review/23147328
+        offenseInvolvement:
+          type: boolean
+          description: Indicate if the reported content involves one or more of these child sexual-related offences.
+          example: true
+        threatSuspicion:
+          type: boolean
+          description: Indicate if the reported content gives rise to a suspicion of a criminal offence involving
+            a threat to life or safety of a person or persons.
+          example: false
+        contactName:
+          type: string
+          description: Name of the person reporting the inappropriate feedback.
+          example: John Doe
+        contactEmail:
+          type: string
+          description: Email address of the person reporting the inappropriate feedback.
+          example: john.doe@example.com
+        displayCode:
+          type: string
+          description: A code for display purposes.
+          example: 8723
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'A URI reference that uniquely identifies the problem type only in the context of the provided
+            API. Opposed to the specification in RFC-7807, it is neither recommended to be dereferenceable nor globally
+            unique for the problem type.
+
+            '
+          default: about:blank
+          example: /some/uri-reference
+        title:
+          type: string
+          description: 'A short summary of the problem type. Written in English and readable for engineers, usually
+            not suited for non-technical stakeholders and not localized.
+
+            '
+          example: ERROR_BAD_REQUEST
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence of the problem.
+
+            '
+          minimum: 100
+          maximum: 600
+          exclusiveMaximum: true
+          example: 400
+        detail:
+          type: string
+          description: 'A human-readable explanation specific to this occurrence of the problem that is helpful
+            to locate the problem and give advice on how to proceed. Written in English and readable for engineers,
+            usually not suited for non-technical stakeholders and not localized.
+
+            '
+          example: Missing or unknown value for contentType.
+        instance:
+          type: string
+          format: uri-reference
+          description: 'A URI reference that identifies the specific occurrence of the problem, e.g., by adding
+            a fragment identifier or sub-path to the problem type. May be used to locate the root of this problem
+            in the source code.
+
+            '
+          example: /some/uri-reference#specific-occurrence-context
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

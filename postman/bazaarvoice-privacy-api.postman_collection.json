@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "6b7f6b28-1658-4d8a-953b-86f466cac077",
+		"name": "Bazaarvoice Privacy API",
+		"description": "The Bazaarvoice Privacy API provides a secure HTTP interface for integrating Bazaarvoice into your General Data Protection Regulation (GDPR) compliance workflow.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "accessRequests",
+			"item": [
+				{
+					"name": "https://developer.bazaarvoice.com/privacy-api/reference/right-of-access#many-requests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://stg.api.bazaarvoice.com/privacy/v1/accessRequests?passkey={{passkey}}&identifier={{identifier}}&clientName={{clientName}}&completedAfter={{completedAfter}}&submittedAfter={{submittedAfter}}&status={{status}}&limit={{limit}}",
+							"protocol": "https",
+							"host": [
+								"stg",
+								"api",
+								"bazaarvoice",
+								"com"
+							],
+							"path": [
+								"privacy",
+								"v1",
+								"accessRequests"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								},
+								{
+									"key": "identifier",
+									"value": "{{identifier}}"
+								},
+								{
+									"key": "clientName",
+									"value": "{{clientName}}"
+								},
+								{
+									"key": "completedAfter",
+									"value": "{{completedAfter}}"
+								},
+								{
+									"key": "submittedAfter",
+									"value": "{{submittedAfter}}"
+								},
+								{
+									"key": "status",
+									"value": "{{status}}"
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}"
+								}
+							]
+						},
+						"description": "Returns a collection of all available 'accessRequests' resources available to the user identified by the Authorization header. <a href='/privacy-api/reference/right-of-access#many-requests'> Read more</a> about obtaining multiple 'accessRequests'."
+					},
+					"response": []
+				},
+				{
+					"name": "https://developer.bazaarvoice.com/privacy-api/reference/right-of-access#submitting-a-right-of-access-request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "accessRequest object that needs to be added."
+						},
+						"url": {
+							"raw": "https://stg.api.bazaarvoice.com/privacy/v1/accessRequests?passkey={{passkey}}",
+							"protocol": "https",
+							"host": [
+								"stg",
+								"api",
+								"bazaarvoice",
+								"com"
+							],
+							"path": [
+								"privacy",
+								"v1",
+								"accessRequests"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Create a new 'accessRequests' resource to request information about an end-user. <a href='/privacy-api/reference/right-of-access#submitting-a-right-of-access-request'>Read more</a>"
+					},
+					"response": []
+				},
+				{
+					"name": "https://developer.bazaarvoice.com/privacy-api/reference/right-of-access#single-request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://stg.api.bazaarvoice.com/privacy/v1/accessRequests/:accessRequestId?passkey={{passkey}}",
+							"protocol": "https",
+							"host": [
+								"stg",
+								"api",
+								"bazaarvoice",
+								"com"
+							],
+							"path": [
+								"privacy",
+								"v1",
+								"accessRequests",
+								":accessRequestId"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "accessRequestId",
+									"value": "{{accessRequestId}}"
+								}
+							]
+						},
+						"description": "Returns a single 'accessRequest' resources. <a href='/privacy-api/reference/right-of-access#single-request'>Read more</a> about the endpoint."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for accessRequests"
+		},
+		{
+			"name": "forgetRequests",
+			"item": [
+				{
+					"name": "https://developer.bazaarvoice.com/privacy-api/reference/right-to-be-forgotten#many-requests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://stg.api.bazaarvoice.com/privacy/v1/forgetRequests?passkey={{passkey}}&identifier={{identifier}}&clientName={{clientName}}&completedAfter={{completedAfter}}&submittedAfter={{submittedAfter}}&status={{status}}&limit={{limit}}",
+							"protocol": "https",
+							"host": [
+								"stg",
+								"api",
+								"bazaarvoice",
+								"com"
+							],
+							"path": [
+								"privacy",
+								"v1",
+								"forgetRequests"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								},
+								{
+									"key": "identifier",
+									"value": "{{identifier}}"
+								},
+								{
+									"key": "clientName",
+									"value": "{{clientName}}"
+								},
+								{
+									"key": "completedAfter",
+									"value": "{{completedAfter}}"
+								},
+								{
+									"key": "submittedAfter",
+									"value": "{{submittedAfter}}"
+								},
+								{
+									"key": "status",
+									"value": "{{status}}"
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}"
+								}
+							]
+						},
+						"description": "Returns a collection of all available forgetRequests resources available to the user identified by the Authorization header.<a href='/privacy-api/reference/right-to-be-forgotten#many-requests'>Read more about the 'forgetRequest'</a>"
+					},
+					"response": []
+				},
+				{
+					"name": "https://developer.bazaarvoice.com/privacy-api/reference/right-to-be-forgotten#submitting-a-right-to-be-forgotten-request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "forgetRequest object that needs to be added."
+						},
+						"url": {
+							"raw": "https://stg.api.bazaarvoice.com/privacy/v1/forgetRequests?passkey={{passkey}}",
+							"protocol": "https",
+							"host": [
+								"stg",
+								"api",
+								"bazaarvoice",
+								"com"
+							],
+							"path": [
+								"privacy",
+								"v1",
+								"forgetRequests"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Create a new forgetRequests resource to trigger the deletion of an end-user's data."
+					},
+					"response": []
+				},
+				{
+					"name": "https://developer.bazaarvoice.com/privacy-api/reference/right-to-be-forgotten#single-request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://stg.api.bazaarvoice.com/privacy/v1/forgetRequests/:forgetRequestId?passkey={{passkey}}",
+							"protocol": "https",
+							"host": [
+								"stg",
+								"api",
+								"bazaarvoice",
+								"com"
+							],
+							"path": [
+								"privacy",
+								"v1",
+								"forgetRequests",
+								":forgetRequestId"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "forgetRequestId",
+									"value": "{{forgetRequestId}}"
+								}
+							]
+						},
+						"description": "Returns a single 'forgetRequestId' resources. <a href='/privacy-api/reference/right-to-be-forgotten#single-request'>Read more here</a>."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for forgetRequests"
+		}
+	]
+}

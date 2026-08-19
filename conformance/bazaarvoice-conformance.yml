@@ -1,22 +1,103 @@
-generated: '2026-07-18'
-method: derived
-source: openapi/bazaarvoice-content-search-openapi.json
+generated: '2026-08-13'
+method: searched
+source:
+- openapi/_original/
+- https://www.bazaarvoice.com/company/trust/security/
+- https://www.bazaarvoice.com/company/trust/faq/
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/security-imperatives
+- https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/oauth2-2-legged
+note: >-
+  Revised from the previous round. The rfc9457 assertion was WRONG: Bazaarvoice does publish
+  application/problem+json responses - they were present in the content-search spec already in the
+  repo and are declared across the Transactions, Conversations Submission, Product Sentiment and
+  Authentic Discovery documents harvested this round. The estate is mixed, not absent.
 standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    Eleven distinct OpenAPI documents (3.0.0 / 3.0.1 / 3.0.3) are published on
+    developers.bazaarvoice.com, covering 64 operations across Conversations Display, Conversations
+    Submission, Response, Notifications Subscriptions, Transactions, Product Sentiment, Social
+    Commerce Media, Authentic Discovery, Displayable Content Export and Product Sentiment Export.
+- id: rfc9457-problem-details
+  conforms: partial
+  evidence: >-
+    application/problem+json is declared on 400/401/403/404/429/default responses in
+    bazaarvoice-transactions-openapi.json, bazaarvoice-conversations-submission-openapi.json,
+    bazaarvoice-product-sentiment-openapi.json, bazaarvoice-authentic-discovery-openapi.json and
+    bazaarvoice-content-search-openapi.json, with a shared Problem schema (type/title/status/
+    detail/instance). The older Conversations Display, Response and Notifications Subscriptions
+    APIs return plain status codes with a JSON body instead.
 - id: oauth2
   conforms: true
   evidence: >-
-    Transactions/Response APIs implement 2-legged OAuth2 (client credentials) with a
-    token endpoint.
-- id: openapi-3.0
-  conforms: true
-  evidence: Content Search API operations are published as OpenAPI 3.0.0 definitions.
-- id: rfc9457-problem-details
+    The Transactions API and Privacy API document a 2-legged OAuth2 client-credentials flow with a
+    POST /auth-v1/oauth2/token endpoint; the Privacy and Response APIs additionally document a
+    3-legged flow via identity.portal.bazaarvoice.com. Transactions and Response declare HTTP
+    bearer securitySchemes in their OpenAPI.
+- id: oauth2-scopes
   conforms: false
-  evidence: Error responses use plain HTTP status codes, not application/problem+json.
+  evidence: >-
+    No scope vocabulary is published or declared. The oauth2 flows are documented in prose only and
+    no OpenAPI declares an oauth2 securityScheme with a scopes map, so there is no scope surface to
+    capture - scopes/ is deliberately absent rather than empty.
 - id: rest-json
   conforms: true
-  evidence: JSON request/response bodies over HTTPS with standard verbs.
+  evidence: JSON request/response bodies over HTTPS with standard verbs across every published API.
+- id: cors
+  conforms: true
+  evidence: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/cors
+- id: jsonp
+  conforms: true
+  evidence: >-
+    JSONP is documented as a cross-domain GET mechanism for the classic Conversations API -
+    a legacy pattern, recorded because it is still published.
+- id: schema-org-json-ld
+  conforms: true
+  evidence: >-
+    The Authentic Discovery API and the Social Commerce Gallery Structured Data API return
+    Schema.org structured data as JSON-LD or Microdata for AI/search crawler consumption.
+- id: tls-1.2-minimum
+  conforms: true
+  evidence: >-
+    Security Imperatives pages published per API product require HTTPS/TLS; live probe observed
+    TLSv1.3 on api.bazaarvoice.com and developers.bazaarvoice.com.
+- id: iso-27001
+  conforms: true
+  evidence: >-
+    ISO/IEC 27001:2013 certified by Schellman Compliance LLC, certificate 1667990-1, issued
+    2022-11-17. See security/bazaarvoice-trust-center.yml.
+- id: csa-caiq
+  conforms: true
+  evidence: CSA Consensus Assessment Initiative Questionnaire published on the trust pages.
+- id: gdpr
+  conforms: true
+  evidence: >-
+    GDPR compliance claimed on the trust FAQ, and operationalised as a shipped Privacy API with
+    right-of-access and right-to-be-forgotten request endpoints.
+- id: ccpa
+  conforms: true
+  evidence: CCPA compliance claimed on the trust FAQ; served by the same Privacy API surface.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: >-
+    Deprecations are announced as documentation pages (for example the HTTP 3XX redirect
+    end-of-life notice) rather than with Sunset/Deprecation response headers.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key mechanism is documented or present in any spec.
+- id: json-api
+  conforms: false
 - id: fhir-r4
   conforms: false
 - id: scim2
   conforms: false
+- id: odata
+  conforms: false
+- id: fapi
+  conforms: false
+compliance_program:
+  published: true
+  url: https://www.bazaarvoice.com/company/trust/security/
+  certifications: [ISO/IEC 27001:2013, CSA CAIQ]
+  claims: [GDPR, CCPA]

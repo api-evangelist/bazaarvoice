@@ -1,0 +1,60 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Home](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/home.md): This page provides a high-level overview of the Bazaarvoice Mobile SDKs suitable for all audiences.
+- [Android Requirements](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-requirements.md): This page documents the requirments you may need to satisfy to use the Bazaarvoice Mobile SDK.
+- [Installation](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-installation.md): This guide shows you how to install and import the Bazaarvoice Mobile SDK into your Android app.
+- [Example Projects](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-example-projects.md): This page provides example projects to get you up-and-running quickly with the Bazaarvoice Mobile SDK for Android.
+- [BV Pixel](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-bv-pixel.md): This documentation explains how to use the Bazaarvoice Pixel to capture product purchases as well as non-transactional events, such as 'Store Locator' or 'Where To Buy' clicks.
+- [Authentication](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-authentication.md): This documentation explains how to authenticate authors using either Bazaarvoice-mastered authentication ("hosted auth") or Client-mastered authentication ("site auth").
+- [Badges](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-badges.md): This documentation explains how badges can be used to visually identify notable attributes about authors or content.
+- [Content Display](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-content-display.md): This documentation explains how user-generated content (UGC), including reviews and statistics, as well as product information can be displayed using the mobile SDK.
+- [Content Submission](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-content-submission.md): This documentation explains the mechanics of submitting user-generated content (UGC) to Bazaarvoice using the Mobile SDK.
+- [Device Fingerprinting](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-device-fingerprinting.md): This documentation explains how to create and submit a device fingerprint for a users mobile device.
+- [Incentivized Reviews](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-incentivized-reviews.md): This tutorial introduces developers to incentivized badges and incentivized review count in the Android SDK.
+- [Multi Config](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-multi-config.md): This documentation demonstrates how a multi-config setup can be used to send API requests using the mobile SDK.
+- [Content Coach](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/content-coach.md): This section outlines the purpose of the Content Coach feature and provides implementation guidance.
+- [Display & Submit API](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-display-submit-api.md): This documentation explains the mechanics of display and submitting consumer store reviews, including store specific meta-data, to Bazaarvoice using the Mobile SDK.
+- [Push Notifications](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-push-notifications.md): This documentation introduces Push Notifications for Store Reviews and identifies the steps to start using them.
+- [Location](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-location.md): This documentation explains how to use the Location module of the Bazaarvoice Mobile SDK for Android to know when your shoppers are entering and exiting your physical retail locations.
+- [Product Recommendations](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-product-recommendations.md): This documentation explains how to retrieve and display Product Recommendations.
+- [Product Sentiments](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/product-sentiments-android.md): This page explains how to use the Product Sentiments module to retrieve various product sentiments from consumer reviews.
+- [Analytics and Location](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-analytics-and-location.md): This page explains how to configure the SDK to store data in a particular geographic region.
+- [Api Reference](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-api-reference.md): The Bazaarvoice Mobile SDKs provide access to most of the core products Bazaarvoice offers
+- [User Authentication Token](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/android-user-authentication-token.md): This page explains how developers can authenticate authors with the Bazaarvoice Mobile SDK by submitting a user ID along with the consumer generated content.
+- [IOS Requirements](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-requirements.md): This page documents the requirements you may need to satisfy to use the Bazaarvoice Mobile SDK.
+- [Installation](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-installation.md): This guide shows you how to install and import the Bazaarvoice Mobile SDK into your iOS app.
+- [Example Projects](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-example-project.md): This page provides example projects to get you up-and-running quickly with the Bazaarvoice Mobile SDK for iOS.
+- [BV Pixel](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-bv-pixel.md)
+- [Authentication](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-authentication.md): This documentation explains how to authenticate authors using either Bazaarvoice-mastered authentication ("hosted auth") or Client-mastered authentication ("site auth").
+- [Badges](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-badges.md): This documentation explains how badges can be used to visually identify notable attributes about authors or content.
+- [Content Display](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-content-display.md): This documentation explains how user-generated content (UGC), including reviews and statistics, as well as product information can be displayed using the mobile SDK.
+- [Content Submission](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-content-submission.md): This documentation explains the mechanics of submitting user-generated content (UGC) to Bazaarvoice using the Mobile SDK.
+- [Device Fingerprinting](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-device-fingerprinting.md): This documentation explains how to create and submit a device fingerprint for a users mobile device.  ##
+- [Incentivized Reviews](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-incentivized-reviews.md): This tutorial introduces developers to incentivized badges and incentivized review count in the iOS SDK.
+- [Content Coach](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/content-coach-1.md): This section outlines the purpose of the Content Coach feature and provides implementation guidance.
+- [Swift](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-swift.md): This section outlines how to implement Content Coach in iOS devices using Swift.
+- [Objective-C](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/objective-c.md): This section outlines how to implement Content Coach in iOS devices using Objective-C.
+- [Product Recommendations](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-product-recommendations.md): This documentation explains how to retrieve and display Product Recommendations.
+- [Product Sentiments](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/product-sentiments-ios.md): This page explains how to use the Product Sentiments module to retrieve various product sentiments from consumer reviews.
+- [Display submit api](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-display-submit-api.md): This documentation explains the mechanics of display and submitting consumer store reviews, including store specific meta-data, to Bazaarvoice using the Mobile SDK.
+- [Analytics & Location](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-analytics-location.md): This page explains how to configure the SDK to store data in a particular geographic region.
+- [User Authentication Token](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-user-authentication-token.md): This page explains how developers can authenticate authors with the Bazaarvoice Mobile SDK by submitting a user ID along with the consumer generated content.
+- [Networking Delegation](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-networking-delegation.md): This page explains how to configure the behavior of `NSURLSession` using the Bazaarvoice Mobile SDK for iOS.
+- [IOS 9 Considerations](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios-9-considerations.md): This page explains when you might need to disable App Transport Security (ATS) in your mobile application.
+- [Api Reference](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/ios.md)
+- [Hosted UI Overview](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/hosted-ui-overview.md)
+- [Hosted UI Resources](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/hosted-ui-resources.md): Bazaarvoice clients implementing our hosted UI may find the following resources helpful:
+- [Legal](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/legal.md): This page contains important legal information related to using the Bazaarvoice Mobile SDK.
+- [FAQ](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/faq.md)
+- [Android](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/faq-android.md): The following is a list of commonly asked questions and their answers.
+- [iOS](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/faq-ios.md): The following is a list of commonly asked questions and their answers.
+- [Getting Help](https://developers.bazaarvoice.com/v1.0-MobileSDK/docs/getting-help.md): This page explains what to do when you need help using Bazaarvoice Mobile SDK for iOS.
+
+## API Reference
+- [API Reference](https://developers.bazaarvoice.com/v1.0-MobileSDK/reference/api-reference.md)
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-MobileSDK/page/support.md)

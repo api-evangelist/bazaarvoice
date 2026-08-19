@@ -1,0 +1,83 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.bazaarvoice.com/pricing/
+model: contact-sales
+currency: null
+note: >-
+  Bazaarvoice publishes a named tier ladder but no numbers. The pricing page lists three product
+  tiers each for Ratings & Reviews and Social Commerce, plus three support tiers, and describes what
+  is included in each - but no price, currency, billing period, quota or overage is stated anywhere
+  on the page. Every tier routes to a "contact sales" form. API access itself is not sold as a
+  metered product: rate limits and quotas are set per API key in the Bazaarvoice Portal rather than
+  attached to a published plan (see rate-limits/bazaarvoice-rate-limits.yml), and the Notifications
+  Subscriptions API documents that the Enterprise package is a prerequisite for access.
+plan_count: 9
+plans:
+- name: Ratings & Reviews - Essentials
+  product: Ratings & Reviews
+  price: null
+  currency: null
+  billing_period: null
+  quota: null
+  overage: null
+  availability: contact-sales
+- name: Ratings & Reviews - Advanced
+  product: Ratings & Reviews
+  price: null
+  currency: null
+  billing_period: null
+  quota: null
+  overage: null
+  availability: contact-sales
+- name: Ratings & Reviews - Enterprise
+  product: Ratings & Reviews
+  price: null
+  currency: null
+  billing_period: null
+  quota: null
+  overage: null
+  availability: contact-sales
+  api_note: >-
+    The Enterprise package is the tier Bazaarvoice names as a requirement for the Notifications
+    Subscriptions API.
+- name: Social Commerce - Essentials
+  product: Social Commerce
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+- name: Social Commerce - Advanced
+  product: Social Commerce
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+- name: Social Commerce - Enterprise
+  product: Social Commerce
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+- name: Support - Standard
+  product: Support
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+- name: Support - Priority
+  product: Support
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+- name: Support - Enterprise
+  product: Support
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+free_tier: false
+trial: false
+self_serve_purchase: false
+evidence:
+- {url: 'https://www.bazaarvoice.com/pricing/', http_status: 200, finding: 'nine named tiers, zero published prices'}

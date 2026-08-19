@@ -1,0 +1,930 @@
+{
+  "item": [
+    {
+      "id": "e5f5073c-41a4-460f-b53f-931aefac5a99",
+      "name": "Contributor",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87e428b8-76d8-4f17-a20b-f50d44767bc8",
+          "name": "Contributor Search",
+          "request": {
+            "name": "Contributor Search",
+            "description": {},
+            "url": {
+              "path": [
+                ":clientId",
+                "contributors",
+                ":contributorExternalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) Client ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributorExternalId",
+                  "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Correlation ID",
+                "key": "X-Correlation-ID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f431337a-0de4-4b35-bd58-b66c2683b6a3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"clearTextExternalId\": \"string\",\n  \"legacyInternalId\": \"string\",\n  \"displayName\": \"string\",\n  \"merit\": \"string\",\n  \"rank\": \"string\",\n  \"affiliation\": \"string\",\n  \"meritBadgeEligible\": \"string\",\n  \"hyperlinkingEnabled\": \"string\",\n  \"location\": \"string\",\n  \"externalId\": \"string\",\n  \"status\": \"string\",\n  \"contentCodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"submissionTime\": \"string\",\n  \"firstPublishTime\": \"string\",\n  \"lastPublishTime\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12940269-4ea8-4878-ad03-d354b43ada94",
+              "name": "Invalid request body, or missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "055d8017-a5d9-4bcc-9487-b946c870f3e1",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70c2fbab-d889-476d-9270-b859637515eb",
+          "name": "Contributor Search",
+          "request": {
+            "name": "Contributor Search",
+            "description": {},
+            "url": {
+              "path": [
+                "contributor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Client ID",
+                "key": "clientId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Correlation ID",
+                "key": "X-Correlation-ID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e4a5ef6-a2b8-4ada-815f-9e80d9d5ce71",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"legacyInternalID\": \"string\",\n    \"displayName\": \"string\",\n    \"externalId\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"legacyInternalID\": \"string\",\n    \"displayName\": \"string\",\n    \"externalId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "404ed3bc-e879-4619-ab75-a0f8cf769f75",
+              "name": "Invalid request body, or missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d527a834-07b1-4b14-aa81-f620a005be26",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a17312dd-8e74-4bcd-a77a-c4acfabae7b9",
+          "name": "Contributor Search",
+          "request": {
+            "name": "Contributor Search",
+            "description": {},
+            "url": {
+              "path": [
+                "contributors",
+                ":contributorExternalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributorExternalId",
+                  "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Client ID",
+                "key": "clientId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Correlation ID",
+                "key": "X-Correlation-ID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9612de27-f0ef-42e1-9fff-6b4e40690f63",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"clearTextExternalId\": \"string\",\n  \"legacyInternalId\": \"string\",\n  \"displayName\": \"string\",\n  \"merit\": \"string\",\n  \"rank\": \"string\",\n  \"affiliation\": \"string\",\n  \"meritBadgeEligible\": \"string\",\n  \"hyperlinkingEnabled\": \"string\",\n  \"location\": \"string\",\n  \"externalId\": \"string\",\n  \"status\": \"string\",\n  \"contentCodes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"submissionTime\": \"string\",\n  \"firstPublishTime\": \"string\",\n  \"lastPublishTime\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db80e5bd-06f0-4699-b24f-14b17199abef",
+              "name": "Invalid request body, or missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9646d03e-e273-454c-832e-205869343f6a",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff7bcf0e-e377-4b78-b0ee-f034809c5b58",
+          "name": "Contributor Search",
+          "request": {
+            "name": "Contributor Search",
+            "description": {},
+            "url": {
+              "path": [
+                "contributors",
+                ":contributorExternalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributorExternalId",
+                  "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Client ID",
+                "key": "clientId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Correlation ID",
+                "key": "X-Correlation-ID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"externalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"displayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"affiliation\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"merit\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"meritBadgeEligible\": \"<boolean>\",\n    \"hyperlinkingEnabled\": \"<boolean>\",\n    \"status\": \"<string>\",\n    \"statusGroup\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a623b9ba-32ba-491d-a22a-bec0173748e9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"externalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"displayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"affiliation\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"merit\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"meritBadgeEligible\": \"<boolean>\",\n    \"hyperlinkingEnabled\": \"<boolean>\",\n    \"status\": \"<string>\",\n    \"statusGroup\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"limit\": 214,\n  \"offset\": 4976,\n  \"totalResults\": 7893,\n  \"totalQueriedAnswers\": 3597,\n  \"results\": [\n    {\n      \"clearTextExternalId\": \"string\",\n      \"legacyInternalId\": \"string\",\n      \"displayName\": \"string\",\n      \"merit\": \"string\",\n      \"rank\": \"string\",\n      \"affiliation\": \"string\",\n      \"meritBadgeEligible\": \"string\",\n      \"hyperlinkingEnabled\": \"string\",\n      \"location\": \"string\",\n      \"externalId\": \"string\",\n      \"status\": \"string\",\n      \"contentCodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionTime\": \"string\",\n      \"firstPublishTime\": \"string\",\n      \"lastPublishTime\": \"string\"\n    },\n    {\n      \"clearTextExternalId\": \"string\",\n      \"legacyInternalId\": \"string\",\n      \"displayName\": \"string\",\n      \"merit\": \"string\",\n      \"rank\": \"string\",\n      \"affiliation\": \"string\",\n      \"meritBadgeEligible\": \"string\",\n      \"hyperlinkingEnabled\": \"string\",\n      \"location\": \"string\",\n      \"externalId\": \"string\",\n      \"status\": \"string\",\n      \"contentCodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionTime\": \"string\",\n      \"firstPublishTime\": \"string\",\n      \"lastPublishTime\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c46719b-4f58-485e-827d-eb699d860986",
+              "name": "Invalid request body, or missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"externalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"displayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"affiliation\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"merit\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"meritBadgeEligible\": \"<boolean>\",\n    \"hyperlinkingEnabled\": \"<boolean>\",\n    \"status\": \"<string>\",\n    \"statusGroup\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9185911-69be-493c-84b2-8a47e5080131",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contributors",
+                    ":contributorExternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributorExternalId",
+                      "description": "(Required) Contributor's external Id (not the internal legacy Id), use - when using the body"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"externalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"legacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"displayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"affiliation\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"merit\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"meritBadgeEligible\": \"<boolean>\",\n    \"hyperlinkingEnabled\": \"<boolean>\",\n    \"status\": \"<string>\",\n    \"statusGroup\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1031a35-c426-4dfb-871a-3cb77845b36b",
+    "name": "Bazaarvoice Content Search Answers Contributor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.\n\nContact Support:\n Name: Bazaarvoice Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

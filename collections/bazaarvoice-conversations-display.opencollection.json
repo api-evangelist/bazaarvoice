@@ -1,0 +1,746 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conversations Display API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/reviews.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Attributes",
+                "value": "ModeratorCodes",
+                "type": "query",
+                "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "ExcludeFamily",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product."
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Rating:eq:3,4\" will match all reviews with rating values 3 OR 4.\n- Advanced operators can be used to define filters. For instance, \"Filter=Rating:lt:3\" will match all reviews with a rating value less than 3. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=Rating:gte:4&Filter=IsFeatured:eq:true\" will match all featured reviews with a rating of 4-star or higher.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:47950830\n- Comma Seperated Multiple Filter values: &filter=Id:eq:47938933,47950830,47645686\n- Multiple Filter AND'ed value: &filter=ProductId:155590400&filter=HasPhotos:eq:false&SubmissionTime:gt:1694629800000&filter=.....\n"
+              },
+              {
+                "name": "Filter_[TYPE]",
+                "value": "Id:eq:sp-1",
+                "type": "query",
+                "description": "Filtering option for included nested content. TYPE can be any included nested content. i.e. Comments for Reviews."
+              },
+              {
+                "name": "FilteredStats",
+                "value": "Reviews",
+                "type": "query",
+                "description": "Statistics based on the filters used to perform queries. The filtered statistics are returned in their own block and can be returned any place that a regular statistics block can be currently returned. Available content types are: Reviews, Questions, Answers. Note: FilteredStats must be used in conjunction with \"Include=Products\". The filtered stats block will be identical to a regular stats block if a filtered stat is requested but a filter has not been specified for the particular type of stat being requested.\t"
+              },
+              {
+                "name": "IncentivizedStats",
+                "value": "false",
+                "type": "query",
+                "description": "If set to true, displays the number of incentivized reviews for each product or author returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the Include parameter to include authors or products in the response, and also with the FilteredStats or Stats parameters to include statistics for reviews in the response."
+              },
+              {
+                "name": "Include",
+                "value": "Products",
+                "type": "query",
+                "description": "Related subjects to be included (e.g. Products, Categories, Authors, or Comments)."
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100."
+              },
+              {
+                "name": "Limit_[TYPE]",
+                "value": "10",
+                "type": "query",
+                "description": "Limit option for the nested content type returned. TYPE can be any nested content. i.e. Comments for Reviews. An error is returned if the value passed exceeds 20."
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Search",
+                "value": "keys",
+                "type": "query",
+                "description": "Full-text search string used to find UGC.\nResults can not be sorted when using Search.\nSearch is only available to requests filtered by one product ID."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort reviews\n- Sort criteria for primary content type of the query. Sort order is required (asc or desc). \n- Multi-attribute sorting for each content/subject type is supported (except for contentLocale). \n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Rating:desc\n - Multiple Sort values AND'ed: &sort=Rating:desc&sort=TotalCommentCount:desc\n"
+              },
+              {
+                "name": "Sort_[TYPE]",
+                "value": "Id:desc",
+                "type": "query",
+                "description": "Sorting option for nested content. Sort order is required (asc or desc). TYPE can be any nested content. i.e. Comments for Reviews."
+              },
+              {
+                "name": "Stats",
+                "value": "Reviews",
+                "type": "query",
+                "description": "The type of statistics that will be calculated on included subjects. Available content types are: Reviews, Questions, Answers. Note: Not all statistical content types apply to every possible include.\t"
+              }
+            ]
+          },
+          "docs": "Reviews Api is used to display reviews for products and products related to a product family."
+        },
+        {
+          "info": {
+            "name": "Retrieve Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/reviewcomments.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Attributes",
+                "value": "ModeratorCodes",
+                "type": "query",
+                "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "ExcludeFamily",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product"
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=TotalFeedbackCount:eq:3,4\" will match all content with TotalFeedbackCount values equal to 3 OR 4.\n- Advanced operators can be used to define filters. For instance, \"Filter=TotalFeedbackCount:lte:10\" will match all content with a rating value less than or equal to 10. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=Rating:gte:4&Filter=IsFeatured:eq:true\" will match all featured reviews with a rating of 4-star or higher.Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=TotalFeedbackCount:gt:10&Filter=IsFeatured:true\" will match all featured content with a TotalFeedbackCount value of greater than 10.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=TotalFeedbackCount:lt:5\n- Comma Seperated Multiple Filter values: &filter=Id:eq:4723748,4723746\n- Multiple Filter AND'ed value: &filter=SubmissionTime:gt:1610649000000&filter=SubmissionTime:lt:1610908200000&filter=IsFeatured:eq:false&filter=.....\n"
+              },
+              {
+                "name": "Include",
+                "value": "Products",
+                "type": "query",
+                "description": "Related subjects to be included in the response. Can be one or more (comma-separated) of Reviews, Products, Categories, or Authors."
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100.\t"
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.\t"
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort comments\n- Sort criteria is specified as <sort option>:asc for ascending and <sort option>:desc for descending. \n- Sort order is required (asc or desc).Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. For instance Sort=TotalFeedbackCount:desc,TotalPositiveFeedbackCount:asc sorts by number of feedbacks received descending, then number of positive feedbacks received ascending.\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Rating:desc\n - Multiple Sort values AND'ed: &sort=Rating:desc&sort=TotalCommentCount:desc\n"
+              }
+            ]
+          },
+          "docs": "Comments Api is used to display comments posted on reviews. It can be used request all comments for a particular review or particular comment on a review. It even allows advanced requests based on the filters that are defined below."
+        },
+        {
+          "info": {
+            "name": "Retrieve Questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/questions.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Attributes",
+                "value": "ModeratorCodes",
+                "type": "query",
+                "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "ExcludeFamily",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product."
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:3,4\" will match Questions with Ids 3 OR 4.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:gt:50\" will match Questions with an Id value greater than 50. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=ProductId:eq:75&Filter=isfeatured:eq:true\" will match all featured Questions for the Product with Id 75.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:eq:1852069\n- Comma Seperated Multiple Filter values: &filter=Id:eq:1852069,1852039,1852069,...\n- Multiple Filter AND'ed value: &filter=Id:eq:1852069,1852039,1852069&filter=hasAnswers:eq:true&filter=.....\n"
+              },
+              {
+                "name": "Filter_[TYPE]",
+                "value": "Id:eq:sp-1",
+                "type": "query",
+                "description": "Filtering option for included nested content. TYPE can be any included nested content. e.g. Answers for Questions."
+              },
+              {
+                "name": "Include",
+                "value": "Products",
+                "type": "query",
+                "description": "Related subjects to be included (e.g. Products, Categories, Authors, or Answers)."
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100."
+              },
+              {
+                "name": "Limit_[TYPE]",
+                "value": "10",
+                "type": "query",
+                "description": "Limit option for the nested content type returned. TYPE can be any nested content. e.g. Answers for Questions. An error is returned if the value passed exceeds 20.\t"
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Search",
+                "value": "keys",
+                "type": "query",
+                "description": "Full-text search string used to find UGC.\nResults can not be sorted when using Search.\nSearch is only available to requests filtered by one product ID."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort questions\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. Sort=rating:asc,submissiontime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Rating:desc\n - Multiple Sort values AND'ed: &sort=Rating:desc&sort=Submissiontime:desc\n"
+              },
+              {
+                "name": "Sort_[TYPE]",
+                "value": "Id:desc",
+                "type": "query",
+                "description": "Sorting option for nested content. TYPE can be any nested content. e.g. Answers for Questions."
+              },
+              {
+                "name": "Stats",
+                "value": "Reviews",
+                "type": "query",
+                "description": "The type of statistics that will be calculated on included subjects. Available content types are: Reviews, Questions, Answers. Note: Not all statistical content types apply to every possible include."
+              }
+            ]
+          },
+          "docs": "Questions Api is used to display questions posted on Products. Questions Api can also be used to pull question based on filters mentioned below."
+        },
+        {
+          "info": {
+            "name": "Retrieve Answers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/answers.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Attributes",
+                "value": "ModeratorCodes",
+                "type": "query",
+                "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "ExcludeFamily",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product."
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:50,75\" will match all Answers with Id 50 OR 75.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:lt:100\" will match all Answers with an Id value of less than 100. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=QuestionId:eq:50&filter=isfeatured:true\" will match all featured Answers with QuestionId 50.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:1865584\n- Comma Seperated Multiple Filter values: &filter=Id:eq:1675274,1675262,1675260\n- Multiple Filter AND'ed value: &filter=QuestionId:eq:1483881&filter=ProductId:eq:100986399&filter=.....\n"
+              },
+              {
+                "name": "Include",
+                "value": "Products",
+                "type": "query",
+                "description": "Related subjects to be included (e.g. Products, Categories, Authors, or Answers)."
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100."
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort answers\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. Sort=Id:asc,SubmissionTime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Id:desc\n - Multiple Sort values AND'ed: &sort=Id:desc&sort=SubmissionTime:desc\n"
+              },
+              {
+                "name": "Stats",
+                "value": "Reviews",
+                "type": "query",
+                "description": "The type of statistics that will be calculated on included subjects. Available content types are: Answers, Questions, Reviews. Note: Not all statistical content types apply to every possible include."
+              }
+            ]
+          },
+          "docs": "Answers Api is used to display answers posted on the questions posted for products."
+        },
+        {
+          "info": {
+            "name": "Retrieve Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/authors.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Attributes",
+                "value": "ModeratorCodes",
+                "type": "query",
+                "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "ExcludeFamily",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product."
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=ModeratorCode:eq:LI,PD\" will match all content with moderation code values of LI (Liability Concern) or PD (Product Description Inaccurate).\n- Advanced operators can be used to define filters. For instance, \"Filter=TotalReviewCount:gte:10\" will match all content with a TotalReviewCount value of greater than or equal to 10. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=ContextDataValue_gender:eq:female&Filter=ContextDataValue_age:eq:21to34\" will match all content written by women between the ages of 21 and 34.\n- Time-based filters can be used for SubmissionTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=contextdatavalue_age:under21\n- Comma Seperated Multiple Filter values: &filter=ModeratorCode:eq:LI,PD\n- Multiple Filter AND'ed value: &filter=ContextDataValue_gender:eq:female&filter=ContextDataValue_age:eq:21to34&filter=.....\n"
+              },
+              {
+                "name": "Filter_[TYPE]",
+                "value": "Id:eq:sp-1",
+                "type": "query",
+                "description": "Filter criteria for a included content or subject type. TYPE can be Reviews, Questions, Answers, or Comments. Multiple filter criteria are supported for each content type."
+              },
+              {
+                "name": "IncentivizedStats",
+                "value": "false",
+                "type": "query",
+                "description": "If set to true, displays the number of incentivized reviews written by each author returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the FilteredStats or Stats parameters to include statistics for reviews in the response."
+              },
+              {
+                "name": "Include",
+                "value": "Products",
+                "type": "query",
+                "description": "Content types written by the author to be included (e.g. Questions, Reviews, Answers, or Comments)."
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100."
+              },
+              {
+                "name": "Limit_[TYPE]",
+                "value": "10",
+                "type": "query",
+                "description": "Limit option for a included content. TYPE can be Reviews, Questions, Answers or Comments. An error is returned if the value passed exceeds 20."
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort Authors\n- Sort criteria is specified as <sort option>:asc for ascending and <sort option>:desc for descending\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. For instance, Sort=TotalReviewCount:desc,Id:asc sorts the authors, first by their total review count (most to least), then if there are authors with the same number of reviews, the authors are sorted alphabetically by ID.\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Id:desc\n - Multiple Sort values AND'ed: &sort=Id:asc&sort=TotalReviewCount:desc\n"
+              },
+              {
+                "name": "Sort_[TYPE]",
+                "value": "Id:desc",
+                "type": "query",
+                "description": "Sort criteria for a included content. TYPE can be Reviews, Questions, Answers or Comments."
+              },
+              {
+                "name": "Stats",
+                "value": "Reviews",
+                "type": "query",
+                "description": "The content types for which statistics should be calculated for the author. Available content types are: Reviews, Questions, Answers. Note: Statistics can also be calculated on includes."
+              }
+            ]
+          },
+          "docs": "Profile/Authors Api is used to display about Author Information who have written reviews, questions and answers."
+        },
+        {
+          "info": {
+            "name": "Retrieve Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/products.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Attributes",
+                "value": "ModeratorCodes",
+                "type": "query",
+                "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "ExcludeFamily",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product."
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:50,75\" will match all Products with Id 50 OR 75.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:lte:100\" will match all Products with an Id value of less than or equal to 100. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"filter=IsActive:eq:false&filter=IsDisabled:eq:false\" will match all Products that are neither Active nor Disabled.\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:product01\n- Comma Seperated Multiple Filter values: &filter=Id:eq:Product1,d7873e29-5a90-4875-b91e-01aa96564882\n- Multiple Filter AND'ed value: &filter=IsActive:eq:false&filter=Id:product01&filter=.....\n"
+              },
+              {
+                "name": "Filter_[TYPE]",
+                "value": "Id:eq:sp-1",
+                "type": "query",
+                "description": "Filtering option for included nested content. TYPE can be any related content, i.e., Reviews, Questions, Answers, Comments, Authors, Categories."
+              },
+              {
+                "name": "IncentivizedStats",
+                "value": "false",
+                "type": "query",
+                "description": "If set to true, displays the number of incentivized reviews for each product or author returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the Include parameter to include authors or products in the response, and also with the FilteredStats or Stats parameters to include statistics for reviews in the response."
+              },
+              {
+                "name": "Include",
+                "value": "Products",
+                "type": "query",
+                "description": "Related subjects to be included (e.g. Products, Categories, Authors, Reviews, Questions."
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100."
+              },
+              {
+                "name": "Limit_[TYPE]",
+                "value": "10",
+                "type": "query",
+                "description": "Limit option for the nested content type returned. TYPE can be any related content i.e.Reviews, Questions, Answers, Comments, Authors, Categories. An error is returned if the value passed exceeds 20."
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Search",
+                "value": "keys",
+                "type": "query",
+                "description": "Full-text search string used to find UGC.\nResults can not be sorted when using Search.\nSearch is only available to requests filtered by one product ID."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort Products\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. sort=rating:asc,submissiontime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=rating:desc\n - Multiple Sort values AND'ed: &sort=rating:asc&sort=submissiontime:desc\n"
+              },
+              {
+                "name": "Sort_[TYPE]",
+                "value": "Id:desc",
+                "type": "query",
+                "description": "Sorting option for nested content. Sort order is required (asc or desc). TYPE can be any related content, i.e., Reviews, Questions, Answers, Comments, Authors, Categories."
+              },
+              {
+                "name": "Stats",
+                "value": "Reviews",
+                "type": "query",
+                "description": "The type of statistics that will be calculated on included subjects. Available content types are: Reviews, Questions, Answers. Note: Not all statistical content types apply to every possible include.\t"
+              }
+            ]
+          },
+          "docs": "Products Api is used to get details about a particular product or all the products for a particular passkey."
+        },
+        {
+          "info": {
+            "name": "Retrieve Product Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/categories.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)"
+              },
+              {
+                "name": "Filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter             \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:5,6\" will match all categories with Id 5 OR 6.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:lte:50\" will match all categories with an Id value of less than or equal to 50. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=AncestorId:eq:5&Filter=IsDisabled:eq:false\" will match all categories that are not disabled and that have an ancestor category with Id 5.\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:BV_MISCELLANEOUS_CATEGORY\n- Comma Seperated Multiple Filter values: &filter=Id:eq:BV_MISCELLANEOUS_CATEGORY,....\n- Multiple Filter AND'ed value: &filter=Id:BV_MISCELLANEOUS_CATEGORY&Filter=IsActive:eq:false&filter=.....\n"
+              },
+              {
+                "name": "Limit",
+                "value": "10",
+                "type": "query",
+                "description": "Max number of records returned. An error is returned if the value passed exceeds 100."
+              },
+              {
+                "name": "Locale",
+                "value": "en_US",
+                "type": "query",
+                "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+              },
+              {
+                "name": "Offset",
+                "value": "20",
+                "type": "query",
+                "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000."
+              },
+              {
+                "name": "Sort",
+                "value": "",
+                "type": "query",
+                "description": "Ways to sort Products\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. sort=rating:asc,submissiontime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Id:desc\n - Multiple Sort values AND'ed: &sort=Id:desc&sort=SubmissionTime:desc\n"
+              }
+            ]
+          },
+          "docs": "Categories Api is responsible for displaying product related categories for a particular passkey."
+        },
+        {
+          "info": {
+            "name": "Retrieve Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/statistics.json",
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version"
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter criteria for content of the query. Must be Product IDs.\n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=ProductId:eq:Product1,Product2\" returns statistics for Product1 and Product2.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=ProductId:Product1\n- Comma Seperated Multiple Filter values: &filter=ProductId:eq:Product1,Product2\n"
+              },
+              {
+                "name": "stats",
+                "value": "NativeReviews",
+                "type": "query",
+                "description": "The content type for which statistics should be included. Currently available types:\nReviews: returns statistics for all content, including syndicated content (if enabled on your API key).\nNativeReviews: returns statistics only for content submitted on your site; Syndicated content and product family content are excluded."
+              },
+              {
+                "name": "Callback",
+                "value": "custom_Function01",
+                "type": "query",
+                "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma). See the JSONP tutorial for more information.\t"
+              },
+              {
+                "name": "IncentivizedStats",
+                "value": "false",
+                "type": "query",
+                "description": "If set to true, displays the number of incentivized reviews for each product returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the Stats parameter."
+              }
+            ]
+          },
+          "docs": "Statistics Api is responsible for pulling up all sort of statistics like review statistics for a product or multiple products or even question and answer related statistics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

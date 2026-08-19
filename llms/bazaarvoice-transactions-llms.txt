@@ -1,0 +1,22 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Overview](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview.md)
+- [Authentication](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/oauth2-2-legged.md): The following tutorial explains how to use OAuth2 with the Bazaarvoice Transactions API using a two-legged workflow, which authenticates directly between the OAuth2 API and your Transactions application.
+- [Rate Limit Headers](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/rate-limit-headers.md): Rate Limit expresses a service level agreement in the form of a permissible number of API requests that can be made within a given time interval.
+- [Create Transaction](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/ingest-transaction.md): It creates the single transaction's record into the system.Bazaarvoice using this input will schedule Review Requests Notifications.
+- [Create Bulk Transactions](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/ingest-bulk-transaction.md): It creates transactions' records into the system.Bazaarvoice using this input will schedule Review Requests Notifications.
+- [Invalidate Transaction](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/invalidate-transaction.md): It submits a request to invalidate the transaction.
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/security-imperatives.md): Security Fundamentals for HTTPS and TLS.
+- [Troubleshooting](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/troubleshooting.md)
+
+## API Reference
+- [Retrieve OAuth2 Token: 2-Legged](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/post_auth-v1-oauth2-token.md)
+- [Create a Transaction](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction.md): It creates the single transaction's record into the system.Bazaarvoice using this input will schedule Review Requests Notifications.
+- [Create Bulk Transactions](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingestbulktransaction.md): It creates transactions' records into the system.Bazaarvoice using this input will schedule Review Requests Notifications.
+- [Invalidate a Transaction](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/invalidatetransaction.md): It submits a request to invalidate the transaction.
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-TransactionsAPI/page/support.md)

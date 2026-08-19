@@ -1,0 +1,431 @@
+{
+  "item": [
+    {
+      "id": "aa5030aa-0590-4ead-8a5f-cc9fbb64b562",
+      "name": "Client Response",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3523f070-ef58-4cab-858c-3c7ec6f6067c",
+          "name": "Get the count of responses for a list of reviews",
+          "request": {
+            "name": "Get the count of responses for a list of reviews",
+            "description": {},
+            "url": {
+              "path": [
+                "response",
+                "v1",
+                "clientResponses",
+                "reviews",
+                "-",
+                "responses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "passkey",
+                  "value": "<string>",
+                  "description": "(Required) Passkey to access the API"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Bazaarvoice Portal Email",
+                "key": "X-Portal-User",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Client who owns the KMS Passkey",
+                "key": "X-Bazaarvoice-Customer",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Name of App associated with Passkey",
+                "key": "X-Bazaarvoice-AppName",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reviewIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82a910fa-26d2-483f-93f7-c2d70113f629",
+              "name": "Successful retrieval of response count for reviews",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    "reviews",
+                    "-",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bazaarvoice Portal Email",
+                    "key": "X-Portal-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client who owns the KMS Passkey",
+                    "key": "X-Bazaarvoice-Customer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Name of App associated with Passkey",
+                    "key": "X-Bazaarvoice-AppName",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reviewIds\": [\n    \"12345\",\n    \"67890\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"counts\": [\n    {\n      \"reviewId\": \"12345\",\n      \"responseCount\": 2\n    },\n    {\n      \"reviewId\": \"67890\",\n      \"responseCount\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "839b82ef-9c93-4689-88c7-8f4428c5a9f5",
+              "name": "Validation exception on one or more fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    "reviews",
+                    "-",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bazaarvoice Portal Email",
+                    "key": "X-Portal-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client who owns the KMS Passkey",
+                    "key": "X-Bazaarvoice-Customer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Name of App associated with Passkey",
+                    "key": "X-Bazaarvoice-AppName",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reviewIds\": [\n    \"12345\",\n    \"67890\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76f494c6-9be2-4fe7-a15a-f63739a47339",
+              "name": "Unauthorised access",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    "reviews",
+                    "-",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bazaarvoice Portal Email",
+                    "key": "X-Portal-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client who owns the KMS Passkey",
+                    "key": "X-Bazaarvoice-Customer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Name of App associated with Passkey",
+                    "key": "X-Bazaarvoice-AppName",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reviewIds\": [\n    \"12345\",\n    \"67890\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 401,\n  \"message\": \"Credentials are required to access this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "532903e0-d466-413c-bb13-bedb1df8fdd5",
+              "name": "Unknown or invalid passkey",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "response",
+                    "v1",
+                    "clientResponses",
+                    "reviews",
+                    "-",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "passkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bazaarvoice Portal Email",
+                    "key": "X-Portal-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client who owns the KMS Passkey",
+                    "key": "X-Bazaarvoice-Customer",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Name of App associated with Passkey",
+                    "key": "X-Bazaarvoice-AppName",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reviewIds\": [\n    \"12345\",\n    \"67890\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "<h1>Developer Inactive</h1>",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://stg.api.bazaarvoice.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "58ea2a31-2fea-4792-9e7e-90ad4f618615",
+    "name": "Count Client Response",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

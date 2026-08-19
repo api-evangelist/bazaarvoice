@@ -1,0 +1,591 @@
+openapi: 3.0.1
+info:
+  title: Transactions API
+  x-api-id: 0a0913f4-76e3-4a84-8560-b09aa65823e9
+  x-audience: external-public
+  description: These APIs facilitate the submission of customer transaction data to Bazaarvoice for processing and
+    analysis.
+  version: 1.0.0
+  contact:
+    email: notifications20team@bazaarvoice.com
+    name: Notifications Team
+    url: https://developer.bazaarvoice.com/notifications-subscriptions-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Customer Transaction Management Stage
+security:
+- accessToken: []
+tags:
+- name: /customer-transactions
+  description: Customer Transaction Data Submission to Bazaarvoice.
+paths:
+  /customer-transactions/transactions:
+    post:
+      summary: Create a Transaction
+      tags:
+      - Transactions
+      operationId: ingestTransaction
+      description: It creates the single transaction's record into the system.Bazaarvoice using this input will
+        schedule Review Requests Notifications.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestTransactionRequest'
+        required: true
+      responses:
+        '202':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestTransactionResponse'
+        '400':
+          description: Bad Request. There are a number of potential reasons for this. Examples of each potential
+            Problem can be found below.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                MissingRequiredFields:
+                  description: MissingRequiredFields
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: The required fields are missing. Ensure the Request Body has all required fields and
+                      try again.
+                ValidationFailed:
+                  description: ValidationFailed
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: Validation failed for some fields.
+        '401':
+          description: Unauthorized. Request lacks valid authentication credentials for this resource.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/unauthorized
+                instance: /customer-transactions/transactions
+                title: Unauthorized
+                status: 401
+                detail: Request lacks valid authentication credentials for this resource.
+        '403':
+          description: Forbidden. Credentials lack the permission to perform this action with this resource.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/forbidden
+                instance: /customer-transactions/transactions
+                title: Forbidden
+                status: 403
+                detail: Credentials lack the permission to perform this action with this resource.
+        default:
+          description: Unexpected Internal Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/internal-error
+                instance: /customer-transactions/transactions
+                title: Internal Error
+                status: 500
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /customer-transactions/bulk-transactions:
+    post:
+      summary: Create Bulk Transactions
+      tags:
+      - Transactions
+      operationId: ingestBulkTransaction
+      description: It creates transactions' records into the system.Bazaarvoice using this input will schedule Review
+        Requests Notifications.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestBulkTransactionsRequest'
+        required: true
+      responses:
+        '207':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestBulkTransactionsResponse'
+        '400':
+          description: Bad Request. There are a number of potential reasons for this. Examples of each potential
+            Problem can be found below.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                MissingRequiredFields:
+                  description: MissingRequiredFields
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: The required fields are missing. Ensure the Request Body has all required fields and
+                      try again.
+                ValidationFailed:
+                  description: ValidationFailed
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: Validation failed for some fields.
+                TransactionCountExceeded:
+                  description: TransactionCountExceeded
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: The number of transactions in the request exceeds the maximum allowed limit. Please
+                      reduce the number of transactions and try again.
+                RequestSizeExceeded:
+                  description: RequestSizeExceeded
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: The size of the request exceeds the maximum allowed limit. Please reduce the size of
+                      the request payload and try again.
+        '401':
+          description: Unauthorized. Request lacks valid authentication credentials for this resource.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/unauthorized
+                instance: /customer-transactions/bulk-transactions
+                title: Unauthorized
+                status: 401
+                detail: Request lacks valid authentication credentials for this resource.
+        '403':
+          description: Forbidden. Credentials lack the permission to perform this action with this resource.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/forbidden
+                instance: /customer-transactions/bulk-transactions
+                title: Forbidden
+                status: 403
+                detail: Credentials lack the permission to perform this action with this resource.
+        default:
+          description: Unexpected Internal Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/internal-error
+                instance: /customer-transactions/bulk-transactions
+                title: Internal Error
+                status: 500
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /customer-transactions/transactions/{id}:
+    patch:
+      summary: Invalidate a Transaction
+      tags:
+      - Transactions
+      operationId: invalidateTransaction
+      description: It submits a request to invalidate the transaction.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvalidateTransactionRequest'
+        required: true
+      responses:
+        '202':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidateTransactionResponse'
+        '400':
+          description: Bad Request. There are a number of potential reasons for this. Examples of each potential
+            Problem can be found below.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                MissingRequiredFields:
+                  description: MissingRequiredFields
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: The required fields are missing. Ensure the Request Body has all required fields and
+                      try again.
+                ValidationFailed:
+                  description: ValidationFailed
+                  value:
+                    type: /problems/bad-request
+                    instance: /customer-transactions/transactions
+                    title: Bad Request
+                    status: 400
+                    detail: Validation failed for some fields.
+        '401':
+          description: Unauthorized. Request lacks valid authentication credentials for this resource.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/unauthorized
+                instance: /customer-transactions/transactions
+                title: Unauthorized
+                status: 401
+                detail: Request lacks valid authentication credentials for this resource.
+        '403':
+          description: Forbidden. Credentials lack the permission to perform this action with this resource.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/forbidden
+                instance: /customer-transactions/transactions
+                title: Forbidden
+                status: 403
+                detail: Credentials lack the permission to perform this action with this resource.
+        default:
+          description: Unexpected Internal Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                type: /problems/internal-error
+                instance: /customer-transactions/transactions
+                title: Internal Error
+                status: 500
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+components:
+  schemas:
+    IngestTransactionRequest:
+      required:
+      - clientName
+      - deploymentZone
+      - emailAddress
+      - locale
+      - products
+      - transactionDate
+      - transactionId
+      - userId
+      - userName
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: test-client-name
+          description: The client identifier that needs to be provided corresponding to the apikey provided.
+        id:
+          type: string
+          example: transactionId-1234
+          description: The Identifier for the transaction between end customer and client. This is provided by the
+            client and not created by Bazaarvoice.
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        emailAddress:
+          pattern: (.+)@(.+)
+          type: string
+          example: john-doe@gmail.com
+          description: The email address of the end customer for whom we need to send notifications.
+        transactionDate:
+          pattern: (?:\d{4})-(?:\d{2})-(?:\d{2})T(?:\d{2}):(?:\d{2}):(?:\d{2}).(?:\d{3})z
+          type: string
+          format: date-time
+          example: '2023-06-06T08:47:51.792Z'
+          description: The time at which the transaction was made at clients end by the end customer. We can check
+            the example for the date-time format in which Bazaarvoice expects this field data.
+        nickname:
+          type: string
+          example: John Doe
+          description: The end customer username used during notifying the end customer.
+        userId:
+          pattern: '[^/]+'
+          type: string
+          example: john_doe
+          description: The end customer userId to be provided.
+        locale:
+          pattern: '[a-z]{2}(_[A-Z]{2}(_[0-9a-zA-Z_]+)?)?'
+          type: string
+          format: bcp47
+          example: en_US
+        deploymentZone:
+          pattern: '[a-zA-Z0-9_]+'
+          type: string
+          example: main_site
+          description: The deployment zone that this transaction should be processed at.
+        transactionChannel:
+          type: string
+          description: The transaction channel over which we would like to notify the customer.
+          example: EMAIL
+    Product:
+      required:
+      - imageUrl
+      - name
+      - money
+      type: object
+      properties:
+        id:
+          pattern: '[^/]+'
+          type: string
+          example: sample-product
+          description: The product identifier used by the client.
+        name:
+          type: string
+          example: Sample Product
+          description: The name of the product.
+        money:
+          $ref: '#/components/schemas/Money'
+        imageUrl:
+          pattern: ^(http|ftp).*
+          type: string
+          example: https://test-client.com/eu/images/sample-product.jpg
+          description: Image of the product.
+        incentivizedReview:
+          type: string
+          example: 'yes'
+          description: Indicates if a review is incentivized or includes a specific incentive type. Accepts "true",
+            "false", or a value such as "Coupon" or "Cashback".
+    Transaction:
+      required:
+      - deploymentZone
+      - emailAddress
+      - locale
+      - products
+      - transactionDate
+      - transactionId
+      - userId
+      - userName
+      type: object
+      properties:
+        id:
+          type: string
+          example: transactionId-1234
+          description: The Identifier for the transaction between end customer and client. This is provided by the
+            client and not created by Bazaarvoice.
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        emailAddress:
+          pattern: (.+)@(.+)
+          type: string
+          example: john-doe@gmail.com
+          description: The email address of the end customer for whom we need to send notifications.
+        transactionDate:
+          pattern: (?:\d{4})-(?:\d{2})-(?:\d{2})T(?:\d{2}):(?:\d{2}):(?:\d{2}).(?:\d{3})z
+          type: string
+          format: date-time
+          example: '2023-06-06T08:47:51.792Z'
+          description: The time at which the transaction was made at clients end by the end customer. We can check
+            the example for the date-time format in which Bazaarvoice expects this field data.
+        nickname:
+          type: string
+          example: John Doe
+          description: The end customer username used during notifying the end customer.
+        userId:
+          pattern: '[^/]+'
+          type: string
+          example: john_doe
+          description: The end customer userId to be provided.
+        locale:
+          pattern: '[a-z]{2}(_[A-Z]{2}(_[0-9a-zA-Z_]+)?)?'
+          type: string
+          format: bcp47
+          example: en_US
+        deploymentZone:
+          pattern: '[a-zA-Z0-9_]+'
+          type: string
+          example: main_site
+          description: The deployment zone that this transaction should be processed at.
+        transactionChannel:
+          type: string
+          description: The transaction channel over which we would like to notify the customer.
+          example: EMAIL
+    Money:
+      type: object
+      properties:
+        amount:
+          maximum: 2
+          exclusiveMaximum: false
+          minimum: 0
+          exclusiveMinimum: false
+          type: number
+          format: double
+          description: Amount of the product.
+          example: 59.92
+        currency:
+          type: string
+          description: 3 letter currency code as defined by ISO-4217
+          example: EUR
+    IngestTransactionResponse:
+      type: object
+      properties:
+        responseMessage:
+          $ref: '#/components/schemas/TransactionStatus'
+    IngestBulkTransactionsRequest:
+      required:
+      - clientName
+      - transactions
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: test-client-name
+          description: The client identifier that needs to be provided corresponding to the apikey provided.
+        transactions:
+          type: array
+          maxItems: 300
+          items:
+            $ref: '#/components/schemas/Transaction'
+    BulkTransactionsResponseItem:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          example: transactionId-1234
+          description: The Identifier for the transaction between end customer and client. This is provided by the
+            client and not created by Bazaarvoice.
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-06-06T08:47:51.792Z'
+          description: Response time.
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        message:
+          type: string
+          example: Accepted.
+    IngestBulkTransactionsResponse:
+      type: object
+      properties:
+        batchId:
+          type: string
+          description: Unique batch id.
+        batchStatus:
+          $ref: '#/components/schemas/BatchStatus'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkTransactionsResponseItem'
+    InvalidateTransactionRequest:
+      required:
+      - clienName
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: test-client
+        id:
+          type: string
+          example: transaction-id-123
+    InvalidateTransactionResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          example: transaction-id-123
+        transactionStatus:
+          $ref: '#/components/schemas/TransactionStatus'
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'A URI reference that uniquely identifies the problem type only in the context of the provided
+            API. Opposed to the specification in RFC-7807, it is neither recommended to be dereferenceable and point
+            to a human-readable documentation nor globally unique for the problem type.
+
+            '
+          default: about:blank
+          example: /some/uri-reference
+        title:
+          type: string
+          description: 'A short summary of the problem type. Written in English and readable for engineers, usually
+            not suited for non technical stakeholders and not localized.
+
+            '
+          example: some title for the error situation
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence of the problem.
+
+            '
+          minimum: 100
+          maximum: 600
+          exclusiveMaximum: true
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the problem that is helpful
+            to locate the problem and give advice on how to proceed. Written in English and readable for engineers,
+            usually not suited for non technical stakeholders and not localized.
+
+            '
+          example: some description for the error situation
+        instance:
+          type: string
+          format: uri-reference
+          description: 'A URI reference that identifies the specific occurrence of the problem, e.g. by adding a
+            fragment identifier or sub-path to the problem type. May be used to locate the root of this problem
+            in the source code.
+
+            '
+          example: /some/uri-reference#specific-occurrence-context
+    TransactionStatus:
+      type: string
+      example: ACCEPTED
+      x-extensible-enum:
+      - ACCEPTED
+      - CANCELLED
+      - IN_PROGRESS
+      - REJECTED
+    BatchStatus:
+      type: string
+      example: ACCEPTED
+      x-extensible-enum:
+      - ACCEPTED
+      - PARTIAL_SUCCESS
+      - SUCCESS
+      - FAILURE
+  securitySchemes:
+    accessToken:
+      type: http
+      scheme: bearer
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

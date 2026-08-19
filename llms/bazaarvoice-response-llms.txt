@@ -1,0 +1,37 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Overview](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/home.md)
+- [Getting Started](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/getting-started.md): This section contains information that will get you started using the Response API quickly and correctly.
+- [OAuth2 : 3-Legged](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/oauth2-3-legged.md): The Bazaarvoice Response API provides 3-legged methods for **OAuth2** authentication.
+- [Client Response](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/client-response-overview.md): This section contains reference documentation for the client response resource.
+- [Create Client Response](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/create-client-response.md): This page describes how to create a client response request.
+- [Read Client Response](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/read-client-response.md)
+- [Update Client Response](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/update-client-response.md): This page describes how to update a client response record.
+- [Delete Review Response](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/delete-review-response.md): This page describes how to delete a specific client response record.
+- [Count Review Responses](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/count-review-responses.md): This page describes how to retrieve a count of responses for a list of reviews.
+- [Overview](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview.md): This page contains general information about using the Response API.
+- [Author](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/author.md): This page describes the response Author resource. The Author resource is the writer of the review response.
+- [Review](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/review.md): This page describes the Review resource.
+- [Tools](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/tools.md): Listed below is a collection of tools you can use to help you work more effectively with the Response API. These tools are maintained by Bazaarvoice.
+- [API Key Management](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/api-key-process.md): This section provides documentation on requesting and managing API keys, and registering the application.
+- [Troubleshooting](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/troubleshooting.md): This page has basic steps to help you fix common issues encountered when using the [Response API](/v1.0-ResponseAPI/docs/home). Many issues can be fixed by following the steps below.
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/security-imperatives.md): Security Fundamentals for HTTPS and TLS.
+
+## API Reference
+- [Get a given client response record](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse.md)
+- [Delete a given client response record](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/deleteclientresponse.md)
+- [Update a given client response record](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/updateclientresponse.md)
+- [Get all client response records for the specified review](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponseforreview.md)
+- [Get the count of responses for a list of reviews](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews.md)
+- [Submit a client response for a given review](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/createclientresponseforreview.md)
+- [Get a given client response record's author details](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getauthorrelationship.md)
+- [Get a given client response record's author details](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getauthor.md)
+- [Get a given client response record's review details](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getreview.md)
+- [Get a given client response record's review details](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getreviewrelationship.md)
+- [Retrieve OAuth2 Token: 3-Legged](https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/retrieve-oauth2-token-3-legged.md)
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-ResponseAPI/page/support.md)

@@ -1,0 +1,2910 @@
+{
+ "openapi": "3.0.0",
+ "info": {
+  "title": "Conversations Display API",
+  "x-audience": "external-partner",
+  "description": "Conversations API Display operations by Bazaarvoice",
+  "version": "1.0.0"
+ },
+ "servers": [
+  {
+   "url": "https://stg.api.bazaarvoice.com",
+   "description": "Conversations Staging API Server"
+  }
+ ],
+ "paths": {
+  "/data/reviews.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Reviews",
+    "description": "Reviews Api is used to display reviews for products and products related to a product family.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Attributes",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter.",
+      "example": "ModeratorCodes"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "ExcludeFamily",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product.",
+      "example": "true"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Rating:eq:3,4\" will match all reviews with rating values 3 OR 4.\n- Advanced operators can be used to define filters. For instance, \"Filter=Rating:lt:3\" will match all reviews with a rating value less than 3. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=Rating:gte:4&Filter=IsFeatured:eq:true\" will match all featured reviews with a rating of 4-star or higher.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:47950830\n- Comma Seperated Multiple Filter values: &filter=Id:eq:47938933,47950830,47645686\n- Multiple Filter AND'ed value: &filter=ProductId:155590400&filter=HasPhotos:eq:false&SubmissionTime:gt:1694629800000&filter=.....\n"
+     },
+     {
+      "name": "Filter_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Filtering option for included nested content. TYPE can be any included nested content. i.e. Comments for Reviews.",
+      "example": "Id:eq:sp-1"
+     },
+     {
+      "name": "FilteredStats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Statistics based on the filters used to perform queries. The filtered statistics are returned in their own block and can be returned any place that a regular statistics block can be currently returned. Available content types are: Reviews, Questions, Answers. Note: FilteredStats must be used in conjunction with \"Include=Products\". The filtered stats block will be identical to a regular stats block if a filtered stat is requested but a filter has not been specified for the particular type of stat being requested.\t",
+      "example": "Reviews"
+     },
+     {
+      "name": "IncentivizedStats",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "If set to true, displays the number of incentivized reviews for each product or author returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the Include parameter to include authors or products in the response, and also with the FilteredStats or Stats parameters to include statistics for reviews in the response.",
+      "example": "false"
+     },
+     {
+      "name": "Include",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Related subjects to be included (e.g. Products, Categories, Authors, or Comments).",
+      "example": "Products"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.",
+      "example": "10"
+     },
+     {
+      "name": "Limit_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Limit option for the nested content type returned. TYPE can be any nested content. i.e. Comments for Reviews. An error is returned if the value passed exceeds 20.",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Search",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Full-text search string used to find UGC.\nResults can not be sorted when using Search.\nSearch is only available to requests filtered by one product ID.",
+      "example": "keys"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort reviews\n- Sort criteria for primary content type of the query. Sort order is required (asc or desc). \n- Multi-attribute sorting for each content/subject type is supported (except for contentLocale). \n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Rating:desc\n - Multiple Sort values AND'ed: &sort=Rating:desc&sort=TotalCommentCount:desc\n"
+     },
+     {
+      "name": "Sort_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Sorting option for nested content. Sort order is required (asc or desc). TYPE can be any nested content. i.e. Comments for Reviews.",
+      "example": "Id:desc"
+     },
+     {
+      "name": "Stats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "The type of statistics that will be calculated on included subjects. Available content types are: Reviews, Questions, Answers. Note: Not all statistical content types apply to every possible include.\t",
+      "example": "Reviews"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Review"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/reviewcomments.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Comments",
+    "description": "Comments Api is used to display comments posted on reviews. It can be used request all comments for a particular review or particular comment on a review. It even allows advanced requests based on the filters that are defined below.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Attributes",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter.",
+      "example": "ModeratorCodes"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "ExcludeFamily",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product",
+      "example": "true"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=TotalFeedbackCount:eq:3,4\" will match all content with TotalFeedbackCount values equal to 3 OR 4.\n- Advanced operators can be used to define filters. For instance, \"Filter=TotalFeedbackCount:lte:10\" will match all content with a rating value less than or equal to 10. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=Rating:gte:4&Filter=IsFeatured:eq:true\" will match all featured reviews with a rating of 4-star or higher.Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=TotalFeedbackCount:gt:10&Filter=IsFeatured:true\" will match all featured content with a TotalFeedbackCount value of greater than 10.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=TotalFeedbackCount:lt:5\n- Comma Seperated Multiple Filter values: &filter=Id:eq:4723748,4723746\n- Multiple Filter AND'ed value: &filter=SubmissionTime:gt:1610649000000&filter=SubmissionTime:lt:1610908200000&filter=IsFeatured:eq:false&filter=.....\n"
+     },
+     {
+      "name": "Include",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Related subjects to be included in the response. Can be one or more (comma-separated) of Reviews, Products, Categories, or Authors.",
+      "example": "Products"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.\t",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.\t",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort comments\n- Sort criteria is specified as <sort option>:asc for ascending and <sort option>:desc for descending. \n- Sort order is required (asc or desc).Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. For instance Sort=TotalFeedbackCount:desc,TotalPositiveFeedbackCount:asc sorts by number of feedbacks received descending, then number of positive feedbacks received ascending.\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Rating:desc\n - Multiple Sort values AND'ed: &sort=Rating:desc&sort=TotalCommentCount:desc\n"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Comment"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/questions.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Questions",
+    "description": "Questions Api is used to display questions posted on Products. Questions Api can also be used to pull question based on filters mentioned below.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Attributes",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter.",
+      "example": "ModeratorCodes"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "ExcludeFamily",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product.",
+      "example": "true"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:3,4\" will match Questions with Ids 3 OR 4.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:gt:50\" will match Questions with an Id value greater than 50. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=ProductId:eq:75&Filter=isfeatured:eq:true\" will match all featured Questions for the Product with Id 75.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:eq:1852069\n- Comma Seperated Multiple Filter values: &filter=Id:eq:1852069,1852039,1852069,...\n- Multiple Filter AND'ed value: &filter=Id:eq:1852069,1852039,1852069&filter=hasAnswers:eq:true&filter=.....\n"
+     },
+     {
+      "name": "Filter_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Filtering option for included nested content. TYPE can be any included nested content. e.g. Answers for Questions.",
+      "example": "Id:eq:sp-1"
+     },
+     {
+      "name": "Include",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Related subjects to be included (e.g. Products, Categories, Authors, or Answers).",
+      "example": "Products"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.",
+      "example": "10"
+     },
+     {
+      "name": "Limit_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Limit option for the nested content type returned. TYPE can be any nested content. e.g. Answers for Questions. An error is returned if the value passed exceeds 20.\t",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Search",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Full-text search string used to find UGC.\nResults can not be sorted when using Search.\nSearch is only available to requests filtered by one product ID.",
+      "example": "keys"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort questions\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. Sort=rating:asc,submissiontime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Rating:desc\n - Multiple Sort values AND'ed: &sort=Rating:desc&sort=Submissiontime:desc\n"
+     },
+     {
+      "name": "Sort_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Sorting option for nested content. TYPE can be any nested content. e.g. Answers for Questions.",
+      "example": "Id:desc"
+     },
+     {
+      "name": "Stats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "The type of statistics that will be calculated on included subjects. Available content types are: Reviews, Questions, Answers. Note: Not all statistical content types apply to every possible include.",
+      "example": "Reviews"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Question"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/answers.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Answers",
+    "description": "Answers Api is used to display answers posted on the questions posted for products.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Attributes",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter.",
+      "example": "ModeratorCodes"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "ExcludeFamily",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product.",
+      "example": "true"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:50,75\" will match all Answers with Id 50 OR 75.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:lt:100\" will match all Answers with an Id value of less than 100. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=QuestionId:eq:50&filter=isfeatured:true\" will match all featured Answers with QuestionId 50.\n- Time-based filters can be used for SubmissionTime, LastModificationTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:1865584\n- Comma Seperated Multiple Filter values: &filter=Id:eq:1675274,1675262,1675260\n- Multiple Filter AND'ed value: &filter=QuestionId:eq:1483881&filter=ProductId:eq:100986399&filter=.....\n"
+     },
+     {
+      "name": "Include",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Related subjects to be included (e.g. Products, Categories, Authors, or Answers).",
+      "example": "Products"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort answers\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. Sort=Id:asc,SubmissionTime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Id:desc\n - Multiple Sort values AND'ed: &sort=Id:desc&sort=SubmissionTime:desc\n"
+     },
+     {
+      "name": "Stats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "The type of statistics that will be calculated on included subjects. Available content types are: Answers, Questions, Reviews. Note: Not all statistical content types apply to every possible include.",
+      "example": "Reviews"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Answer"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/authors.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Profiles",
+    "description": "Profile/Authors Api is used to display about Author Information who have written reviews, questions and answers.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Attributes",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter.",
+      "example": "ModeratorCodes"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "ExcludeFamily",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product.",
+      "example": "true"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=ModeratorCode:eq:LI,PD\" will match all content with moderation code values of LI (Liability Concern) or PD (Product Description Inaccurate).\n- Advanced operators can be used to define filters. For instance, \"Filter=TotalReviewCount:gte:10\" will match all content with a TotalReviewCount value of greater than or equal to 10. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=ContextDataValue_gender:eq:female&Filter=ContextDataValue_age:eq:21to34\" will match all content written by women between the ages of 21 and 34.\n- Time-based filters can be used for SubmissionTime and LastModeratedTime. Dates in time-based filters are calculated as the number of seconds since January 1, 1970, 00:00:00 UTC. In a future version, we will be adding support for comparing date/time string values. The following example returns content that was submitted on November 9, 2009: &filter=SubmissionTime:gt:1257746400&filter=SubmissionTime:lt:1257832800 .\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=contextdatavalue_age:under21\n- Comma Seperated Multiple Filter values: &filter=ModeratorCode:eq:LI,PD\n- Multiple Filter AND'ed value: &filter=ContextDataValue_gender:eq:female&filter=ContextDataValue_age:eq:21to34&filter=.....\n"
+     },
+     {
+      "name": "Filter_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Filter criteria for a included content or subject type. TYPE can be Reviews, Questions, Answers, or Comments. Multiple filter criteria are supported for each content type.",
+      "example": "Id:eq:sp-1"
+     },
+     {
+      "name": "IncentivizedStats",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "If set to true, displays the number of incentivized reviews written by each author returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the FilteredStats or Stats parameters to include statistics for reviews in the response.",
+      "example": "false"
+     },
+     {
+      "name": "Include",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Content types written by the author to be included (e.g. Questions, Reviews, Answers, or Comments).",
+      "example": "Products"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.",
+      "example": "10"
+     },
+     {
+      "name": "Limit_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Limit option for a included content. TYPE can be Reviews, Questions, Answers or Comments. An error is returned if the value passed exceeds 20.",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort Authors\n- Sort criteria is specified as <sort option>:asc for ascending and <sort option>:desc for descending\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. For instance, Sort=TotalReviewCount:desc,Id:asc sorts the authors, first by their total review count (most to least), then if there are authors with the same number of reviews, the authors are sorted alphabetically by ID.\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Id:desc\n - Multiple Sort values AND'ed: &sort=Id:asc&sort=TotalReviewCount:desc\n"
+     },
+     {
+      "name": "Sort_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Sort criteria for a included content. TYPE can be Reviews, Questions, Answers or Comments.",
+      "example": "Id:desc"
+     },
+     {
+      "name": "Stats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "The content types for which statistics should be calculated for the author. Available content types are: Reviews, Questions, Answers. Note: Statistics can also be calculated on includes.",
+      "example": "Reviews"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Author"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/products.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Products",
+    "description": "Products Api is used to get details about a particular product or all the products for a particular passkey.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Attributes",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Attributes to be included when returning content. For example, if includes are requested along with the &attributes=ModeratorCodes parameter, both the includes and the results will contain moderator codes. In order to filter by ModeratorCode, you must request the ModeratorCodes attribute parameter.",
+      "example": "ModeratorCodes"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "ExcludeFamily",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Boolean flag indicating whether to exclude content from other products in the same family as the requested product.",
+      "example": "true"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:50,75\" will match all Products with Id 50 OR 75.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:lte:100\" will match all Products with an Id value of less than or equal to 100. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"filter=IsActive:eq:false&filter=IsDisabled:eq:false\" will match all Products that are neither Active nor Disabled.\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:product01\n- Comma Seperated Multiple Filter values: &filter=Id:eq:Product1,d7873e29-5a90-4875-b91e-01aa96564882\n- Multiple Filter AND'ed value: &filter=IsActive:eq:false&filter=Id:product01&filter=.....\n"
+     },
+     {
+      "name": "Filter_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Filtering option for included nested content. TYPE can be any related content, i.e., Reviews, Questions, Answers, Comments, Authors, Categories.",
+      "example": "Id:eq:sp-1"
+     },
+     {
+      "name": "IncentivizedStats",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "If set to true, displays the number of incentivized reviews for each product or author returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the Include parameter to include authors or products in the response, and also with the FilteredStats or Stats parameters to include statistics for reviews in the response.",
+      "example": "false"
+     },
+     {
+      "name": "Include",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Related subjects to be included (e.g. Products, Categories, Authors, Reviews, Questions.",
+      "example": "Products"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.",
+      "example": "10"
+     },
+     {
+      "name": "Limit_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Limit option for the nested content type returned. TYPE can be any related content i.e.Reviews, Questions, Answers, Comments, Authors, Categories. An error is returned if the value passed exceeds 20.",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Search",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Full-text search string used to find UGC.\nResults can not be sorted when using Search.\nSearch is only available to requests filtered by one product ID.",
+      "example": "keys"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort Products\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. sort=rating:asc,submissiontime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=rating:desc\n - Multiple Sort values AND'ed: &sort=rating:asc&sort=submissiontime:desc\n"
+     },
+     {
+      "name": "Sort_[TYPE]",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Sorting option for nested content. Sort order is required (asc or desc). TYPE can be any related content, i.e., Reviews, Questions, Answers, Comments, Authors, Categories.",
+      "example": "Id:desc"
+     },
+     {
+      "name": "Stats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "The type of statistics that will be calculated on included subjects. Available content types are: Reviews, Questions, Answers. Note: Not all statistical content types apply to every possible include.\t",
+      "example": "Reviews"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Product"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/categories.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Product Categories",
+    "description": "Categories Api is responsible for displaying product related categories for a particular passkey.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma)",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "Filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Filter criteria for primary content of the query. Multiple filter\ncriteria are supported. Here you can find few of many options we can use the filter parameter             \n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=Id:eq:5,6\" will match all categories with Id 5 OR 6.\n- Advanced operators can be used to define filters. For instance, \"Filter=Id:lte:50\" will match all categories with an Id value of less than or equal to 50. All advanced operators are documented on the Conversations API page.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n- Multiple filters are allowed as URL parameters in which case filters are AND'ed. For instance, \"Filter=AncestorId:eq:5&Filter=IsDisabled:eq:false\" will match all categories that are not disabled and that have an ancestor category with Id 5.\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=Id:BV_MISCELLANEOUS_CATEGORY\n- Comma Seperated Multiple Filter values: &filter=Id:eq:BV_MISCELLANEOUS_CATEGORY,....\n- Multiple Filter AND'ed value: &filter=Id:BV_MISCELLANEOUS_CATEGORY&Filter=IsActive:eq:false&filter=.....\n"
+     },
+     {
+      "name": "Limit",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Max number of records returned. An error is returned if the value passed exceeds 100.",
+      "example": "10"
+     },
+     {
+      "name": "Locale",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.",
+      "example": "en_US"
+     },
+     {
+      "name": "Offset",
+      "in": "query",
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Index at which to return results. By default, indexing begins at 0 when you issue a query. Using Limit=100, Offset=0 returns results 0-99. When changing this to Offset=1, results 1-100 are returned. The maximum supported value is 300000.",
+      "example": "20"
+     },
+     {
+      "name": "Sort",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "description": "Ways to sort Products\n- Sort order is required (asc or desc). There is no default.\n- Multi-attribute sorting is supported by using a comma separated list of sort criteria for a content/subject type. e.g. sort=rating:asc,submissiontime:desc\n\nBelow we will be stating few examples of the sort parameter\n - Single Sort value: &sort=Id:desc\n - Multiple Sort values AND'ed: &sort=Id:desc&sort=SubmissionTime:desc\n"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Category"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  },
+  "/data/statistics.json": {
+   "get": {
+    "tags": [
+     "default"
+    ],
+    "summary": "Retrieve Statistics",
+    "description": "Statistics Api is responsible for pulling up all sort of statistics like review statistics for a product or multiple products or even question and answer related statistics.",
+    "parameters": [
+     {
+      "name": "apiversion",
+      "in": "query",
+      "schema": {
+       "type": "number"
+      },
+      "description": "The API version",
+      "required": true,
+      "example": "5.4"
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "API key is required to authenticate API user and check permission to access particular client's data.",
+      "required": true,
+      "example": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4"
+     },
+     {
+      "name": "filter",
+      "in": "query",
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "style": "form",
+      "explode": true,
+      "required": true,
+      "description": "Filter criteria for content of the query. Must be Product IDs.\n- Each filter argument specifies the attribute to filter on followed by a comma-separated list of values. For instance, \"Filter=ProductId:eq:Product1,Product2\" returns statistics for Product1 and Product2.\n- If a filter value contains a comma or a colon, that character needs to be escaped with a backslash (\\, or \\:). If a filter value contains an ampersand (&), the ampersand must be encoded in the filter value by replacing & with %26.\n\nBelow we will be stating few examples of the filter parameter\n- Single Filter value: &filter=ProductId:Product1\n- Comma Seperated Multiple Filter values: &filter=ProductId:eq:Product1,Product2\n"
+     },
+     {
+      "name": "stats",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "The content type for which statistics should be included. Currently available types:\nReviews: returns statistics for all content, including syndicated content (if enabled on your API key).\nNativeReviews: returns statistics only for content submitted on your site; Syndicated content and product family content are excluded.",
+      "example": "NativeReviews"
+     },
+     {
+      "name": "Callback",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Callback function name used with JSONP. Value is a string consisting of the following characters: a-z,A-Z,0-9,_ (excluding comma). See the JSONP tutorial for more information.\t",
+      "example": "custom_Function01"
+     },
+     {
+      "name": "IncentivizedStats",
+      "in": "query",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "If set to true, displays the number of incentivized reviews for each product returned in the response within an IncentivizedReviewCount element. This parameter must be used in conjunction with the Stats parameter.",
+      "example": "false"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Stats"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequestResponse"
+     },
+     "401": {
+      "$ref": "#/components/responses/UnauthorizedResponse"
+     },
+     "429": {
+      "$ref": "#/components/responses/TooManyRequestsResponse"
+     },
+     "500": {
+      "$ref": "#/components/responses/InternalServerErrorResponse"
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Review": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Id": {
+         "type": "string"
+        },
+        "CID": {
+         "type": "string"
+        },
+        "SourceClient": {
+         "type": "string"
+        },
+        "Badges": {
+         "type": "object",
+         "properties": {
+          "incentivizedReview": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          },
+          "Expert": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          },
+          "Staff": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        },
+        "BadgesOrder": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "LastModeratedTime": {
+         "type": "string"
+        },
+        "LastModificationTime": {
+         "type": "string"
+        },
+        "ProductId": {
+         "type": "string"
+        },
+        "ContextDataValuesOrder": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "ClientResponses": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "Department": {
+            "type": "string"
+           },
+           "Response": {
+            "type": "string"
+           },
+           "ResponseType": {
+            "type": "string"
+           },
+           "ResponseSource": {
+            "type": "string"
+           },
+           "Name": {
+            "type": "string"
+           },
+           "Date": {
+            "type": "string"
+           },
+           "SourceClientName": {
+            "type": "string"
+           }
+          }
+         }
+        },
+        "UserLocation": {
+         "type": "string"
+        },
+        "AuthorId": {
+         "type": "string"
+        },
+        "ContentLocale": {
+         "type": "string"
+        },
+        "IsFeatured": {
+         "type": "boolean"
+        },
+        "TotalInappropriateFeedbackCount": {
+         "type": "number"
+        },
+        "TotalClientResponseCount": {
+         "type": "number"
+        },
+        "TotalCommentCount": {
+         "type": "number"
+        },
+        "Photos": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "Sizes": {
+            "type": "object",
+            "properties": {
+             "normal": {
+              "type": "object",
+              "properties": {
+               "Id": {
+                "type": "string"
+               },
+               "Url": {
+                "type": "string"
+               }
+              }
+             },
+             "thumbnail": {
+              "type": "object",
+              "properties": {
+               "Id": {
+                "type": "string"
+               },
+               "Url": {
+                "type": "string"
+               }
+              }
+             },
+             "large": {
+              "type": "object",
+              "properties": {
+               "Id": {
+                "type": "string"
+               },
+               "Url": {
+                "type": "string"
+               }
+              }
+             }
+            }
+           },
+           "Id": {
+            "type": "string"
+           },
+           "SizesOrder": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           },
+           "Caption": {
+            "type": "object"
+           }
+          }
+         }
+        },
+        "Rating": {
+         "type": "number"
+        },
+        "IsRatingsOnly": {
+         "type": "boolean"
+        },
+        "IsRecommended": {
+         "type": "boolean"
+        },
+        "Helpfulness": {
+         "type": "number"
+        },
+        "TotalFeedbackCount": {
+         "type": "number"
+        },
+        "TotalNegativeFeedbackCount": {
+         "type": "number"
+        },
+        "TotalPositiveFeedbackCount": {
+         "type": "number"
+        },
+        "ModerationStatus": {
+         "type": "string"
+        },
+        "SubmissionTime": {
+         "type": "string"
+        },
+        "ReviewText": {
+         "type": "string"
+        },
+        "Title": {
+         "type": "string"
+        },
+        "UserNickname": {
+         "type": "string"
+        },
+        "ContextDataValues": {
+         "type": "object",
+         "properties": {
+          "Age": {
+           "type": "object",
+           "properties": {
+            "Value": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "ValueLabel": {
+             "type": "string"
+            },
+            "DimensionLabel": {
+             "type": "string"
+            }
+           }
+          },
+          "IncentivizedReview": {
+           "type": "object",
+           "properties": {
+            "Value": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "ValueLabel": {
+             "type": "string"
+            },
+            "DimensionLabel": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        },
+        "Pros": {
+         "type": "object"
+        },
+        "RatingRange": {
+         "type": "number"
+        },
+        "CommentIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "SubmissionId": {
+         "type": "object"
+        },
+        "Cons": {
+         "type": "object"
+        },
+        "AdditionalFieldsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AdditionalFields": {
+         "type": "object"
+        },
+        "InappropriateFeedbackList": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "SecondaryRatingsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "TagDimensions": {
+         "type": "object"
+        },
+        "IsSyndicated": {
+         "type": "boolean"
+        },
+        "ProductRecommendationIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "CampaignId": {
+         "type": "object"
+        },
+        "TagDimensionsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "SecondaryRatings": {
+         "type": "object"
+        },
+        "Videos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Comment": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Id": {
+         "type": "string"
+        },
+        "CID": {
+         "type": "string"
+        },
+        "SourceClient": {
+         "type": "string"
+        },
+        "LastModeratedTime": {
+         "type": "string"
+        },
+        "LastModificationTime": {
+         "type": "string"
+        },
+        "ReviewId": {
+         "type": "string"
+        },
+        "Badges": {
+         "type": "object",
+         "properties": {
+          "top25": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        },
+        "BadgesOrder": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "AuthorId": {
+         "type": "string"
+        },
+        "UserLocation": {
+         "type": "string"
+        },
+        "ContentLocale": {
+         "type": "string"
+        },
+        "IsFeatured": {
+         "type": "boolean"
+        },
+        "TotalInappropriateFeedbackCount": {
+         "type": "number"
+        },
+        "TotalFeedbackCount": {
+         "type": "number"
+        },
+        "TotalNegativeFeedbackCount": {
+         "type": "number"
+        },
+        "TotalPositiveFeedbackCount": {
+         "type": "number"
+        },
+        "ModerationStatus": {
+         "type": "string"
+        },
+        "SubmissionTime": {
+         "type": "string"
+        },
+        "CommentText": {
+         "type": "string"
+        },
+        "Title": {
+         "type": "string"
+        },
+        "UserNickname": {
+         "type": "string"
+        },
+        "StoryId": {
+         "type": "object"
+        },
+        "InappropriateFeedbackList": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Photos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "SubmissionId": {
+         "type": "object"
+        },
+        "Videos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "CampaignId": {
+         "type": "object"
+        },
+        "IsSyndicated": {
+         "type": "boolean"
+        },
+        "ProductRecommendationIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Question": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Id": {
+         "type": "string"
+        },
+        "CID": {
+         "type": "string"
+        },
+        "SourceClient": {
+         "type": "string"
+        },
+        "LastModeratedTime": {
+         "type": "string"
+        },
+        "LastModificationTime": {
+         "type": "string"
+        },
+        "ProductId": {
+         "type": "string"
+        },
+        "Badges": {
+         "type": "object",
+         "properties": {
+          "Expert": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          },
+          "Staff": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        },
+        "BadgesOrder": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "AuthorId": {
+         "type": "string"
+        },
+        "UserLocation": {
+         "type": "string"
+        },
+        "ContentLocale": {
+         "type": "string"
+        },
+        "InappropriateFeedbackList": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "AuthorId": {
+            "type": "string"
+           },
+           "SubmissionTime": {
+            "type": "string"
+           }
+          }
+         }
+        },
+        "TotalInappropriateFeedbackCount": {
+         "type": "number"
+        },
+        "IsFeatured": {
+         "type": "boolean"
+        },
+        "TotalAnswerCount": {
+         "type": "number"
+        },
+        "QuestionDetails": {
+         "type": "string"
+        },
+        "QuestionSummary": {
+         "type": "string"
+        },
+        "TotalFeedbackCount": {
+         "type": "number"
+        },
+        "TotalNegativeFeedbackCount": {
+         "type": "number"
+        },
+        "TotalPositiveFeedbackCount": {
+         "type": "number"
+        },
+        "ModerationStatus": {
+         "type": "string"
+        },
+        "SubmissionTime": {
+         "type": "string"
+        },
+        "UserNickname": {
+         "type": "string"
+        },
+        "CampaignId": {
+         "type": "object"
+        },
+        "TagDimensionsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ContextDataValues": {
+         "type": "object"
+        },
+        "SubmissionId": {
+         "type": "object"
+        },
+        "Videos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ProductRecommendationIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AdditionalFieldsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "CategoryId": {
+         "type": "object"
+        },
+        "AnswerIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "IsSyndicated": {
+         "type": "boolean"
+        },
+        "Photos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AdditionalFields": {
+         "type": "object"
+        },
+        "TagDimensions": {
+         "type": "object"
+        },
+        "ContextDataValuesOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Answer": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Id": {
+         "type": "string"
+        },
+        "CID": {
+         "type": "string"
+        },
+        "SourceClient": {
+         "type": "string"
+        },
+        "LastModeratedTime": {
+         "type": "string"
+        },
+        "LastModificationTime": {
+         "type": "string"
+        },
+        "QuestionId": {
+         "type": "string"
+        },
+        "Badges": {
+         "type": "object",
+         "properties": {
+          "top25": {
+           "type": "object",
+           "properties": {
+            "ContentType": {
+             "type": "string"
+            },
+            "Id": {
+             "type": "string"
+            },
+            "BadgeType": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        },
+        "BadgesOrder": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "AuthorId": {
+         "type": "string"
+        },
+        "UserLocation": {
+         "type": "string"
+        },
+        "ContentLocale": {
+         "type": "string"
+        },
+        "IsFeatured": {
+         "type": "boolean"
+        },
+        "TotalInappropriateFeedbackCount": {
+         "type": "number"
+        },
+        "IsBrandAnswer": {
+         "type": "boolean"
+        },
+        "TotalFeedbackCount": {
+         "type": "number"
+        },
+        "TotalNegativeFeedbackCount": {
+         "type": "number"
+        },
+        "TotalPositiveFeedbackCount": {
+         "type": "number"
+        },
+        "ModerationStatus": {
+         "type": "string"
+        },
+        "SubmissionTime": {
+         "type": "string"
+        },
+        "AnswerText": {
+         "type": "string"
+        },
+        "UserNickname": {
+         "type": "string"
+        },
+        "Photos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Videos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ContextDataValuesOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "CampaignId": {
+         "type": "object"
+        },
+        "SubmissionId": {
+         "type": "object"
+        },
+        "AdditionalFields": {
+         "type": "object"
+        },
+        "ContextDataValues": {
+         "type": "object"
+        },
+        "IsSyndicated": {
+         "type": "boolean"
+        },
+        "AdditionalFieldsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "InappropriateFeedbackList": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ProductRecommendationIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Author": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Id": {
+         "type": "string"
+        },
+        "ContributorRank": {
+         "type": "string"
+        },
+        "UserNickname": {
+         "type": "string"
+        },
+        "LastModeratedTime": {
+         "type": "string"
+        },
+        "ModerationStatus": {
+         "type": "string"
+        },
+        "SubmissionTime": {
+         "type": "string"
+        },
+        "ThirdPartyIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Badges": {
+         "type": "object"
+        },
+        "ProductRecommendationIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ContextDataValuesOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Location": {
+         "type": "object"
+        },
+        "SecondaryRatingsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "QuestionIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "SubmissionId": {
+         "type": "object"
+        },
+        "Avatar": {
+         "type": "object"
+        },
+        "Videos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AnswerIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Photos": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "SecondaryRatings": {
+         "type": "object"
+        },
+        "CommentIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AdditionalFieldsOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "StoryIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ReviewIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ContextDataValues": {
+         "type": "object"
+        },
+        "AdditionalFields": {
+         "type": "object"
+        },
+        "BadgesOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Product": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Description": {
+         "type": "string"
+        },
+        "ImageUrl": {
+         "type": "string"
+        },
+        "Name": {
+         "type": "string"
+        },
+        "Id": {
+         "type": "string"
+        },
+        "CategoryId": {
+         "type": "string"
+        },
+        "Active": {
+         "type": "boolean"
+        },
+        "Disabled": {
+         "type": "boolean"
+        },
+        "FamilyIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ModelNumbers": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AttributesOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "UPCs": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Brand": {
+         "type": "object"
+        },
+        "ISBNs": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "QuestionIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "StoryIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "BrandExternalId": {
+         "type": "object"
+        },
+        "Attributes": {
+         "type": "object"
+        },
+        "EANs": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ManufacturerPartNumbers": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ProductPageUrl": {
+         "type": "object"
+        },
+        "ReviewIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Stats": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "ProductStatistics": {
+         "type": "object",
+         "properties": {
+          "ProductId": {
+           "type": "string"
+          },
+          "NativeReviewStatistics": {
+           "type": "object",
+           "properties": {
+            "AverageOverallRating": {
+             "type": "number"
+            },
+            "TotalReviewCount": {
+             "type": "number"
+            },
+            "OverallRatingRange": {
+             "type": "number"
+            }
+           }
+          },
+          "ReviewStatistics": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "Category": {
+    "type": "object",
+    "properties": {
+     "Limit": {
+      "type": "number"
+     },
+     "Offset": {
+      "type": "number"
+     },
+     "TotalResults": {
+      "type": "number"
+     },
+     "Locale": {
+      "type": "string"
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Active": {
+         "type": "boolean"
+        },
+        "Disabled": {
+         "type": "boolean"
+        },
+        "Name": {
+         "type": "string"
+        },
+        "Id": {
+         "type": "string"
+        },
+        "ParentId": {
+         "type": "string"
+        },
+        "CategoryPageUrl": {
+         "type": "string"
+        },
+        "QuestionIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "ImageUrl": {
+         "type": "string"
+        },
+        "ProductIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "Attributes": {
+         "type": "object"
+        },
+        "StoryIds": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        },
+        "AttributesOrder": {
+         "type": "array",
+         "items": {
+          "type": "object"
+         }
+        }
+       }
+      }
+     },
+     "Includes": {
+      "type": "object"
+     },
+     "HasErrors": {
+      "type": "boolean"
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "BadRequestErrorResponseSchema": {
+    "type": "object",
+    "properties": {
+     "Includes": {
+      "type": "object",
+      "default": {}
+     },
+     "HasErrors": {
+      "type": "boolean",
+      "default": true
+     },
+     "Offset": {
+      "type": "number",
+      "default": null
+     },
+     "TotalResults": {
+      "type": "number",
+      "default": null
+     },
+     "Locale": {
+      "type": "string",
+      "default": null
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "default": {}
+      }
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Message": {
+         "type": "string",
+         "example": "The passKey provided is invalid."
+        },
+        "Code": {
+         "type": "string",
+         "example": "ERROR_PARAM_INVALID_API_KEY",
+         "x-extensible-enum": [
+          "ERROR_PARAM_INVALID_API_KEY",
+          "ERROR_PARAM_INVALID_CALLBACK",
+          "ERROR_PARAM_INVALID_FILTER_ATTRIBUTE",
+          "ERROR_PARAM_INVALID_INCLUDED",
+          "ERROR_PARAM_INVALID_LIMIT",
+          "ERROR_PARAM_INVALID_LOCALE",
+          "ERROR_PARAM_INVALID_OFFSET",
+          "ERROR_PARAM_INVALID_SORT_ATTRIBUTE",
+          "ERROR_PARAM_INVALID_SEARCH_ATTRIBUTE",
+          "ERROR_UNKNOWN",
+          "ERROR_UNSUPPORTED"
+         ]
+        }
+       }
+      }
+     }
+    }
+   },
+   "UnauthorizedErrorResponseSchema": {
+    "type": "object",
+    "properties": {
+     "Includes": {
+      "type": "object",
+      "default": {}
+     },
+     "HasErrors": {
+      "type": "boolean",
+      "default": true
+     },
+     "Offset": {
+      "type": "number",
+      "default": null
+     },
+     "TotalResults": {
+      "type": "number",
+      "default": null
+     },
+     "Locale": {
+      "type": "string",
+      "default": null
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "default": {}
+      }
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Message": {
+         "type": "string",
+         "example": "You are not authorized to make this request."
+        },
+        "Code": {
+         "type": "string",
+         "example": "ERROR_ACCESS_DENIED",
+         "x-extensible-enum": [
+          "ERROR_ACCESS_DENIED"
+         ]
+        }
+       }
+      }
+     }
+    }
+   },
+   "UnknownErrorResponseSchema": {
+    "type": "object",
+    "properties": {
+     "Includes": {
+      "type": "object",
+      "default": {}
+     },
+     "HasErrors": {
+      "type": "boolean",
+      "default": true
+     },
+     "Offset": {
+      "type": "number",
+      "default": null
+     },
+     "TotalResults": {
+      "type": "number",
+      "default": null
+     },
+     "Locale": {
+      "type": "string",
+      "default": null
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "default": {}
+      }
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Message": {
+         "type": "string",
+         "example": "Unknown error encountered."
+        },
+        "Code": {
+         "type": "string",
+         "example": "ERROR_UNKNOWN",
+         "x-extensible-enum": [
+          "ERROR_UNKNOWN"
+         ]
+        }
+       }
+      }
+     }
+    }
+   },
+   "TooManyRequestErrorResponseSchema": {
+    "type": "object",
+    "properties": {
+     "Includes": {
+      "type": "object",
+      "default": {}
+     },
+     "HasErrors": {
+      "type": "boolean",
+      "default": true
+     },
+     "Offset": {
+      "type": "number",
+      "default": null
+     },
+     "TotalResults": {
+      "type": "number",
+      "default": null
+     },
+     "Locale": {
+      "type": "string",
+      "default": null
+     },
+     "Results": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "default": {}
+      }
+     },
+     "Errors": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "Message": {
+         "type": "string",
+         "example": "Please try again later."
+        },
+        "Code": {
+         "type": "string",
+         "example": "ERROR_REQUEST_LIMIT_REACHED",
+         "x-extensible-enum": [
+          "ERROR_REQUEST_LIMIT_REACHED"
+         ]
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "responses": {
+   "BadRequestResponse": {
+    "description": "Bad Request",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/BadRequestErrorResponseSchema"
+      }
+     }
+    }
+   },
+   "UnauthorizedResponse": {
+    "description": "Unauthorized Request",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/UnauthorizedErrorResponseSchema"
+      }
+     }
+    }
+   },
+   "TooManyRequestsResponse": {
+    "description": "Too Many Request Error",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/TooManyRequestErrorResponseSchema"
+      }
+     }
+    }
+   },
+   "InternalServerErrorResponse": {
+    "description": "Internal Server Error",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/UnknownErrorResponseSchema"
+      }
+     }
+    }
+   }
+  }
+ },
+ "x-readme": {
+  "explorer-enabled": true,
+  "proxy-enabled": true,
+  "samples-enabled": true
+ }
+}

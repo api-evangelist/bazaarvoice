@@ -1,0 +1,1032 @@
+{
+  "item": [
+    {
+      "id": "7acd08c4-a466-4747-b619-5b533e9bce75",
+      "name": "/customer-transactions",
+      "description": {
+        "content": "Customer Transaction Data Submission to Bazaarvoice.",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "b819b935-e1e6-4741-9360-3f7bd90a8f53",
+      "name": "Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6b772a9-73f6-4e96-84b0-6b60133cd304",
+          "name": "Create a Transaction",
+          "request": {
+            "name": "Create a Transaction",
+            "description": {
+              "content": "It creates the single transaction's record into the system.Bazaarvoice using this input will schedule Review Requests Notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer-transactions",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientName\": \"<string>\",\n  \"deploymentZone\": \"<string>\",\n  \"emailAddress\": \"<string>\",\n  \"locale\": \"<bcp47>\",\n  \"products\": [\n    {\n      \"imageUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"money\": {\n        \"amount\": \"<double>\",\n        \"currency\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"incentivizedReview\": \"<string>\"\n    },\n    {\n      \"imageUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"money\": {\n        \"amount\": \"<double>\",\n        \"currency\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"incentivizedReview\": \"<string>\"\n    }\n  ],\n  \"transactionDate\": \"<dateTime>\",\n  \"userId\": \"<string>\",\n  \"id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"transactionChannel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51245aaf-150c-47d0-aed4-196a1e90c89d",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"deploymentZone\": \"main_site\",\n  \"emailAddress\": \"john-doe@gmail.com\",\n  \"locale\": \"en_US\",\n  \"products\": [\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    },\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    }\n  ],\n  \"transactionDate\": \"<dateTime>\",\n  \"userId\": \"john_doe\",\n  \"id\": \"transactionId-1234\",\n  \"nickname\": \"John Doe\",\n  \"transactionChannel\": \"EMAIL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseMessage\": \"ACCEPTED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b864c23b-a4b0-4de1-a467-10d16c07bdef",
+              "name": "Bad Request. There are a number of potential reasons for this. Examples of each potential Problem can be found below.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"deploymentZone\": \"main_site\",\n  \"emailAddress\": \"john-doe@gmail.com\",\n  \"locale\": \"en_US\",\n  \"products\": [\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    },\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    }\n  ],\n  \"transactionDate\": \"<dateTime>\",\n  \"userId\": \"john_doe\",\n  \"id\": \"transactionId-1234\",\n  \"nickname\": \"John Doe\",\n  \"transactionChannel\": \"EMAIL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/bad-request\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"detail\": \"The required fields are missing. Ensure the Request Body has all required fields and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ccfd844-955d-4af4-9fc0-75b770e785a5",
+              "name": "Unauthorized. Request lacks valid authentication credentials for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"deploymentZone\": \"main_site\",\n  \"emailAddress\": \"john-doe@gmail.com\",\n  \"locale\": \"en_US\",\n  \"products\": [\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    },\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    }\n  ],\n  \"transactionDate\": \"<dateTime>\",\n  \"userId\": \"john_doe\",\n  \"id\": \"transactionId-1234\",\n  \"nickname\": \"John Doe\",\n  \"transactionChannel\": \"EMAIL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/unauthorized\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"Request lacks valid authentication credentials for this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e3ed37c-5402-419c-b8af-a81f31cca46e",
+              "name": "Forbidden. Credentials lack the permission to perform this action with this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"deploymentZone\": \"main_site\",\n  \"emailAddress\": \"john-doe@gmail.com\",\n  \"locale\": \"en_US\",\n  \"products\": [\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    },\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    }\n  ],\n  \"transactionDate\": \"<dateTime>\",\n  \"userId\": \"john_doe\",\n  \"id\": \"transactionId-1234\",\n  \"nickname\": \"John Doe\",\n  \"transactionChannel\": \"EMAIL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/forbidden\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Forbidden\",\n  \"status\": 403,\n  \"detail\": \"Credentials lack the permission to perform this action with this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "097ee8e1-08db-45a9-8488-193514865b7c",
+              "name": "Unexpected Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"deploymentZone\": \"main_site\",\n  \"emailAddress\": \"john-doe@gmail.com\",\n  \"locale\": \"en_US\",\n  \"products\": [\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    },\n    {\n      \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n      \"name\": \"Sample Product\",\n      \"money\": {\n        \"amount\": 59.92,\n        \"currency\": \"EUR\"\n      },\n      \"id\": \"sample-product\",\n      \"incentivizedReview\": \"yes\"\n    }\n  ],\n  \"transactionDate\": \"<dateTime>\",\n  \"userId\": \"john_doe\",\n  \"id\": \"transactionId-1234\",\n  \"nickname\": \"John Doe\",\n  \"transactionChannel\": \"EMAIL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/internal-error\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Internal Error\",\n  \"status\": 500,\n  \"detail\": \"An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3908732-338b-4357-9b66-a8177717f5e8",
+          "name": "Create Bulk Transactions",
+          "request": {
+            "name": "Create Bulk Transactions",
+            "description": {
+              "content": "It creates transactions' records into the system.Bazaarvoice using this input will schedule Review Requests Notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer-transactions",
+                "bulk-transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientName\": \"<string>\",\n  \"transactions\": [\n    {\n      \"deploymentZone\": \"<string>\",\n      \"emailAddress\": \"<string>\",\n      \"locale\": \"<bcp47>\",\n      \"products\": [\n        {\n          \"imageUrl\": \"<string>\",\n          \"name\": \"<string>\",\n          \"money\": {\n            \"amount\": \"<double>\",\n            \"currency\": \"<string>\"\n          },\n          \"id\": \"<string>\",\n          \"incentivizedReview\": \"<string>\"\n        },\n        {\n          \"imageUrl\": \"<string>\",\n          \"name\": \"<string>\",\n          \"money\": {\n            \"amount\": \"<double>\",\n            \"currency\": \"<string>\"\n          },\n          \"id\": \"<string>\",\n          \"incentivizedReview\": \"<string>\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"transactionChannel\": \"<string>\"\n    },\n    {\n      \"deploymentZone\": \"<string>\",\n      \"emailAddress\": \"<string>\",\n      \"locale\": \"<bcp47>\",\n      \"products\": [\n        {\n          \"imageUrl\": \"<string>\",\n          \"name\": \"<string>\",\n          \"money\": {\n            \"amount\": \"<double>\",\n            \"currency\": \"<string>\"\n          },\n          \"id\": \"<string>\",\n          \"incentivizedReview\": \"<string>\"\n        },\n        {\n          \"imageUrl\": \"<string>\",\n          \"name\": \"<string>\",\n          \"money\": {\n            \"amount\": \"<double>\",\n            \"currency\": \"<string>\"\n          },\n          \"id\": \"<string>\",\n          \"incentivizedReview\": \"<string>\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"transactionChannel\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5037a4c2-0c7c-4072-a65f-4818b09fb32f",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "bulk-transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"transactions\": [\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    },\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batchId\": \"string\",\n  \"batchStatus\": \"ACCEPTED\",\n  \"items\": [\n    {\n      \"transactionId\": \"transactionId-1234\",\n      \"occurredAt\": \"2023-06-06T08:47:51.792Z\",\n      \"status\": \"ACCEPTED\",\n      \"message\": \"Accepted.\"\n    },\n    {\n      \"transactionId\": \"transactionId-1234\",\n      \"occurredAt\": \"2023-06-06T08:47:51.792Z\",\n      \"status\": \"ACCEPTED\",\n      \"message\": \"Accepted.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ff1398b-7c93-40c7-af41-eb5fbbb9db10",
+              "name": "Bad Request. There are a number of potential reasons for this. Examples of each potential Problem can be found below.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "bulk-transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"transactions\": [\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    },\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/bad-request\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"detail\": \"The required fields are missing. Ensure the Request Body has all required fields and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d07a8c20-1a72-4a11-9aac-3d81f3bcf925",
+              "name": "Unauthorized. Request lacks valid authentication credentials for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "bulk-transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"transactions\": [\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    },\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/unauthorized\",\n  \"instance\": \"/customer-transactions/bulk-transactions\",\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"Request lacks valid authentication credentials for this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "956ac93d-468a-40b4-9ff8-c9845444d280",
+              "name": "Forbidden. Credentials lack the permission to perform this action with this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "bulk-transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"transactions\": [\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    },\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/forbidden\",\n  \"instance\": \"/customer-transactions/bulk-transactions\",\n  \"title\": \"Forbidden\",\n  \"status\": 403,\n  \"detail\": \"Credentials lack the permission to perform this action with this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2277b248-fa1f-4c2d-abe5-2f35c51b3ace",
+              "name": "Unexpected Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "bulk-transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client-name\",\n  \"transactions\": [\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    },\n    {\n      \"deploymentZone\": \"main_site\",\n      \"emailAddress\": \"john-doe@gmail.com\",\n      \"locale\": \"en_US\",\n      \"products\": [\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        },\n        {\n          \"imageUrl\": \"https://test-client.com/eu/images/sample-product.jpg\",\n          \"name\": \"Sample Product\",\n          \"money\": {\n            \"amount\": 59.92,\n            \"currency\": \"EUR\"\n          },\n          \"id\": \"sample-product\",\n          \"incentivizedReview\": \"yes\"\n        }\n      ],\n      \"transactionDate\": \"<dateTime>\",\n      \"userId\": \"john_doe\",\n      \"id\": \"transactionId-1234\",\n      \"nickname\": \"John Doe\",\n      \"transactionChannel\": \"EMAIL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/internal-error\",\n  \"instance\": \"/customer-transactions/bulk-transactions\",\n  \"title\": \"Internal Error\",\n  \"status\": 500,\n  \"detail\": \"An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81f26a73-092d-490e-8641-5c83545f9f3a",
+          "name": "Invalidate a Transaction",
+          "request": {
+            "name": "Invalidate a Transaction",
+            "description": {
+              "content": "It submits a request to invalidate the transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer-transactions",
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientName\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8b73e61-ac71-4040-bc24-389166818687",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client\",\n  \"id\": \"transaction-id-123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"transaction-id-123\",\n  \"transactionStatus\": \"ACCEPTED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e07bb0e8-72b7-4a82-a902-ad8eead888fc",
+              "name": "Bad Request. There are a number of potential reasons for this. Examples of each potential Problem can be found below.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client\",\n  \"id\": \"transaction-id-123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/bad-request\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"detail\": \"The required fields are missing. Ensure the Request Body has all required fields and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0fc8311-5819-4115-92e1-378529139422",
+              "name": "Unauthorized. Request lacks valid authentication credentials for this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client\",\n  \"id\": \"transaction-id-123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/unauthorized\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"Request lacks valid authentication credentials for this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f2b31ed-9f5b-4af3-a347-c34fe8683bed",
+              "name": "Forbidden. Credentials lack the permission to perform this action with this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client\",\n  \"id\": \"transaction-id-123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/forbidden\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Forbidden\",\n  \"status\": 403,\n  \"detail\": \"Credentials lack the permission to perform this action with this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa808509-5f2d-40f8-b45f-869d866050a5",
+              "name": "Unexpected Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer-transactions",
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"test-client\",\n  \"id\": \"transaction-id-123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"/problems/internal-error\",\n  \"instance\": \"/customer-transactions/transactions\",\n  \"title\": \"Internal Error\",\n  \"status\": 500,\n  \"detail\": \"An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://stg.api.bazaarvoice.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cb1250bf-dbcb-45bc-b62d-54a4e2d2f1a5",
+    "name": "Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These APIs facilitate the submission of customer transaction data to Bazaarvoice for processing and analysis.\n\nContact Support:\n Name: Notifications Team\n Email: notifications20team@bazaarvoice.com",
+      "type": "text/plain"
+    }
+  }
+}

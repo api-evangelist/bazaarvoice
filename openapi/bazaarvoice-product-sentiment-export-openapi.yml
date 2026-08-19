@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  title: Step 1
+  description: Product Sentiment Export for Bazaarvoice Reviews
+  version: 1.0.0
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Staging
+paths:
+  /psi/v1/data:
+    get:
+      tags:
+      - Step 1
+      summary: Step 1 - GET manifest file list
+      operationId: requestmanifestfilelist
+      parameters:
+      - name: X-Bazaarvoice-Signature
+        in: header
+        description: Signature generated using the algorithm with passkey and timestamp. [Learn more](https://developers.bazaarvoice.com/v1.0-PS-Export/docs/creating-access-signature).
+        required: true
+        schema:
+          type: string
+      - name: X-Bazaarvoice-Timestamp
+        in: header
+        description: A Unix timestamp in milliseconds. This is the same value communicated by the X-Bazaarvoice-Timestamp
+          header.
+        required: true
+        schema:
+          type: string
+      - name: X-Bazaarvoice-Passkey
+        in: header
+        description: This is the same value communicated with the X-Bazaarvoice-Passkey header.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation Success
+          content:
+            application/json:
+              example:
+                manifests:
+                - version: v1
+                  fulls:
+                  - date: '2019-01-07'
+                    path: /manifests/full/2019-01-07/v1/manifest.json
+                  - date: '2019-01-08'
+                    path: /manifests/full/2019-01-08/v1/manifest.json
+              schema:
+                $ref: '#/components/schemas/manifests'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    manifests:
+      type: object
+      properties:
+        version:
+          type: string
+          example: v1
+          description: 'Version of the file '
+        fulls:
+          type: object
+          properties:
+            date:
+              type: string
+              description: Unique identifier of the feature. It is composed of words and phrases that match the
+                name of the feature in English, but to be treated as ID. It can contain ‘spaces’.
+            path:
+              type: string
+              description: Name of the feature in requested language to be used for display and other purposes
+      description: All features for a product
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: RF unauthorised error
+                detail:
+                  errorcode: oauth.v2.RFUnauthorised
+    '403':
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Invalid ApiKey
+                detail:
+                  errorcode: oauth.v2.InvalidApiKey
+    '404':
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Unable to identify proxy for host:- https_vhost and url:- /pi/v1/data
+                detail:
+                  errorcode: messaging.adaptors.http.flow.ApplicationNotFound
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              fault:
+                faultstring: Raising fault. Fault name:- RFUnauthorized
+                detail:
+                  errorcode: steps.raisefault.RaiseFault
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

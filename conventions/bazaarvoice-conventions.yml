@@ -1,36 +1,46 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
 source:
-- openapi/bazaarvoice-content-search-openapi.json
-- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+- openapi/_original/
 - https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/pagination
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/cors
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/caching
 authentication:
-  style: api-passkey
+  style: mixed
   detail: >-
-    Content Search API sends the Bv-Passkey header; classic Conversations API sends a
-    Passkey query parameter. Transactions/Response APIs use 2-legged OAuth2. See
+    Passkey (Bv-Passkey header or Passkey/passkey query parameter), HTTP bearer from OAuth2 on the
+    Transactions/Response/Privacy APIs, and X-Curalate-Api-Key on Social Commerce. See
     authentication/bazaarvoice-authentication.yml.
 versioning:
-  style: query-parameter
+  style: mixed
   detail: >-
-    The classic Conversations API selects version with the ApiVersion query parameter
-    (e.g. ApiVersion=5.4); current major line is 5.4. The V2.0 Content Search API is
-    versioned in its base path/host.
+    ApiVersion query parameter on the classic Conversations API (current 5.4); path-segment
+    versioning on the newer products (/response/v1/, /privacy/v1/, /sentiment/v1/, /dce/v3/,
+    /psi/v1/, /structured-data/v1). See lifecycle/bazaarvoice-lifecycle.yml.
   current: '5.4'
+environments:
+  style: separate-host
+  detail: >-
+    Test and live are separated by HOST, not key prefix: stg.api.bazaarvoice.com versus
+    api.bazaarvoice.com. See sandbox/bazaarvoice-sandbox.yml.
 content_negotiation:
   detail: >-
-    Classic Conversations API returns JSON or XML selected by the URL extension
-    (/data/reviews.json vs .xml). The Content Search API returns application/json.
-  formats: [json, xml]
+    The classic Conversations API selects JSON or XML by URL extension (/data/reviews.json vs
+    .xml). The newer APIs return application/json. The Authentic Discovery and Social Commerce
+    structured-data endpoints select JSON-LD, Microdata or plain JSON by Accept header.
+  formats: [json, xml, application/ld+json, microdata]
 request_tracing:
   header: X-Correlation-ID
   detail: >-
-    The Content Search API accepts an optional X-Correlation-ID request header to
-    correlate a request across Bazaarvoice systems.
+    The Content Search API accepts an optional X-Correlation-ID request header to correlate a
+    request across Bazaarvoice systems. No estate-wide request-id is returned on responses.
 rate_limit_signaling:
   detail: >-
-    Responses on the universal domains include rate-limit headers identifying the
-    QPM allotment and current usage plus the hourly quota. See
+    Responses on the universal domains carry rate-limit headers identifying the QPM allotment and
+    current usage plus the hourly quota. The Product Sentiment API additionally declares an explicit
+    429 response with application/problem+json in its OpenAPI. See
     rate-limits/bazaarvoice-rate-limits.yml.
   headers:
   - X-Bazaarvoice-QPM-Allotted
@@ -39,26 +49,58 @@ rate_limit_signaling:
   - X-Bazaarvoice-Quota-Current
   - X-Bazaarvoice-Quota-Reset
   - X-Bazaarvoice-Error-Detail
+  status_on_exhaustion: 429
 pagination:
   style: offset-limit
   detail: >-
-    Conversations/Content Search queries page with Offset and Limit parameters and
-    return TotalResults so clients can page through UGC result sets.
-  params: [Offset, Limit]
+    Conversations, Content Search, Response and Notifications Subscriptions queries page with
+    Offset/offset and Limit/limit parameters and return TotalResults so clients can page through
+    result sets. No cursor pagination anywhere in the estate.
+  params: [Offset, Limit, offset, limit]
   response_fields: [TotalResults, Results]
+filtering:
+  detail: >-
+    The Conversations Display API uses a Filter/Sort/Search parameter grammar (Filter=ProductId:eq:X)
+    plus Include for related content; Content Search takes a JSON request body with structured
+    filters.
+  params: [Filter, Sort, Search, Include, Stats]
+field_expansion:
+  supported: true
+  detail: The Include parameter expands related content (Products, Authors, Comments) into a display response.
+metadata:
+  detail: >-
+    Client-defined key/value data is carried as Context Data Values (CDVs), Tag Dimensions,
+    Additional Fields and Secondary Ratings on submissions and returned on display.
 idempotency:
   supported: false
   detail: >-
-    Bazaarvoice does not document an idempotency-key mechanism for write operations;
-    submissions are guarded by the submission workflow (fingerprinting/duplicate
-    detection) rather than a client-supplied idempotency key.
+    Bazaarvoice documents no idempotency-key mechanism for write operations anywhere in the estate,
+    and no Idempotency-Key parameter appears in any of the eleven published OpenAPI documents.
+    Duplicate submissions are guarded by the submission workflow (device fingerprinting via
+    iovation, duplicate detection and moderation) rather than by a client-supplied key. NO
+    Idempotency pointer is emitted for this provider - the artifact records an absence.
 errors:
+  envelope: mixed
   detail: >-
-    Standard HTTP status codes; error detail is returned in the response body and, for
-    rate-limit rejections, in the X-Bazaarvoice-Error-Detail header. See
-    errors/bazaarvoice-problem-types.yml.
+    The newer APIs (Transactions, Conversations Submission, Product Sentiment, Content Search,
+    Authentic Discovery) return application/problem+json with an RFC 9457 Problem body. The older
+    APIs (Conversations Display, Response, Notifications Subscriptions) return plain HTTP status
+    codes with a JSON body carrying HasErrors/Errors[]. Rate-limit rejections additionally carry
+    X-Bazaarvoice-Error-Detail. See errors/bazaarvoice-problem-types.yml.
+cross_domain:
+  cors: true
+  jsonp: true
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/cors
+caching:
+  detail: Bazaarvoice publishes a caching-strategy guide for display responses.
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/caching
+internationalization:
+  detail: Locale is a first-class display and submission parameter; content is stored and returned per locale.
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/internationalization
 cross_reference:
   errors: errors/bazaarvoice-problem-types.yml
   lifecycle: lifecycle/bazaarvoice-lifecycle.yml
   authentication: authentication/bazaarvoice-authentication.yml
   rate_limits: rate-limits/bazaarvoice-rate-limits.yml
+  sandbox: sandbox/bazaarvoice-sandbox.yml
+  data_model: data-model/bazaarvoice-data-model.yml

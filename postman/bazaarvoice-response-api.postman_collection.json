@@ -1,0 +1,458 @@
+{
+	"info": {
+		"_postman_id": "c660582e-6323-4ae2-954b-308230b8abd6",
+		"name": "Bazaarvoice Response API",
+		"description": "The Bazaarvoice Response API lets you programmatically manage review responses.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "clientResponses",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let randomGeneratedGuid = Math.floor(Math.random() * 1000000000);",
+									"pm.environment.set(\"randomGeneratedGuid\", randomGeneratedGuid);",
+									"var token = pm.response.json().token;",
+									"pm.environment.set(\"token\", token);",
+									"",
+									"var expiration = pm.response.json().expiration;",
+									"pm.environment.set(\"expiration\", expiration);",
+									"",
+									"var signature = pm.response.json().signature;",
+									"pm.environment.set(\"signature\", signature);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"{{username}}\",\"password\":\"{{password}}\"}"
+						},
+						"url": {
+							"raw": "{{portalurl}}/api/v1/auth/login",
+							"host": [
+								"{{portalurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client Responses for review ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{clientName}}/reviews/{{reviewID}}?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{clientName}}",
+								"reviews",
+								"{{reviewID}}"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Returns a collection of all available client response resources available to the identified clientName. <a href='https://developer.bazaarvoice.com/response-api/reference/client-response/read-client-response#get-all-client-review-responses-for-a-given-review'>Read more here</a>."
+					},
+					"response": []
+				},
+				{
+					"name": "Create client response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attributes\": {\n      \"department\": \"Department1234\",\n      \"response\": \"This is my first response to a review!\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{clientName}}/reviews/{{reviewID}}?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{clientName}}",
+								"reviews",
+								"{{reviewID}}"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Creates a new client response resource. <a href='https://developer.bazaarvoice.com/response-api/reference/client-response/create-client-response'>Read more here</a>."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Review Response",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{responseGuid}}/?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{responseGuid}}",
+								""
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Gets a single client response resource. <a href='https://developer.bazaarvoice.com/response-api/reference/client-response/read-client-response#get-a-specific-client-review-response'>Read more here</a>."
+					},
+					"response": []
+				},
+				{
+					"name": "Update client response",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attributes\": {\n      \"department\": \"Department1234\",\n      \"response\": \"This is my updated response to a review!\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{responseGuid}}/?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{responseGuid}}",
+								""
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Updates a client response resource. <a href='https://developer.bazaarvoice.com/response-api/reference/client-response/update-client-response'>Read more here</a>."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete response by Guid",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{responseGuid}}/?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{responseGuid}}",
+								""
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Deletes a client response resource. <a href='https://developer.bazaarvoice.com/response-api/reference/client-response/delete-review-response'>Read more here</a>."
+					},
+					"response": []
+				},
+				{
+					"name": "Get review by response Guid",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{responseGuid}}/review?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{responseGuid}}",
+								"review"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Gets the client response Review resource. <a href='https://developer.bazaarvoice.com/response-api/reference/review'>Read more here</a>."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author by Response Guid",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "x-portal-client",
+								"value": "{{clientName}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-signature",
+								"value": "{{signature}}",
+								"type": "text"
+							},
+							{
+								"key": "x-portal-token-expiration",
+								"value": "{{expiration}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/response/v1/clientResponses/{{responseGuid}}/author?passkey={{passkey}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"v1",
+								"clientResponses",
+								"{{responseGuid}}",
+								"author"
+							],
+							"query": [
+								{
+									"key": "passkey",
+									"value": "{{passkey}}"
+								}
+							]
+						},
+						"description": "Gets the client response Author resource. <a href='https://developer.bazaarvoice.com/response-api/reference/author'>Read more here</a>."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for clientResponses"
+		}
+	]
+}

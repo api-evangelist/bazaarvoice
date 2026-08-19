@@ -1,0 +1,56 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Home](https://developers.bazaarvoice.com/v1.0-DCE/docs/home.md): This page provides a high-level overview of the Bazaarvoice Displayable Content Export (DCE)
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-DCE/docs/security-imperatives.md)
+- [Getting Started](https://developers.bazaarvoice.com/v1.0-DCE/docs/getting-started.md): This page describes the fundamental knowledge that you need in order to use the Displayable Content Export (DCE).
+- [Creating Access Signature](https://developers.bazaarvoice.com/v1.0-DCE/docs/creating-access-signature.md)
+- [Workflow Walk-Through](https://developers.bazaarvoice.com/v1.0-DCE/docs/workflow-walk-through.md)
+- [1. Request Manifest File List](https://developers.bazaarvoice.com/v1.0-DCE/docs/request-manifest-file-list.md): The Displayble Content Export (DCE) workflow begins with a request for a manifest file list. Values in the list will be in the form of URL paths which will be used in the next step.
+- [2. Request Manifest File Location](https://developers.bazaarvoice.com/v1.0-DCE/docs/request-manifest-file-location.md): In this step you will request the location of a manifest file that contains a listing of all the available data sets. The response to this request will be a 302 redirect to the location of the manifest file.
+- [3. Follow 302 Redirect to Manifest File](https://developers.bazaarvoice.com/v1.0-DCE/docs/follow-302-redirect-to-manifest-file.md): To get the manifest file your application makes a request using the location path value from the previous step, either by following the HTTP redirect automatically or by using the path value in the body to make the request.
+- [4. Request UGC data file location](https://developers.bazaarvoice.com/v1.0-DCE/docs/request-ugc-data-file-location.md): Your application should parse the manifest file from the previous step for the data that you want and use the file paths from the manifest to make requests for that data as described in this step. This request will return a 302 redirect to the location of the manifest file.
+- [5. Follow 302 Redirect to UGC Data File](https://developers.bazaarvoice.com/v1.0-DCE/docs/follow-302-redirect-to-ugc-data-file.md): Finally, your application should follow the HTTP 302 redirect from the previous step to get the UGC data file.
+- [6. Example using cURL](https://developers.bazaarvoice.com/v1.0-DCE/docs/example-curl.md): Now that you've learned how to request content with the Displayable Content Export (DCE) you can try it out using cURL.
+- [Overview](https://developers.bazaarvoice.com/v1.0-DCE/docs/dce-bv-pixel-overview.md): This tutorial covers how to implement BV Pixel and its required tags for customers using Bazaarvoice's API. Developers will learn the importance of BV Pixel, the available analytics tags, and the <a href="/v1.0-DCE/docs/required-analytics" target="_blank" rel="dev-center-2.0">required analytics tags</a>.  <a href="/v1.0-DCE/docs/how-to-verify-bv-pixel" target="_blank" rel="dev-center-2.0">Verification tools</a> are also provided.
+- [Set Up](https://developers.bazaarvoice.com/v1.0-DCE/docs/set-up.md): BV Pixel implementation requires the BV loader on pages where you intend to collect events. The BV loader loads the JavaScript library, which tracks the activities on your website.
+- [Required Analytics](https://developers.bazaarvoice.com/v1.0-DCE/docs/required-analytics.md): The following BV Pixel tracking tags are required on pages with user-generated content (UGC).
+- [Product Display Page Overview](https://developers.bazaarvoice.com/v1.0-DCE/docs/product-display-page-overview.md): This page details the analytics events that should be implemented on pages utilizing user-generated content.
+- [PDP Passive Analytic Events](https://developers.bazaarvoice.com/v1.0-DCE/docs/passive-analytic-events.md): The following documentation details passive/macro-level analytic events that should be present when rendering webpages containing user-generated content (UGC).
+- [PDP Featured Used Events](https://developers.bazaarvoice.com/v1.0-DCE/docs/featured-used-events.md): To collect the granular interactions with UGC (e.g. clicks, sorts, filters, and hovers, invoking an image overlay, clicking a user profile, loading more content), the `trackEvent` event is used.
+- [Transaction & Conversion Overview](https://developers.bazaarvoice.com/v1.0-DCE/docs/transaction-conversion-overview.md): [Conversion events](/v1.0-DCE/docs/non-commerce-conversions) for non-eCommerce sites and [Transactions events](/v1.0-DCE/docs/ecommerce-transactions) for eCommerce sites are the key metrics that power the Conversion Impact report (CIR).
+- [Non-commerce Conversions](https://developers.bazaarvoice.com/v1.0-DCE/docs/non-commerce-conversions.md): Clients that measure conversion in metrics other than monetary terms should use the following analytics event. This analytics event ignores most of the parameters involved with sales.
+- [eCommerce Transactions](https://developers.bazaarvoice.com/v1.0-DCE/docs/ecommerce-transactions.md): Clients interested in measuring the impact of user-generated content (UGC) on their sales must implement the `trackTransaction` analytics event.
+- [How to Verify BV Pixel](https://developers.bazaarvoice.com/v1.0-DCE/docs/how-to-verify-bv-pixel.md): This page describes how to confirm that BV Pixel data is being captured correctly and sent to Bazaarvoice.
+- [Opting-Out of Tracking](https://developers.bazaarvoice.com/v1.0-DCE/docs/opting-out-of-tracking.md): This page details how Bazaarvoice clients can support an end-user's request to opt-out of tracking them through a client's domain.
+- [DCE Data Sets -v2](https://developers.bazaarvoice.com/v1.0-DCE/docs/dce-data-sets.md): This section contains reference documentation for version 2 of the Displayable Content Export (DCE) data sets organized by content type.
+- [Review](https://developers.bazaarvoice.com/v1.0-DCE/docs/review.md): This page provides information about the review data set in the Displayable Content Export (DCE).
+- [Comment](https://developers.bazaarvoice.com/v1.0-DCE/docs/comment.md): This page provides information about the comment data set in the Displayable Content Export (DCE).
+- [Question](https://developers.bazaarvoice.com/v1.0-DCE/docs/question.md): This page provides information about the question data set in the Displayable Content Export (DCE).
+- [Answer](https://developers.bazaarvoice.com/v1.0-DCE/docs/answer.md): This page provides information about the answer data set in the Displayable Content Export (DCE).
+- [Author](https://developers.bazaarvoice.com/v1.0-DCE/docs/author.md): This page provides information about the author data set in the Displayable Content Export (DCE).
+- [Category](https://developers.bazaarvoice.com/v1.0-DCE/docs/category.md): This page provides information about the category data set in the Displayable Content Export (DCE).
+- [Product](https://developers.bazaarvoice.com/v1.0-DCE/docs/product.md): This page provides information about the product data set in the Displayable Content Export (DCE).
+- [Brand](https://developers.bazaarvoice.com/v1.0-DCE/docs/brand.md): This page provides information about the brand data set in the Displayable Content Export (DCE).
+- [Client Response](https://developers.bazaarvoice.com/v1.0-DCE/docs/client-response.md): This page provides information about the client response data set in the Displayable Content Export (DCE).
+- [Syndication Source](https://developers.bazaarvoice.com/v1.0-DCE/docs/syndication-source.md): This page provides information about the syndication source data set in the Displayable Content Export (DCE).
+- [Question Parent Keys](https://developers.bazaarvoice.com/v1.0-DCE/docs/question-parent-keys.md): This page provides information about the question parent key data set in the Displayable Content Export (DCE).
+- [Removed Content Keys](https://developers.bazaarvoice.com/v1.0-DCE/docs/removed-content-keys.md): This page provides information about the removed content key set in the Displayable Content Export (DCE).
+- [Review Parent Keys](https://developers.bazaarvoice.com/v1.0-DCE/docs/review-parent-keys.md): This page provides information about the review parent key data set in the Displayable Content Export (DCE).
+- [AI Review Summary](https://developers.bazaarvoice.com/v1.0-DCE/docs/ai-review-summary.md): This page provides information about the review summary data set in the Displayable Content Export (DCE)
+- [DCE HTTP Service - v3](https://developers.bazaarvoice.com/v1.0-DCE/docs/dce-http-service-v3.md): This page contains reference documentation for version 3 of the Displayable Content Export (DCE) HTTP service.
+- [Tools](https://developers.bazaarvoice.com/v1.0-DCE/docs/tools.md): The tool below is created and maintained by the Bazaarvoice Development team to assist developers using the Displayable Content Export (DCE).
+- [Troubleshooting](https://developers.bazaarvoice.com/v1.0-DCE/docs/troubleshooting.md): This page has basic steps to help you to fix some common issues encountered when using the Displayable Content Export (DCE). Many issues can be resolved by following the steps below.
+- [Changelogs](https://developers.bazaarvoice.com/v1.0-DCE/docs/changelogs.md): This document lists changes between Displayable Content Export (DCE) versions.
+- [API  Key Management](https://developers.bazaarvoice.com/v1.0-DCE/docs/api-key-management.md): This page explains how to use the API Key Management application in the Bazaarvoice Portal to view and manage API keys.
+
+## API Reference
+- [Step 1 - GET manifest file list](https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list.md)
+- [Step 2 & 3 - GET manifest file location and Redirect to manifest file](https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-location.md)
+- [Step 4 - GET Data File Location](https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-data-file-location.md)
+- [Step5: Follow 302 Redirect to Data File](https://developers.bazaarvoice.com/v1.0-DCE/reference/follow302redirect.md)
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-DCE/page/support.md)

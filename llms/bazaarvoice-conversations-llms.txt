@@ -1,0 +1,136 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Home](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home.md): This page provides a high-level overview of the Bazaarvoice Conversations API suitable for all audiences.
+- [HTTP Deprecation | Redirect (3XX) End of Life](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/http-deprecation-redirect-end-of-life.md): This page serves as means to communicate the end of life support for redirects (Status 3XX) for HTTP API traffic to Bazzarvoice
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/security-imperatives.md): Security Fundamentals for HTTPS and TLS.
+- [Platform & API Concepts](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts.md): This page explains important concepts that you need to know in order to use the Conversations Platform and API.
+- [Display Fundamentals](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-fundamentals.md): This tutorial explains Conversations API display request fundamentals.
+- [Submission Fundamentals](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-fundamentals.md): This tutorial explains Conversations API full submission request fundamentals. It does not apply to progressive submission.
+- [Best Practices](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/best-practices.md): We have compiled some tips to get you started building your Conversations application the right way.
+- [Internationalization](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/internationalization.md): This tutorial will teach developers how to correctly use the Bazaarvoice Conversations API to request and submit international content. Developers will first learn how the Bazaarvoice Conversations platform supports internationalization followed by an in-depth discussion of how to localize applications using the Conversations API.
+- [Field Types](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/field-types.md): This documentation describes the fields that can be submitted using the Bazaarvoice Conversations API using full submission, including information about availability and display recommendations.
+- [Cross Domain Requests](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/cross-domain-requests.md): This section contains tutorials specific to making cross domain requests with the Conversations API.
+- [CORS](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/cors.md): This tutorial explains how developers can use Cross Origin Resource Sharing (CORS) to make cross-domain GET and POST requests to the Conversations API.
+- [JSONP](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/jsonp.md): This tutorial explains how developers can use JavaScript Object Notation with Padding (JSONP) to make cross-domain GET requests to the Conversations API.
+- [Badges](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/badges.md): This tutorial introduces developers to badges used in the Conversations API
+- [Caching](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/caching.md): This page summarizes several possible caching strategies and how they can be used with the Conversations API.  #
+- [Incentivized Reviews](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/incentivized-reviews.md): This tutorial introduces developers to incentivized badges and incentivized review count in the Conversations API.
+- [Pagination](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/pagination.md): This tutorial describes how to use the `Limit` and `Offset` parameters to page through API result sets.
+- [Intelligent Trust Mark on Products](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/intelligent-trustmark-on-products.md): The Intelligent Trust Mark (ITMK) is a dynamic, catalog product/PDP-level Trust Mark designed to broadcast trustworthiness to consumers across e-Commerce sites.
+- [Locales supported By Trust Mark](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/locales-supported-by-trust-mark.md)
+- [Q&A PDP Components](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/qa-pdp-components.md): This tutorial describes the standard product display page (PDP) components that make up Bazaarvoice Conversations Questions and Answers (Q&A).
+- [R&R PDP Components](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/rr-pdp-components.md): This tutorial describes the standard product display page (PDP) components that make up Bazaarvoice Conversations Ratings and Reviews (R&R).
+- [Search Engine Optimization](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/search-engine-optimization.md): This tutorial introduces developers to Search Engine Optimization (SEO) concepts for clients using the Conversations API which can improve your rankings in search engines.
+- [Syndicated Content](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/syndicated-content.md)
+- [Translated Content](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/translated-content.md): This tutorial provides a high-level overview of using a third-party translation API service to add translated content to your Conversations application.
+- [Verified Purchaser](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/verified-purchaser.md)
+- [Overview](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-pixel-overview.md): This tutorial covers how to implement BV Pixel and its required tags for customers using Bazaarvoice's API. Developers will learn the importance of BV Pixel, the available analytics tags, and the [required analytics tags](/v1.0-ConversationsAPI/docs/bv-pixel-required-analytics). [Verification tools](/v1.0-ConversationsAPI/docs/how-to-verify-bv-pixel) are also provided.
+- [Set Up](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-pixel-setup.md): BV Pixel implementation requires the BV loader on pages where you intend to collect events. The BV loader loads the JavaScript library, which tracks the activities on your website.
+- [Required Analytics](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-pixel-required-analytics.md): The following BV Pixel tracking tags are required on pages with user-generated content (UGC).
+- [Product Display Page - Passive Analytic Events](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/product-display-page-passive-analytic-events.md): The following documentation details passive/macro-level analytic events that should be present when rendering webpages containing user-generated content (UGC).
+- [Product Display Page - Feature Used Events](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/product-display-page-feature-used-events.md): To collect the granular interactions with UGC (e.g. clicks, sorts, filters, and hovers, invoking an image overlay, clicking a user profile, loading more content), the `trackEvent` event is used.
+- [Transaction Conversion- Non Commerce Conversions](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/transaction-conversion-non-commerce-conversions.md): Clients that measure conversion in metrics other than monetary terms should use the following analytics event. This analytics event ignores most of the parameters involved with sales.
+- [Transaction Conversion- eCommerce Transactions](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/transaction-conversion-ecommerce-transactions.md): Clients interested in measuring the impact of user-generated content (UGC) on their sales must implement the `trackTransaction` analytics event.
+- [How to Verify BV Pixel](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/how-to-verify-bv-pixel.md): This page describes how to confirm that BV Pixel data is being captured correctly and sent to Bazaarvoice.
+- [Opting-Out of Tracking](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-pixel-opting-out-of-tracking.md): This page details how Bazaarvoice clients can support an end-user's request to opt-out of tracking them through a client's domain.
+- [User Email Address](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/user-email-address.md): This section contains tutorials on encryption and decryption of email address.
+- [Decrypting Email Address](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/decrypting-email-address.md)
+- [Encrypting Email Address](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/encrypting-email-address.md)
+- [Custom Question Filter](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/custom-question-filter.md): This tutorial outlines how to use Context Data Value, Tag Dimensions and Secondary Ratings to create Custom Question Filter.
+- [Keyword Filter](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/keyword-filter.md): This tutorial outlines how to build Keyword Filter using Bazaarvoice API's.
+- [Retrieve Review Summary](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/review-summarization.md): An API to summarize and generate AI based review highlights for a product.
+- [FAQs | Review Summarization API](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/faqs-review-summarization-api.md)
+- [Content Coach](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/content-coach.md): This section outlines the purpose of the Content Coach feature and provides implementation guidance, including sample request and response.
+- [Visual Content Coach: AI-generated media ideas](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/visual-content-coach-ai-generated-media-ideas-api.md): This section outlines the purpose of the Visual Content Coach: AI-generated media ideas feature and provides implementation guidance, including sample request and response.
+- [Visual Content Coach: Media Quality Feedback](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/visual-content-coach-media-quality-feedback.md): This section outlines the purpose of the Visual Content Coach: Media Quality Feedback API and provides implementation guidance, including sample requests and responses.
+- [Authenticity](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/authenticity.md): In this tutorial developers will learn what it means for content to be authentic and what they can do to increase the likelihood that their applications conform to the Bazaarvoice Authenticity policy.
+- [Authentication](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/authentication.md): This section contains tutorials specific to authenticating authors when they submit content.
+- [Device Fingerprinting](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/device-fingerprinting.md): This section contains tutorials specific to creating and device fingerprint to Bazaarvoice.
+- [iovation - Web](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/iovation-web.md)
+- [iovation - Mobile](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/iovation-mobile.md)
+- [Submission Walkthrough](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-walkthrough.md): This topic applies to full submission only
+- [How to Build a Submission Form](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/how-to-build-a-submission-form.md): This topic applies to full submission only
+- [Input Types](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/input-types.md): This tutorial describes the input types available for **Full Submission** in the Bazaarvoice Conversations API. Developers will learn how to use the Type property to determine what graphical user interface elements to use in their applications.
+- [Photo Upload](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/photo-upload.md): This tutorial covers how to perform photo uploads using the Bazaarvoice Conversations API. Readers will learn about the photo upload process and walk-through the steps involved in performing a photo upload.
+- [Video Upload](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/video-upload.md): This tutorial covers how to perform video uploads using the Bazaarvoice Conversations API. Readers will learn about the video upload process and walk-through the steps involved in performing a video upload.
+- [Feedback Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/feedback-submission.md): More information on feedback submission can be found here.
+- [BV- Mastered Authentication](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/b-mastered.md): This tutorial will show you the components you will need to implement Bazaarvoice-mastered authentication via the Bazaarvoice Conversations API and how the process works.
+- [Client Mastered Authentication](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/client-mastered.md): This page explains how developers can authenticate authors with Bazaarvoice by submitting a user ID along with the consumer generated content.
+- [Progressive Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/progressive-submission.md): This tutorial explains how to use the progressive submission endpoints. These endpoints are available as part of the Conversations API.
+- [BV-Mastered Authentication](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-mastered-authentication.md)
+- [Client Mastered Authentication](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/client-mastered-authentication.md)
+- [Overview](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview.md): Content Display Overview
+- [Review Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/review-display.md): Returns Reviews and Rating and related data.
+- [Comment Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/comment-display.md): Returns comments posted on reviews.
+- [Question Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/question-display.md): Returns questions and related data.
+- [Answer Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/answer-display.md): Returns answers and related data.
+- [Profile Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/profile-display.md): Returns data about Content Authors.
+- [Product Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/product-display.md): Returns Product data.
+- [Category Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/category-display.md): Returns categories and related data.
+- [Statistics Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/statistics-display.md): Returns Product-based Review Statistics and Questions & Answers Statistics. This method has been optimized and is created for inline ratings display.
+- [Feedback Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/feedback-display.md)
+- [Overview](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview.md): Content Submission Overview
+- [Review Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/review-submission.md)
+- [Full Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/review-full-submission.md): Submit reviews on a product
+- [Progressive Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/review-progressive-submission.md): Supports obtaining multiple review forms at once and submitting parts of a review as a user provides content.
+- [Comment Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/comment-submission.md): Submit a comment on a review.
+- [Question Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/question-submission.md): Submit questions on a product.
+- [Answer Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/answer-submission.md)
+- [Authenticate User](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/authenticate-user.md): Authenticate an author using their email address.
+- [Photo Upload](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/photo-upload-reference.md): Upload photos for a review, question, or answer.
+- [Video Upload](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/video-upload-reference.md): Upload videos for a review.
+- [Feedback Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/feedback-submission-reference.md): Submit feedback on a review, comment, question, answer.
+- [DSA Feedback Submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/dsa-feedback-submission.md)
+- [DSA feedback form iframe Integration](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/dsa-iframe-integration.md)
+- [Upgrade Guide](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide.md)
+- [Changelogs](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/changelogs.md): This document lists changes between Conversations API versions.
+- [Future Deprecations](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/future-deprecations.md): This documentation identifies Conversations API features that should be avoided because we intend to deprecate them in the future.
+- [Conversations PRR Only Features](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/conversations-prr-only-features.md): This section documents features that are only available to clients on our Conversations PRR platform.
+- [Hosted Video Upload - v5.4(PRR)](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/hosted-video-upload.md): Upload videos for a review, question, answer or comment.
+- [Hosted Video Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/hosted-video-display.md): This page explains how to display in HTML videos by Bazaarvoice.
+- [Related Questions Display](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/related-questions-display.md): Returns Related Questions.
+- [API Analytics v1.0](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/conversations-api-analytics.md)
+- [InAuth - Device Fingerprinting](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/inauth-device-fingerprinting.md): This tutorial demonstrates how to create and submit device fingerprint information to [InAuth](http://www.inauth.com/) as part of submitting user-generated content to Bazaarvoice using the Conversations API.
+- [iovation - web](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/iovation-web-deprecated.md): This tutorial demonstrates how to create and submit device fingerprint information from [iovation](https://www.iovation.com/) along with user generated content to the Bazaarvoice Conversations API.
+- [API Rate Limit](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit.md): This tutorial introduces developers to Bazaarvoice API rate limiting, explains how to determine the rate limit and offers several suggestions on how to avoid exceeding the rate limit.
+- [API Key Management](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management.md): This page explains how to use the API Key Management application in the Bazaarvoice Portal to view and manage API keys.
+- [Omnibus Directive](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/omnibus-directive.md): A guide to API clients for Omnibus Directive.
+- [French Consumer Code](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/french-consumer-code.md): This section covers France’s new regulatory requirement to show the "Date of User Experience" on reviews.
+- [Troubleshooting](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/troubleshooting.md): This page has basic steps to help you to fix some common issues encountered when using the Conversations API. Many issues can be resolved by following the steps below.
+- [Tools](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/tools.md): The list below is a collection of tools the Development Team at Bazaarvoice has created to assist users working with the Conversations API. These tools are maintained by Bazaarvoice.
+- [Mobile SDKs](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/mobile-sdks.md): This page provides an overview of features and benefits of the Bazaarvoice Mobile SDKs for Android and iOS.
+
+## API Reference
+- [Preview Review Form](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/getreviewpreview.md)
+- [Submit a review](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference.md)
+- [initiateSubmit](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/post_data-initiatesubmit-json.md): Endpoint to request product info for setting up a review submission form
+- [progressiveSubmit](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/post_data-progressivesubmit-json.md): Endpoint for handling progressive submissions
+- [Submit a feedback](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/submitfeedback.md)
+- [Generate a form URL for DSA.](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/dsafeedabackurl.md): This API generates a form URL for DSA feedback.
+- [Preview Comments Form](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/getcomment.md)
+- [Submit a comment](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/submitcomment.md)
+- [Preview a question submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/getquestion.md)
+- [Submit a question](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/submitquestion.md)
+- [Preview an answer submission](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/getanswer.md)
+- [Submit an answer](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/submitanswer.md)
+- [Authenticate a user](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-authenticate-user-reference.md)
+- [Upload a photo](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-upload-photo-reference.md)
+- [Upload a video](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-upload-video-reference.md)
+- [Retrieve Reviews](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json.md): Reviews Api is used to display reviews for products and products related to a product family.
+- [Retrieve Comments](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviewcomments-json.md): Comments Api is used to display comments posted on reviews. It can be used request all comments for a particular review or particular comment on a review. It even allows advanced requests based on the filters that are defined below.
+- [Retrieve Questions](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-questions-json.md): Questions Api is used to display questions posted on Products. Questions Api can also be used to pull question based on filters mentioned below.
+- [Retrieve Answers](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-answers-json.md): Answers Api is used to display answers posted on the questions posted for products.
+- [Retrieve Profiles](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-authors-json.md): Profile/Authors Api is used to display about Author Information who have written reviews, questions and answers.
+- [Retrieve Products](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-products-json.md): Products Api is used to get details about a particular product or all the products for a particular passkey.
+- [Retrieve Product Categories](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-categories-json.md): Categories Api is responsible for displaying product related categories for a particular passkey.
+- [Retrieve Statistics](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-statistics-json.md): Statistics Api is responsible for pulling up all sort of statistics like review statistics for a product or multiple products or even question and answer related statistics.
+- [Retrieve Review Summary](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/getreviewsummary.md): Retreive the review summary of given productId based on formatType
+- [Generate Review Tokens](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/generatereviewtokensapi.md): AI-generated content coaching offering product aspects to help reviewers
+- [Match Tokens](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/matchtokensapi.md): AI-generated matching of discussed aspects
+- [Retrieve Dynamic Visual Guidelines](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-content-coach-v1-review-visual-guidelines.md): Fetches the latest set of dynamic visual content guidelines pre-calculated and cached for a given productId. Requires the passkey for authentication and implicit client identification.
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-ConversationsAPI/page/support.md)

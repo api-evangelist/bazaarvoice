@@ -1,0 +1,315 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Response API",
+    "version": "1.0.1-1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Author",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a given client response record's author details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid/relationships/author",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a given client response record's author details"
+        },
+        {
+          "info": {
+            "name": "Get a given client response record's author details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid/author",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a given client response record's author details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Client Response",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a given client response record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a given client response record"
+        },
+        {
+          "info": {
+            "name": "Update a given client response record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a given client response record"
+        },
+        {
+          "info": {
+            "name": "Delete a given client response record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a given client response record"
+        },
+        {
+          "info": {
+            "name": "Get all client response records for the specified review",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:client/reviews/:reviewId",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "Specify a client name"
+              },
+              {
+                "name": "reviewId",
+                "value": "",
+                "type": "path",
+                "description": "Specify a review id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all client response records for the specified review"
+        },
+        {
+          "info": {
+            "name": "Submit a client response for a given review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:client/reviews/:reviewId",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "Specify a client name"
+              },
+              {
+                "name": "reviewId",
+                "value": "",
+                "type": "path",
+                "description": "Specify a review id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit a client response for a given review"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Review",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a given client response record's review details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid/review",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a given client response record's review details"
+        },
+        {
+          "info": {
+            "name": "Get a given client response record's review details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/:responseGuid/relationships/review",
+            "params": [
+              {
+                "name": "responseGuid",
+                "value": "",
+                "type": "path",
+                "description": "Specify a string Client Response Id"
+              },
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a given client response record's review details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

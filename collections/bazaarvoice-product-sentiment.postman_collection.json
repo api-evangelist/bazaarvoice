@@ -1,0 +1,1740 @@
+{
+  "item": [
+    {
+      "id": "91cd35e0-d27e-4eb8-83cc-7c662f600623",
+      "name": "features",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "268f70e8-c35b-40ba-8cac-e56ad428ac8e",
+          "name": "Provides best and worst features along with their quotes for a product",
+          "request": {
+            "name": "Provides best and worst features along with their quotes for a product",
+            "description": {},
+            "url": {
+              "path": [
+                "summarised-features"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "755fde08-ea0a-4297-a5b9-194d03b89135",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bestFeatures\": [\n    {\n      \"featureId\": \"string\",\n      \"feature\": \"string\",\n      \"percentPositive\": 934.4677984713146,\n      \"nativeFeature\": \"string\",\n      \"reviewsMentioned\": {\n        \"total\": 90,\n        \"positive\": 84,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"averageRatingReviews\": {\n        \"positive\": 5.5,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"_embedded\": {\n        \"quotes\": [\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"syndicated\"\n          },\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"native\"\n          }\n        ]\n      }\n    },\n    {\n      \"featureId\": \"string\",\n      \"feature\": \"string\",\n      \"percentPositive\": 9312.798123721253,\n      \"nativeFeature\": \"string\",\n      \"reviewsMentioned\": {\n        \"total\": 90,\n        \"positive\": 84,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"averageRatingReviews\": {\n        \"positive\": 5.5,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"_embedded\": {\n        \"quotes\": [\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"syndicated\"\n          },\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"native\"\n          }\n        ]\n      }\n    }\n  ],\n  \"worstFeatures\": [\n    {\n      \"featureId\": \"string\",\n      \"feature\": \"string\",\n      \"percentPositive\": 5194.4348831870975,\n      \"nativeFeature\": \"string\",\n      \"reviewsMentioned\": {\n        \"total\": 90,\n        \"positive\": 84,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"averageRatingReviews\": {\n        \"positive\": 5.5,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"_embedded\": {\n        \"quotes\": [\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"native\"\n          },\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"native\"\n          }\n        ]\n      }\n    },\n    {\n      \"featureId\": \"string\",\n      \"feature\": \"string\",\n      \"percentPositive\": 4339.782264356835,\n      \"nativeFeature\": \"string\",\n      \"reviewsMentioned\": {\n        \"total\": 90,\n        \"positive\": 84,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"averageRatingReviews\": {\n        \"positive\": 5.5,\n        \"negative\": 0,\n        \"incentivized\": 0\n      },\n      \"_embedded\": {\n        \"quotes\": [\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"native\"\n          },\n          {\n            \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n            \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"emotion\": \"joy\",\n            \"reviewRating\": 5,\n            \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n            \"reviewedAt\": \"2021-05-03\",\n            \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n            \"nativeLanguage\": \"en-US\",\n            \"incentivised\": false,\n            \"reviewType\": \"native\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8858fda5-98e8-4f28-878a-24f23610b095",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e81e6c4-452a-4fb0-9a00-fc74458bb6c4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7766e1f-9390-4ba9-94db-bf3c064459ab",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f861d4b-74a0-4ec1-b247-88ac977283be",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83979046-a2d9-4c63-b68b-171af102492b",
+          "name": "Provides quotes for a specific feature",
+          "request": {
+            "name": "Provides quotes for a specific feature",
+            "description": {},
+            "url": {
+              "path": [
+                "summarised-features",
+                ":featureId",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "featureId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b4aa728-8fb4-4e56-9657-36a2f58c053e",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features",
+                    ":featureId",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "featureId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": [\n    {\n      \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n      \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n      \"emotion\": \"joy\",\n      \"reviewRating\": 5,\n      \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n      \"reviewedAt\": \"2021-05-03\",\n      \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n      \"nativeLanguage\": \"en-US\",\n      \"incentivised\": false,\n      \"reviewType\": \"native\"\n    },\n    {\n      \"quoteId\": \"EoA591P2Xi3/khB9osEG5l6cMtD5biVJ+r9FYMLG9KBIh8JmHqlSxRU4yP1ghuH9eXpFovA5uhI=\",\n      \"text\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n      \"emotion\": \"joy\",\n      \"reviewRating\": 5,\n      \"reviewId\": \"59902a9d-a6d8-5798-aa46-cde93d80e666\",\n      \"reviewedAt\": \"2021-05-03\",\n      \"translatedText\": \"Lovely fitting look nice and the quality of the leggings is lovely they wash well too!\",\n      \"nativeLanguage\": \"en-US\",\n      \"incentivised\": false,\n      \"reviewType\": \"native\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b16079a-4a8b-4bd2-817d-5d82c6732ba1",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features",
+                    ":featureId",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "featureId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1febcba4-673c-4ff8-9e9d-c8423eb96ac8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features",
+                    ":featureId",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "featureId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6224909-ae93-4450-9d78-8b179ac4991b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features",
+                    ":featureId",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "featureId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6a880b2-5771-48bf-a17c-55b1f0f5ed81",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "summarised-features",
+                    ":featureId",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "featureId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d0b6a72-9b4d-4794-9c2f-7e241ec06b7b",
+          "name": "Provides all features for a product",
+          "request": {
+            "name": "Provides all features for a product",
+            "description": {},
+            "url": {
+              "path": [
+                "features"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22bd1235-a992-4bcb-8b2e-f556229779ad",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"features\": [\n    {\n      \"feature\": \"comfort\",\n      \"nativeFeature\": \"comfort\"\n    },\n    {\n      \"feature\": \"comfort\",\n      \"nativeFeature\": \"comfort\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55bc5067-6a89-48ec-8494-4180d9f498ed",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e75050b-3691-4602-9229-37be4ea66ecf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3e52af7-1309-4be3-b3e8-30c2214d29d0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7938fd70-b68a-4af2-8782-893d9e19388e",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "features"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f2b31bab-b654-4edc-aafc-a773b4474ee1",
+      "name": "quotes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7107976-31b2-4937-a782-f8f634c6e7ea",
+          "name": "Provides top 25 positive quotes for a product",
+          "request": {
+            "name": "Provides top 25 positive quotes for a product",
+            "description": {},
+            "url": {
+              "path": [
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "5"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5177d98c-423b-4228-ad2e-921e0add1ef5",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": [\n    {\n      \"id\": \"PaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAld5G1g8whdUcpC5Em3cYzBUnPaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAleT4avVT2RAUQ==\",\n      \"text\": \"Lovely soft material, great fitting and comfortable.\",\n      \"reviewRating\": 5,\n      \"reviewId\": \"559ee070-65d4-54a1-960b-9bed94695a90\",\n      \"reviewedAt\": \"2001-01-09\",\n      \"nativeLanguage\": \"en-US\",\n      \"highlightedText\": \"Lovely <strong>soft</strong> material, great fitting and comfortable.\",\n      \"incentivised\": false,\n      \"translatedText\": \"Lovely soft material, great fitting and comfortable.\",\n      \"reviewType\": \"native\"\n    },\n    {\n      \"id\": \"PaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAld5G1g8whdUcpC5Em3cYzBUnPaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAleT4avVT2RAUQ==\",\n      \"text\": \"Lovely soft material, great fitting and comfortable.\",\n      \"reviewRating\": 5,\n      \"reviewId\": \"559ee070-65d4-54a1-960b-9bed94695a90\",\n      \"reviewedAt\": \"1988-08-15\",\n      \"nativeLanguage\": \"en-US\",\n      \"highlightedText\": \"Lovely <strong>soft</strong> material, great fitting and comfortable.\",\n      \"incentivised\": false,\n      \"translatedText\": \"Lovely soft material, great fitting and comfortable.\",\n      \"reviewType\": \"family\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d19dd6a-02c8-4946-9371-6dafa97cd4c2",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48e9fd27-1a0c-482b-87b9-7d313929f7aa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11722404-22ce-4e8c-aeef-8f29f7bd7331",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3043211-3267-4d31-9dc9-4c88372890e0",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "64755f7b-7de9-4bb0-87b5-bf2d37d4347f",
+      "name": "expressions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a2aa40b-0cd1-42de-9f3b-72854c8abf38",
+          "name": "Provides all expressions for a product",
+          "request": {
+            "name": "Provides all expressions for a product",
+            "description": {},
+            "url": {
+              "path": [
+                "expressions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "feature",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52985be5-fd57-4a93-9ab5-b9b11ff124e7",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expressions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nativeFeature\": \"comfort\",\n  \"expressions\": [\n    \"comforted\",\n    \"relieved\",\n    \"tranquility\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27802e20-a085-4b49-bf1b-16cd1a1bc48b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expressions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8b70591-ab7c-42df-a591-51d2bb1307dc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expressions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b329931-0865-4f42-aba1-89af52dc662b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expressions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b01c70f2-10a0-496c-a0d8-642f58c72a23",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expressions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "feature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://stg.api.bazaarvoice.com/sentiment/v1/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "38dd5d35-3f5e-48a4-82b4-0c3077dee499",
+    "name": "Product Sentiment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentiment Insights for Bazaarvoice Reviews\n\nContact Support:\n Name: Content Intelligence\n Email: content-intelligence-dev@bazaarvoice.com",
+      "type": "text/plain"
+    }
+  }
+}

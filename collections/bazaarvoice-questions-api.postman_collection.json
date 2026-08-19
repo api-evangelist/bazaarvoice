@@ -1,0 +1,963 @@
+{
+  "item": [
+    {
+      "id": "7ff9bce6-1f1a-45fa-9e92-a03e7ade4254",
+      "name": "Questions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "851767a4-e755-44c4-87f7-d31b0ba68095",
+          "name": "Get question",
+          "request": {
+            "name": "Get question",
+            "description": {},
+            "url": {
+              "path": [
+                "questions",
+                ":legacyInternalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "questionClientId",
+                  "value": "<string>",
+                  "description": "client that owns the question, when not the client specified by the clientId header"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "legacyInternalId",
+                  "description": "(Required) Question's legacy internal id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Question Client ID",
+                "key": "clientId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Offset for answers",
+                "key": "from",
+                "value": "<integer>"
+              },
+              {
+                "disabled": false,
+                "description": "Number of answers to return",
+                "key": "size",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8fa3954-708e-4232-9b63-68ae22898445",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "questionClientId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Question Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Offset for answers",
+                    "key": "from",
+                    "value": "<integer>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Number of answers to return",
+                    "key": "size",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"question\": {\n    \"id\": \"string\",\n    \"version\": 7303,\n    \"firstUpdateAt\": \"string\",\n    \"lastUpdateAt\": \"string\",\n    \"lastMutateAt\": \"string\",\n    \"client\": \"string\",\n    \"legacyInternalId\": 1763,\n    \"moderationContentID\": \"string\",\n    \"moderationVersionID\": \"string\",\n    \"featured\": false,\n    \"contributorNickname\": \"string\",\n    \"sendEmailAlertWhenPublished\": true,\n    \"sendEmailAlertWhenAnswered\": true,\n    \"contributorLocation\": \"string\",\n    \"displayAsAnonymous\": true,\n    \"questionSummary\": \"string\",\n    \"questionDetails\": \"string\",\n    \"campaignId\": \"string\",\n    \"contentOriginId\": \"string\",\n    \"submissionTime\": \"string\",\n    \"firstPublishTime\": \"string\",\n    \"lastPublishTime\": \"string\",\n    \"displayLocale\": \"string\",\n    \"status\": \"string\",\n    \"contentCodes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"submissionId\": \"string\",\n    \"externalQuestionId\": \"string\",\n    \"externalProductId\": \"string\",\n    \"photos\": [\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"avatarPhoto\": {\n      \"caption\": \"string\",\n      \"mediumImageId\": \"string\",\n      \"thumbnailImageId\": \"string\",\n      \"url\": \"string\",\n      \"thumbnailUrl\": \"string\"\n    },\n    \"videos\": [\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"cdvOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cdvProperties\": {\n      \"key_0\": \"string\"\n    },\n    \"tagOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"tagProperties\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"customProperties\": {\n      \"key_0\": \"string\"\n    },\n    \"productReferences\": [\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      }\n    ],\n    \"bestAnswer\": {\n      \"table\": \"string\",\n      \"id\": \"string\"\n    },\n    \"displayLastUpdate\": {\n      \"hash\": \"string\",\n      \"timestamp\": \"string\"\n    },\n    \"contributor\": {\n      \"table\": \"string\",\n      \"id\": \"string\"\n    },\n    \"about\": {\n      \"table\": \"string\",\n      \"id\": \"string\"\n    },\n    \"statusGroup\": \"string\"\n  },\n  \"contributor\": {\n    \"id\": \"string\",\n    \"table\": \"string\",\n    \"version\": 3925,\n    \"sourceVersion\": 1376,\n    \"deleted\": false,\n    \"signature\": \"string\",\n    \"firstUpdateAt\": \"string\",\n    \"lastUpdateAt\": \"string\",\n    \"lastMutateAt\": \"string\",\n    \"type\": \"string\",\n    \"legacyInternalId\": 6488,\n    \"clearTextExternalId\": \"string\",\n    \"anonymous\": true,\n    \"rank\": \"string\",\n    \"merit\": \"string\",\n    \"affiliation\": \"string\",\n    \"contributorBadgeEnabled\": true,\n    \"contributorLocation\": \"string\",\n    \"campaignId\": \"string\",\n    \"contentOriginId\": \"string\",\n    \"submissionTime\": \"string\",\n    \"firstPublishTime\": \"string\",\n    \"lastPublishTime\": \"string\",\n    \"displayCode\": \"string\",\n    \"displayLocale\": \"string\",\n    \"status\": \"string\",\n    \"contentCodes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"submissionId\": \"string\",\n    \"displayName\": \"string\",\n    \"sourceName\": \"string\",\n    \"agreedToTermsAndConditions\": true,\n    \"cdvOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ratingOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"photos\": [\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"avatarPhoto\": {\n      \"caption\": \"string\",\n      \"mediumImageId\": \"string\",\n      \"thumbnailImageId\": \"string\",\n      \"url\": \"string\",\n      \"thumbnailUrl\": \"string\"\n    },\n    \"productReferences\": [\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      }\n    ],\n    \"videos\": [\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"displayLastUpdate\": {\n      \"hash\": \"string\",\n      \"timestamp\": \"string\"\n    },\n    \"customProperties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"cdvProperties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"ratingProperties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"externalId\": \"string\"\n  },\n  \"product\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"active\": false,\n    \"description\": \"string\",\n    \"imageUrl\": \"string\",\n    \"brandId\": \"string\",\n    \"brandName\": \"string\",\n    \"categoryId\": \"string\",\n    \"categoryName\": \"string\",\n    \"productPageUrl\": \"string\"\n  },\n  \"statistics\": {\n    \"positiveFeedbackCount\": 3543,\n    \"negativeFeedbackCount\": 9774,\n    \"helpfulnessScore\": 1000,\n    \"characterCount\": 4887,\n    \"productReferenceCount\": 734,\n    \"inappropriateFeedbackCount\": 9277,\n    \"numPhotos\": 8068,\n    \"numVideos\": 9389,\n    \"hasPhotos\": true,\n    \"hasVideos\": false\n  },\n  \"answers\": [\n    {\n      \"answer\": {\n        \"id\": \"string\",\n        \"version\": 373,\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"client\": \"string\",\n        \"legacyInternalId\": 6075,\n        \"moderationContentID\": \"string\",\n        \"moderationVersionID\": \"string\",\n        \"featured\": false,\n        \"contributorNickname\": \"string\",\n        \"sendEmailAlertWhenPublished\": false,\n        \"displayAsAnonymous\": false,\n        \"text\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"externalAnswerId\": \"string\",\n        \"externalProductId\": \"string\",\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tagOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"cdvProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"tagProperties\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"contributor\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"question\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"submissionInstant\": 8566,\n        \"statusGroup\": \"string\"\n      },\n      \"contributor\": {\n        \"id\": \"string\",\n        \"table\": \"string\",\n        \"version\": 3233,\n        \"sourceVersion\": 5291,\n        \"deleted\": true,\n        \"signature\": \"string\",\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"type\": \"string\",\n        \"legacyInternalId\": 5872,\n        \"clearTextExternalId\": \"string\",\n        \"anonymous\": true,\n        \"rank\": \"string\",\n        \"merit\": \"string\",\n        \"affiliation\": \"string\",\n        \"contributorBadgeEnabled\": false,\n        \"contributorLocation\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayCode\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"displayName\": \"string\",\n        \"sourceName\": \"string\",\n        \"agreedToTermsAndConditions\": false,\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ratingOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"avatarPhoto\": {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"displayLastUpdate\": {\n          \"hash\": \"string\",\n          \"timestamp\": \"string\"\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"cdvProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"ratingProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"externalId\": \"string\"\n      },\n      \"statistics\": {\n        \"positiveFeedbackCount\": 7889,\n        \"negativeFeedbackCount\": 2043,\n        \"helpfulnessScore\": 2096,\n        \"characterCount\": 2432,\n        \"productReferenceCount\": 6595,\n        \"inappropriateFeedbackCount\": 8453,\n        \"numPhotos\": 9018,\n        \"numVideos\": 6180,\n        \"hasPhotos\": true,\n        \"hasVideos\": true\n      }\n    },\n    {\n      \"answer\": {\n        \"id\": \"string\",\n        \"version\": 6431,\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"client\": \"string\",\n        \"legacyInternalId\": 690,\n        \"moderationContentID\": \"string\",\n        \"moderationVersionID\": \"string\",\n        \"featured\": true,\n        \"contributorNickname\": \"string\",\n        \"sendEmailAlertWhenPublished\": false,\n        \"displayAsAnonymous\": true,\n        \"text\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"externalAnswerId\": \"string\",\n        \"externalProductId\": \"string\",\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tagOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"cdvProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"tagProperties\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_2\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_3\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_4\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\",\n          \"key_4\": \"string\"\n        },\n        \"contributor\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"question\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"submissionInstant\": 2713,\n        \"statusGroup\": \"string\"\n      },\n      \"contributor\": {\n        \"id\": \"string\",\n        \"table\": \"string\",\n        \"version\": 7261,\n        \"sourceVersion\": 8026,\n        \"deleted\": true,\n        \"signature\": \"string\",\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"type\": \"string\",\n        \"legacyInternalId\": 2227,\n        \"clearTextExternalId\": \"string\",\n        \"anonymous\": true,\n        \"rank\": \"string\",\n        \"merit\": \"string\",\n        \"affiliation\": \"string\",\n        \"contributorBadgeEnabled\": false,\n        \"contributorLocation\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayCode\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"displayName\": \"string\",\n        \"sourceName\": \"string\",\n        \"agreedToTermsAndConditions\": false,\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ratingOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"avatarPhoto\": {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"displayLastUpdate\": {\n          \"hash\": \"string\",\n          \"timestamp\": \"string\"\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"cdvProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"ratingProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"externalId\": \"string\"\n      },\n      \"statistics\": {\n        \"positiveFeedbackCount\": 9914,\n        \"negativeFeedbackCount\": 1584,\n        \"helpfulnessScore\": 4787,\n        \"characterCount\": 1680,\n        \"productReferenceCount\": 3744,\n        \"inappropriateFeedbackCount\": 6495,\n        \"numPhotos\": 7579,\n        \"numVideos\": 8721,\n        \"hasPhotos\": true,\n        \"hasVideos\": false\n      }\n    }\n  ],\n  \"totalQueriedAnswers\": 5497\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f158d0e-53fb-4ccb-9a05-bb048b4c6c99",
+              "name": "Missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "questionClientId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Question Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Offset for answers",
+                    "key": "from",
+                    "value": "<integer>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Number of answers to return",
+                    "key": "size",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48b318bb-578b-4e0b-8590-a793ca028310",
+              "name": "Question not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "questionClientId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Question Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Offset for answers",
+                    "key": "from",
+                    "value": "<integer>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Number of answers to return",
+                    "key": "size",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "825c1bea-ad6b-4fc0-96d9-91f3ef265a17",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "questionClientId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Question Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Offset for answers",
+                    "key": "from",
+                    "value": "<integer>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Number of answers to return",
+                    "key": "size",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b33c8321-07d1-4525-afa0-64ca9f48eb2f",
+          "name": "Get question",
+          "request": {
+            "name": "Get question",
+            "description": {},
+            "url": {
+              "path": [
+                ":clientId",
+                "questions",
+                ":legacyInternalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) Client ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "legacyInternalId",
+                  "description": "(Required) Question's legacy internal id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1ebd8b8-8eb9-4703-a202-705e3f99bfa3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"question\": {\n    \"id\": \"string\",\n    \"version\": 9408,\n    \"firstUpdateAt\": \"string\",\n    \"lastUpdateAt\": \"string\",\n    \"lastMutateAt\": \"string\",\n    \"client\": \"string\",\n    \"legacyInternalId\": 4364,\n    \"moderationContentID\": \"string\",\n    \"moderationVersionID\": \"string\",\n    \"featured\": false,\n    \"contributorNickname\": \"string\",\n    \"sendEmailAlertWhenPublished\": false,\n    \"sendEmailAlertWhenAnswered\": true,\n    \"contributorLocation\": \"string\",\n    \"displayAsAnonymous\": false,\n    \"questionSummary\": \"string\",\n    \"questionDetails\": \"string\",\n    \"campaignId\": \"string\",\n    \"contentOriginId\": \"string\",\n    \"submissionTime\": \"string\",\n    \"firstPublishTime\": \"string\",\n    \"lastPublishTime\": \"string\",\n    \"displayLocale\": \"string\",\n    \"status\": \"string\",\n    \"contentCodes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"submissionId\": \"string\",\n    \"externalQuestionId\": \"string\",\n    \"externalProductId\": \"string\",\n    \"photos\": [\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"avatarPhoto\": {\n      \"caption\": \"string\",\n      \"mediumImageId\": \"string\",\n      \"thumbnailImageId\": \"string\",\n      \"url\": \"string\",\n      \"thumbnailUrl\": \"string\"\n    },\n    \"videos\": [\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"cdvOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cdvProperties\": {\n      \"key_0\": \"string\"\n    },\n    \"tagOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"tagProperties\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"customProperties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"productReferences\": [\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      }\n    ],\n    \"bestAnswer\": {\n      \"table\": \"string\",\n      \"id\": \"string\"\n    },\n    \"displayLastUpdate\": {\n      \"hash\": \"string\",\n      \"timestamp\": \"string\"\n    },\n    \"contributor\": {\n      \"table\": \"string\",\n      \"id\": \"string\"\n    },\n    \"about\": {\n      \"table\": \"string\",\n      \"id\": \"string\"\n    },\n    \"statusGroup\": \"string\"\n  },\n  \"contributor\": {\n    \"id\": \"string\",\n    \"table\": \"string\",\n    \"version\": 9485,\n    \"sourceVersion\": 8668,\n    \"deleted\": false,\n    \"signature\": \"string\",\n    \"firstUpdateAt\": \"string\",\n    \"lastUpdateAt\": \"string\",\n    \"lastMutateAt\": \"string\",\n    \"type\": \"string\",\n    \"legacyInternalId\": 8855,\n    \"clearTextExternalId\": \"string\",\n    \"anonymous\": true,\n    \"rank\": \"string\",\n    \"merit\": \"string\",\n    \"affiliation\": \"string\",\n    \"contributorBadgeEnabled\": false,\n    \"contributorLocation\": \"string\",\n    \"campaignId\": \"string\",\n    \"contentOriginId\": \"string\",\n    \"submissionTime\": \"string\",\n    \"firstPublishTime\": \"string\",\n    \"lastPublishTime\": \"string\",\n    \"displayCode\": \"string\",\n    \"displayLocale\": \"string\",\n    \"status\": \"string\",\n    \"contentCodes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"submissionId\": \"string\",\n    \"displayName\": \"string\",\n    \"sourceName\": \"string\",\n    \"agreedToTermsAndConditions\": false,\n    \"cdvOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ratingOrder\": [\n      \"string\",\n      \"string\"\n    ],\n    \"photos\": [\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"avatarPhoto\": {\n      \"caption\": \"string\",\n      \"mediumImageId\": \"string\",\n      \"thumbnailImageId\": \"string\",\n      \"url\": \"string\",\n      \"thumbnailUrl\": \"string\"\n    },\n    \"productReferences\": [\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      }\n    ],\n    \"videos\": [\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      {\n        \"legacyInternalId\": \"string\",\n        \"rawUrlInput\": \"string\",\n        \"caption\": \"string\",\n        \"videoHost\": \"string\",\n        \"videoId\": \"string\",\n        \"uploadStatus\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      }\n    ],\n    \"displayLastUpdate\": {\n      \"hash\": \"string\",\n      \"timestamp\": \"string\"\n    },\n    \"customProperties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"cdvProperties\": {\n      \"key_0\": \"string\"\n    },\n    \"ratingProperties\": {\n      \"key_0\": \"string\"\n    },\n    \"externalId\": \"string\"\n  },\n  \"product\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"active\": false,\n    \"description\": \"string\",\n    \"imageUrl\": \"string\",\n    \"brandId\": \"string\",\n    \"brandName\": \"string\",\n    \"categoryId\": \"string\",\n    \"categoryName\": \"string\",\n    \"productPageUrl\": \"string\"\n  },\n  \"statistics\": {\n    \"positiveFeedbackCount\": 8687,\n    \"negativeFeedbackCount\": 5002,\n    \"helpfulnessScore\": 8641,\n    \"characterCount\": 1231,\n    \"productReferenceCount\": 7867,\n    \"inappropriateFeedbackCount\": 1681,\n    \"numPhotos\": 306,\n    \"numVideos\": 2203,\n    \"hasPhotos\": true,\n    \"hasVideos\": false\n  },\n  \"answers\": [\n    {\n      \"answer\": {\n        \"id\": \"string\",\n        \"version\": 179,\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"client\": \"string\",\n        \"legacyInternalId\": 6624,\n        \"moderationContentID\": \"string\",\n        \"moderationVersionID\": \"string\",\n        \"featured\": false,\n        \"contributorNickname\": \"string\",\n        \"sendEmailAlertWhenPublished\": true,\n        \"displayAsAnonymous\": false,\n        \"text\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"externalAnswerId\": \"string\",\n        \"externalProductId\": \"string\",\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tagOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"cdvProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"tagProperties\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"contributor\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"question\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"submissionInstant\": 2305,\n        \"statusGroup\": \"string\"\n      },\n      \"contributor\": {\n        \"id\": \"string\",\n        \"table\": \"string\",\n        \"version\": 3226,\n        \"sourceVersion\": 2536,\n        \"deleted\": false,\n        \"signature\": \"string\",\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"type\": \"string\",\n        \"legacyInternalId\": 1805,\n        \"clearTextExternalId\": \"string\",\n        \"anonymous\": false,\n        \"rank\": \"string\",\n        \"merit\": \"string\",\n        \"affiliation\": \"string\",\n        \"contributorBadgeEnabled\": true,\n        \"contributorLocation\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayCode\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"displayName\": \"string\",\n        \"sourceName\": \"string\",\n        \"agreedToTermsAndConditions\": true,\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ratingOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"avatarPhoto\": {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"displayLastUpdate\": {\n          \"hash\": \"string\",\n          \"timestamp\": \"string\"\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"cdvProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"ratingProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"externalId\": \"string\"\n      },\n      \"statistics\": {\n        \"positiveFeedbackCount\": 6727,\n        \"negativeFeedbackCount\": 6188,\n        \"helpfulnessScore\": 8461,\n        \"characterCount\": 5236,\n        \"productReferenceCount\": 1151,\n        \"inappropriateFeedbackCount\": 5065,\n        \"numPhotos\": 4669,\n        \"numVideos\": 4463,\n        \"hasPhotos\": false,\n        \"hasVideos\": false\n      }\n    },\n    {\n      \"answer\": {\n        \"id\": \"string\",\n        \"version\": 93,\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"client\": \"string\",\n        \"legacyInternalId\": 1114,\n        \"moderationContentID\": \"string\",\n        \"moderationVersionID\": \"string\",\n        \"featured\": true,\n        \"contributorNickname\": \"string\",\n        \"sendEmailAlertWhenPublished\": true,\n        \"displayAsAnonymous\": true,\n        \"text\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"externalAnswerId\": \"string\",\n        \"externalProductId\": \"string\",\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tagOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"cdvProperties\": {\n          \"key_0\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"tagProperties\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"contributor\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"question\": {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        \"submissionInstant\": 4999,\n        \"statusGroup\": \"string\"\n      },\n      \"contributor\": {\n        \"id\": \"string\",\n        \"table\": \"string\",\n        \"version\": 3720,\n        \"sourceVersion\": 832,\n        \"deleted\": true,\n        \"signature\": \"string\",\n        \"firstUpdateAt\": \"string\",\n        \"lastUpdateAt\": \"string\",\n        \"lastMutateAt\": \"string\",\n        \"type\": \"string\",\n        \"legacyInternalId\": 6665,\n        \"clearTextExternalId\": \"string\",\n        \"anonymous\": true,\n        \"rank\": \"string\",\n        \"merit\": \"string\",\n        \"affiliation\": \"string\",\n        \"contributorBadgeEnabled\": false,\n        \"contributorLocation\": \"string\",\n        \"campaignId\": \"string\",\n        \"contentOriginId\": \"string\",\n        \"submissionTime\": \"string\",\n        \"firstPublishTime\": \"string\",\n        \"lastPublishTime\": \"string\",\n        \"displayCode\": \"string\",\n        \"displayLocale\": \"string\",\n        \"status\": \"string\",\n        \"contentCodes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"submissionId\": \"string\",\n        \"displayName\": \"string\",\n        \"sourceName\": \"string\",\n        \"agreedToTermsAndConditions\": false,\n        \"cdvOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ratingOrder\": [\n          \"string\",\n          \"string\"\n        ],\n        \"photos\": [\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"caption\": \"string\",\n            \"mediumImageId\": \"string\",\n            \"thumbnailImageId\": \"string\",\n            \"url\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"avatarPhoto\": {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        \"productReferences\": [\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          },\n          {\n            \"table\": \"string\",\n            \"id\": \"string\"\n          }\n        ],\n        \"videos\": [\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          },\n          {\n            \"legacyInternalId\": \"string\",\n            \"rawUrlInput\": \"string\",\n            \"caption\": \"string\",\n            \"videoHost\": \"string\",\n            \"videoId\": \"string\",\n            \"uploadStatus\": \"string\",\n            \"thumbnailUrl\": \"string\"\n          }\n        ],\n        \"displayLastUpdate\": {\n          \"hash\": \"string\",\n          \"timestamp\": \"string\"\n        },\n        \"customProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"cdvProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"ratingProperties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"externalId\": \"string\"\n      },\n      \"statistics\": {\n        \"positiveFeedbackCount\": 1171,\n        \"negativeFeedbackCount\": 3961,\n        \"helpfulnessScore\": 5041,\n        \"characterCount\": 4893,\n        \"productReferenceCount\": 9338,\n        \"inappropriateFeedbackCount\": 8286,\n        \"numPhotos\": 3331,\n        \"numVideos\": 9167,\n        \"hasPhotos\": false,\n        \"hasVideos\": true\n      }\n    }\n  ],\n  \"totalQueriedAnswers\": 8888\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca8389ab-d3cb-468b-bcaf-082d18cd153a",
+              "name": "Question not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05bbbf7a-61fe-4314-9ee8-d04e0a3ba1e3",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "questions",
+                    ":legacyInternalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "legacyInternalId",
+                      "description": "(Required) Question's legacy internal id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03cde48a-d885-4a48-95d9-c490c08b6f30",
+          "name": "searchQuestions",
+          "request": {
+            "name": "searchQuestions",
+            "description": {},
+            "url": {
+              "path": [
+                "questions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Client ID",
+                "key": "clientId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc0f446e-b35d-4d5c-a60a-3201592c535c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"limit\": 6907,\n  \"offset\": 7450,\n  \"totalResults\": 4243,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"version\": 6982,\n      \"firstUpdateAt\": \"string\",\n      \"lastUpdateAt\": \"string\",\n      \"lastMutateAt\": \"string\",\n      \"client\": \"string\",\n      \"legacyInternalId\": 5794,\n      \"moderationContentID\": \"string\",\n      \"moderationVersionID\": \"string\",\n      \"featured\": true,\n      \"contributorNickname\": \"string\",\n      \"sendEmailAlertWhenPublished\": false,\n      \"sendEmailAlertWhenAnswered\": true,\n      \"contributorLocation\": \"string\",\n      \"displayAsAnonymous\": false,\n      \"questionSummary\": \"string\",\n      \"questionDetails\": \"string\",\n      \"campaignId\": \"string\",\n      \"contentOriginId\": \"string\",\n      \"submissionTime\": \"string\",\n      \"firstPublishTime\": \"string\",\n      \"lastPublishTime\": \"string\",\n      \"displayLocale\": \"string\",\n      \"status\": \"string\",\n      \"contentCodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionId\": \"string\",\n      \"externalQuestionId\": \"string\",\n      \"externalProductId\": \"string\",\n      \"photos\": [\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"avatarPhoto\": {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      \"videos\": [\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"cdvOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cdvProperties\": {\n        \"key_0\": \"string\"\n      },\n      \"tagOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tagProperties\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"customProperties\": {\n        \"key_0\": \"string\"\n      },\n      \"productReferences\": [\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        }\n      ],\n      \"bestAnswer\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"displayLastUpdate\": {\n        \"hash\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"contributor\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"about\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"statusGroup\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"version\": 6387,\n      \"firstUpdateAt\": \"string\",\n      \"lastUpdateAt\": \"string\",\n      \"lastMutateAt\": \"string\",\n      \"client\": \"string\",\n      \"legacyInternalId\": 4677,\n      \"moderationContentID\": \"string\",\n      \"moderationVersionID\": \"string\",\n      \"featured\": true,\n      \"contributorNickname\": \"string\",\n      \"sendEmailAlertWhenPublished\": true,\n      \"sendEmailAlertWhenAnswered\": true,\n      \"contributorLocation\": \"string\",\n      \"displayAsAnonymous\": true,\n      \"questionSummary\": \"string\",\n      \"questionDetails\": \"string\",\n      \"campaignId\": \"string\",\n      \"contentOriginId\": \"string\",\n      \"submissionTime\": \"string\",\n      \"firstPublishTime\": \"string\",\n      \"lastPublishTime\": \"string\",\n      \"displayLocale\": \"string\",\n      \"status\": \"string\",\n      \"contentCodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionId\": \"string\",\n      \"externalQuestionId\": \"string\",\n      \"externalProductId\": \"string\",\n      \"photos\": [\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"avatarPhoto\": {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      \"videos\": [\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"cdvOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cdvProperties\": {\n        \"key_0\": \"string\"\n      },\n      \"tagOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tagProperties\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"customProperties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"productReferences\": [\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        }\n      ],\n      \"bestAnswer\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"displayLastUpdate\": {\n        \"hash\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"contributor\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"about\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"statusGroup\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "100c1da8-c1da-4329-986f-0b6b04af7773",
+              "name": "Invalid request body, or missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42fca50f-2567-41e9-9892-29759b6302a7",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df3bf77e-1b05-42ac-9e03-19c17fcc4117",
+          "name": "searchQuestions",
+          "request": {
+            "name": "searchQuestions",
+            "description": {},
+            "url": {
+              "path": [
+                ":clientId",
+                "questions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) Client ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Correlation ID",
+                "key": "X-Correlation-ID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ae50d3a-a388-4099-a23f-8c9235d7dddd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"limit\": 2391,\n  \"offset\": 1043,\n  \"totalResults\": 2748,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"version\": 3207,\n      \"firstUpdateAt\": \"string\",\n      \"lastUpdateAt\": \"string\",\n      \"lastMutateAt\": \"string\",\n      \"client\": \"string\",\n      \"legacyInternalId\": 8464,\n      \"moderationContentID\": \"string\",\n      \"moderationVersionID\": \"string\",\n      \"featured\": true,\n      \"contributorNickname\": \"string\",\n      \"sendEmailAlertWhenPublished\": true,\n      \"sendEmailAlertWhenAnswered\": true,\n      \"contributorLocation\": \"string\",\n      \"displayAsAnonymous\": false,\n      \"questionSummary\": \"string\",\n      \"questionDetails\": \"string\",\n      \"campaignId\": \"string\",\n      \"contentOriginId\": \"string\",\n      \"submissionTime\": \"string\",\n      \"firstPublishTime\": \"string\",\n      \"lastPublishTime\": \"string\",\n      \"displayLocale\": \"string\",\n      \"status\": \"string\",\n      \"contentCodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionId\": \"string\",\n      \"externalQuestionId\": \"string\",\n      \"externalProductId\": \"string\",\n      \"photos\": [\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"avatarPhoto\": {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      \"videos\": [\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"cdvOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cdvProperties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"tagOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tagProperties\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"customProperties\": {\n        \"key_0\": \"string\"\n      },\n      \"productReferences\": [\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        }\n      ],\n      \"bestAnswer\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"displayLastUpdate\": {\n        \"hash\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"contributor\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"about\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"statusGroup\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"version\": 5914,\n      \"firstUpdateAt\": \"string\",\n      \"lastUpdateAt\": \"string\",\n      \"lastMutateAt\": \"string\",\n      \"client\": \"string\",\n      \"legacyInternalId\": 8238,\n      \"moderationContentID\": \"string\",\n      \"moderationVersionID\": \"string\",\n      \"featured\": true,\n      \"contributorNickname\": \"string\",\n      \"sendEmailAlertWhenPublished\": true,\n      \"sendEmailAlertWhenAnswered\": true,\n      \"contributorLocation\": \"string\",\n      \"displayAsAnonymous\": true,\n      \"questionSummary\": \"string\",\n      \"questionDetails\": \"string\",\n      \"campaignId\": \"string\",\n      \"contentOriginId\": \"string\",\n      \"submissionTime\": \"string\",\n      \"firstPublishTime\": \"string\",\n      \"lastPublishTime\": \"string\",\n      \"displayLocale\": \"string\",\n      \"status\": \"string\",\n      \"contentCodes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"submissionId\": \"string\",\n      \"externalQuestionId\": \"string\",\n      \"externalProductId\": \"string\",\n      \"photos\": [\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"caption\": \"string\",\n          \"mediumImageId\": \"string\",\n          \"thumbnailImageId\": \"string\",\n          \"url\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"avatarPhoto\": {\n        \"caption\": \"string\",\n        \"mediumImageId\": \"string\",\n        \"thumbnailImageId\": \"string\",\n        \"url\": \"string\",\n        \"thumbnailUrl\": \"string\"\n      },\n      \"videos\": [\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        },\n        {\n          \"legacyInternalId\": \"string\",\n          \"rawUrlInput\": \"string\",\n          \"caption\": \"string\",\n          \"videoHost\": \"string\",\n          \"videoId\": \"string\",\n          \"uploadStatus\": \"string\",\n          \"thumbnailUrl\": \"string\"\n        }\n      ],\n      \"cdvOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cdvProperties\": {\n        \"key_0\": \"string\"\n      },\n      \"tagOrder\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tagProperties\": {\n        \"key_0\": [\n          \"string\",\n          \"string\"\n        ],\n        \"key_1\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"customProperties\": {\n        \"key_0\": \"string\"\n      },\n      \"productReferences\": [\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        },\n        {\n          \"table\": \"string\",\n          \"id\": \"string\"\n        }\n      ],\n      \"bestAnswer\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"displayLastUpdate\": {\n        \"hash\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"contributor\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"about\": {\n        \"table\": \"string\",\n        \"id\": \"string\"\n      },\n      \"statusGroup\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80218792-173c-4be5-837c-592cc02e4feb",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c12c5185-2b07-4be1-89b3-71fa18a178d8",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":clientId",
+                    "questions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clientId",
+                      "description": "(Required) Client ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"direction\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"questionId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"submissionTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"moderationTime\": {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    \"brandId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categoryId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"productId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"activeProduct\": \"<boolean>\",\n    \"displayLocale\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"questionModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatusGroup\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerModerationStatus\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"globalSearch\": \"<string>\",\n    \"contributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorDisplayName\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"contributorRank\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerLegacyInternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContentCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorExternalId\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerContributorNickname\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"answerCampaignSource\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"withApprovedAnswers\": \"<boolean>\",\n    \"withRejectedAnswers\": \"<boolean>\",\n    \"withPendingAnswers\": \"<boolean>\",\n    \"withExpiredAnswers\": \"<boolean>\",\n    \"questionHasPhotos\": \"<boolean>\",\n    \"questionHasVideos\": \"<boolean>\",\n    \"answerHasPhotos\": \"<boolean>\",\n    \"answerHasVideos\": \"<boolean>\",\n    \"withAnswers\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c154728a-6974-4c87-8051-19533f448489",
+    "name": "Bazaarvoice Content Search Answers Questions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.\n\nContact Support:\n Name: Bazaarvoice Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

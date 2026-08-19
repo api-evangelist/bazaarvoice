@@ -1,0 +1,28 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Getting Started](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/home.md): The Bazaarvoice Privacy API provides a secure HTTP interface for integrating Bazaarvoice into your General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), and other privacy regulations compliance workflows.
+- [Privacy Design Reference](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/privacy-privacy-design-reference.md): Privacy API: Integrate your Bazaarvoice solution into your privacy regulations compliance workflow using a secure HTTP interface
+- [API Key Management](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/api-key-management.md): This page explains how to use the API key management application in the Bazaarvoice Portal to view and manage API keys.
+- [OAuth2 : 2-Legged](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/oauth2-2-legged.md): The Bazaarvoice Privacy API provides 2-legged and 3-legged methods for **OAuth2** authentication. Use the **[2-legged](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/oauth2-2-legged)** workflow if you want to authenticate your application without a Bazaarvoice Portal user involved in supplying credentials. Use the **[3-legged workflow](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/oauth2-3-legged)** if you want to authenticate your application based on a Bazaarvoice Portal user supplying credentials. Due to its automation advantages, Bazaarvoice expects that the 2-legged workflow best fits the majority of client use cases for the Privacy API.
+- [OAuth2 : 3-Legged](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/oauth2-3-legged.md): The Bazaarvoice Privacy API provides 2-legged and 3-legged methods for **OAuth2** authentication. Use the **[2-legged](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/oauth2-2-legged)** workflow if you want to authenticate your application without a Bazaarvoice Portal user involved in supplying credentials. Use the **[3-legged workflow](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/oauth2-3-legged)** if you want to authenticate your application based on a Bazaarvoice Portal user supplying credentials. Due to its automation advantages, Bazaarvoice expects that the 2-legged workflow best fits the majority of client use cases for the Privacy API.
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/docs/security-imperatives.md): Security Fundamentals for HTTPS and TLS.
+
+## API Reference
+- [Privacy Design Reference](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/privacy-design-reference.md): A high level application design reference to give a clearer context on how the Privacy API functions
+- [Retrieve OAuth2 Token: 2-Legged](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/post_auth-v1-oauth2-token.md)
+- [Retrieve OAuth2 Token: 3-Legged](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/privacy-post-auth-v1-oauth2-token-reference.md)
+- [Create an ROA](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/post_accessrequests.md)
+- [Retrieve all ROA for a requester](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/get_accessrequests.md)
+- [Retrieve ROA request by ID](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/get_accessrequests-requestid.md)
+- [ROA Data Format](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/roa-data-format.md)
+- [Create an RTBF](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/post_forgetrequest.md)
+- [Retrieve all RTBF for a requester](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/get_forgetrequest.md)
+- [Retrieve RTBF by request ID](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/get_forgetrequest-requestid.md)
+- [Troubleshooting](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/troubleshooting.md): This page has basic steps to help you fix common issues encountered when using the Privacy API. Many issues can be fixed by following the steps below.
+- [FAQs](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/faqs.md): Frequently Asked questions regarding Privacy API integration.
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-PrivacyAPI/page/support.md)

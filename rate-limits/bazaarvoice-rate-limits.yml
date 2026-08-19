@@ -1,12 +1,25 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
-source: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+source:
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+- https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/rate-limit-headers
+- openapi/_original/bazaarvoice-product-sentiment-openapi.json
 model: per-api-key
 signaling: response-headers
+status_on_exhaustion: 429
 description: >-
-  Bazaarvoice rate-limits each API key by queries-per-minute (QPM) plus an hourly
-  quota. Actual numeric allotments are set per key and are not published as universal
-  defaults; clients read their current allotment and usage from response headers.
+  Bazaarvoice rate-limits each API key by queries-per-minute (QPM) plus an hourly quota. Numeric
+  allotments are set per key in the Bazaarvoice Portal and are NOT published as universal defaults;
+  a client reads its current allotment and usage from the response headers on every call, and can
+  also see the allotment for each key in the portal's API Key Management application. The
+  Transactions API publishes its own rate-limit-headers page describing the same header family.
+  The Product Sentiment API is the one product whose OpenAPI declares the exhaustion response
+  explicitly - a 429 with application/problem+json.
+limit_count: 0
+limit_count_note: >-
+  Zero is the honest answer: Bazaarvoice publishes the mechanism and the headers but no numeric
+  limit. The one number that appears in the docs (60 QPM) is captioned as an example of one
+  client's configuration, not a default, so it is not recorded as a limit.
 headers:
 - name: X-Bazaarvoice-QPM-Allotted
   meaning: Maximum queries-per-minute capacity set on the API key.
@@ -23,7 +36,20 @@ headers:
 deprecated_headers:
 - X-Bazaarvoice-QPS-Allotted
 - X-Bazaarvoice-QPS-Current
+retry_after: false
+retry_after_note: No Retry-After header is documented; clients are expected to read X-Bazaarvoice-Quota-Reset.
+scopes:
+- scope: per-key
+  window: 1 minute
+  limit: null
+  burst: null
+  note: QPM allotment, set per API key in the Bazaarvoice Portal.
+- scope: per-key
+  window: 1 hour
+  limit: null
+  burst: null
+  note: Hourly quota, set per API key in the Bazaarvoice Portal.
 limits: []
 notes: >-
-  QPS-based headers are deprecated in favor of QPM. Numeric limits vary per key;
-  the docs example (60 QPM) is one client's configuration, not a default.
+  QPS-based headers are deprecated in favour of QPM. Numeric limits vary per key; the docs example
+  (60 QPM) is one client's configuration, not a default.

@@ -1,0 +1,1089 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Conversation Submission API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submitreview",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview Review Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/submitreview.json",
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "ProductId",
+                "value": "1000001",
+                "type": "query",
+                "description": "The id of the product for which submission form is requested."
+              },
+              {
+                "name": "Action",
+                "value": "Preview",
+                "type": "query",
+                "description": "The submission action to take"
+              },
+              {
+                "name": "Rating",
+                "value": "5",
+                "type": "query",
+                "description": "Value is positive integer between 1 and 5, and represents review overall rating."
+              },
+              {
+                "name": "ReviewText",
+                "value": "test review Text test review Text test review Text test review Text",
+                "type": "query",
+                "description": "Value is review body text.The minimum length is configurable,  default is 50 but can be lower."
+              },
+              {
+                "name": "Title",
+                "value": "test title",
+                "type": "query",
+                "description": "Value is content title text. The minimum and maximum lengths are configurable. The current default is 50 characters, but can be lower to 1 or higher to 255."
+              },
+              {
+                "name": "UserNickname",
+                "value": "test_nick_name",
+                "type": "query",
+                "description": "User nickname display text."
+              },
+              {
+                "name": "agreedtotermsandconditions",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings."
+              }
+            ]
+          },
+          "docs": "Preview Review Form"
+        },
+        {
+          "info": {
+            "name": "Submit a review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/submitreview.json",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "params": [
+              {
+                "name": "apiversion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "productId",
+                "value": "1000001",
+                "type": "query",
+                "description": "The ID of the product that this content is being submitted on."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "action",
+                  "value": ""
+                },
+                {
+                  "name": "AgreedToTermsAndConditions",
+                  "value": ""
+                },
+                {
+                  "name": "AdditionalField_<Dimension-External-Id>",
+                  "value": ""
+                },
+                {
+                  "name": "campaignId",
+                  "value": ""
+                },
+                {
+                  "name": "ContextDataValue_<Dimension-External-Id>",
+                  "value": ""
+                },
+                {
+                  "name": "fp",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_AuthenticationEmail",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_CallbackUrl",
+                  "value": ""
+                },
+                {
+                  "name": "isRecommended",
+                  "value": ""
+                },
+                {
+                  "name": "Locale",
+                  "value": ""
+                },
+                {
+                  "name": "NetPromoterComment",
+                  "value": ""
+                },
+                {
+                  "name": "NetPromoterScore",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoUrl_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoCaption_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "rating",
+                  "value": ""
+                },
+                {
+                  "name": "Rating_<Dimension-External-Id>",
+                  "value": ""
+                },
+                {
+                  "name": "reviewText",
+                  "value": ""
+                },
+                {
+                  "name": "title",
+                  "value": ""
+                },
+                {
+                  "name": "tag_<Dimension-External-Id>_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "tagid_<Dimension-External-Id>/<Tag-Label>",
+                  "value": ""
+                },
+                {
+                  "name": "user",
+                  "value": ""
+                },
+                {
+                  "name": "userId",
+                  "value": ""
+                },
+                {
+                  "name": "UserEmail",
+                  "value": ""
+                },
+                {
+                  "name": "userNickname",
+                  "value": ""
+                },
+                {
+                  "name": "UserLocation",
+                  "value": ""
+                },
+                {
+                  "name": "SendEmailAlertWhenCommented",
+                  "value": ""
+                },
+                {
+                  "name": "SendEmailAlertWhenPublished",
+                  "value": ""
+                },
+                {
+                  "name": "VideoUrl_1",
+                  "value": ""
+                },
+                {
+                  "name": "VideoCaption_1",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submit a review"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProgressiveSubmit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "initiateSubmit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/initiateSubmit.json",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "apiVersion",
+                "value": "",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Action is always submit"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique id for user. It should only contain alphanumeric characters, hyphens (-), and underscores (_). No other special characters should be used. Can be encoded in UserToken or sent as plain text, depending on API key configuration. Must not contain any personally identifiable information (PII) data, particularly email address."
+              },
+              {
+                "name": "hostedauth",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the action being performed, is using hosted authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Endpoint to request product info for setting up a review submission form"
+        },
+        {
+          "info": {
+            "name": "progressiveSubmit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/progressiveSubmit.json",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "apiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "action",
+                "value": "submit",
+                "type": "query",
+                "description": "Action is always submit"
+              },
+              {
+                "name": "fields",
+                "value": "true",
+                "type": "query",
+                "description": "A dictionary of form fields for a review form. Format depends on whether \"extended\" parameter is set. fields will be pre-populated with previously submitted content."
+              },
+              {
+                "name": "passkey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              },
+              {
+                "name": "hostedauth",
+                "value": "True",
+                "type": "query",
+                "description": "Indicates the action being performed, is using hosted authentication"
+              },
+              {
+                "name": "extended",
+                "value": "True",
+                "type": "query",
+                "description": "This parameter is sent as a single key and does not need a value. When omitted, the fields elements are returned in an ordered list that honors the submission field order as specified in the configuration hub, with the exception that required fields are presented first in the ordered list. When included, fields elements are returned in full submission-style format."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Endpoint for handling progressive submissions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview Comments Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/submitreviewcomment.json",
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "ReviewId",
+                "value": "47635347",
+                "type": "query",
+                "description": "The id of the review that this comment is being submitted on. Required for review comments."
+              },
+              {
+                "name": "UserId",
+                "value": "testi2",
+                "type": "query",
+                "description": "User's external ID. This value should come from your authentication system. See Client-Mastered Authentication for more information.\nAlert: Do not use an email address for this value."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ]
+          },
+          "docs": "Preview Comments Form"
+        },
+        {
+          "info": {
+            "name": "Submit a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/submitreviewcomment.json",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "ProductId",
+                "value": "1000001",
+                "type": "query",
+                "description": "The id of the product that this content is being submitted on."
+              },
+              {
+                "name": "reviewId",
+                "value": "47635347",
+                "type": "query",
+                "description": "A ReviewId is required for all review comment submissions."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Action",
+                  "value": ""
+                },
+                {
+                  "name": "CommentText",
+                  "value": ""
+                },
+                {
+                  "name": "fp",
+                  "value": ""
+                },
+                {
+                  "name": "CampaignId",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_AuthenticationEmail",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_CallbackUrl",
+                  "value": ""
+                },
+                {
+                  "name": "Locale",
+                  "value": ""
+                },
+                {
+                  "name": "SendEmailAlertWhenPublished",
+                  "value": ""
+                },
+                {
+                  "name": "user",
+                  "value": ""
+                },
+                {
+                  "name": "userid",
+                  "value": ""
+                },
+                {
+                  "name": "UserEmail",
+                  "value": ""
+                },
+                {
+                  "name": "UserLocation",
+                  "value": ""
+                },
+                {
+                  "name": "UserNickname",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submit a comment"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Questions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview a question submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/submitquestion.json",
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "ProductId",
+                "value": "product01",
+                "type": "query",
+                "description": "The id of the product that this content is being submitted on."
+              },
+              {
+                "name": "Action",
+                "value": "preview",
+                "type": "query",
+                "description": "The submission action to take"
+              },
+              {
+                "name": "QuestionSummary",
+                "value": "How do I get it autoshipped every month?",
+                "type": "query",
+                "description": "Contains the text of the question summary. Only a single line of text is allowed."
+              },
+              {
+                "name": "User",
+                "value": "e4cd358f898194db893ff3905a40f64b646174653d3230323330393230267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d3930267375626a6563746964733d70726f647563743031",
+                "type": "query",
+                "description": "Value of the encrypted user. This parameter demonstrates that a user has been authenticated. Note that the UserId parameter does not contain authentication information and should not be used for hosted authentication. See the Authenticate User method for more information."
+              },
+              {
+                "name": "agreedtotermsandconditions",
+                "value": "yes",
+                "type": "query",
+                "description": "Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings."
+              },
+              {
+                "name": "usernickname",
+                "value": "sheenu",
+                "type": "query",
+                "description": "User nickname display text."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ]
+          },
+          "docs": "Preview a question submission"
+        },
+        {
+          "info": {
+            "name": "Submit a question",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/submitquestion.json",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "ProductId",
+                "value": "product01",
+                "type": "query",
+                "description": "The id of the product that this content is being submitted on."
+              },
+              {
+                "name": "userId",
+                "value": "testing2",
+                "type": "query",
+                "description": "User's external ID. This value should come from you authentication system. See Client-Mastered Authentication for more information."
+              },
+              {
+                "name": "questionsummary",
+                "value": "Quality of product",
+                "type": "query",
+                "description": "Contains the text of the question summary. Only a single line of text is allowed."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Action",
+                  "value": ""
+                },
+                {
+                  "name": "fp",
+                  "value": ""
+                },
+                {
+                  "name": "AgreedToTermsAndConditions",
+                  "value": ""
+                },
+                {
+                  "name": "CampaignId",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_AuthenticationEmail",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_CallbackUrl",
+                  "value": ""
+                },
+                {
+                  "name": "IsUserAnonymous",
+                  "value": ""
+                },
+                {
+                  "name": "Locale",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoCaption_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoUrl_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "QuestionDetails",
+                  "value": ""
+                },
+                {
+                  "name": "QuestionSummary",
+                  "value": ""
+                },
+                {
+                  "name": "SendEmailAlertWhenAnswered",
+                  "value": ""
+                },
+                {
+                  "name": "SendEmailAlertWhenPublished",
+                  "value": ""
+                },
+                {
+                  "name": "User",
+                  "value": ""
+                },
+                {
+                  "name": "UserEmail",
+                  "value": ""
+                },
+                {
+                  "name": "UserId",
+                  "value": ""
+                },
+                {
+                  "name": "UserLocation",
+                  "value": ""
+                },
+                {
+                  "name": "UserNickname",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submit a question"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Answers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview an answer submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/data/submitanswer.json",
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "QuestionId",
+                "value": "1483881",
+                "type": "query",
+                "description": "The id of the question that this answer is being submitted on."
+              },
+              {
+                "name": "Action",
+                "value": "preview",
+                "type": "query",
+                "description": "The submission action to take"
+              },
+              {
+                "name": "AnswerText",
+                "value": "HeyLetsDothis API key config has been changed to encrypted USERIDs",
+                "type": "query",
+                "description": "Contains the text of the answer."
+              },
+              {
+                "name": "agreedtotermsandconditions",
+                "value": "true",
+                "type": "query",
+                "description": "Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings."
+              },
+              {
+                "name": "UserId",
+                "value": "testi2",
+                "type": "query",
+                "description": "User's external ID. This value should come from your authentication system. See Client-Mastered Authentication for more information.\n\nAlert Do not use an email address for this value."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ]
+          },
+          "docs": "Preview an answer submission"
+        },
+        {
+          "info": {
+            "name": "Submit an answer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/submitanswer.json",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "QuestionId",
+                  "value": ""
+                },
+                {
+                  "name": "Action",
+                  "value": ""
+                },
+                {
+                  "name": "AnswerText",
+                  "value": ""
+                },
+                {
+                  "name": "UserId",
+                  "value": ""
+                },
+                {
+                  "name": "fp",
+                  "value": ""
+                },
+                {
+                  "name": "AgreedToTermsAndConditions",
+                  "value": ""
+                },
+                {
+                  "name": "CampaignId",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_AuthenticationEmail",
+                  "value": ""
+                },
+                {
+                  "name": "HostedAuthentication_CallbackUrl",
+                  "value": ""
+                },
+                {
+                  "name": "Locale",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoCaption_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoUrl_<n>",
+                  "value": ""
+                },
+                {
+                  "name": "SendEmailAlertWhenPublished",
+                  "value": ""
+                },
+                {
+                  "name": "User",
+                  "value": ""
+                },
+                {
+                  "name": "UserEmail",
+                  "value": ""
+                },
+                {
+                  "name": "UserLocation",
+                  "value": ""
+                },
+                {
+                  "name": "UserNickname",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submit an answer"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authenticateuser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/authenticateuser.json",
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "authtoken",
+                "value": "[authtoken]",
+                "type": "query",
+                "description": "Value of the authentication token that was received in a user's authentication email. See the hostedauthentication_callbackurl parameter for more information."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ]
+          },
+          "docs": "Authenticate a user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/submitfeedback.json",
+            "headers": [
+              {
+                "name": "X-Forwarded-For",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "ContentId",
+                "value": "47645686",
+                "type": "query",
+                "description": "The ID of the content with which the feedback is associated."
+              },
+              {
+                "name": "ContentType",
+                "value": "review",
+                "type": "query",
+                "description": "The type of content with which the feedback is associated (review, question, answer, or review_comment)."
+              },
+              {
+                "name": "FeedbackType",
+                "value": "helpfulness",
+                "type": "query",
+                "description": "Type of feedback (inappropriate, helpfulness)."
+              },
+              {
+                "name": "Vote",
+                "value": "Positive",
+                "type": "query",
+                "description": "Helpfulness vote for this content. Valid votes are: Positive, Negative. This parameter is only required for FeedbackType=helpfulness."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission             to access a particular client's data."
+              }
+            ]
+          },
+          "docs": "Submit a feedback"
+        },
+        {
+          "info": {
+            "name": "Generate a form URL for DSA.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/dsafeedbackurl.json",
+            "params": [
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Key required to authenticate API user and check permission to access particular client's data."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API generates a form URL for DSA feedback."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Uploadphoto",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a photo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/data/uploadphoto.json",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "params": [
+              {
+                "name": "ApiVersion",
+                "value": "5.4",
+                "type": "query",
+                "description": "The API version, e.g. 5.4."
+              },
+              {
+                "name": "contentType",
+                "value": "review",
+                "type": "query",
+                "description": "The content type for which this media is being submitted. Valid values include review, question or answer."
+              },
+              {
+                "name": "PassKey",
+                "value": "caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4",
+                "type": "query",
+                "description": "API key is required to authenticate API user and check permission to access particular client's data."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Locale",
+                  "value": ""
+                },
+                {
+                  "name": "Photo",
+                  "value": ""
+                },
+                {
+                  "name": "PhotoUrl",
+                  "value": ""
+                },
+                {
+                  "name": "User",
+                  "value": ""
+                },
+                {
+                  "name": "UserId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a photo"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

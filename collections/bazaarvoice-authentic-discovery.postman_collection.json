@@ -1,0 +1,507 @@
+{
+  "item": [
+    {
+      "id": "5c7117db-4664-4484-b7da-4232d88e72c1",
+      "name": "Fetch Structured Data (JSON-LD or Microdata)",
+      "request": {
+        "name": "Fetch Structured Data (JSON-LD or Microdata)",
+        "description": {
+          "content": "Retrieves structured data for a specific product. This is the recommended endpoint that accepts productId as a query parameter.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "clients",
+            ":clientId",
+            "ugc"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "productId",
+              "value": "<string>",
+              "description": "(Required) The ID of the product. Can contain special characters."
+            },
+            {
+              "description": {
+                "content": "A JSON-encoded query object containing parameters for various content types. Refer to Bazaarvoice CV2 documentation for specific filter and sort values.\n",
+                "type": "text/plain"
+              },
+              "key": "q",
+              "value": ""
+            },
+            {
+              "disabled": false,
+              "key": "canonical",
+              "value": "<uri>",
+              "description": "The exact identifier string used in your Product Schema's `@id` field. **CRITICAL REQUIREMENT:** For search engines to associate these reviews with your product, the string you send here **MUST BE IDENTICAL** (character-for-character) to the `@id` you assign to the Product object in your own schema generation. **Recommended Format:** Product Canonical URL + `#product` fragment."
+            },
+            {
+              "disabled": false,
+              "key": "locale",
+              "value": "<string>",
+              "description": "(Required) Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+            },
+            {
+              "disabled": false,
+              "key": "siteId",
+              "value": "<string>",
+              "description": "Site ID of the implementation, default will be main_site"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "clientId",
+              "description": "(Required) The name of the client. Can contain special characters."
+            }
+          ]
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "Clients will need to send User-Agent of consumers accessing the PDP page",
+            "key": "Bv-Forwarded-User-Agent",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "Clients will need to send User-Agent of their backend http client",
+            "key": "User-Agent",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/ld+json"
+          }
+        ],
+        "method": "GET",
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "key",
+              "value": "Bv-passkey"
+            },
+            {
+              "key": "value",
+              "value": "{{apiKey}}"
+            },
+            {
+              "key": "in",
+              "value": "header"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "507bdd1b-2e3e-4bf8-a5b1-3c6a01fe9f49",
+          "name": "Returns JSONLD by default for reviews and ratings.\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "clients",
+                ":clientId",
+                "ugc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "product1"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "canonical",
+                  "value": "https://www.example.com/running-shoe#product"
+                },
+                {
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "siteId",
+                  "value": "main_site"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) The name of the client. Can contain special characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Bv-passkey",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of consumers accessing the PDP page",
+                "key": "Bv-Forwarded-User-Agent",
+                "value": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of their backend http client",
+                "key": "User-Agent",
+                "value": "Apache-HttpClient/4.5.8 (Java/1.8.0_191)"
+              },
+              {
+                "disabled": false,
+                "description": "Accept header must be empty or omitted. The API will return the default content type (text/javascript) for now, in future this might change.",
+                "key": "Accept",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Indicates which request headers affect the response",
+              "key": "Vary",
+              "value": "Origin, Accept-Encoding, Accept"
+            },
+            {
+              "disabled": false,
+              "description": "Caching directives (default 55 minutes)",
+              "key": "Cache-Control",
+              "value": "public, max-age=3300"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/ld+json"
+            }
+          ],
+          "body": "{\n  \"ratings\": {\n    \"@context\": \"https://schema.org/\",\n    \"@id\": \"https://example.com/product\",\n    \"aggregateRating\": {\n      \"@type\": \"AggregateRating\",\n      \"ratingValue\": \"4.7\",\n      \"reviewCount\": 873,\n      \"bestRating\": 5\n    }\n  },\n  \"galleries\": [\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"ItemList\",\n      \"name\": \"Visual Gallery\",\n      \"numberOfItems\": 97,\n      \"itemListElement\": [\n        {\n          \"@type\": \"ListItem\",\n          \"position\": 1,\n          \"item\": {\n            \"@type\": \"ImageObject\",\n            \"name\": \"Featuring Sandals\",\n            \"contentUrl\": \"https://example.com/image1.jpg\"\n          }\n        },\n        {\n          \"@type\": \"ListItem\",\n          \"position\": 2,\n          \"item\": {\n            \"@type\": \"ImageObject\",\n            \"name\": \"Featuring Boots\",\n            \"contentUrl\": \"https://example.com/image2.jpg\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "78334ba9-64a0-4668-9245-bc5bd5009389",
+          "name": "Bad Request, Validation failed for the request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "clients",
+                ":clientId",
+                "ugc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "product1"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "canonical",
+                  "value": "https://www.example.com/running-shoe#product"
+                },
+                {
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "siteId",
+                  "value": "main_site"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) The name of the client. Can contain special characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Bv-passkey",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of consumers accessing the PDP page",
+                "key": "Bv-Forwarded-User-Agent",
+                "value": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of their backend http client",
+                "key": "User-Agent",
+                "value": "Apache-HttpClient/4.5.8 (Java/1.8.0_191)"
+              },
+              {
+                "disabled": false,
+                "description": "Accept header must be empty or omitted. The API will return the default content type (text/javascript) for now, in future this might change.",
+                "key": "Accept",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"/problems/bad-request\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"detail\": \"Bv-passkey is required\",\n  \"instance\": \"/clients/{clientId}/ugc\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "bf209b74-62f4-4155-b906-cac02dcdedfb",
+          "name": "Unauthorized",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "clients",
+                ":clientId",
+                "ugc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "product1"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "canonical",
+                  "value": "https://www.example.com/running-shoe#product"
+                },
+                {
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "siteId",
+                  "value": "main_site"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) The name of the client. Can contain special characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Bv-passkey",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of consumers accessing the PDP page",
+                "key": "Bv-Forwarded-User-Agent",
+                "value": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of their backend http client",
+                "key": "User-Agent",
+                "value": "Apache-HttpClient/4.5.8 (Java/1.8.0_191)"
+              },
+              {
+                "disabled": false,
+                "description": "Accept header must be empty or omitted. The API will return the default content type (text/javascript) for now, in future this might change.",
+                "key": "Accept",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"/problems/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"Invalid Bv-passkey\",\n  \"instance\": \"/clients/{clientId}/ugc\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "836d2324-1b0c-46cb-a457-edd05074f52a",
+          "name": "Internal Server Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "clients",
+                ":clientId",
+                "ugc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "product1"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "canonical",
+                  "value": "https://www.example.com/running-shoe#product"
+                },
+                {
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "siteId",
+                  "value": "main_site"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clientId",
+                  "description": "(Required) The name of the client. Can contain special characters."
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Bv-passkey",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of consumers accessing the PDP page",
+                "key": "Bv-Forwarded-User-Agent",
+                "value": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot"
+              },
+              {
+                "disabled": false,
+                "description": "Clients will need to send User-Agent of their backend http client",
+                "key": "User-Agent",
+                "value": "Apache-HttpClient/4.5.8 (Java/1.8.0_191)"
+              },
+              {
+                "disabled": false,
+                "description": "Accept header must be empty or omitted. The API will return the default content type (text/javascript) for now, in future this might change.",
+                "key": "Accept",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            }
+          ],
+          "body": "{\n  \"type\": \"/problems/unexpected-error\",\n  \"title\": \"Internal Server Error\",\n  \"status\": 500,\n  \"detail\": \"Internal Server Error\",\n  \"instance\": \"/clients/{clientId}/ugc\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://seo-stg.bazaarvoice.com/structured-data/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b2638d4e-652a-49de-99ca-b0232660d5bf",
+    "name": "SEO",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Authentic Discovery API for serving structured data (JSONLD, Microdata). Serves JSON-LD by default, and Microdata.\n\nContact Support:\n Name: SWAT\n Email: swat-display@bazaarvoice.com",
+      "type": "text/plain"
+    }
+  }
+}

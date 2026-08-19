@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bazaarvoice Content Search Answers API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Answers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAnswers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/questions/:legacyInternalId/answers",
+            "headers": [
+              {
+                "name": "X-Correlation-ID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "legacyInternalId",
+                "value": "",
+                "type": "path",
+                "description": "Question's legacy internal ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "getAnswers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

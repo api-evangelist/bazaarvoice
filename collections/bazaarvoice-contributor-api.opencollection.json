@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bazaarvoice Content Search Answers Contributor API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contributor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Contributor Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/:clientId/contributors/:contributorExternalId",
+            "headers": [
+              {
+                "name": "X-Correlation-ID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "Client ID"
+              },
+              {
+                "name": "contributorExternalId",
+                "value": "",
+                "type": "path",
+                "description": "Contributor's external Id (not the internal legacy Id), use - when using the body"
+              }
+            ]
+          },
+          "docs": "Contributor Search"
+        },
+        {
+          "info": {
+            "name": "Contributor Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/contributor",
+            "headers": [
+              {
+                "name": "clientId",
+                "value": ""
+              },
+              {
+                "name": "X-Correlation-ID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Contributor Search"
+        },
+        {
+          "info": {
+            "name": "Contributor Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/contributors/:contributorExternalId",
+            "headers": [
+              {
+                "name": "clientId",
+                "value": ""
+              },
+              {
+                "name": "X-Correlation-ID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "contributorExternalId",
+                "value": "",
+                "type": "path",
+                "description": "Contributor's external Id (not the internal legacy Id), use - when using the body"
+              }
+            ]
+          },
+          "docs": "Contributor Search"
+        },
+        {
+          "info": {
+            "name": "Contributor Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/contributors/:contributorExternalId",
+            "headers": [
+              {
+                "name": "clientId",
+                "value": ""
+              },
+              {
+                "name": "X-Correlation-ID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "contributorExternalId",
+                "value": "",
+                "type": "path",
+                "description": "Contributor's external Id (not the internal legacy Id), use - when using the body"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Contributor Search"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

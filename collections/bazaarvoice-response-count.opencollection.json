@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Count Client Response",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Client Response",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the count of responses for a list of reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stg.api.bazaarvoice.com/response/v1/clientResponses/reviews/-/responses",
+            "headers": [
+              {
+                "name": "X-Portal-User",
+                "value": ""
+              },
+              {
+                "name": "X-Bazaarvoice-Customer",
+                "value": ""
+              },
+              {
+                "name": "X-Bazaarvoice-AppName",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "passkey",
+                "value": "",
+                "type": "query",
+                "description": "Passkey to access the API"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the count of responses for a list of reviews"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

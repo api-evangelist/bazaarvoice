@@ -1,48 +1,124 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
-source: openapi/bazaarvoice-content-search-openapi.json
+source:
+- openapi/_original/
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management
+- https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/oauth2-2-legged
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/platform-api-concepts
 docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management
 summary:
   types:
   - apiKey
+  - http
   - oauth2
   api_key_in:
   - header
   - query
+  http_schemes:
+  - bearer
   oauth2_flows:
   - clientCredentials
+  - authorizationCode
   note: >-
-    Bazaarvoice uses two authentication models across its API surface. The Conversations
-    and Content Search APIs authenticate with an API passkey (the Bv-Passkey header in
-    the V2.0 Content Search API, or the Passkey query parameter in the classic
-    Conversations API). Passkeys are requested and managed in the Bazaarvoice Portal's
-    API Key Management application and must be activated by a Technical Administrator.
-    The Transactions API and Response API instead use 2-legged OAuth2 (client
-    credentials) and do not accept passkeys.
+    Bazaarvoice runs three distinct authentication models across its API estate, and which one
+    applies depends entirely on which product you are calling. (1) An API PASSKEY - the Bv-Passkey
+    header on the Content Search and Authentic Discovery APIs, or a Passkey query parameter on the
+    classic Conversations and Notifications Subscriptions APIs. Passkeys are requested and managed
+    in the Bazaarvoice Portal API Key Management application and must be activated by a Technical
+    Administrator. (2) HTTP BEARER tokens obtained from OAuth2 - the Transactions API uses a
+    2-legged client-credentials flow against POST /auth-v1/oauth2/token, while the Response and
+    Privacy APIs also document a 3-legged flow through identity.portal.bazaarvoice.com. (3) A
+    separate X-Curalate-Api-Key header on the Social Commerce Display (Media) API, which runs on
+    the Curalate platform Bazaarvoice acquired.
 schemes:
 - name: Bv-Passkey
   type: apiKey
   in: header
   parameter: Bv-Passkey
   description: >-
-    API passkey for the Content Search API, sent as the Bv-Passkey request header.
-    Requested and managed in the Bazaarvoice Portal API Key Management application.
+    API passkey for the V2.0 Content Search API, sent as the Bv-Passkey request header.
   sources:
-  - openapi/bazaarvoice-content-search-openapi.json
+  - openapi/_original/bazaarvoice-content-search-openapi.json
+- name: Bv-passkey
+  type: apiKey
+  in: header
+  parameter: Bv-passkey
+  description: >-
+    Authentic Discovery API key, sent as the Bv-passkey request header on
+    GET /clients/{clientId}/ugc (note the lower-case "p" - the Authentic Discovery document spells
+    the header differently from the Content Search document).
+  sources:
+  - openapi/_original/bazaarvoice-authentic-discovery-openapi.json
 - name: Passkey
   type: apiKey
   in: query
   parameter: passkey
   description: >-
-    API passkey for the classic Conversations API, supplied as the Passkey query
-    parameter (e.g. ?ApiVersion=5.4&Passkey={apikey}).
+    API passkey for the classic Conversations API, supplied as the Passkey query parameter
+    (e.g. ?ApiVersion=5.4&Passkey={apikey}).
   docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management
-- name: OAuth2ClientCredentials
-  type: oauth2
-  flow: clientCredentials
-  tokenUrl: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/post_auth-v1-oauth2-token
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: passkey
+  description: Notifications Subscriptions API passkey, supplied as the passkey query parameter.
+  sources:
+  - openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
+- name: accessToken
+  type: http
+  scheme: bearer
   description: >-
-    2-legged OAuth2 (client credentials) for the Transactions API and Response API.
-    client_id and client_secret are issued by Bazaarvoice Support; a token is obtained
-    from the POST /auth-v1/oauth2/token endpoint. No passkey is used for these APIs.
+    Bearer access token for the Transactions API, obtained from the 2-legged OAuth2
+    client-credentials endpoint. client_id and client_secret are issued by Bazaarvoice Support.
   docs: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/oauth2-2-legged
+  sources:
+  - openapi/_original/bazaarvoice-transactions-openapi.json
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: >-
+    Bearer access token for the Response API. The spec's own scheme description documents a
+    two-part login against identity(-stg).portal.bazaarvoice.com/api/v1/oauth2/login followed by a
+    token exchange.
+  sources:
+  - openapi/_original/bazaarvoice-response-openapi.json
+  - openapi/_original/bazaarvoice-response-count-openapi.json
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: X-Curalate-Api-Key
+  description: >-
+    API key header for the Social Commerce Display (Media) API. Bazaarvoice's own Social Commerce
+    docs state that all endpoints are served from edge.curalate.com - Curalate is the visual-commerce
+    company Bazaarvoice acquired, and the product still runs on that platform and its key header.
+  sources:
+  - openapi/_original/bazaarvoice-social-commerce-media-openapi.json
+oauth2:
+  flows:
+  - flow: clientCredentials
+    name: 2-legged
+    token_endpoint_docs: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/post_auth-v1-oauth2-token
+    applies_to: [Transactions API, Privacy API]
+    docs: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/oauth2-2-legged
+  - flow: authorizationCode
+    name: 3-legged
+    login_endpoint: https://identity.portal.bazaarvoice.com/api/v1/oauth2/login
+    applies_to: [Privacy API, Response API]
+    docs: https://developers.bazaarvoice.com/v1.0-PrivacyAPI/reference/privacy-post-auth-v1-oauth2-token-reference
+  scopes_published: false
+key_management:
+  portal: https://portal.bazaarvoice.com
+  docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-key-management
+  detail: >-
+    Keys are requested per client through the API Key Management application in the Bazaarvoice
+    Portal; a Technical Administrator must activate a key before it will authenticate. The portal
+    also shows each key's status and rate-limit allotment.
+author_authentication:
+  detail: >-
+    Distinct from API authentication: content SUBMISSION additionally requires an author identity,
+    either BV-mastered (Bazaarvoice hosts the user account) or client-mastered (the client passes a
+    signed user id). Device fingerprinting via iovation is documented as part of the submission
+    anti-fraud path.
+  docs:
+  - https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/bv-mastered-authentication
+  - https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/client-mastered-authentication

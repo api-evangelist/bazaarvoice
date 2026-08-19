@@ -1,23 +1,52 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
 source:
 - https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide
+- https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/http-deprecation-redirect-end-of-life
 - https://status.bazaarvoice.com
+- openapi/_original/
 versioning:
-  scheme: query-parameter
+  scheme: mixed
   current: '5.4'
   detail: >-
-    Classic Conversations API versions are selected with the ApiVersion query
-    parameter; the current major line is 5.4. The V2.0 Content Search API is versioned
-    in its base path.
+    Bazaarvoice versions differently per product line. The classic Conversations API selects a
+    version with the ApiVersion query parameter (current major line 5.4). The V2.0 Content Search
+    API is versioned in its base path/host. The newer APIs pin the version into the path segment
+    instead - /response/v1/, /privacy/v1/, /sentiment/v1/, /notifications/, /dce/v3/, /psi/v1/,
+    /structured-data/v1. There is no single estate-wide versioning contract.
   docs: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide
 deprecation:
   policy_url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/upgrade-guide
+  sunset_header: false
+  deprecation_header: false
   detail: >-
-    Bazaarvoice publishes an upgrade guide and per-version changelogs documenting
-    behavioral changes and deprecations between Conversations API versions.
+    Bazaarvoice publishes an upgrade guide and per-version changelogs documenting behavioral changes
+    and deprecations between Conversations API versions, and announces end-of-life for specific
+    behaviors as dedicated documentation pages. It does NOT signal deprecation at runtime - no
+    RFC 8594 Sunset header and no Deprecation header appear in any published spec, and no operation
+    in any of the eleven OpenAPI documents carries deprecated: true.
+  announcements:
+  - name: HTTP Deprecation | Redirect (3XX) End of Life
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/http-deprecation-redirect-end-of-life
+    detail: >-
+      End of life for HTTP-to-HTTPS redirect (3XX) support on API traffic; clients calling over
+      plain HTTP must move to HTTPS rather than relying on the redirect.
+  - name: QPS rate-limit headers superseded by QPM
+    detail: X-Bazaarvoice-QPS-* headers are deprecated in favour of the X-Bazaarvoice-QPM-* pair.
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/api-rate-limit
+  - name: bvapi.js superseded by bv.js
+    detail: The v1 display loader is superseded by the v2 bv.js loader, which Bazaarvoice recommends for continued support.
+sla:
+  url: null
+  uptime_target: null
+  detail: >-
+    No public SLA or uptime commitment is published. Support tiers (Standard / Priority /
+    Enterprise) are listed on the pricing page without published response-time or availability
+    targets.
 status_page: https://status.bazaarvoice.com
 status_page_provider: statuspage.io
 status_api: https://status.bazaarvoice.com/api/v2/status.json
-sla: null
+status_api_verified: '2026-08-13'
 deprecated_operations: []
+deprecated_operations_note: >-
+  Checked every operation in all eleven published OpenAPI documents; none is marked deprecated.

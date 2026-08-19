@@ -1,0 +1,24 @@
+# Bazaarvoice Developer Space V2.0 Documentation
+
+> Documentation for Bazaarvoice Developer Space V2.0
+
+## Guides
+- [Overview](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview.md)
+- [Getting Started](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/getting-started.md)
+- [Retrieve Summarised Features](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/get-summarised-features.md)
+- [Retrieve Quotes for a Summarised Features](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/get-quotes-for-summarised-features.md)
+- [Retrieve Features](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/get-features.md)
+- [Retrieve Quotes](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/get-quotes.md)
+- [Retrieve Expressions](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/get-expressions.md)
+- [Security Imperatives](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/security-imperatives.md): Security Fundamentals for HTTPS and TLS.
+- [API Key Management](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/api-key-management.md): This page explains how to use the API Key Management application in the Bazaarvoice Portal to view and manage API keys.
+
+## API Reference
+- [Provides best and worst features along with their quotes for a product](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes.md)
+- [Provides quotes for a specific feature](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/getsummarisedfeatureswithquotes.md)
+- [Provides all features for a product](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/getallfeaturesforproduct.md)
+- [Provides top 25 positive quotes for a product](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/getproductquotes.md)
+- [Provides all expressions for a product](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/getfeatureexpressions.md)
+
+## Pages
+- [Support](https://developers.bazaarvoice.com/v1.0-SentimentsAPI/page/support.md)

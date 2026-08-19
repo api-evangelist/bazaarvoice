@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SEO",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fetch Structured Data (JSON-LD or Microdata)",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://seo-stg.bazaarvoice.com/structured-data/v1/clients/:clientId/ugc",
+        "headers": [
+          {
+            "name": "Bv-Forwarded-User-Agent",
+            "value": ""
+          },
+          {
+            "name": "User-Agent",
+            "value": ""
+          },
+          {
+            "name": "Accept",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "clientId",
+            "value": "yourclientid",
+            "type": "path",
+            "description": "The name of the client. Can contain special characters."
+          },
+          {
+            "name": "productId",
+            "value": "product1",
+            "type": "query",
+            "description": "The ID of the product. Can contain special characters."
+          },
+          {
+            "name": "q",
+            "value": "",
+            "type": "query",
+            "description": "A JSON-encoded query object containing parameters for various content types. Refer to Bazaarvoice CV2 documentation for specific filter and sort values.\n"
+          },
+          {
+            "name": "canonical",
+            "value": "https://www.example.com/running-shoe#product",
+            "type": "query",
+            "description": "The exact identifier string used in your Product Schema's `@id` field. **CRITICAL REQUIREMENT:** For search engines to associate these reviews with your product, the string you send here **MUST BE IDENTICAL** (character-for-character) to the `@id` you assign to the Product object in your own schema generation. **Recommended Format:** Product Canonical URL + `#product` fragment."
+          },
+          {
+            "name": "locale",
+            "value": "",
+            "type": "query",
+            "description": "Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key."
+          },
+          {
+            "name": "siteId",
+            "value": "",
+            "type": "query",
+            "description": "Site ID of the implementation, default will be main_site"
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "Bv-passkey",
+          "value": "{{Bv-passkey}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Retrieves structured data for a specific product. This is the recommended endpoint that accepts productId as a query parameter."
+    }
+  ],
+  "bundled": true
+}

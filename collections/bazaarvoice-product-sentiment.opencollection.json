@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Product Sentiment API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Provides best and worst features along with their quotes for a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/sentiment/v1/summarised-features",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides best and worst features along with their quotes for a product"
+        },
+        {
+          "info": {
+            "name": "Provides quotes for a specific feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/sentiment/v1/summarised-features/:featureId/quotes",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "featureId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides quotes for a specific feature"
+        },
+        {
+          "info": {
+            "name": "Provides all features for a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/sentiment/v1/features",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides all features for a product"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Provides top 25 positive quotes for a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/sentiment/v1/quotes",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides top 25 positive quotes for a product"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "expressions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Provides all expressions for a product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stg.api.bazaarvoice.com/sentiment/v1/expressions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "feature",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides all expressions for a product"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

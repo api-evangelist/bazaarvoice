@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "51533631-f203-4b2c-b15d-a2bb512933ca",
+      "name": "Lookahead",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d0301c2-f775-4111-b67f-9daca45a6700",
+          "name": "Lookahead Search",
+          "request": {
+            "name": "Lookahead Search",
+            "description": {},
+            "url": {
+              "path": [
+                "lookahead"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Client ID",
+                "key": "clientId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Correlation ID",
+                "key": "X-Correlation-ID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f35fa052-0bc7-48be-b745-31132526da6b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookahead"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"hierachy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"name\": \"string\",\n    \"externalId\": \"string\"\n  },\n  {\n    \"hierachy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"name\": \"string\",\n    \"externalId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49c255a3-4b09-476e-8143-0350cf6ac944",
+              "name": "Invalid request body, or missing clientId header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookahead"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f464df7-62ae-4a2e-ad1b-afb7364ee6ad",
+              "name": "Unexpected internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lookahead"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Client ID",
+                    "key": "clientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Correlation ID",
+                    "key": "X-Correlation-ID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"term\": \"<string>\",\n  \"mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f4be90cb-f6ba-40d6-8919-a4b7b981a641",
+    "name": "Bazaarvoice Content Search Answers Lookahead API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.\n\nContact Support:\n Name: Bazaarvoice Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

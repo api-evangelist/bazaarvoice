@@ -1,0 +1,1367 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "Response API",
+  "description": "The Bazaarvoice Response API lets you programmatically manage review responses.",
+  "contact": {
+   "name": "Response API Team",
+   "email": "support@bazaarvoice.com"
+  },
+  "version": "1.0.1-1"
+ },
+ "servers": [
+  {
+   "url": "https://stg.api.bazaarvoice.com",
+   "description": "STAGING"
+  },
+  {
+   "url": "https://api.bazaarvoice.com",
+   "description": "PRODUCTION"
+  }
+ ],
+ "paths": {
+  "/response/v1/clientResponses/{responseGuid}/relationships/author": {
+   "get": {
+    "tags": [
+     "Author"
+    ],
+    "summary": "Get a given client response record's author details",
+    "operationId": "getAuthorRelationship",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of an author relationship",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AuthorRelationship"
+        },
+        "example": {
+         "data": {
+          "type": "author",
+          "id": "1"
+         },
+         "links": {
+          "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/author",
+          "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/author"
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown or invalid response guid",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 404,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}/relationships/author",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "id",
+           "message": "Client Response Id does not exist"
+          }
+         ]
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   }
+  },
+  "/response/v1/clientResponses/{responseGuid}/author": {
+   "get": {
+    "tags": [
+     "Author"
+    ],
+    "summary": "Get a given client response record's author details",
+    "operationId": "getAuthor",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of an author relationship",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AuthorRelationship"
+        },
+        "example": {
+         "data": {
+          "type": "author",
+          "id": "1"
+         },
+         "links": {
+          "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/author",
+          "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/author"
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown or invalid response guid",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 404,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}/author",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "id",
+           "message": "Client Response Id does not exist"
+          }
+         ]
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   }
+  },
+  "/response/v1/clientResponses/{responseGuid}": {
+   "get": {
+    "tags": [
+     "Client Response"
+    ],
+    "summary": "Get a given client response record",
+    "operationId": "getClientResponse",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of a client response record",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ClientResponseResponseModel"
+        },
+        "example": {
+         "type": "clientResponse",
+         "id": "{responseGuid}",
+         "attributes": {
+          "department": "Department name specified by the user",
+          "response": "Response specified by the user",
+          "responseBy": "Optional responder name specified by the user",
+          "responseSource": "Name of Application created for OAuth",
+          "responderClient": "responderClient",
+          "created": "XXXX-XX-XXTXX:XX:XXZ",
+          "updated": "XXXX-XX-XXTXX:XX:XXZ"
+         },
+         "relationships": {
+          "review": {
+           "data": {
+            "type": "review",
+            "id": "XXXXXXX",
+            "clientName": "XXXXXXXXXXXX"
+           },
+           "links": {
+            "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review",
+            "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review"
+           }
+          }
+         },
+         "links": {
+          "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}"
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown or invalid response guid",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 404,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "id",
+           "message": "Client Response Id does not exist"
+          }
+         ]
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   },
+   "delete": {
+    "tags": [
+     "Client Response"
+    ],
+    "summary": "Delete a given client response record",
+    "operationId": "deleteClientResponse",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": "Successful deletion of a client response record (204 returned whether the responseGuid exists or not)",
+      "content": {}
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   },
+   "patch": {
+    "tags": [
+     "Client Response"
+    ],
+    "summary": "Update a given client response record",
+    "operationId": "updateClientResponse",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ClientResponseRequest"
+       }
+      }
+     },
+     "required": false
+    },
+    "responses": {
+     "200": {
+      "description": "Successful update of a client response record",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ClientResponse"
+        },
+        "example": {
+         "type": "clientResponse",
+         "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+         "attributes": {
+          "department": "Department name specified by the user",
+          "response": "Response specified by the user",
+          "responseBy": "Optional responder name specified by the user",
+          "responseSource": "Name of Application created for OAuth",
+          "created": "2018-06-22T19:55:03Z",
+          "updated": "2018-06-27T14:32:15Z"
+         },
+         "relationships": {
+          "author": {
+           "data": {
+            "type": "author",
+            "id": "Dav OAuth"
+           },
+           "links": {
+            "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author",
+            "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author"
+           }
+          },
+          "review": {
+           "data": {
+            "type": "review",
+            "id": "75266",
+            "clientName": "apitestcustomer"
+           },
+           "links": {
+            "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review",
+            "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review"
+           }
+          }
+         },
+         "links": {
+          "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Duplicate response text",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 400,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "response",
+           "message": "Duplicate '{response text}' detected for ClientResponse.response"
+          }
+         ]
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown or invalid response guid",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 404,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "id",
+           "message": "Client Response Id does not exist"
+          }
+         ]
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "x-codegen-request-body-name": "body"
+   }
+  },
+  "/response/v1/clientResponses/{client}/reviews/{reviewId}": {
+   "get": {
+    "tags": [
+     "Client Response"
+    ],
+    "summary": "Get all client response records for the specified review",
+    "operationId": "getClientResponseForReview",
+    "parameters": [
+     {
+      "name": "client",
+      "in": "path",
+      "description": "Specify a client name",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "reviewId",
+      "in": "path",
+      "description": "Specify a review id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of a client response record",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ClientResponse"
+        },
+        "example": {
+         "data": [
+          {
+           "type": "clientResponse",
+           "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+           "attributes": {
+            "department": "Department name specified by the user",
+            "response": "Response specified by the user",
+            "responseBy": "Optional responder name specified by the user",
+            "responseSource": "Name of Application created for OAuth",
+            "created": "XXXX-XX-XXTXX:XX:XXZ",
+            "updated": "XXXX-XX-XXTXX:XX:XXZ"
+           },
+           "relationships": {
+            "author": {
+             "data": {
+              "type": "author",
+              "id": "Dav OAuth"
+             },
+             "links": {
+              "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author",
+              "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author"
+             }
+            },
+            "review": {
+             "data": {
+              "type": "review",
+              "id": "{reviewId}",
+              "clientName": "{client}"
+             },
+             "links": {
+              "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review",
+              "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review"
+             }
+            }
+           },
+           "links": {
+            "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+           }
+          }
+         ],
+         "links": {
+          "self": "https://qa.api.bazaarvoice.com/response/v1/response/v1/clientResponses/apitestcustomer/reviews/XXXXXXX"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Incorrect or unknown review id",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 400,
+         "requestURI": "/response/v1/clientResponses/{client}/reviews/{reviewId}",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "reviewId",
+           "message": "Review Id does not exist for client"
+          }
+         ]
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "Client Response"
+    ],
+    "summary": "Submit a client response for a given review",
+    "operationId": "createClientResponseForReview",
+    "parameters": [
+     {
+      "name": "client",
+      "in": "path",
+      "description": "Specify a client name",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "reviewId",
+      "in": "path",
+      "description": "Specify a review id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ClientResponseRequest"
+       }
+      }
+     },
+     "required": false
+    },
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of a client response record",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ClientResponse"
+        },
+        "example": {
+         "data": [
+          {
+           "type": "clientResponse",
+           "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+           "attributes": {
+            "department": "Department name specified by the user",
+            "response": "Response specified by the user",
+            "responseBy": "Optional responder name specified by the user",
+            "responseSource": "Name of Application created for OAuth",
+            "created": "2018-06-22T19:55:03Z",
+            "updated": "2018-06-22T19:55:03Z"
+           },
+           "relationships": {
+            "author": {
+             "data": {
+              "type": "author",
+              "id": "Dav OAuth"
+             },
+             "links": {
+              "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author",
+              "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author"
+             }
+            },
+            "review": {
+             "data": {
+              "type": "review",
+              "id": "{reviewId}",
+              "clientName": "{client}"
+             },
+             "links": {
+              "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review",
+              "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review"
+             }
+            }
+           },
+           "links": {
+            "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+           }
+          }
+         ]
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Incorrect or unknown review id",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "examples": {
+         "Invalid review ID": {
+          "value": {
+           "httpCode": 400,
+           "requestURI": "/response/v1/clientResponses/{client}/reviews/{reviewId}",
+           "errors": [
+            {
+             "code": "INVALID_PROPERTY_VALUE",
+             "field": "reviewId",
+             "message": "Review Id does not exist for client"
+            }
+           ]
+          }
+         },
+         "Response may not be empty": {
+          "value": {
+           "httpCode": 400,
+           "requestURI": "/response/v1/clientResponses/{client}/reviews/{reviewId}",
+           "errors": [
+            {
+             "code": "INVALID_PROPERTY_VALUE",
+             "field": "response",
+             "message": "Validation error for `ClientResponseResource.clientResponseModify.attributes.response:` may not be empty"
+            }
+           ]
+          }
+         },
+         "Department may not be empty": {
+          "value": {
+           "httpCode": 400,
+           "requestURI": "/response/v1/clientResponses/{client}/reviews/{reviewId}",
+           "errors": [
+            {
+             "code": "INVALID_PROPERTY_VALUE",
+             "field": "department",
+             "message": "Validation error for `ClientResponseResource.clientResponseModify.attributes.department:` may not be empty"
+            }
+           ]
+          }
+         },
+         "The submitted JSON is not formatted correctly": {
+          "value": {
+           "httpCode": 400,
+           "requestURI": "/response/v1/clientResponses/{client}/reviews/{reviewId}",
+           "errors": [
+            {
+             "code": "INVALID_PROPERTY_VALUE",
+             "field": "attributes",
+             "message": "Validation error for `ClientResponseResource.clientResponseModify.attributes:` may not be null"
+            }
+           ]
+          }
+         },
+         "Duplicate responses are not supported": {
+          "value": {
+           "httpCode": 400,
+           "requestURI": "/response/v1/clientResponses/{client}/reviews/{reviewId}",
+           "errors": [
+            {
+             "code": "INVALID_PROPERTY_VALUE",
+             "field": "response",
+             "message": "Duplicate 'This is some sample response' detected for ClientResponse.response"
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ],
+    "x-codegen-request-body-name": "body"
+   }
+  },
+  "/response/v1/clientResponses/{responseGuid}/review": {
+   "get": {
+    "tags": [
+     "Review"
+    ],
+    "summary": "Get a given client response record's review details",
+    "operationId": "getReview",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of an author relationship",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReviewRelationship"
+        },
+        "example": {
+         "data": {
+          "type": "review",
+          "id": 12345,
+          "clientName": "clientName"
+         },
+         "links": {
+          "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review",
+          "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review"
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown or invalid response guid",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 404,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}/review",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "id",
+           "message": "Client Response Id does not exist"
+          }
+         ]
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   }
+  },
+  "/response/v1/clientResponses/{responseGuid}/relationships/review": {
+   "get": {
+    "tags": [
+     "Review"
+    ],
+    "summary": "Get a given client response record's review details",
+    "operationId": "getReviewRelationship",
+    "parameters": [
+     {
+      "name": "responseGuid",
+      "in": "path",
+      "description": "Specify a string Client Response Id",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "passkey",
+      "in": "query",
+      "description": "Passkey to access the API",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful retrieval of an author relationship",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReviewRelationship"
+        },
+        "example": {
+         "data": {
+          "type": "review",
+          "id": 12345,
+          "clientName": "clientName"
+         },
+         "links": {
+          "self": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review",
+          "related": "https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review"
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorised access",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UserNotAuthorised"
+        },
+        "example": {
+         "code": 401,
+         "message": "Credentials are required to access this resource."
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unknown or invalid passkey",
+      "content": {
+       "text/html": {
+        "schema": {
+         "$ref": "#/components/schemas/IncorrectApiKey"
+        },
+        "example": "<h1>Developer Inactive</h1>"
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown or invalid response guid",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "example": {
+         "httpCode": 404,
+         "requestURI": "/response/v1/clientResponses/{responseGuid}/relationships/review",
+         "errors": [
+          {
+           "code": "INVALID_PROPERTY_VALUE",
+           "field": "id",
+           "message": "Client Response Id does not exist"
+          }
+         ]
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "BearerAuth": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AuthorData": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     }
+    }
+   },
+   "AuthorRelationship": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/AuthorData"
+     },
+     "links": {
+      "$ref": "#/components/schemas/Links"
+     }
+    }
+   },
+   "Links": {
+    "type": "object",
+    "properties": {
+     "self": {
+      "type": "string"
+     },
+     "related": {
+      "type": "string"
+     }
+    }
+   },
+   "ClientResponse": {
+    "type": "object",
+    "properties": {
+     "department": {
+      "type": "string"
+     },
+     "response": {
+      "type": "string"
+     },
+     "responseBy": {
+      "type": "string"
+     },
+     "responseSource": {
+      "type": "string"
+     },
+     "responderClient": {
+      "type": "string"
+     },
+     "created": {
+      "type": "integer",
+      "format": "int64"
+     },
+     "updated": {
+      "type": "integer",
+      "format": "int64"
+     }
+    },
+    "description": "The data associated with a given Client Response record"
+   },
+   "ClientResponseRequest": {
+    "type": "object",
+    "properties": {
+     "attributes": {
+      "type": "object",
+      "properties": {
+       "department": {
+        "type": "string"
+       },
+       "response": {
+        "type": "string"
+       },
+       "responseBy": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "department",
+       "response"
+      ]
+     }
+    },
+    "required": [
+     "attributes"
+    ],
+    "description": "The data associated with a given Client Response record"
+   },
+   "Error": {
+    "required": [
+     "code",
+     "message"
+    ],
+    "type": "object",
+    "properties": {
+     "code": {
+      "$ref": "#/components/schemas/ErrorCode"
+     },
+     "field": {
+      "type": "string",
+      "description": "The field for which this error applies"
+     },
+     "message": {
+      "type": "string",
+      "description": "The human-readable message describing this error"
+     }
+    },
+    "description": "Error relating to an API request"
+   },
+   "ErrorCode": {
+    "type": "object",
+    "properties": {
+     "message": {
+      "type": "string"
+     }
+    },
+    "description": "Error code value"
+   },
+   "ErrorResponse": {
+    "required": [
+     "errors",
+     "httpCode",
+     "requestURI"
+    ],
+    "type": "object",
+    "properties": {
+     "httpCode": {
+      "type": "integer",
+      "description": "The HTTP response code",
+      "format": "int32"
+     },
+     "requestURI": {
+      "type": "string",
+      "description": "The incoming request URI"
+     },
+     "errors": {
+      "type": "array",
+      "description": "The list of detailed errors",
+      "items": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "Error Response to an API request"
+   },
+   "ClientResponseRelationships": {
+    "type": "object",
+    "properties": {
+     "author": {
+      "$ref": "#/components/schemas/AuthorRelationship"
+     },
+     "review": {
+      "$ref": "#/components/schemas/ReviewRelationship"
+     }
+    }
+   },
+   "ClientResponseResponseModel": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ClientResponse"
+     },
+     "relationships": {
+      "$ref": "#/components/schemas/ClientResponseRelationships"
+     },
+     "links": {
+      "$ref": "#/components/schemas/Links"
+     }
+    }
+   },
+   "ReviewData": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "clientName": {
+      "type": "string"
+     }
+    }
+   },
+   "ReviewRelationship": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/ReviewData"
+     },
+     "links": {
+      "$ref": "#/components/schemas/Links"
+     }
+    }
+   },
+   "IncorrectApiKey": {
+    "type": "string",
+    "description": "Message describing the error associated with API"
+   },
+   "UserNotAuthorised": {
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The HTTP status code generated by the origin server for this occurrence of the problem.",
+      "default": 403
+     },
+     "message": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "BearerAuth": {
+    "type": "http",
+    "scheme": "bearer",
+    "description": "### Part One\n* curl -X POST   'https://identity(-stg).portal.bazaarvoice.com/api/v1/oauth2/login?client_id={{CLIENT_ID}}&redirect_uri=http%3A%2F%2Flocalhost%3A8080'\n-H 'accept: */*'\n-H 'Content-Type: application/json'\n-H 'allow-redirects:false'\n-d '{\n\"email\": \"{{USER_EMAIL}}\",\n\"password\": \"{{USER_PASSWORD}}\"\n}'\n### Part Two (with code gotten from part one)\n* curl -X POST \"https://identity(-stg).bazaarvoice.com/auth/v1/oauth2/token?passkey={API_PASSKEY}\" \\\n-H \"Content-Type: application/x-www-form-urlencoded\" \\\n-d \"code={AUTHORIZATION_CODE_FROM_PART_ONE}&grant_type=authorization_code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&client_secret={CLIENT_SECRET}\"\n"
+   }
+  }
+ },
+ "x-readme": {
+  "explorer-enabled": true,
+  "proxy-enabled": true
+ }
+}

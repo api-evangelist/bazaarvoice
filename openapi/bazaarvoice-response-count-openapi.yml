@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: Count Client Response
+  version: 1.0.0
+paths:
+  /response/v1/clientResponses/reviews/-/responses:
+    post:
+      tags:
+      - Client Response
+      summary: Get the count of responses for a list of reviews
+      operationId: countResponsesForReviews
+      parameters:
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      - name: X-Portal-User
+        in: header
+        description: Bazaarvoice Portal Email
+        required: true
+        schema:
+          type: string
+      - name: X-Bazaarvoice-Customer
+        in: header
+        description: Client who owns the KMS Passkey
+        required: true
+        schema:
+          type: string
+      - name: X-Bazaarvoice-AppName
+        in: header
+        description: Name of App associated with Passkey
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewResponseCountRequest'
+            example:
+              reviewIds:
+              - '12345'
+              - '67890'
+      responses:
+        '200':
+          description: Successful retrieval of response count for reviews
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewResponseCountResponse'
+              example:
+                counts:
+                - reviewId: '12345'
+                  responseCount: 2
+                - reviewId: '67890'
+                  responseCount: 0
+        '400':
+          description: Validation exception on one or more fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                type: string
+              example: <h1>Developer Inactive</h1>
+      security:
+      - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    ReviewResponseCountRequest:
+      type: object
+      properties:
+        reviewIds:
+          type: array
+          items:
+            type: string
+    ReviewResponseCountResponse:
+      type: object
+      properties:
+        counts:
+          type: array
+          items:
+            type: object
+            properties:
+              reviewId:
+                type: string
+              responseCount:
+                type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    UserNotAuthorised:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    IncorrectApiKey:
+      type: string
+servers:
+- url: https://stg.api.bazaarvoice.com
+x-readme: {}
