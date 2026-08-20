@@ -43,6 +43,17 @@ tags:
 - Ratings
 - User Generated Content
 - Retail
+- E-Commerce
+- Product Reviews
+- Syndication
+- Social Commerce
+- SEO
+tags_raw:
+- Company
+- Reviews
+- Ratings
+- User Generated Content
+- Retail
 - eCommerce
 - Product Reviews
 - Syndication
@@ -245,6 +256,12 @@ apis:
   humanURL: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
   baseURL: https://api.bazaarvoice.com
   tags:
+  - Notification
+  - Email
+  - Consent
+  - Subscription
+  - Privacy
+  tags_raw:
   - Notifications
   - Email
   - Consent
@@ -273,6 +290,12 @@ apis:
   humanURL: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
   baseURL: https://api.bazaarvoice.com
   tags:
+  - Transaction
+  - Review Requests
+  - Notification
+  - E-Commerce
+  - Order
+  tags_raw:
   - Transactions
   - Review Requests
   - Notifications
@@ -299,6 +322,12 @@ apis:
   humanURL: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
   baseURL: https://api.bazaarvoice.com/sentiment/v1/
   tags:
+  - Sentiment
+  - Natural Language Processing
+  - Insights
+  - Reviews
+  - Artificial Intelligence
+  tags_raw:
   - Sentiment
   - Natural Language Processing
   - Insights
