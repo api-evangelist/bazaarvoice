@@ -3,9 +3,9 @@
   "feeds": [
     {
       "source": "https://developer.bazaarvoice.com/conversations-api/getting-help",
-      "error": "HTTPError"
+      "error": "URLError"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-15T12:22:01Z"
+  "fetched": "2026-08-22T20:20:02Z"
 }
