@@ -149,305 +149,1478 @@ apis:
     url: https://developer.bazaarvoice.com/conversations-api/reference/v5.4
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/home
-- aid: bazaarvoice:bazaarvoice-conversations-display-api
-  name: Bazaarvoice Conversations Display API
-  description: The Conversations Display API returns published user-generated content for a product or
-    catalog - reviews, review comments, questions, answers, author profiles, products, categories and
-    aggregate statistics - as JSON or XML, selected with the ApiVersion query parameter and a client passkey.
-  humanURL: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+- aid: bazaarvoice:bazaarvoice-authenticateuser-api
+  name: Bazaarvoice Authenticateuser API
+  description: The Authenticateuser API from Bazaarvoice — 1 operation(s) for authenticateuser.
+  humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
   tags:
-  - Reviews
-  - Questions
-  - Answers
-  - Display
-  - User Generated Content
+  - Authenticateuser
   properties:
   - type: OpenAPI
-    url: openapi/bazaarvoice-conversations-display-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-conversations-display-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-conversations-display-overlay.yaml
+    url: openapi/bazaarvoice-authenticateuser-api-openapi.yml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
-- aid: bazaarvoice:bazaarvoice-conversations-submission-api
-  name: Bazaarvoice Conversations Submission API
-  description: 'The Conversations Submission API accepts shopper-generated content: reviews, review comments,
-    questions, answers and feedback, plus photo and video upload, author authentication and progressive
-    submission. Form previews describe the fields each client requires before a submission is posted.'
-  humanURL: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
-  baseURL: https://api.bazaarvoice.com
-  tags:
-  - Reviews
-  - Submission
-  - User Generated Content
-  - Media Upload
-  - Moderation
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-conversations-submission-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-conversations-submission-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-conversations-submission-overlay.yaml
   - type: APIReference
-    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
-- aid: bazaarvoice:bazaarvoice-response-api
-  name: Bazaarvoice Response API
-  description: The Response API lets a brand publish, edit and remove its official response to a review,
-    and read the review and author behind a response. It authenticates with an HTTP bearer token obtained
-    through the Bazaarvoice identity portal rather than with a passkey.
-  humanURL: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
-  baseURL: https://api.bazaarvoice.com
-  tags:
-  - Reviews
-  - Brand Response
-  - Moderation
-  - Customer Service
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-response-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-response-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-response-overlay.yaml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
   - type: Postman
     url: postman/bazaarvoice-response-api.postman_collection.json
-- aid: bazaarvoice:bazaarvoice-response-count-api
-  name: Bazaarvoice Response Count API
-  description: A separately published single-operation contract that takes a list of review identifiers
-    and returns how many brand responses each review already has - the bulk triage counterpart to the
-    Response API.
-  humanURL: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
-  baseURL: https://api.bazaarvoice.com
-  tags:
-  - Reviews
-  - Brand Response
-  - Bulk
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-response-count-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-response-count-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-response-count-overlay.yaml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
-- aid: bazaarvoice:bazaarvoice-notifications-subscriptions-api
-  name: Bazaarvoice Notifications Subscriptions API
-  description: The Notifications Subscriptions API manages shopper email subscription state for Bazaarvoice
-    notification emails - paging the opt-in and opt-out lists per email type and subscribing or unsubscribing
-    an address on the shopper's behalf. Email addresses are encrypted with a shared secret key.
-  humanURL: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
-  baseURL: https://api.bazaarvoice.com
-  tags:
-  - Notification
-  - Email
-  - Consent
-  - Subscription
-  - Privacy
-  tags_raw:
-  - Notifications
-  - Email
-  - Consent
-  - Subscriptions
-  - Privacy
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-notifications-subscriptions-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-notifications-subscriptions-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-notifications-subscriptions-overlay.yaml
   - type: APIReference
-    url: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
   - type: Documentation
-    url: https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
   - type: Postman
     url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
-- aid: bazaarvoice:bazaarvoice-transactions-api
-  name: Bazaarvoice Transactions API
-  description: The Transactions API ingests purchase transaction records - single or bulk - so Bazaarvoice
-    can schedule post-interaction review-request notifications, and invalidates a transaction when an
-    order is cancelled. It authenticates with 2-legged OAuth2 client credentials and returns RFC 9457
-    problem documents on error.
-  humanURL: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
-  baseURL: https://api.bazaarvoice.com
-  tags:
-  - Transaction
-  - Review Requests
-  - Notification
-  - E-Commerce
-  - Order
-  tags_raw:
-  - Transactions
-  - Review Requests
-  - Notifications
-  - eCommerce
-  - Orders
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-transactions-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-transactions-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-transactions-overlay.yaml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
-- aid: bazaarvoice:bazaarvoice-product-sentiment-api
-  name: Bazaarvoice Product Sentiment API
-  description: 'The Product Sentiment API returns NLP-derived consumer insight from review text: summarised
-    product features with best/worst weighting, the shopper quotes behind each feature, all detected features
-    for a product, top positive quotes, and the underlying expressions. It is the one Bazaarvoice contract
-    that declares its 429 response.'
-  humanURL: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
-  baseURL: https://api.bazaarvoice.com/sentiment/v1/
-  tags:
-  - Sentiment
-  - Natural Language Processing
-  - Insights
-  - Reviews
-  - Artificial Intelligence
-  tags_raw:
-  - Sentiment
-  - Natural Language Processing
-  - Insights
-  - Reviews
-  - AI
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-product-sentiment-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-product-sentiment-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-product-sentiment-overlay.yaml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
-- aid: bazaarvoice:bazaarvoice-social-commerce-media-api
-  name: Bazaarvoice Social Commerce Display (Media) API
-  description: The Social Commerce Display API serves visual user-generated content - gallery media, top
-    images, recommendations, Instagram and Facebook sourcing, media upload and reporting, and Schema.org
-    structured data for galleries. Bazaarvoice's own Social Commerce documentation states that all endpoints
-    are served from edge.curalate.com, the platform of Curalate, the visual-commerce company Bazaarvoice
-    acquired; the API still authenticates with an X-Curalate-Api-Key header.
-  humanURL: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
-  baseURL: https://edge.curalate.com
-  tags:
-  - Social Commerce
-  - Visual UGC
-  - Galleries
-  - Instagram
-  - Media
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-social-commerce-media-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-social-commerce-media-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-social-commerce-media-overlay.yaml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
-- aid: bazaarvoice:bazaarvoice-authentic-discovery-api
-  name: Bazaarvoice Authentic Discovery API
-  description: 'The Authentic Discovery API is Bazaarvoice''s generative-engine-optimization surface:
-    a server-side call that returns a product''s ratings, reviews, review summaries and Q&A as Schema.org
-    JSON-LD or Microdata so it can be embedded in the initial HTML response and read by AI crawlers that
-    do not execute JavaScript.'
-  humanURL: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
-  baseURL: https://seo.bazaarvoice.com/structured-data/v1
-  tags:
-  - Structured Data
-  - JSON-LD
-  - SEO
-  - AI Discovery
-  - Agents
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-authentic-discovery-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-authentic-discovery-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-authentic-discovery-overlay.yaml
   - type: APIReference
-    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
-- aid: bazaarvoice:bazaarvoice-displayable-content-export
-  name: Bazaarvoice Displayable Content Export
-  description: 'Displayable Content Export is a bulk HTTPS data interface: a client requests a manifest
-    file list, follows redirects to the manifest and then to the data files, and downloads the full set
-    of displayable user-generated content rather than paging it through the Conversations Display API.'
-  humanURL: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
-  baseURL: https://api.bazaarvoice.com
-  tags:
-  - Bulk Export
-  - Data Feed
-  - User Generated Content
-  - Batch
-  properties:
-  - type: OpenAPI
-    url: openapi/bazaarvoice-displayable-content-export-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-displayable-content-export-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-displayable-content-export-overlay.yaml
   - type: APIReference
     url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
-- aid: bazaarvoice:bazaarvoice-product-sentiment-export
-  name: Bazaarvoice Product Sentiment Export
-  description: 'Product Sentiment Export is the bulk counterpart to the Product Sentiment API: the same
-    manifest-then-download HTTPS flow used by Displayable Content Export, delivering sentiment insight
-    data as files instead of per-product API responses.'
-  humanURL: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-author-api
+  name: Bazaarvoice Author API
+  description: The Author API from Bazaarvoice — 2 operation(s) for author.
+  humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
   tags:
-  - Bulk Export
-  - Sentiment
-  - Data Feed
-  - Insights
-  - Batch
+  - Author
   properties:
   - type: OpenAPI
-    url: openapi/bazaarvoice-product-sentiment-export-openapi.yml
-  - type: OpenAPI
-    name: Provider-published source document (verbatim)
-    url: openapi/_original/bazaarvoice-product-sentiment-export-openapi.json
-  - type: Overlay
-    url: overlays/bazaarvoice-product-sentiment-export-overlay.yaml
+    url: openapi/bazaarvoice-author-api-openapi.yml
   - type: APIReference
-    url: https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-client-response-api
+  name: Bazaarvoice Client Response API
+  description: The Client Response API from Bazaarvoice — 3 operation(s) for client response.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Client Response
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-client-response-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-comments-api
+  name: Bazaarvoice Comments API
+  description: The Comments API from Bazaarvoice — 1 operation(s) for comments.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-comments-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-default-api
+  name: Bazaarvoice Default API
+  description: The default API from Bazaarvoice — 8 operation(s) for default.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - default
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-default-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-expressions-api
+  name: Bazaarvoice Expressions API
+  description: The expressions API from Bazaarvoice — 1 operation(s) for expressions.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - expressions
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-expressions-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-facebook-api
+  name: Bazaarvoice Facebook API
+  description: The Facebook API from Bazaarvoice — 4 operation(s) for facebook.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Facebook
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-facebook-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-features-api
+  name: Bazaarvoice Features API
+  description: The features API from Bazaarvoice — 3 operation(s) for features.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - features
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-features-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-feedback-api
+  name: Bazaarvoice Feedback API
+  description: The Feedback API from Bazaarvoice — 2 operation(s) for feedback.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-feedback-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-instagram-api
+  name: Bazaarvoice Instagram API
+  description: The Instagram API from Bazaarvoice — 3 operation(s) for instagram.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Instagram
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-instagram-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-media-api
+  name: Bazaarvoice Media API
+  description: The Media API from Bazaarvoice — 4 operation(s) for media.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-media-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-meta-api
+  name: Bazaarvoice Meta API
+  description: The Meta API from Bazaarvoice — 1 operation(s) for meta.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Meta
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-meta-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-notifications-client-subscriptions-api
+  name: Bazaarvoice Notifications/{client}/subscriptions API
+  description: Enables clients to manage end-user subscriptions to email notifications.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - notifications/{client}/subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-notifications-client-subscriptions-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-progressivesubmit-api
+  name: Bazaarvoice Progressive Submit API
+  description: The ProgressiveSubmit API from Bazaarvoice — 2 operation(s) for progressivesubmit.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - ProgressiveSubmit
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-progressivesubmit-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-quotes-api
+  name: Bazaarvoice Quotes API
+  description: The quotes API from Bazaarvoice — 1 operation(s) for quotes.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-quotes-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-report-api
+  name: Bazaarvoice Report API
+  description: The Report API from Bazaarvoice — 1 operation(s) for report.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Report
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-report-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-review-api
+  name: Bazaarvoice Review API
+  description: The Review API from Bazaarvoice — 2 operation(s) for review.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Review
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-review-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-step-1-api
+  name: Bazaarvoice Step 1 API
+  description: The Step 1 API from Bazaarvoice — 2 operation(s) for step 1.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Step 1
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-step-1-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-structured-data-api
+  name: Bazaarvoice Structured Data API
+  description: The Structured Data API from Bazaarvoice — 1 operation(s) for structured data.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Structured Data
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-structured-data-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-submitreview-api
+  name: Bazaarvoice Submitreview API
+  description: The Submitreview API from Bazaarvoice — 1 operation(s) for submitreview.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Submitreview
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-submitreview-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-transactions-api
+  name: Bazaarvoice Transactions API
+  description: The Transactions API from Bazaarvoice — 3 operation(s) for transactions.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-transactions-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-upload-api
+  name: Bazaarvoice Upload API
+  description: The Upload API from Bazaarvoice — 3 operation(s) for upload.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-upload-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
+- aid: bazaarvoice:bazaarvoice-uploadphoto-api
+  name: Bazaarvoice Uploadphoto API
+  description: The Uploadphoto API from Bazaarvoice — 1 operation(s) for uploadphoto.
+  humanURL: https://developers.bazaarvoice.com/
+  baseURL: https://api.bazaarvoice.com
+  tags:
+  - Uploadphoto
+  properties:
+  - type: OpenAPI
+    url: openapi/bazaarvoice-uploadphoto-api-openapi.yml
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/get_data-reviews-json
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/display-overview
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-ConversationsAPI/reference/conversations-submit-review-reference
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ConversationsAPI/docs/submission-overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/getclientresponse
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/docs/overview
+  - type: Postman
+    url: postman/bazaarvoice-response-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-ResponseAPI/reference/countresponsesforreviews
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/reference/notifications-get-opt-in-email
+  - type: Documentation
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-NotificationsAPI/docs/notifications-subscription-api
+  - type: Postman
+    url: postman/bazaarvoice-notifications-subscriptions-api.postman_collection.json
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/reference/ingesttransaction
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-TransactionsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/reference/gettopfeaturequotes
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SentimentsAPI/docs/overview
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/api-endpoints
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-SocialCommerceAPI/docs/introduction
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/reference/getstructureddata
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/home
+  - type: APIReference
+    url: https://developers.bazaarvoice.com/v1.0-DCE/reference/dce-request-manifest-file-list
+  - type: Documentation
+    url: https://developers.bazaarvoice.com/v1.0-DCE/docs/home
+  - type: APIReference
+    url: >-
+      https://developers.bazaarvoice.com/v1.0-PS-Export/reference/ps-export-request-manifest-file-list-reference
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
 common:
+- type: Overlay
+  url: overlays/bazaarvoice-conversations-display-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-conversations-submission-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-response-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-response-count-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-notifications-subscriptions-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-transactions-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-product-sentiment-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-social-commerce-media-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-authentic-discovery-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-displayable-content-export-overlay.yaml
+- type: Overlay
+  url: overlays/bazaarvoice-product-sentiment-export-overlay.yaml
 - type: DeveloperPortal
   url: https://developers.bazaarvoice.com/
 - type: Documentation
