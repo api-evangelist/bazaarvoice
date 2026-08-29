@@ -1,0 +1,37 @@
+slug: bazaarvoice
+provider: Bazaarvoice
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Reviews
+  spec_file: bazaarvoice-reviews-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.7
+  evidence: '"Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions,
+    Answers, Contributor profiles"; operations "Get review", "searchReviews"; schemas Review, ReviewContributor,
+    SecondaryRatings'
+  reason: Search and retrieval of consumer ratings and reviews is voice-of-customer / customer feedback
+    content management. Not product master data (the Product schema is only a reference), not marketing
+    content authoring.
+- tag: Submitreview
+  spec_file: bazaarvoice-submitreview-api-openapi.yml
+  capability_id: BC-430.50
+  capability_id_l1: BC-430
+  capability_name: Customer Feedback Management
+  confidence: 0.7
+  evidence: POST /data/submitreview.json "Submit a review"; "Preview Review Form"; schemas SubmitReview,
+    GetReview
+  reason: Collection of consumer review submissions is capture of customer feedback / voice of customer.
+    The operations are content submission, not product data or transaction processing.

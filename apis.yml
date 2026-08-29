@@ -1611,6 +1611,9 @@ apis:
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
 common:
+- type: CapabilityMap
+  url: capabilities/bazaarvoice-capability-edges.yml
+  name: Bazaarvoice Business Capability Map
 - type: Overlay
   url: overlays/bazaarvoice-conversations-display-overlay.yaml
 - type: Overlay
