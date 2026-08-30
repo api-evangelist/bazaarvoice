@@ -418,7 +418,8 @@ apis:
   description: The default API from Bazaarvoice — 8 operation(s) for default.
   humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
-  tags:
+  tags: []
+  tags_raw:
   - default
   properties:
   - type: OpenAPI
@@ -608,6 +609,8 @@ apis:
   humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
   tags:
+  - Features
+  tags_raw:
   - features
   properties:
   - type: OpenAPI
@@ -922,7 +925,8 @@ apis:
   description: Enables clients to manage end-user subscriptions to email notifications.
   humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
-  tags:
+  tags: []
+  tags_raw:
   - notifications/{client}/subscriptions
   properties:
   - type: OpenAPI
@@ -1049,6 +1053,8 @@ apis:
   humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
   tags:
+  - Quotes
+  tags_raw:
   - quotes
   properties:
   - type: OpenAPI
@@ -1427,6 +1433,8 @@ apis:
   humanURL: https://developers.bazaarvoice.com/
   baseURL: https://api.bazaarvoice.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
