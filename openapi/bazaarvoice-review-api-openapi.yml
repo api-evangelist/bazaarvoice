@@ -1,0 +1,259 @@
+openapi: 3.2.0
+info:
+  title: Response Review API
+  description: The Bazaarvoice Response API lets you programmatically manage review responses.
+  contact:
+    name: Response API Team
+    email: support@bazaarvoice.com
+  version: 1.0.1-1
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: STAGING
+- url: https://api.bazaarvoice.com
+  description: PRODUCTION
+tags:
+- name: Review
+paths:
+  /response/v1/clientResponses/{responseGuid}/review:
+    get:
+      tags:
+      - Review
+      summary: Get a given client response record's review details
+      operationId: getReview
+      parameters:
+      - name: responseGuid
+        in: path
+        description: Specify a string Client Response Id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of an author relationship
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewRelationship'
+              example:
+                data:
+                  type: review
+                  id: 12345
+                  clientName: clientName
+                links:
+                  self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review
+                  related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+        '404':
+          description: Unknown or invalid response guid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                httpCode: 404
+                requestURI: /response/v1/clientResponses/{responseGuid}/review
+                errors:
+                - code: INVALID_PROPERTY_VALUE
+                  field: id
+                  message: Client Response Id does not exist
+      security:
+      - BearerAuth: []
+  /response/v1/clientResponses/{responseGuid}/relationships/review:
+    get:
+      tags:
+      - Review
+      summary: Get a given client response record's review details
+      operationId: getReviewRelationship
+      parameters:
+      - name: responseGuid
+        in: path
+        description: Specify a string Client Response Id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of an author relationship
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewRelationship'
+              example:
+                data:
+                  type: review
+                  id: 12345
+                  clientName: clientName
+                links:
+                  self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review
+                  related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+        '404':
+          description: Unknown or invalid response guid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                httpCode: 404
+                requestURI: /response/v1/clientResponses/{responseGuid}/relationships/review
+                errors:
+                - code: INVALID_PROPERTY_VALUE
+                  field: id
+                  message: Client Response Id does not exist
+      security:
+      - BearerAuth: []
+components:
+  schemas:
+    ReviewRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ReviewData'
+        links:
+          $ref: '#/components/schemas/Links'
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        field:
+          type: string
+          description: The field for which this error applies
+        message:
+          type: string
+          description: The human-readable message describing this error
+      description: Error relating to an API request
+    ErrorResponse:
+      required:
+      - errors
+      - httpCode
+      - requestURI
+      type: object
+      properties:
+        httpCode:
+          type: integer
+          description: The HTTP response code
+          format: int32
+        requestURI:
+          type: string
+          description: The incoming request URI
+        errors:
+          type: array
+          description: The list of detailed errors
+          items:
+            $ref: '#/components/schemas/Error'
+      description: Error Response to an API request
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API
+    ErrorCode:
+      type: object
+      properties:
+        message:
+          type: string
+      description: Error code value
+    Links:
+      type: object
+      properties:
+        self:
+          type: string
+        related:
+          type: string
+    UserNotAuthorised:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          default: 403
+        message:
+          type: string
+    ReviewData:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        clientName:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: '### Part One
+
+        * curl -X POST   ''https://identity(-stg).portal.bazaarvoice.com/api/v1/oauth2/login?client_id={{CLIENT_ID}}&redirect_uri=http%3A%2F%2Flocalhost%3A8080''
+
+        -H ''accept: */*''
+
+        -H ''Content-Type: application/json''
+
+        -H ''allow-redirects:false''
+
+        -d ''{
+
+        "email": "{{USER_EMAIL}}",
+
+        "password": "{{USER_PASSWORD}}"
+
+        }''
+
+        ### Part Two (with code gotten from part one)
+
+        * curl -X POST "https://identity(-stg).bazaarvoice.com/auth/v1/oauth2/token?passkey={API_PASSKEY}" \
+
+        -H "Content-Type: application/x-www-form-urlencoded" \
+
+        -d "code={AUTHORIZATION_CODE_FROM_PART_ONE}&grant_type=authorization_code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&client_secret={CLIENT_SECRET}"
+
+        '
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

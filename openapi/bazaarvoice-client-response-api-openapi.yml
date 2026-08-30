@@ -1,0 +1,740 @@
+openapi: 3.2.0
+info:
+  title: Bazaarvoice Client Response API
+  version: '1.0'
+  description: 'Operations tagged Client Response across 2 of this provider''s published API definitions: bazaarvoice-response-count-openapi.yml, bazaarvoice-response-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://stg.api.bazaarvoice.com
+- url: https://api.bazaarvoice.com
+  description: PRODUCTION
+tags:
+- name: Client Response
+paths:
+  /response/v1/clientResponses/reviews/-/responses:
+    post:
+      tags:
+      - Client Response
+      summary: Get the count of responses for a list of reviews
+      operationId: countResponsesForReviews
+      parameters:
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      - name: X-Portal-User
+        in: header
+        description: Bazaarvoice Portal Email
+        required: true
+        schema:
+          type: string
+      - name: X-Bazaarvoice-Customer
+        in: header
+        description: Client who owns the KMS Passkey
+        required: true
+        schema:
+          type: string
+      - name: X-Bazaarvoice-AppName
+        in: header
+        description: Name of App associated with Passkey
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewResponseCountRequest'
+            example:
+              reviewIds:
+              - '12345'
+              - '67890'
+      responses:
+        '200':
+          description: Successful retrieval of response count for reviews
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewResponseCountResponse'
+              example:
+                counts:
+                - reviewId: '12345'
+                  responseCount: 2
+                - reviewId: '67890'
+                  responseCount: 0
+        '400':
+          description: Validation exception on one or more fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                type: string
+              example: <h1>Developer Inactive</h1>
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://stg.api.bazaarvoice.com
+  /response/v1/clientResponses/{responseGuid}:
+    get:
+      tags:
+      - Client Response
+      summary: Get a given client response record
+      operationId: getClientResponse
+      parameters:
+      - name: responseGuid
+        in: path
+        description: Specify a string Client Response Id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of a client response record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponseResponseModel'
+              example:
+                type: clientResponse
+                id: '{responseGuid}'
+                attributes:
+                  department: Department name specified by the user
+                  response: Response specified by the user
+                  responseBy: Optional responder name specified by the user
+                  responseSource: Name of Application created for OAuth
+                  responderClient: responderClient
+                  created: XXXX-XX-XXTXX:XX:XXZ
+                  updated: XXXX-XX-XXTXX:XX:XXZ
+                relationships:
+                  review:
+                    data:
+                      type: review
+                      id: XXXXXXX
+                      clientName: XXXXXXXXXXXX
+                    links:
+                      self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/relationships/review
+                      related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}/review
+                links:
+                  self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/{responseGuid}
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised_2'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+        '404':
+          description: Unknown or invalid response guid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              example:
+                httpCode: 404
+                requestURI: /response/v1/clientResponses/{responseGuid}
+                errors:
+                - code: INVALID_PROPERTY_VALUE
+                  field: id
+                  message: Client Response Id does not exist
+      security:
+      - BearerAuth: []
+    delete:
+      tags:
+      - Client Response
+      summary: Delete a given client response record
+      operationId: deleteClientResponse
+      parameters:
+      - name: responseGuid
+        in: path
+        description: Specify a string Client Response Id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Successful deletion of a client response record (204 returned whether the responseGuid exists or not)
+          content: {}
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised_2'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+      security:
+      - BearerAuth: []
+    patch:
+      tags:
+      - Client Response
+      summary: Update a given client response record
+      operationId: updateClientResponse
+      parameters:
+      - name: responseGuid
+        in: path
+        description: Specify a string Client Response Id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientResponseRequest'
+        required: false
+      responses:
+        '200':
+          description: Successful update of a client response record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+              example:
+                type: clientResponse
+                id: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+                attributes:
+                  department: Department name specified by the user
+                  response: Response specified by the user
+                  responseBy: Optional responder name specified by the user
+                  responseSource: Name of Application created for OAuth
+                  created: '2018-06-22T19:55:03Z'
+                  updated: '2018-06-27T14:32:15Z'
+                relationships:
+                  author:
+                    data:
+                      type: author
+                      id: Dav OAuth
+                    links:
+                      self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author
+                      related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author
+                  review:
+                    data:
+                      type: review
+                      id: '75266'
+                      clientName: apitestcustomer
+                    links:
+                      self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review
+                      related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review
+                links:
+                  self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+        '400':
+          description: Duplicate response text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              example:
+                httpCode: 400
+                requestURI: /response/v1/clientResponses/{responseGuid}
+                errors:
+                - code: INVALID_PROPERTY_VALUE
+                  field: response
+                  message: Duplicate '{response text}' detected for ClientResponse.response
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised_2'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+        '404':
+          description: Unknown or invalid response guid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              example:
+                httpCode: 404
+                requestURI: /response/v1/clientResponses/{responseGuid}
+                errors:
+                - code: INVALID_PROPERTY_VALUE
+                  field: id
+                  message: Client Response Id does not exist
+      security:
+      - BearerAuth: []
+      x-codegen-request-body-name: body
+    servers:
+    - url: https://stg.api.bazaarvoice.com
+      description: STAGING
+    - url: https://api.bazaarvoice.com
+      description: PRODUCTION
+  /response/v1/clientResponses/{client}/reviews/{reviewId}:
+    get:
+      tags:
+      - Client Response
+      summary: Get all client response records for the specified review
+      operationId: getClientResponseForReview
+      parameters:
+      - name: client
+        in: path
+        description: Specify a client name
+        required: true
+        schema:
+          type: string
+      - name: reviewId
+        in: path
+        description: Specify a review id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of a client response record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+              example:
+                data:
+                - type: clientResponse
+                  id: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+                  attributes:
+                    department: Department name specified by the user
+                    response: Response specified by the user
+                    responseBy: Optional responder name specified by the user
+                    responseSource: Name of Application created for OAuth
+                    created: XXXX-XX-XXTXX:XX:XXZ
+                    updated: XXXX-XX-XXTXX:XX:XXZ
+                  relationships:
+                    author:
+                      data:
+                        type: author
+                        id: Dav OAuth
+                      links:
+                        self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author
+                        related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author
+                    review:
+                      data:
+                        type: review
+                        id: '{reviewId}'
+                        clientName: '{client}'
+                      links:
+                        self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review
+                        related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review
+                  links:
+                    self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+                links:
+                  self: https://qa.api.bazaarvoice.com/response/v1/response/v1/clientResponses/apitestcustomer/reviews/XXXXXXX
+        '400':
+          description: Incorrect or unknown review id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              example:
+                httpCode: 400
+                requestURI: /response/v1/clientResponses/{client}/reviews/{reviewId}
+                errors:
+                - code: INVALID_PROPERTY_VALUE
+                  field: reviewId
+                  message: Review Id does not exist for client
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised_2'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+      security:
+      - BearerAuth: []
+    post:
+      tags:
+      - Client Response
+      summary: Submit a client response for a given review
+      operationId: createClientResponseForReview
+      parameters:
+      - name: client
+        in: path
+        description: Specify a client name
+        required: true
+        schema:
+          type: string
+      - name: reviewId
+        in: path
+        description: Specify a review id
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        description: Passkey to access the API
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientResponseRequest'
+        required: false
+      responses:
+        '200':
+          description: Successful retrieval of a client response record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+              example:
+                data:
+                - type: clientResponse
+                  id: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+                  attributes:
+                    department: Department name specified by the user
+                    response: Response specified by the user
+                    responseBy: Optional responder name specified by the user
+                    responseSource: Name of Application created for OAuth
+                    created: '2018-06-22T19:55:03Z'
+                    updated: '2018-06-22T19:55:03Z'
+                  relationships:
+                    author:
+                      data:
+                        type: author
+                        id: Dav OAuth
+                      links:
+                        self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/author
+                        related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/author
+                    review:
+                      data:
+                        type: review
+                        id: '{reviewId}'
+                        clientName: '{client}'
+                      links:
+                        self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/relationships/review
+                        related: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/review
+                  links:
+                    self: https://[stg.]api.bazaarvoice.com/response/v1/clientResponses/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+        '400':
+          description: Incorrect or unknown review id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              examples:
+                Invalid review ID:
+                  value:
+                    httpCode: 400
+                    requestURI: /response/v1/clientResponses/{client}/reviews/{reviewId}
+                    errors:
+                    - code: INVALID_PROPERTY_VALUE
+                      field: reviewId
+                      message: Review Id does not exist for client
+                Response may not be empty:
+                  value:
+                    httpCode: 400
+                    requestURI: /response/v1/clientResponses/{client}/reviews/{reviewId}
+                    errors:
+                    - code: INVALID_PROPERTY_VALUE
+                      field: response
+                      message: Validation error for `ClientResponseResource.clientResponseModify.attributes.response:` may not be empty
+                Department may not be empty:
+                  value:
+                    httpCode: 400
+                    requestURI: /response/v1/clientResponses/{client}/reviews/{reviewId}
+                    errors:
+                    - code: INVALID_PROPERTY_VALUE
+                      field: department
+                      message: Validation error for `ClientResponseResource.clientResponseModify.attributes.department:` may not be empty
+                The submitted JSON is not formatted correctly:
+                  value:
+                    httpCode: 400
+                    requestURI: /response/v1/clientResponses/{client}/reviews/{reviewId}
+                    errors:
+                    - code: INVALID_PROPERTY_VALUE
+                      field: attributes
+                      message: Validation error for `ClientResponseResource.clientResponseModify.attributes:` may not be null
+                Duplicate responses are not supported:
+                  value:
+                    httpCode: 400
+                    requestURI: /response/v1/clientResponses/{client}/reviews/{reviewId}
+                    errors:
+                    - code: INVALID_PROPERTY_VALUE
+                      field: response
+                      message: Duplicate 'This is some sample response' detected for ClientResponse.response
+        '401':
+          description: Unauthorised access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised_2'
+              example:
+                code: 401
+                message: Credentials are required to access this resource.
+        '403':
+          description: Unknown or invalid passkey
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              example: <h1>Developer Inactive</h1>
+      security:
+      - BearerAuth: []
+      x-codegen-request-body-name: body
+    servers:
+    - url: https://stg.api.bazaarvoice.com
+      description: STAGING
+    - url: https://api.bazaarvoice.com
+      description: PRODUCTION
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    UserNotAuthorised:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    ReviewResponseCountResponse:
+      type: object
+      properties:
+        counts:
+          type: array
+          items:
+            type: object
+            properties:
+              reviewId:
+                type: string
+              responseCount:
+                type: integer
+    ReviewResponseCountRequest:
+      type: object
+      properties:
+        reviewIds:
+          type: array
+          items:
+            type: string
+    AuthorRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthorData'
+        links:
+          $ref: '#/components/schemas/Links'
+    AuthorData:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        field:
+          type: string
+          description: The field for which this error applies
+        message:
+          type: string
+          description: The human-readable message describing this error
+      description: Error relating to an API request
+    ReviewRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ReviewData'
+        links:
+          $ref: '#/components/schemas/Links'
+    ClientResponseRequest:
+      type: object
+      properties:
+        attributes:
+          type: object
+          properties:
+            department:
+              type: string
+            response:
+              type: string
+            responseBy:
+              type: string
+          required:
+          - department
+          - response
+      required:
+      - attributes
+      description: The data associated with a given Client Response record
+    Links:
+      type: object
+      properties:
+        self:
+          type: string
+        related:
+          type: string
+    ErrorResponse_2:
+      required:
+      - errors
+      - httpCode
+      - requestURI
+      type: object
+      properties:
+        httpCode:
+          type: integer
+          description: The HTTP response code
+          format: int32
+        requestURI:
+          type: string
+          description: The incoming request URI
+        errors:
+          type: array
+          description: The list of detailed errors
+          items:
+            $ref: '#/components/schemas/Error'
+      description: Error Response to an API request
+    ClientResponseResponseModel:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/ClientResponse'
+        relationships:
+          $ref: '#/components/schemas/ClientResponseRelationships'
+        links:
+          $ref: '#/components/schemas/Links'
+    ClientResponseRelationships:
+      type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/AuthorRelationship'
+        review:
+          $ref: '#/components/schemas/ReviewRelationship'
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API
+    ErrorCode:
+      type: object
+      properties:
+        message:
+          type: string
+      description: Error code value
+    ClientResponse:
+      type: object
+      properties:
+        department:
+          type: string
+        response:
+          type: string
+        responseBy:
+          type: string
+        responseSource:
+          type: string
+        responderClient:
+          type: string
+        created:
+          type: integer
+          format: int64
+        updated:
+          type: integer
+          format: int64
+      description: The data associated with a given Client Response record
+    UserNotAuthorised_2:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          default: 403
+        message:
+          type: string
+    ReviewData:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        clientName:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- bazaarvoice-response-count-openapi.yml
+- bazaarvoice-response-openapi.yml

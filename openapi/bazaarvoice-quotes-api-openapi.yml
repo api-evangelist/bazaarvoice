@@ -1,0 +1,149 @@
+openapi: 3.2.0
+info:
+  title: Product Sentiment Quotes API
+  description: Sentiment Insights for Bazaarvoice Reviews
+  contact:
+    name: Content Intelligence
+    email: content-intelligence-dev@bazaarvoice.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+  x-audience:
+    x-audience: external-public
+  x-api-id:
+    x-api-id: 0a0913f4-76e3-4a84-8560-b09aa65823e9
+servers:
+- url: https://stg.api.bazaarvoice.com/sentiment/v1/
+  description: STG
+- url: https://api.bazaarvoice.com/sentiment/v1/
+  description: PROD
+tags:
+- name: quotes
+paths:
+  /quotes:
+    get:
+      tags:
+      - quotes
+      summary: Provides top 25 positive quotes for a product
+      operationId: getProductQuotes
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+          - fr
+          - de
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopPositiveQuotesResponse'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+components:
+  schemas:
+    QuoteResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: PaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAld5G1g8whdUcpC5Em3cYzBUnPaNd1cfFExHaPeosP2VMZOxVF646cJn6AVCjthzAleT4avVT2RAUQ==
+        text:
+          type: string
+          example: Lovely soft material, great fitting and comfortable.
+        reviewRating:
+          type: number
+          format: float
+          example: 5
+        reviewId:
+          type: string
+          example: 559ee070-65d4-54a1-960b-9bed94695a90
+        reviewedAt:
+          type: string
+          format: date
+        nativeLanguage:
+          type: string
+          example: en-US
+        highlightedText:
+          type: string
+          example: Lovely <strong>soft</strong> material, great fitting and comfortable.
+        incentivised:
+          type: boolean
+          example: false
+        translatedText:
+          type: string
+          example: Lovely soft material, great fitting and comfortable.
+        reviewType:
+          type: string
+          example: NATIVE
+          enum:
+          - native
+          - family
+          - syndicated
+    TopPositiveQuotesResponse:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteResponse'
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

@@ -1,0 +1,36 @@
+openapi: 3.2.0
+info:
+  title: Media Meta API
+  description: Curalate Media API
+  version: V1
+servers:
+- url: https://edge.curalate.com
+tags:
+- name: Meta
+paths:
+  /api/v1/version:
+    get:
+      tags:
+      - Meta
+      summary: Get the current running version of this server
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+components:
+  schemas:
+    VersionResponse:
+      required:
+      - version
+      type: object
+      properties:
+        version:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: X-Curalate-Api-Key
+      in: header

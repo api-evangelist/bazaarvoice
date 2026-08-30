@@ -1,0 +1,142 @@
+openapi: 3.2.0
+info:
+  title: Media Report API
+  description: Curalate Media API
+  version: V1
+servers:
+- url: https://edge.curalate.com
+tags:
+- name: Report
+paths:
+  /v1/media/report/{dataSourceId}/items/{itemId}:
+    post:
+      tags:
+      - Report
+      summary: Allows end users to report media
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: fe502c92-e9b5-45ee-ad3a-429c1e94f9c4
+          x-qualified-classname: com.curalate.services.deets.model.api.v1.DeetsItemId
+        x-qualified-classname: com.curalate.services.deets.model.api.v1.DeetsItemId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportMediaRequestBody'
+        required: false
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportMediaResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    ReportMediaResponse:
+      required:
+      - metadata
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    ReportMediaRequestBody:
+      required:
+      - message
+      - sourceUrl
+      - userEmail
+      type: object
+      properties:
+        message:
+          type: string
+        userEmail:
+          type: string
+        sourceUrl:
+          type: string
+    MediaApiMetadata:
+      required:
+      - traceId
+      type: object
+      properties:
+        traceId:
+          type: string
+        requestId:
+          type: string
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: X-Curalate-Api-Key
+      in: header

@@ -1,0 +1,298 @@
+openapi: 3.2.0
+info:
+  title: Conversation Submission Uploadphoto API
+  x-api-id: 2b36747d-6cb9-42e2-a7d8-22c3979abeee
+  x-audience: external-public
+  description: The Conversation Submission API is a comprehensive platform for submitting and managing content such as Reviews, Questions, Answers, Comments, Feedback, and media uploads, as well as handling Notifications for CV2 clients.
+  version: 1.0.0
+  contact:
+    email: submission-team@bazaarvoice.com
+    name: Submission Team
+    url: https://developer.bazaarvoice.com/conversations-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Conversation-Submission API STG
+tags:
+- name: Uploadphoto
+paths:
+  /data/uploadphoto.json:
+    post:
+      tags:
+      - Uploadphoto
+      operationId: UploadPhoto
+      summary: Upload a photo
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Locale:
+                  type: string
+                  description: Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.
+                  example: en_US
+                Photo:
+                  type: string
+                  description: A file representing the photo to be submitted. Note that the parameter name is case-sensitive and must be lowercase. Use either the photo or photoUrl parameter to define the photo to upload. An error is returned if both parameters are defined.
+                  example: -F 'Photo=@/path/to/your_image.jpg'
+                PhotoUrl:
+                  type: string
+                  description: URL of the photo to be uploaded. Use either the photo or photoUrl parameter to define the photo to upload. An error is returned if both parameters are defined. HTTP and HTTPS are the only protocols supported for the photoUrl parameter.
+                  example: https://upload.wikimedia.org/wikipedia/commons/b/ba/Flower_jtca001.jpg
+                User:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated. Note that the UserId parameter does not contain authentication information and should not be used for hosted authentication.
+                  example: 4d8f70f72a69b170556ecd0cbec0ee1e646174653d3230323330393132267573657269643d746573743126757365726e616d653d736b616872266d61786167653d3439
+                UserId:
+                  type: string
+                  description: User's external ID. This value should come from your authentication system
+                  example: testi2
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: contentType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The content type for which this media is being submitted. Valid values include review, question or answer.
+        example: review
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPhoto'
+        '400':
+          description: Bad Request - Missing required parameter or using both Photo and PhotoUrl.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                status: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - ApiVersion or using both Photo and PhotoUrl is not allowed.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+    UploadPhoto:
+      type: object
+      properties:
+        Data:
+          type: object
+          description: Additional data associated with the response. This can be an empty object or may contain specific data as needed.
+        HasErrors:
+          type: boolean
+          description: Indicates whether there are any errors in the response.
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+          description: An array of form data. This can be an empty array or may contain specific data as needed.
+        AuthorSubmissionToken:
+          type:
+          - string
+          - 'null'
+          description: The author submission token, if applicable.
+        FormErrors:
+          type: object
+          description: Errors related to the form submission, if any.
+        TypicalHoursToPost:
+          type:
+          - object
+          - 'null'
+          description: The typical number of hours it takes for a photo submission to be processed.
+        SubmissionId:
+          type:
+          - string
+          - 'null'
+          description: The ID associated with the photo submission, if applicable.
+        Locale:
+          type: string
+          description: The locale of the photo submission.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+          description: An array of errors, if any. This can be an empty array or may contain specific error objects as needed.
+        Photo:
+          type: object
+          properties:
+            Caption:
+              type:
+              - string
+              - 'null'
+              description: The caption associated with the photo, if provided.
+            Sizes:
+              type: object
+              properties:
+                thumbnail:
+                  type: object
+                  properties:
+                    Url:
+                      type: string
+                      description: The URL of the thumbnail size photo.
+                    Id:
+                      type: string
+                      description: The ID associated with the thumbnail size photo.
+                normal:
+                  type: object
+                  properties:
+                    Url:
+                      type: string
+                      description: The URL of the normal size photo.
+                    Id:
+                      type: string
+                      description: The ID associated with the normal size photo.
+              description: An object containing different photo sizes and their corresponding URLs and IDs.
+            SizesOrder:
+              type: array
+              items:
+                type: string
+              description: An array specifying the order of different photo sizes.
+            Id:
+              type: string
+              description: The ID of the uploaded photo.
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

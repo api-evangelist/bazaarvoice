@@ -1,0 +1,124 @@
+openapi: 3.2.0
+info:
+  title: Product Sentiment Expressions API
+  description: Sentiment Insights for Bazaarvoice Reviews
+  contact:
+    name: Content Intelligence
+    email: content-intelligence-dev@bazaarvoice.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+  x-audience:
+    x-audience: external-public
+  x-api-id:
+    x-api-id: 0a0913f4-76e3-4a84-8560-b09aa65823e9
+servers:
+- url: https://stg.api.bazaarvoice.com/sentiment/v1/
+  description: STG
+- url: https://api.bazaarvoice.com/sentiment/v1/
+  description: PROD
+tags:
+- name: expressions
+paths:
+  /expressions:
+    get:
+      tags:
+      - expressions
+      summary: Provides all expressions for a product
+      operationId: getFeatureExpressions
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: feature
+        in: query
+        required: true
+        schema:
+          maxLength: 50
+          minLength: 1
+          type: string
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - en
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureExpressionsResponse'
+        '204':
+          description: No Content
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  code: ERROR_PARAM_MISSING_PARAMETERS
+                  message: string
+                  timeStamp: '2023-03-08T18:28:39.644Z'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Invalid Passkey
+                  detail: Passkey provided is invalid or missing from the request headers.
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                type: string
+                example:
+                  type: about:blank
+                  title: Rate Limit Exceeded
+                  detail: Your passkey quota has been expired. Please re-try after sometime.
+components:
+  schemas:
+    FeatureExpressionsResponse:
+      type: object
+      properties:
+        nativeFeature:
+          type: string
+          example: comfort
+        expressions:
+          type: array
+          example:
+          - comforted
+          - relieved
+          - tranquility
+          items:
+            type: string
+            example: '["comforted","relieved","tranquility"]'
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

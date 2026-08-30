@@ -1,0 +1,650 @@
+openapi: 3.2.0
+info:
+  title: Conversation Submission Submitreview API
+  x-api-id: 2b36747d-6cb9-42e2-a7d8-22c3979abeee
+  x-audience: external-public
+  description: The Conversation Submission API is a comprehensive platform for submitting and managing content such as Reviews, Questions, Answers, Comments, Feedback, and media uploads, as well as handling Notifications for CV2 clients.
+  version: 1.0.0
+  contact:
+    email: submission-team@bazaarvoice.com
+    name: Submission Team
+    url: https://developer.bazaarvoice.com/conversations-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Conversation-Submission API STG
+tags:
+- name: Submitreview
+paths:
+  /data/submitreview.json:
+    get:
+      tags:
+      - Submitreview
+      operationId: GetReviewPreview
+      summary: Preview Review Form
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product for which submission form is requested.
+        example: '1000001'
+      - name: Action
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The submission action to take
+        example: Preview
+      - name: Rating
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Value is positive integer between 1 and 5, and represents review overall rating.
+        example: 5
+      - name: ReviewText
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 50
+          maxLength: 10000
+        description: Value is review body text.The minimum length is configurable,  default is 50 but can be lower.
+        example: test review Text test review Text test review Text test review Text
+      - name: Title
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+        description: Value is content title text. The minimum and maximum lengths are configurable. The current default is 50 characters, but can be lower to 1 or higher to 255.
+        example: test title
+      - name: UserNickname
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 4
+          maxLength: 25
+        description: User nickname display text.
+        example: test_nick_name
+      - name: agreedtotermsandconditions
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings.
+        example: 'true'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReview'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERRROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    post:
+      tags:
+      - Submitreview
+      operationId: SubmitReview
+      summary: Submit a review
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  description: The submission action to take -- either 'Action=', 'Action=Preview' or 'Action=Submit'. 'Action=' will show information that can be used to build a submission form, 'Action=Preview' will show a draft of the content to be submitted; 'Action=Submit' will submit the content. If 'Action=Submit', the request must be an HTTP POST.
+                  example: Submit
+                AgreedToTermsAndConditions:
+                  type: boolean
+                  description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings.
+                  example: true
+                AdditionalField_<Dimension-External-Id>:
+                  type: string
+                  description: A concrete example of the parameter might be 'AdditionalField_Seat' with a value of '24F' (describing the seat number at a stadium or on a plane).
+                  example: dimension_1
+                campaignId:
+                  type: string
+                  description: Arbitrary text that may be saved alongside content to indicate vehicle by which content was captured, e.g. “post-purchase email”.
+                  example: campaign1
+                ContextDataValue_<Dimension-External-Id>:
+                  type: string
+                  description: 'Some examples of this parameter include the following. Each is followed by possible values.
+
+                    ContextDataValue_PurchaserRank - "top", "top10", "top100", "top1000"
+
+                    ContextDataValue_Purchaser - "yes", "no"
+
+                    ContextDataValue_Age - "under21", "21to34", "35to44", "45to54", "55to64", "over65"
+
+                    ContextDataValue_Gender - "male", "female"'
+                  example: under21
+                fp:
+                  type: string
+                  description: 'Fingerprint of content author''s device. See the Authenticity Tutorial for more information.
+
+                    Per the Bazaarvoice Authenticity Policy, you must send a device fingerprint attached to each submission. If you fail to send a device fingerprint with your submission, Bazaarvoice may take any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation of your API license.
+
+                    Alert: Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+                  example: 0400Ia/vP4SUWbEXk1Rjuv1iJmSjiw6jjNGA14xr7X6xRXldg3Eo6XtD78oKt7mA8bo/mtBit
+                HostedAuthentication_AuthenticationEmail:
+                  type: string
+                  description: Email address where the submitter will receive the confirmation email. If you are configured to use hosted email authentication, this parameter is required. See the Authenticate User method for more information on hosted authentication.
+                  example: dummy@dummy.com
+                HostedAuthentication_CallbackUrl:
+                  type: string
+                  description: URL of the link contained in the user authentication email. This should point to a landing page where a web application exists to complete the user authentication process. The host for the URL must be one of the domains configured for the client. The link in the email will contain a user authentication token (authtoken) that is used to verify the submitter. If you are configured to use hosted email authentication, this parameter is required. See the hosted authentication tutorial for more information.
+                  example: https://dummy.com
+                isRecommended:
+                  type: boolean
+                  description: Value is true or false; default is null – "true" or "false" answer to "I would recommend this to a friend". Required dependent on client settings.
+                  example: 'false'
+                Locale:
+                  type: string
+                  description: 'Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.
+
+                    Alert: Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+                  example: en_US
+                NetPromoterComment:
+                  type: string
+                  description: Value is text representing a user comment to explain numerical Net Promoter score.
+                  example: Dummy comment
+                NetPromoterScore:
+                  type: integer
+                  description: Value is positive integer between 1 and 10 representing a numerical rating in response to “How would you rate this company?”
+                  example: '5'
+                PhotoUrl_<n>:
+                  type: string
+                  description: Value is a Bazaarvoice URL of a photo uploaded using the Data API, where <n> is a non-negative integer. See our photo upload tutorial for more information.
+                  example: https://dummy.com/abc.jpg
+                PhotoCaption_<n>:
+                  type: string
+                  description: Value is caption text for the photo URL with the same value of <n>.
+                  example: Dummy caption for photo
+                rating:
+                  type: integer
+                  description: Value is positive integer between 1 and 5, and represents review overall rating.
+                  example: '5'
+                Rating_<Dimension-External-Id>:
+                  type: integer
+                  description: A concrete example might be Rating_Quality where the value would represent the user's opinion of the quality of the product. The value is a positive integer between 1 and 5 and represents rating dimension value.
+                  example: '3'
+                reviewText:
+                  type: string
+                  minLength: 50
+                  maxLength: 10000
+                  description: Value is review body text. If the text is less than 50 characters, it will be considered as a ratings-only review.
+                  example: Test review for testing review text.Test test test test
+                title:
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  description: Value is content title text. The minimum and maximum lengths are configurable. The current default is 50 characters, but can be lower to 1 or higher to 255.
+                  example: test title
+                tag_<Dimension-External-Id>_<n>:
+                  type: string
+                  description: A concrete example of the parameter might be 'tag_Pro_1'. Valid values could be any free-form text. <n> should be a non-negative integer starting at the number 1.
+                  example: EasyToUse
+                tagid_<Dimension-External-Id>/<Tag-Label>:
+                  type: boolean
+                  description: Boolean indicating whether or not the tag applies to the user. A concrete example might be 'tagid_Pro/EasyToUse=true'.
+                  example: 'true'
+                user:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated. Note that the UserId parameter does not contain authentication information and should not be used for hosted authentication. See the Authenticate User method for more information.
+                  example: 8bbecfb7aef71e0188119983bdbef197646174653d323032322d30372d3134267573657269643d
+                userId:
+                  type: string
+                  description: 'User''s external ID. It should only contain alphanumeric characters, hyphens (-), and underscores (_). No other special characters should be used. Can be encoded in UserToken or sent as plain text, depending on API key configuration. Must not contain any personally identifiable information (PII) data, particularly email address. '
+                  example: testi123
+                UserEmail:
+                  type: string
+                  description: User's email address.
+                  example: abc@dummy.com
+                userNickname:
+                  type: string
+                  minLength: 4
+                  maxLength: 25
+                  description: User nickname display text.
+                  example: dummyyy
+                UserLocation:
+                  type: string
+                  description: User location text.
+                  example: EU
+                SendEmailAlertWhenCommented:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when a comment is posted on the content.
+                  example: 'true'
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her content is published.
+                  example: 'false'
+                VideoUrl_1:
+                  type: string
+                  description: Value is valid URL to a YouTube video where <n> is a non-negative integer.
+                  example: https://google.com/test.mp4
+                VideoCaption_1:
+                  type: string
+                  description: Value is caption text for the video URL with the same value of <n>.
+                  example: Dummy caption for video
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission. If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: apiversion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: passkey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      - name: productId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The ID of the product that this content is being submitted on.
+        example: '1000001'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitReview'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Errror
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+    SubmitReview:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Review:
+          type: object
+          properties:
+            Status:
+              type: number
+              description: The status of the review.
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is published.
+            SendEmailAlertWhenCommented:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is commented on.
+            SubmissionTime:
+              type: string
+              description: The submission time of the review.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            Rating:
+              type: number
+              description: The rating of the review.
+            IsRecommended:
+              type: boolean
+              description: Flag indicating whether the review is recommended.
+            ReviewText:
+              type: string
+              description: The text content of the review.
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the review to be posted.
+            Id:
+              type: string
+              description: The ID of the review.
+            SubmissionId:
+              type: string
+              description: The submission ID of the review.
+            Title:
+              type: string
+              description: The title of the review.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the review.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    GetReview:
+      type: object
+      properties:
+        Locale:
+          type: string
+          description: The locale of the review.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+            Groups:
+              type: object
+            FieldsOrder:
+              type: array
+              items:
+                type: string
+            GroupsOrder:
+              type: array
+              items:
+                type: string
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted
+        Review:
+          type: object
+          properties:
+            SendEmailAlertWhenCommented:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is commented on.
+            Rating:
+              type: number
+              description: The rating of the review.
+            SubmissionTime:
+              type: string
+              description: The submission time of the review.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2}$
+            ReviewText:
+              type: string
+              description: The text content of the review.
+            SubmissionId:
+              type: string
+              description: The submission ID of the review.
+            Title:
+              type: string
+              description: The title of the review.
+            IsRecommended:
+              type: boolean
+              description: Flag indicating whether the review is recommended.
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the review to be posted.
+            Id:
+              type: string
+              description: The ID of the review.
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is published.
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

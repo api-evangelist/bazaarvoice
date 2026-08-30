@@ -1,0 +1,513 @@
+openapi: 3.2.0
+info:
+  title: Notifications Subscriptions Notifications/{client}/subscriptions API
+  x-api-id: 0a0913f4-76e3-4a84-8560-b09aa65823e9
+  x-audience: external-partner
+  description: The Notifications Subscription API enables clients to manage end-user subscriptions to email notifications triggered by the Bazaarvoice platform.
+  version: 1.0.0
+  contact:
+    email: notifications20team@bazaarvoice.com
+    name: Notifications Team
+    url: https://developer.bazaarvoice.com/notifications-subscriptions-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: STAGING Notifications Subscriptions API
+- url: https://api.bazaarvoice.com
+  description: Prod Notifications Subscriptions API
+security:
+- apiKey: []
+tags:
+- name: notifications/{client}/subscriptions
+  description: Enables clients to manage end-user subscriptions to email notifications.
+paths:
+  /notifications/{client}/subscriptions/by_page/{emailType}/OPT_IN:
+    get:
+      tags:
+      - notifications/{client}/subscriptions
+      summary: Retrieve opt-in email list
+      description: Request a list of email addresses that have been explicitly subscribed to particular email type
+      operationId: fetchOptInByPage
+      parameters:
+      - name: client
+        in: path
+        description: Customer name associated with API key
+        required: true
+        schema:
+          type: string
+      - name: emailType
+        in: path
+        description: Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailType'
+      - name: limit
+        in: query
+        description: Optional. Count of email address to return. Max value of 1000 is supported
+        schema:
+          $ref: '#/components/schemas/limit'
+      - name: offset
+        in: query
+        description: Required after 1st request. A token, provided in each API response, to be used in the next request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '**OK**'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResultsSubscriptionResponse'
+              example:
+                offset: NjUzODgxNTY4MWU1NzJiNjRjOTZlMmM0
+                data:
+                - emailAddress: b3eca1d1246ac3bd150d4ef0fbe59d9b5c772139f003bf7d146c61f0255ac48f
+                  timestamp: '2023-02-14T22:11:03.501Z'
+        '403':
+          description: '**Forbidden** - API key missing from request or not enabled'
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              examples:
+                IncorrectApiKey:
+                  description: API key is missing or not enabled.
+                  value: <h1>Developer Inactive</h1>
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              examples:
+                UserNotAuthorised:
+                  description: Missing, invalid or Incorrect API key for environment or client. Ensure client name in path correct.
+                  value:
+                    code: 403
+                    message: User not authorized.
+        '404':
+          description: '**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.
+
+
+            Ensure email type is correct, all caps
+
+            '
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                InvalidEmailType:
+                  value: 'Invalid email type: pie'
+        '405':
+          description: '**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectHttpMethod'
+  /notifications/{client}/subscriptions/by_page/{emailType}/OPT_OUT:
+    get:
+      tags:
+      - notifications/{client}/subscriptions
+      summary: Retrieve opt-out email list
+      description: Request a list of email addresses that have been explicitly unsubscribed to particular email type
+      operationId: fetchOptOutByPage
+      parameters:
+      - name: client
+        in: path
+        description: Customer name associated with API key
+        required: true
+        schema:
+          type: string
+      - name: emailType
+        in: path
+        description: Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailType'
+      - name: limit
+        in: query
+        description: Optional. Count of email address to return. Max value of 1000 is supported
+        schema:
+          $ref: '#/components/schemas/limit'
+      - name: offset
+        in: query
+        description: Required after 1st request. A token, provided in each API response, to be used in the next request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '**OK**'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResultsSubscriptionResponse'
+              example:
+                offset: NjUzODgxNTY4MWU1NzJiNjRjOTZlMmM0
+                data:
+                - emailAddress: b3eca1d1246ac3bd150d4ef0fbe59d9b5c772139f003bf7d146c61f0255ac48f
+                  timestamp: '2023-02-14T22:11:03.501Z'
+        '403':
+          description: '**Forbidden** - API key missing from request or not enabled'
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              examples:
+                IncorrectApiKey:
+                  description: API key is missing or not enabled.
+                  value: <h1>Developer Inactive</h1>
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              examples:
+                UserNotAuthorised:
+                  description: Missing, invalid or Incorrect API key for environment or client. Ensure client name in path correct.
+                  value:
+                    code: 403
+                    message: User not authorized.
+        '404':
+          description: '**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.
+
+
+            Ensure email type is correct, all caps
+
+            '
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                InvalidEmailType:
+                  value: 'Invalid email type: pie'
+        '405':
+          description: '**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectHttpMethod'
+  /notifications/{client}/subscriptions/subscribe:
+    post:
+      tags:
+      - notifications/{client}/subscriptions
+      summary: Add email to opt-in list
+      description: On success, returns the updated/inserted subscription
+      operationId: subscribe
+      parameters:
+      - name: client
+        in: path
+        description: Customer name associated with API key
+        required: true
+        schema:
+          type: string
+      - name: usertoken
+        in: query
+        description: See [Creating the Email Authentication Token](https://developer.bazaarvoice.com/notifications-subscriptions-api/submitting-email-addresses/creating-email-authentication-token)
+        schema:
+          type: string
+      - name: emailtype
+        in: query
+        description: Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/EmailType'
+      responses:
+        '200':
+          description: Created/updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddSubscriptionResponse'
+              example:
+                emailAddressHash: 94ce81d7ddd4a7018f348a68cfa52d44342faf961d02ec6177ad9eca75507e09
+                phoneNumberHash: ea500eaf0e707a7d06774bf3d316ad2e36e3df2deaf0664e6a3fcd30a227312d
+                _id: 6538fdfb81e572b64c1aa3bc
+                client: test-client
+                emailAddress: 5cf5bf6f05083cfad82828ec069cf3b25874936b37d87fe1dc6588afd80f0c1e
+                phoneNumber: f64243381b03effff8e32cde515498a3
+                channel:
+                - EMAIL
+                subscriptionType: OPT_IN
+                emailType: PIE
+                time: '2023-10-25T14:38:57.461Z'
+                lastUpdatedTimestamp: '2023-10-25T14:38:57.461Z'
+        '400':
+          description: '**Bad Request** Incorrectly constructed or missing email authentication token'
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/InvalidUserToken'
+              examples:
+                InvalidUserToken:
+                  value: the userToken could not be decoded
+                MissingUserToken:
+                  value: the userToken query parameter is missing or blank
+        '403':
+          description: '**Forbidden** - API key missing from request or not enabled'
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              examples:
+                IncorrectApiKey:
+                  description: API key is missing or not enabled.
+                  value: <h1>Developer Inactive</h1>
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              examples:
+                UserNotAuthorised:
+                  description: Missing, invalid or Incorrect API key for environment or client. Ensure client name in path correct.
+                  value:
+                    code: 403
+                    message: User not authorized.
+        '404':
+          description: '**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.
+
+
+            Ensure email type is correct, all caps
+
+            '
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                InvalidEmailType:
+                  value: 'Invalid email type: pie'
+        '405':
+          description: '**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectHttpMethod'
+  /notifications/{client}/subscriptions/unsubscribe:
+    post:
+      tags:
+      - notifications/{client}/subscriptions
+      summary: Add email to opt-out list
+      description: On success, returns the updated/inserted subscription
+      operationId: unsubscribe
+      parameters:
+      - name: client
+        in: path
+        description: Customer name associated with API key
+        required: true
+        schema:
+          type: string
+      - name: usertoken
+        in: query
+        description: See [Creating the Email Authentication Token](https://developer.bazaarvoice.com/notifications-subscriptions-api/submitting-email-addresses/creating-email-authentication-token)
+        schema:
+          type: string
+      - name: emailtype
+        in: query
+        description: Allowed [Notification Types](https://developer.bazaarvoice.com/notifications-subscriptions-api/notification-types)
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/EmailType'
+      responses:
+        '200':
+          description: Created/updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddSubscriptionResponse'
+              example:
+                emailAddressHash: 94ce81d7ddd4a7018f348a68cfa52d44342faf961d02ec6177ad9eca75507e09
+                phoneNumberHash: ea500eaf0e707a7d06774bf3d316ad2e36e3df2deaf0664e6a3fcd30a227312d
+                _id: 6538fdfb81e572b64c1aa3bc
+                client: test-client
+                emailAddress: 5cf5bf6f05083cfad82828ec069cf3b25874936b37d87fe1dc6588afd80f0c1e
+                phoneNumber: f64243381b03effff8e32cde515498a3
+                channel:
+                - EMAIL
+                subscriptionType: OPT_OUT
+                emailType: PIE
+                time: '2023-10-25T14:38:57.461Z'
+                lastUpdatedTimestamp: '2023-10-25T14:38:57.461Z'
+        '400':
+          description: '**Bad Request** Incorrectly constructed or missing email authentication token'
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/InvalidUserToken'
+              examples:
+                InvalidUserToken:
+                  value: the userToken could not be decoded
+                MissingUserToken:
+                  value: the userToken query parameter is missing or blank
+        '403':
+          description: '**Forbidden** - API key missing from request or not enabled'
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/IncorrectApiKey'
+              examples:
+                IncorrectApiKey:
+                  description: API key is missing or not enabled.
+                  value: <h1>Developer Inactive</h1>
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotAuthorised'
+              examples:
+                UserNotAuthorised:
+                  description: Missing, invalid or Incorrect API key for environment or client. Ensure client name in path correct.
+                  value:
+                    code: 403
+                    message: User not authorized.
+        '404':
+          description: '**Not Found** -  Ensure path includes exactly /subscriptions/, all lowercase.
+
+
+            Ensure email type is correct, all caps
+
+            '
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                InvalidEmailType:
+                  value: 'Invalid email type: pie'
+        '405':
+          description: '**Method Not Allowed** - Incorrect HTTP method. Use GET to request email addresses, and POST to submit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectHttpMethod'
+components:
+  schemas:
+    PaginatedResultsSubscriptionResponse:
+      type: object
+      properties:
+        offset:
+          type: string
+          description: A token, provided in each API response, to be used in the next request
+        data:
+          type: array
+          description: A JSON with emailAddress and timestamp
+          items:
+            $ref: '#/components/schemas/SubscriptionResponse'
+    limit:
+      maximum: 1000
+      minimum: 1
+      type: integer
+      format: int32
+      default: 100
+    AddSubscriptionResponse:
+      type: object
+      properties:
+        emailAddressHash:
+          type: string
+          description: SHA-256 hash of email address
+        phoneNumberHash:
+          type: string
+          description: SHA-256 hash of phone number
+        _id:
+          type: string
+          description: Identifier of the record in NN database
+        client:
+          type: string
+          description: Customer/client name associated with API key
+        emailAddress:
+          type: string
+          description: Email address encrypted with an internal secret key
+        channel:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - EMAIL
+            - TEXT
+          description: Channel via which the notification was sent to the end customer
+        subscriptionType:
+          type: string
+          enum:
+          - OPT_IN
+          - OPT_OUT
+          - OPT_IN_PENDING
+          description: Current subscription type for a particular emailType.
+        emailType:
+          $ref: '#/components/schemas/EmailType'
+        time:
+          type: string
+          description: The date and time the customer subscribed/unsubscribed
+          format: date-time
+        lastUpdatedTimestamp:
+          type: string
+          description: The date and time the record last updated in database.
+          format: date-time
+    EmailType:
+      type: string
+      description: Allowed email types
+      enum:
+      - PIE
+      - PIE_FOLLOWUP
+      - REVIEW_COMMENTED
+      - REVIEW_RESPONSE
+      - QUESTION_ANSWERED
+      - REVIEW_CONFIRMATION
+      - REVIEW_APPROVED
+      - REVIEW_REJECTED
+      - QUESTION_CONFIRMATION
+      - QUESTION_APPROVED
+      - QUESTION_REJECTED
+      - ANSWER_CONFIRMATION
+      - ANSWER_APPROVED
+      - ANSWER_REJECTED
+      - COMMENT_CONFIRMATION
+      - COMMENT_APPROVED
+      - COMMENT_REJECTED
+      - SELLER_RATINGS
+      - APO
+      - ALL
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API key
+    InvalidUserToken:
+      description: Message describing the error associated with userToken
+      type: string
+    SubscriptionResponse:
+      type: object
+      properties:
+        emailAddress:
+          type: string
+          description: Email address encrypted using client's secret key
+        timestamp:
+          type: string
+          description: The date and time the user subscribed/unsubscribed
+          format: date-time
+    IncorrectHttpMethod:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          default: 405
+        message:
+          type: string
+          example: HTTP 405 Method Not Allowed
+    UserNotAuthorised:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          default: 403
+        message:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      description: Notifications API passkey
+      name: passkey
+      in: query
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

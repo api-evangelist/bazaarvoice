@@ -1,0 +1,426 @@
+openapi: 3.2.0
+info:
+  title: Conversation Submission Progressive Submit API
+  x-api-id: 2b36747d-6cb9-42e2-a7d8-22c3979abeee
+  x-audience: external-public
+  description: The Conversation Submission API is a comprehensive platform for submitting and managing content such as Reviews, Questions, Answers, Comments, Feedback, and media uploads, as well as handling Notifications for CV2 clients.
+  version: 1.0.0
+  contact:
+    email: submission-team@bazaarvoice.com
+    name: Submission Team
+    url: https://developer.bazaarvoice.com/conversations-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Conversation-Submission API STG
+tags:
+- name: ProgressiveSubmit
+paths:
+  /data/initiateSubmit.json:
+    post:
+      tags:
+      - ProgressiveSubmit
+      summary: initiateSubmit
+      description: Endpoint to request product info for setting up a review submission form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  type: string
+                  description: Locale information
+                productIds:
+                  type: array
+                  items:
+                    type: string
+                  description: List of product identifiers
+            examples:
+              default:
+                value:
+                  locale: en_US
+                  productIds:
+                  - 1000001
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: passkey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+      - name: apiVersion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+      - name: action
+        in: query
+        schema:
+          type: string
+        description: Action is always submit
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique id for user. It should only contain alphanumeric characters, hyphens (-), and underscores (_). No other special characters should be used. Can be encoded in UserToken or sent as plain text, depending on API key configuration. Must not contain any personally identifiable information (PII) data, particularly email address.
+      - name: hostedauth
+        in: query
+        schema:
+          type: string
+        description: Indicates the action being performed, is using hosted authentication
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/bad-request
+                    title: Bad Request
+                    staus: 400
+                    ERROR_CODE: ERROR_BAD_REQUEST
+                    detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/unauthorized
+                    title: Unauthorized
+                    staus: 401
+                    ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                    detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/forbidden
+                    title: Forbidden
+                    staus: 403
+                    ERROR_CODE: ERROR_FORBIDDEN
+                    detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              examples:
+                default:
+                  value:
+                    type: /problems/not-found
+                    title: Not Found
+                    staus: 404
+                    ERROR_CODE: ERROR_NOT_FOUND
+                    detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    fault:
+                      faultstring: request line size exceeding 7,168
+                      detail:
+                        errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    type: /problems/unexpected-error
+                    title: Unexpected Error
+                    staus: 500
+                    ERROR_CODE: ERROR_UNKNOWN
+                    detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/progressiveSubmit.json:
+    post:
+      tags:
+      - ProgressiveSubmit
+      summary: progressiveSubmit
+      description: Endpoint for handling progressive submissions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  type: string
+                  description: Locale information
+                productId:
+                  type: string
+                  description: Product identifier
+                userId:
+                  type: string
+                  description: User identifier
+                submissionSessionToken:
+                  type: string
+                  description: Submission session token
+                submissionFields:
+                  type: object
+                  properties:
+                    rating:
+                      type: string
+                      description: Rating value
+                    agreedtotermsandconditions:
+                      type: string
+                      description: Agreement to terms and conditions
+                    reviewtext:
+                      type: string
+                      minLength: 50
+                      maxLength: 10000
+                      description: Review text. The minimum length is configurable,  default is 50 but can be lower.
+                    title:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                      description: Value is content title text. The minimum and maximum lengths are configurable. The current default is 50 characters, but can be lower to 1 or higher to 255.
+            example:
+              locale: en_US
+              productId: Product1
+              userId: testi2
+              submissionSessionToken: aJk5gwI0/fXmIlzX1QWQJB3dmiOlyFLkeESuVfSXLY+zm7079ZP2BS1KCUoqNam2xH1rv1VjOU8gMUq6isItxZ3az7z1lAhp/UkMFEmTvVM5vxe4f4KRc9NlIafxPotw
+              submissionFields:
+                rating: '5'
+                agreedtotermsandconditions: 'true'
+                reviewtext: 'Product 1: test test test test test test test test test test test test test test test test test test test test test test'
+                title: 'Product 1: Test'
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        example: application/json
+      - name: apiVersion
+        in: query
+        required: true
+        schema:
+          type: number
+        description: The API version, e.g. 5.4.
+        example: '5.4'
+      - name: action
+        in: query
+        schema:
+          type: string
+        description: Action is always submit
+        example: submit
+      - name: fields
+        in: query
+        schema:
+          type: boolean
+        description: A dictionary of form fields for a review form. Format depends on whether "extended" parameter is set. fields will be pre-populated with previously submitted content.
+        example: 'true'
+      - name: passkey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      - name: hostedauth
+        in: query
+        schema:
+          type: string
+        description: Indicates the action being performed, is using hosted authentication
+        example: 'True'
+      - name: extended
+        in: query
+        schema:
+          type: string
+        description: This parameter is sent as a single key and does not need a value. When omitted, the fields elements are returned in an ordered list that honors the submission field order as specified in the configuration hub, with the exception that required fields are presented first in the ordered list. When included, fields elements are returned in full submission-style format.
+        example: 'True'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/progressiveSubmit'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Review submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                status: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+    progressiveSubmit:
+      type: object
+      properties:
+        hasErrors:
+          type: boolean
+          example: false
+        response:
+          type: object
+          properties:
+            review:
+              type: object
+              properties:
+                SendEmailAlertWhenCommented:
+                  type: boolean
+                  description: Flag indicating whether to send an email alert when the review is commented on.
+                Rating:
+                  type: number
+                  description: The rating of the review.
+                SubmissionTime:
+                  type: string
+                  description: The submission time of the review.
+                  pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+                ReviewText:
+                  type: string
+                  description: The text content of the review.
+                Title:
+                  type: string
+                  description: The title of the review.
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Flag indicating whether to send an email alert when the review is published.
+            submissionId:
+              type: string
+              description: The submission ID.
+            isFormComplete:
+              type: boolean
+              description: Flag indicating whether the form is complete.
+            SubmissionSessionToken:
+              type: string
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

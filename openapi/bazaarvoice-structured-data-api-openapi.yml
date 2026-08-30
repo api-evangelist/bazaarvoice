@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  title: Media Structured Data API
+  description: Curalate Media API
+  version: V1
+servers:
+- url: https://edge.curalate.com
+tags:
+- name: Structured Data
+paths:
+  /v1/structured-data/content:
+    get:
+      tags:
+      - Structured Data
+      summary: Get structured data for multiple galleries
+      description: Returns Schema.org structured data for multiple galleries via GET. Response format depends on the Accept header.
+      parameters:
+      - name: q
+        in: query
+        required: true
+        description: 'JSON object specifying gallery configurations. Must be URL-encoded.
+
+
+          Format: {"galleries":[{"dataSourceId":"abc123","filter":"productId:SKU123","limit":10,"sort":"Latest"}]}
+
+
+          Gallery config fields:
+
+          - dataSourceId (required): Unique gallery ID
+
+          - filter: Filters the requested content. Filters are composed of one or more key-value pairs combined with boolean operators and parenthetical groupings.
+
+          - limit: Maximum number of items to return (default: 10)
+
+          - sort: Sorts - Latest, Likes, Moderation, Optimized, LastUpdated
+
+          - offset: Pagination offset
+
+          - before/after: Cursor-based pagination
+
+          - requireProduct: Only return items with products
+
+          - networkSource: Filter by social network source
+
+          - productMetadata: Additional product fields to include
+
+          '
+        schema:
+          type: string
+          example: '{"galleries":[{"dataSourceId":"DKQGLerBTQCDXwNS","limit":10}]}'
+      - name: locale
+        in: query
+        description: Locale for product metadata
+        schema:
+          type: string
+          example: en_US
+      - name: canonical
+        in: query
+        description: Page canonical URL for @id injection in JSON-LD output. Max 2048 characters.
+        schema:
+          type: string
+          example: https://brand.com/product
+      - name: skipCache
+        in: query
+        description: Set to true to bypass edge caching
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Schema.org structured data in requested format (Script/JSON-LD/Microdata)
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            text/javascript:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+components:
+  schemas:
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: X-Curalate-Api-Key
+      in: header

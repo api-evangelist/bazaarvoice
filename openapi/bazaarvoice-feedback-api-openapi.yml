@@ -1,0 +1,456 @@
+openapi: 3.2.0
+info:
+  title: Conversation Submission Feedback API
+  x-api-id: 2b36747d-6cb9-42e2-a7d8-22c3979abeee
+  x-audience: external-public
+  description: The Conversation Submission API is a comprehensive platform for submitting and managing content such as Reviews, Questions, Answers, Comments, Feedback, and media uploads, as well as handling Notifications for CV2 clients.
+  version: 1.0.0
+  contact:
+    email: submission-team@bazaarvoice.com
+    name: Submission Team
+    url: https://developer.bazaarvoice.com/conversations-api/home
+servers:
+- url: https://stg.api.bazaarvoice.com
+  description: Conversation-Submission API STG
+tags:
+- name: Feedback
+paths:
+  /data/submitfeedback.json:
+    post:
+      tags:
+      - Feedback
+      operationId: SubmitFeedback
+      summary: Submit a feedback
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission. If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ContentId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The ID of the content with which the feedback is associated.
+        example: '47645686'
+      - name: ContentType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The type of content with which the feedback is associated (review, question, answer, or review_comment).
+        example: review
+      - name: FeedbackType
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Type of feedback (inappropriate, helpfulness).
+        example: helpfulness
+      - name: Vote
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Helpfulness vote for this content. Valid votes are: Positive, Negative. This parameter is only required for FeedbackType=helpfulness.'
+        example: Positive
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission             to access a particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitFeedback'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+  /data/dsafeedbackurl.json:
+    post:
+      tags:
+      - Feedback
+      summary: Generate a form URL for DSA.
+      operationId: DsaFeedabackUrl
+      description: This API generates a form URL for DSA feedback.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DsaFeedbackUrlRequest'
+        required: true
+      parameters:
+      - in: query
+        name: passkey
+        required: true
+        schema:
+          type: string
+          example: '[yourKey]'
+        description: Key required to authenticate API user and check permission to access particular client's data.
+      responses:
+        '200':
+          description: Successful response containing the generated form URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitDsaFeedbackUrl'
+        '400':
+          description: Bad Request error when invalid parameters are provided or required fields are missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                badRequest:
+                  summary: Bad Request Example
+                  value:
+                    instance: /data/dsafeedbackurl
+                    title: Bad Request
+                    status: 400
+                    detail: Content Type is missing. Ensure the request includes all required fields and try again.
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        '500':
+          description: Internal Server Error when something goes wrong while processing the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                internalServerError:
+                  summary: Internal Server Error Example
+                  value:
+                    instance: /data/dsafeedbackurl
+                    title: Internal Server Error
+                    status: 500
+                    detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+components:
+  schemas:
+    SubmitFeedback:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        TypicalHoursToPost:
+          type: object
+          description: The typical number of hours it takes for a feedback submission to be processed.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Feedback:
+          type: object
+          properties:
+            Inappropriate:
+              type: object
+              properties:
+                ReasonText:
+                  type: string
+                  description: The reason for flagging as inappropriate.
+                AuthorId:
+                  type: string
+                  description: The ID of the author flagging as inappropriate.
+            Helpfulness:
+              type: object
+              properties:
+                ReasonText:
+                  type: string
+                  description: The reason for flagging as helpful.
+                AuthorId:
+                  type: string
+                  description: The ID of the author flagging as helpful.
+        Locale:
+          type: string
+          description: The locale of the feedback submission.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'A URI reference that uniquely identifies the problem type only in the context of the provided API. Opposed to the specification in RFC-7807, it is neither recommended to be dereferenceable nor globally unique for the problem type.
+
+            '
+          default: about:blank
+          example: /some/uri-reference
+        title:
+          type: string
+          description: 'A short summary of the problem type. Written in English and readable for engineers, usually not suited for non-technical stakeholders and not localized.
+
+            '
+          example: ERROR_BAD_REQUEST
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence of the problem.
+
+            '
+          minimum: 100
+          example: 400
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human-readable explanation specific to this occurrence of the problem that is helpful to locate the problem and give advice on how to proceed. Written in English and readable for engineers, usually not suited for non-technical stakeholders and not localized.
+
+            '
+          example: Missing or unknown value for contentType.
+        instance:
+          type: string
+          format: uri-reference
+          description: 'A URI reference that identifies the specific occurrence of the problem, e.g., by adding a fragment identifier or sub-path to the problem type. May be used to locate the root of this problem in the source code.
+
+            '
+          example: /some/uri-reference#specific-occurrence-context
+    SubmitDsaFeedbackUrl:
+      type: object
+      properties:
+        formUrl:
+          type: string
+          example: https://test.dsacompliance.bazaarvoice.com/dsa/iframe/28/e9912a6e1569/?reference=1617911&url=https%3A%2F%2Fapps-qa.bazaarvoice.com%2Ftemp%2Fdsa_iframe%2Ftest_dsa_iframe_v2.html%3FbvmessageType%3DREVIEW_CONTENT%26bvTriggerer%3Ddsa_workflow%23review%2F1617911&hash=0d65f9021a42757913016c9db25bf16d2a5a894245eba0fefee171cc3e9a8915¶meters=%7B%22client%22%3A%22testcustomer-fast-prs-qa%22%2C%22displayCode%22%3A%2214176-en_us%22%2C%22contentType%22%3A%22review%22%2C%22destSiteId%22%3A%22main_site%22%2C%22contentLocale%22%3A%22en_US%22%2C%22product%22%3A%22rnr%22%7D&subject=testcustomer-fast-prs-qa_review_1617911&dhash=3406bda02f8a4ab45e3c14439bfd3326c6e900476b01175db717159323f969c1&domain=apps-qa.bazaarvoice.com
+          description: URL to the DSA feedback form, including parameters like locale, client, sourceClient, and contentType.
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+    DsaFeedbackUrlRequest:
+      type: object
+      required:
+      - url
+      - domain
+      - contentId
+      - lang
+      - parameters
+      properties:
+        url:
+          type: string
+          example: www.abc.com
+          description: URL of the reported content.
+        domain:
+          type: string
+          example: abc.com
+          description: Domain if loaded via iframe (CSP).
+        contentId:
+          type: string
+          example: 54e
+          description: The ID of the content with which the feedback is associated.
+        lang:
+          type: string
+          example: en_US
+          description: Language in which the page should be rendered.
+        subject:
+          type: string
+          example: ID123456
+          description: Subject (optional)
+        parameters:
+          type: object
+          required:
+          - contentType
+          - client
+          - displayCode
+          - destSiteId
+          - contentLocale
+          - destLocale
+          properties:
+            contentType:
+              type: string
+              example: review
+              description: The type of content with which the feedback is associated (review, question, answer, or review_comment).
+            client:
+              type: string
+              example: '[ClientName]'
+              description: BV onboarded client.
+            displayCode:
+              type: string
+              example: '[DisplayCode]'
+              description: Code representing the display of the content submission, such as for UI purposes.
+            sourceClient:
+              type: string
+              example: '[SourceClient]'
+              description: The source client identifier, representing where the content originated. (optional)
+            product:
+              type: string
+              example: rnr
+              description: The product type. If not specified, default value will be "rnr".
+            destSiteId:
+              type: string
+              example: 23675
+              description: Identifies the origin of the report.
+            contentLocale:
+              type: string
+              example: en_US
+              description: Language of the content.
+            destLocale:
+              type: string
+              example: en_US
+              description: Language of the originated content.
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

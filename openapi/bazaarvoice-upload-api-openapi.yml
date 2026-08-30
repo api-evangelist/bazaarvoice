@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  title: Media Upload API
+  description: Curalate Media API
+  version: V1
+servers:
+- url: https://edge.curalate.com
+tags:
+- name: Upload
+paths:
+  /v1/upload/{dataSourceId}:
+    post:
+      tags:
+      - Upload
+      summary: Upload media items
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                mediaItem:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/upload/{dataSourceId}/submit:
+    post:
+      tags:
+      - Upload
+      summary: Submits uploaded content
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitMediaRequestBody'
+        required: false
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitMediaResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+      x-codegen-request-body-name: body
+  /v1/upload/{dataSourceId}/video-status/{videoId}:
+    get:
+      tags:
+      - Upload
+      summary: Check on transcode job status for a given video
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      - name: videoId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: EQEUI7bMI4nzMXM9hFKQ3gnQib5sLzez-dvyNk81Cf0=
+          x-qualified-classname: com.curalate.global.model.types.video.VideoId
+        x-qualified-classname: com.curalate.global.model.types.video.VideoId
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVideoStatusResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+components:
+  schemas:
+    SubmittedMedia:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Image
+          - Video
+        curalateMediaId:
+          type: string
+        url:
+          type: string
+          format: url
+        posterUrl:
+          type: string
+          format: url
+        caption:
+          type: string
+    UploadData:
+      required:
+      - images
+      - videos
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkPhoto'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadVideoResponse'
+    VideoProcessingVideo:
+      required:
+      - posterFileId
+      - versions
+      - videoId
+      type: object
+      properties:
+        videoId:
+          type: string
+        posterFileId:
+          type: string
+        duration:
+          type: integer
+          format: int64
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoProcessingVersion'
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    Image:
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
+    MediaApiMetadata:
+      required:
+      - traceId
+      type: object
+      properties:
+        traceId:
+          type: string
+        requestId:
+          type: string
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
+    NetworkPhoto:
+      required:
+      - extraLarge
+      - extraLargeSquare
+      - id
+      - large
+      - largeSquare
+      - medium
+      - mediumSquare
+      - original
+      - small
+      - smallSquare
+      type: object
+      properties:
+        id:
+          type: string
+        original:
+          $ref: '#/components/schemas/Image'
+        small:
+          $ref: '#/components/schemas/Image'
+        medium:
+          $ref: '#/components/schemas/Image'
+        large:
+          $ref: '#/components/schemas/Image'
+        extraLarge:
+          $ref: '#/components/schemas/Image'
+        smallSquare:
+          $ref: '#/components/schemas/Image'
+        mediumSquare:
+          $ref: '#/components/schemas/Image'
+        largeSquare:
+          $ref: '#/components/schemas/Image'
+        extraLargeSquare:
+          $ref: '#/components/schemas/Image'
+        type:
+          type: string
+    VideoProcessingVersion:
+      required:
+      - height
+      - quality
+      - url
+      - width
+      type: object
+      properties:
+        quality:
+          type: string
+          enum:
+          - Original
+          - FullHD
+          - Standard
+          - Low
+          - VerticalVideo1500FitPad
+          - VerticalVideo1500FillPad
+          - VerticalVideo1500Pad
+          - Unknown
+        url:
+          type: string
+        width:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+        chaptersInMillis:
+          type: array
+          items:
+            type: integer
+            format: int64
+    SubmitMediaResponse:
+      required:
+      - metadata
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    UploadResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UploadData'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadError'
+    UploadError:
+      required:
+      - message
+      - multipartItemName
+      type: object
+      properties:
+        multipartItemName:
+          type: string
+        fileName:
+          type: string
+        message:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.ErrorMessage
+    SubmitMediaRequestBody:
+      required:
+      - emailAddress
+      - emailOptIn
+      - media
+      - mediaContainerId
+      - mediaContainerType
+      type: object
+      properties:
+        mediaContainerType:
+          type: string
+          enum:
+          - Like2Buy
+          - Fanreel
+          - Reveal
+          - All
+          - DynamicLandingPage
+          - Like2BuyV2
+        mediaContainerId:
+          type: string
+        displayName:
+          type: string
+        emailAddress:
+          type: string
+        emailOptIn:
+          type: boolean
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmittedMedia'
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+            properties: {}
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
+    VideoProcessingStatusData:
+      required:
+      - video
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoProcessingVideo'
+    UploadVideoResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          x-qualified-classname: com.curalate.global.model.types.video.VideoId
+    GetVideoStatusResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/VideoProcessingStatusData'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: X-Curalate-Api-Key
+      in: header

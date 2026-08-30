@@ -1,0 +1,366 @@
+openapi: 3.2.0
+info:
+  title: Media Facebook API
+  description: Curalate Media API
+  version: V1
+servers:
+- url: https://edge.curalate.com
+tags:
+- name: Facebook
+paths:
+  /v1/facebook/media:
+    get:
+      tags:
+      - Facebook
+      summary: Retrieve Facebook media items for the user
+      parameters:
+      - name: accessToken
+        in: query
+        required: true
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+        x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: before
+        in: query
+        schema:
+          type: string
+          example: '10152364594836729'
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      - name: after
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFacebookMediaResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/facebook/albums:
+    get:
+      tags:
+      - Facebook
+      summary: Retrieve Facebook media items for the user
+      parameters:
+      - name: accessToken
+        in: query
+        required: true
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+        x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: before
+        in: query
+        schema:
+          type: string
+          example: '10152364594836729'
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      - name: after
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFacebookAlbumsResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/facebook/albums/{albumId}/media:
+    get:
+      tags:
+      - Facebook
+      summary: Retrieve Facebook media items from the specified album
+      parameters:
+      - name: albumId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: accessToken
+        in: query
+        required: true
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+        x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: before
+        in: query
+        schema:
+          type: string
+          example: '10152364594836729'
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      - name: after
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFacebookMediaResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/facebook/auth/{accessToken}/validation:
+    get:
+      tags:
+      - Facebook
+      summary: Validate a Facebook OAuth token
+      parameters:
+      - name: accessToken
+        in: path
+        required: true
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+        x-qualified-classname: com.curalate.mediaapi.service.upload.model.oauth.OAuthAccessToken
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidTokenResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+components:
+  schemas:
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    MediaApiPaging:
+      required:
+      - cursors
+      type: object
+      properties:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+        previous:
+          type: string
+          format: url
+        next:
+          type: string
+          format: url
+    FacebookAlbum:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+    ValidTokenResponse:
+      type: object
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    GetFacebookMediaData:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
+    GetFacebookAlbumsResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFacebookAlbumsData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    GetFacebookAlbumsData:
+      required:
+      - albums
+      type: object
+      properties:
+        albums:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookAlbum'
+    ExternalMedia:
+      required:
+      - id
+      - link
+      - type
+      type: object
+      properties:
+        caption:
+          type: string
+        id:
+          type: string
+        link:
+          type: string
+          format: url
+        posterImageLink:
+          type: string
+          format: url
+        type:
+          type: string
+    GetFacebookMediaResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFacebookMediaData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: X-Curalate-Api-Key
+      in: header

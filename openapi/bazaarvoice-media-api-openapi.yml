@@ -1,0 +1,811 @@
+openapi: 3.2.0
+info:
+  title: Media API
+  description: Curalate Media API
+  version: V1
+servers:
+- url: https://edge.curalate.com
+tags:
+- name: Media
+paths:
+  /v1/media/{dataSourceId}:
+    get:
+      tags:
+      - Media
+      summary: Get media
+      description: Gets media items for a data source
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      - name: filter
+        in: query
+        schema:
+          type: string
+          example: productId:leather-jacket
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.FilterQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.FilterQuery
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - Latest
+          - Likes
+          - Moderation
+          - Optimized
+          - LastUpdated
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: before
+        in: query
+        schema:
+          type: string
+          example: 6ca1a4ad-fb10-41fa-abab-78531a80531e_1487593595790
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      - name: after
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int64
+          example: 10
+      - name: locale
+        in: query
+        schema:
+          type: string
+          example: en-US
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.LocaleString
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.LocaleString
+      - name: productMetadata
+        in: query
+        schema:
+          type: string
+          example: age,gender
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.ProductMetadataQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.ProductMetadataQuery
+      - name: requireProduct
+        in: query
+        schema:
+          type: boolean
+          example: true
+      - name: parameterizeProducts
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: appId
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.AppId
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.AppId
+      - name: networkSource
+        in: query
+        schema:
+          type: string
+          enum:
+          - Pinterest
+          - Facebook
+          - Instagram
+          - Twitter
+          - Tumblr
+          - Snapchat
+          - TikTok
+          - YouTube
+          - MediaImport
+          example: Instagram
+      - name: noExpired
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: skipMetrics
+        in: query
+        schema:
+          type: boolean
+          example: true
+      - name: showRatings
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: rid
+        in: query
+        description: Request id used to identify items within a single request
+        schema:
+          type: string
+      - name: src
+        in: query
+        description: Source url of the requesting content
+        schema:
+          type: string
+      - name: fpcuid
+        in: query
+        description: First party cookie id of the requesting user
+        schema:
+          type: string
+      - name: eid
+        in: query
+        description: Experiment id for the user's experiment
+        schema:
+          type: string
+      - name: vid
+        in: query
+        description: Variation id for the user's experiment
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/media/{dataSourceId}/items/{itemId}:
+    get:
+      tags:
+      - Media
+      summary: Get media item
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: fe502c92-e9b5-45ee-ad3a-429c1e94f9c4
+          x-qualified-classname: com.curalate.services.deets.model.api.v1.DeetsItemId
+        x-qualified-classname: com.curalate.services.deets.model.api.v1.DeetsItemId
+      - name: productMetadata
+        in: query
+        schema:
+          type: string
+          example: age,gender
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.ProductMetadataQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.ProductMetadataQuery
+      - name: parameterizeProducts
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: locale
+        in: query
+        schema:
+          type: string
+          example: en-US
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.LocaleString
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.LocaleString
+      - name: appId
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.AppId
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.AppId
+      - name: noExpired
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: showRatings
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaItemResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/media/{dataSourceId}/items/{itemId}/recommendations:
+    get:
+      tags:
+      - Media
+      summary: Get media item recommendations
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: fe502c92-e9b5-45ee-ad3a-429c1e94f9c4
+          x-qualified-classname: com.curalate.services.deets.model.api.v1.DeetsItemId
+        x-qualified-classname: com.curalate.services.deets.model.api.v1.DeetsItemId
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          example: 10
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecommendedMediaResponse'
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+  /v1/media/{dataSourceId}/images/top:
+    get:
+      tags:
+      - Media
+      summary: Get top media image for a data source
+      parameters:
+      - name: dataSourceId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: DKQGLerBTQCDXwNS
+          x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+        x-qualified-classname: com.curalate.datasourcemanagement.model.api.v1.DataSourceId
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+          example: 10
+      - name: sort
+        in: query
+        schema:
+          type: string
+          enum:
+          - Latest
+          - Likes
+          - Moderation
+          - Optimized
+          - LastUpdated
+      - name: filter
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.FilterQuery
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.FilterQuery
+      - name: fallbackImage
+        in: query
+        schema:
+          type: string
+      - name: width
+        in: query
+        schema:
+          type: integer
+          format: int32
+          example: 400
+      - name: height
+        in: query
+        schema:
+          type: integer
+          format: int32
+          example: 400
+      - name: appId
+        in: query
+        schema:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.AppId
+        x-qualified-classname: com.curalate.mediaapi.model.api.v1.AppId
+      - name: networkSource
+        in: query
+        schema:
+          type: string
+          enum:
+          - Pinterest
+          - Facebook
+          - Instagram
+          - Twitter
+          - Tumblr
+          - Snapchat
+          - TikTok
+          - MediaImport
+      responses:
+        '200':
+          description: The operation completed successfully and yielded results.
+          content:
+            image/*: {}
+        '400':
+          description: The input parameters are not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '404':
+          description: A requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '500':
+          description: An unhandled exception has occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+        '503':
+          description: API is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPayload'
+components:
+  schemas:
+    Price:
+      required:
+      - display
+      type: object
+      properties:
+        display:
+          type: string
+        value:
+          type: number
+        currencySymbol:
+          type: string
+        currencyCode:
+          type: string
+        saleValue:
+          type: number
+        saleDisplay:
+          type: string
+        isOnSale:
+          type: boolean
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    ThumbnailPhoto:
+      required:
+      - medium
+      - mediumSquare
+      - original
+      - small
+      - smallSquare
+      type: object
+      properties:
+        original:
+          $ref: '#/components/schemas/Image'
+        small:
+          $ref: '#/components/schemas/Image'
+        medium:
+          $ref: '#/components/schemas/Image'
+        smallSquare:
+          $ref: '#/components/schemas/Image'
+        mediumSquare:
+          $ref: '#/components/schemas/Image'
+    GetRecommendedMediaResponse:
+      required:
+      - items
+      - metadata
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    NetworkUser:
+      type: object
+      properties:
+        username:
+          type: string
+        displayName:
+          type: string
+        link:
+          type: string
+        image:
+          $ref: '#/components/schemas/ThumbnailPhoto'
+        followerCount:
+          type: integer
+          format: int64
+        followingCount:
+          type: integer
+          format: int64
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    MediaApiPaging:
+      required:
+      - cursors
+      type: object
+      properties:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+        previous:
+          type: string
+          format: url
+        next:
+          type: string
+          format: url
+    Image:
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
+    MediaItem:
+      required:
+      - id
+      - labels
+      - products
+      - source
+      type: object
+      properties:
+        id:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.MediaItemId
+        source:
+          $ref: '#/components/schemas/ContentSource'
+        media:
+          $ref: '#/components/schemas/NetworkMedia'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDetails'
+        labels:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        voteCount:
+          type: integer
+          format: int64
+        clickthrough:
+          $ref: '#/components/schemas/Clickthrough'
+    LocationDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+    GetMediaItemResponse:
+      required:
+      - data
+      - metadata
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MediaItemData'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    Clickthrough:
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
+    GetMediaResponse:
+      required:
+      - data
+      - metadata
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MediaItemsData'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    MediaApiMetadata:
+      required:
+      - traceId
+      type: object
+      properties:
+        traceId:
+          type: string
+        requestId:
+          type: string
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
+    ContentSource:
+      required:
+      - lastUpdatedTimestamp
+      - postedTimestamp
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        postedTimestamp:
+          type: integer
+          format: int64
+        lastUpdatedTimestamp:
+          type: integer
+          format: int64
+        moderationApprovalTimestamp:
+          type: integer
+          format: int64
+        user:
+          $ref: '#/components/schemas/NetworkUser'
+        link:
+          type: string
+        caption:
+          type: string
+        commentCount:
+          type: integer
+          format: int64
+        likeCount:
+          type: integer
+          format: int64
+        repinCount:
+          type: integer
+          format: int64
+        location:
+          $ref: '#/components/schemas/LocationDetails'
+        sourceId:
+          type: string
+        embedUrl:
+          type: string
+        viewCount:
+          type: integer
+          format: int64
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
+    MediaItemData:
+      required:
+      - item
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/MediaItem'
+    SpatialTag:
+      required:
+      - label
+      - x
+      - y
+      type: object
+      properties:
+        x:
+          type: number
+          format: double
+        y:
+          type: number
+          format: double
+        label:
+          type: string
+    MediaItemsData:
+      required:
+      - items
+      - resultsCount
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
+        resultsCount:
+          type: integer
+          format: int64
+    NetworkMedia:
+      type: object
+      discriminator:
+        propertyName: type
+    ProductDetails:
+      required:
+      - id
+      - images
+      - link
+      - metadata
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkPhoto'
+        price:
+          $ref: '#/components/schemas/Price'
+        link:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        spatialTag:
+          $ref: '#/components/schemas/SpatialTag'
+        reviewStatistic:
+          $ref: '#/components/schemas/ReviewStat'
+    NetworkPhoto:
+      required:
+      - extraLarge
+      - extraLargeSquare
+      - id
+      - large
+      - largeSquare
+      - medium
+      - mediumSquare
+      - original
+      - small
+      - smallSquare
+      type: object
+      properties:
+        id:
+          type: string
+        original:
+          $ref: '#/components/schemas/Image'
+        small:
+          $ref: '#/components/schemas/Image'
+        medium:
+          $ref: '#/components/schemas/Image'
+        large:
+          $ref: '#/components/schemas/Image'
+        extraLarge:
+          $ref: '#/components/schemas/Image'
+        smallSquare:
+          $ref: '#/components/schemas/Image'
+        mediumSquare:
+          $ref: '#/components/schemas/Image'
+        largeSquare:
+          $ref: '#/components/schemas/Image'
+        extraLargeSquare:
+          $ref: '#/components/schemas/Image'
+        type:
+          type: string
+    ReviewStat:
+      required:
+      - overallRatingRange
+      type: object
+      properties:
+        averageOverallRating:
+          type: object
+          properties: {}
+        totalReviewCount:
+          type: object
+          properties: {}
+        overallRatingRange:
+          type: integer
+          format: int32
+        productId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.ExternalId
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: X-Curalate-Api-Key
+      in: header
