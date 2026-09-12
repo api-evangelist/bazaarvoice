@@ -1623,6 +1623,8 @@ apis:
   - type: Documentation
     url: https://developers.bazaarvoice.com/v1.0-PS-Export/docs/home
 common:
+- type: Website
+  url: https://www.bazaarvoice.com/
 - type: CapabilityMap
   url: capabilities/bazaarvoice-capability-edges.yml
   name: Bazaarvoice Business Capability Map
