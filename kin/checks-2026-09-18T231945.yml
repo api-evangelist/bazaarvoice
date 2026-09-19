@@ -2,22 +2,18 @@
 kin_checks:
   slug: bazaarvoice
   schema_version: 0.22.0
-  scored_at: '2026-09-17'
-  run_ts: 2026-09-17T233623
+  scored_at: '2026-09-18'
+  run_ts: 2026-09-18T231945
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.22.0.yml was earned; counts
     below let you verify that.
   counts:
     total: 136
-    earned: 46
+    earned: 48
     partial: 20
-    missed: 44
+    missed: 42
     na: 26
   checks:
-  - id: human_url_per_api
-    status: missed
-  - id: base_url_per_api
-    status: missed
   - id: well_known_published
     status: missed
   - id: apis_json_self_hosted
