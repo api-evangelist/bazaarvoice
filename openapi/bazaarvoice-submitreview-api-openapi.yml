@@ -440,6 +440,92 @@ paths:
                 detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
 components:
   schemas:
+    GetReview:
+      type: object
+      properties:
+        Locale:
+          type: string
+          description: The locale of the review.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+            Groups:
+              type: object
+            FieldsOrder:
+              type: array
+              items:
+                type: string
+            GroupsOrder:
+              type: array
+              items:
+                type: string
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted
+        Review:
+          type: object
+          properties:
+            SendEmailAlertWhenCommented:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is commented on.
+            Rating:
+              type: number
+              description: The rating of the review.
+            SubmissionTime:
+              type: string
+              description: The submission time of the review.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2}$
+            ReviewText:
+              type: string
+              description: The text content of the review.
+            SubmissionId:
+              type: string
+              description: The submission ID of the review.
+            Title:
+              type: string
+              description: The title of the review.
+            IsRecommended:
+              type: boolean
+              description: Flag indicating whether the review is recommended.
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the review to be posted.
+            Id:
+              type: string
+              description: The ID of the review.
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the review is published.
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
     ErrorResponse:
       type: object
       required:
@@ -558,92 +644,6 @@ components:
           type: array
           items:
             type: object
-    GetReview:
-      type: object
-      properties:
-        Locale:
-          type: string
-          description: The locale of the review.
-          pattern: ^[a-z]{2}_[A-Z]{2}$
-        Errors:
-          type: array
-          items:
-            type: object
-            properties:
-              Type:
-                type: string
-              Id:
-                type: string
-        Form:
-          type: array
-          items:
-            type: object
-            properties:
-              Type:
-                type: string
-              Id:
-                type: string
-        FormErrors:
-          type: object
-        SubmissionId:
-          type: string
-          description: The submission ID.
-        Data:
-          type: object
-          properties:
-            Fields:
-              type: object
-            Groups:
-              type: object
-            FieldsOrder:
-              type: array
-              items:
-                type: string
-            GroupsOrder:
-              type: array
-              items:
-                type: string
-        TypicalHoursToPost:
-          type: number
-          description: The typical number of hours it takes for a submission to be posted
-        Review:
-          type: object
-          properties:
-            SendEmailAlertWhenCommented:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the review is commented on.
-            Rating:
-              type: number
-              description: The rating of the review.
-            SubmissionTime:
-              type: string
-              description: The submission time of the review.
-              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2}$
-            ReviewText:
-              type: string
-              description: The text content of the review.
-            SubmissionId:
-              type: string
-              description: The submission ID of the review.
-            Title:
-              type: string
-              description: The title of the review.
-            IsRecommended:
-              type: boolean
-              description: Flag indicating whether the review is recommended.
-            TypicalHoursToPost:
-              type: number
-              description: The typical number of hours it takes for the review to be posted.
-            Id:
-              type: string
-              description: The ID of the review.
-            SendEmailAlertWhenPublished:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the review is published.
-        AuthorSubmissionToken:
-          type: string
-        HasErrors:
-          type: boolean
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

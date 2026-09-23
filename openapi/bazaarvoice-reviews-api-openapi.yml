@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bazaarvoice Content Search Answers Reviews API
+  title: Bazaarvoice Content Search Reviews API
   description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
   version: '2.0'
   contact:
@@ -171,128 +171,7 @@ paths:
           description: Unexpected internal error
 components:
   schemas:
-    ReviewQuery:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/ReviewSort'
-        fields:
-          type: array
-          items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/ReviewFilters'
-    CommentStats:
-      type: object
-      properties:
-        positiveFeedbackCount:
-          type: integer
-          format: int32
-        negativeFeedbackCount:
-          type: integer
-          format: int32
-    TimeRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    ReviewSort:
-      type: object
-      properties:
-        field:
-          type: string
-        direction:
-          type: string
-      example:
-      - field: moderationTime
-        direction: desc
-      - field: submissionTime
-        direction: desc
-      - field: rating
-        direction: desc
-      - field: legacyInternalId
-        direction: desc
-    Stats:
-      type: object
-      properties:
-        characterCount:
-          type: integer
-          format: int32
-        commentsApprovedCount:
-          type: integer
-          format: int32
-        commentsPendingCount:
-          type: integer
-          format: int32
-        commentsRejectedCount:
-          type: integer
-          format: int32
-        commentsExpiredCount:
-          type: integer
-          format: int32
-        hasApprovedComment:
-          type: boolean
-        hasPendingComment:
-          type: boolean
-        hasRejectedComment:
-          type: boolean
-        hasExpiredComment:
-          type: boolean
-        inappropriateFeedbackCount:
-          type: integer
-          format: int32
-        negativeFeedbackCount:
-          type: integer
-          format: int32
-        photoCount:
-          type: integer
-          format: int32
-        positiveFeedbackCount:
-          type: integer
-          format: int32
-        productReferenceCount:
-          type: integer
-          format: int32
-        videoCount:
-          type: integer
-          format: int32
-        responseCount:
-          type: integer
-          format: int32
-        hasResponses:
-          type: boolean
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        active:
-          type: boolean
-        description:
-          type: string
-        imageUrl:
-          type: string
-        brandId:
-          type: string
-        brandName:
-          type: string
-        categoryId:
-          type: string
-        categoryName:
-          type: string
-        productPageUrl:
-          type: string
-    ReviewCdvs:
+    SecondaryRatings:
       type: object
       properties:
         order:
@@ -303,84 +182,74 @@ components:
           type: object
           additionalProperties:
             type: string
-    ReviewFilters:
+    TimeRange:
       type: object
       properties:
-        brandId:
-          type: array
-          items:
-            type: string
-        categoryId:
-          type: array
-          items:
-            type: string
+        from:
+          type: string
+        to:
+          type: string
+    Comment:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        text:
+          type: string
+        submissionTime:
+          type: string
+        moderationTime:
+          type: string
+        contributor:
+          $ref: '#/components/schemas/ReviewContributor'
+        moderationStatus:
+          type: string
+        stats:
+          $ref: '#/components/schemas/CommentStats'
         contentCodes:
           type: array
           items:
             type: string
-        displayLocale:
-          type: array
-          items:
-            type: string
-        legacyInternalId:
-          type: array
-          items:
-            type: string
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
         moderationStatusGroup:
-          type: array
-          items:
-            type: string
-        moderationStatus:
-          type: array
-          items:
-            type: string
-        productId:
-          type: array
-          items:
-            type: string
-        activeProduct:
-          type: boolean
-        productName:
-          type: array
-          items:
-            type: string
-        rating:
-          type: array
-          items:
-            type: integer
-            format: int32
-        ratingsOnly:
-          type: boolean
-        productAttributes:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        globalSearch:
+          type: string
+    Response:
+      type: object
+      properties:
+        id:
+          type: string
+        legacyInternalId:
+          type: string
+        text:
+          type: string
+        department:
+          type: string
+        source:
+          type: string
+        name:
           type: string
         submissionTime:
-          $ref: '#/components/schemas/TimeRange'
-        moderationTime:
-          $ref: '#/components/schemas/TimeRange'
-        withClientResponse:
-          type: boolean
-        hasPhoto:
-          type: boolean
-        hasVideo:
-          type: boolean
-        includeNetwork:
-          type: boolean
-        featured:
-          type: boolean
-        campaignId:
-          type: array
-          items:
-            type: string
-        contributorExternalId:
-          type: array
-          items:
-            type: string
+          type: string
+        type:
+          type: string
+        responderClient:
+          type: string
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
     Review:
       type: object
       properties:
@@ -471,68 +340,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Comment'
-    Response:
+    Stats:
       type: object
       properties:
-        id:
-          type: string
-        legacyInternalId:
-          type: string
-        text:
-          type: string
-        department:
-          type: string
-        source:
-          type: string
-        name:
-          type: string
-        submissionTime:
-          type: string
-        type:
-          type: string
-        responderClient:
-          type: string
-    Photo:
-      type: object
-      properties:
-        caption:
-          type: string
-        mediumImageId:
-          type: string
-        thumbnailImageId:
-          type: string
-        url:
-          type: string
-        thumbnailUrl:
-          type: string
-    SecondaryRatings:
-      type: object
-      properties:
-        order:
-          type: array
-          items:
-            type: string
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-    ReviewContributor:
-      type: object
-      properties:
-        clearTextExternalId:
-          type: string
-        displayName:
-          type: string
-        merit:
-          type: string
-        rank:
-          type: string
-        affiliation:
-          type: string
-        location:
-          type: string
-        externalId:
-          type: string
+        characterCount:
+          type: integer
+          format: int32
+        commentsApprovedCount:
+          type: integer
+          format: int32
+        commentsPendingCount:
+          type: integer
+          format: int32
+        commentsRejectedCount:
+          type: integer
+          format: int32
+        commentsExpiredCount:
+          type: integer
+          format: int32
+        hasApprovedComment:
+          type: boolean
+        hasPendingComment:
+          type: boolean
+        hasRejectedComment:
+          type: boolean
+        hasExpiredComment:
+          type: boolean
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        photoCount:
+          type: integer
+          format: int32
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        videoCount:
+          type: integer
+          format: int32
+        responseCount:
+          type: integer
+          format: int32
+        hasResponses:
+          type: boolean
     Video:
       type: object
       properties:
@@ -550,6 +406,82 @@ components:
           type: string
         thumbnailUrl:
           type: string
+    ReviewQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/ReviewSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/ReviewFilters'
+    ReviewCdvs:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    ReviewSort:
+      type: object
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
+      example:
+      - field: moderationTime
+        direction: desc
+      - field: submissionTime
+        direction: desc
+      - field: rating
+        direction: desc
+      - field: legacyInternalId
+        direction: desc
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+        description:
+          type: string
+        imageUrl:
+          type: string
+        brandId:
+          type: string
+        brandName:
+          type: string
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+        productPageUrl:
+          type: string
+    CommentStats:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
     ReviewQueryResponse:
       type: object
       properties:
@@ -566,33 +498,101 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Review'
-    Comment:
+    ReviewContributor:
       type: object
       properties:
-        legacyInternalId:
+        clearTextExternalId:
           type: string
-        text:
+        displayName:
           type: string
-        submissionTime:
+        merit:
           type: string
-        moderationTime:
+        rank:
           type: string
-        contributor:
-          $ref: '#/components/schemas/ReviewContributor'
-        moderationStatus:
+        affiliation:
           type: string
-        stats:
-          $ref: '#/components/schemas/CommentStats'
+        location:
+          type: string
+        externalId:
+          type: string
+    ReviewFilters:
+      type: object
+      properties:
+        brandId:
+          type: array
+          items:
+            type: string
+        categoryId:
+          type: array
+          items:
+            type: string
         contentCodes:
           type: array
           items:
             type: string
-        moderationContentID:
-          type: string
-        moderationVersionID:
-          type: string
+        displayLocale:
+          type: array
+          items:
+            type: string
+        legacyInternalId:
+          type: array
+          items:
+            type: string
         moderationStatusGroup:
+          type: array
+          items:
+            type: string
+        moderationStatus:
+          type: array
+          items:
+            type: string
+        productId:
+          type: array
+          items:
+            type: string
+        activeProduct:
+          type: boolean
+        productName:
+          type: array
+          items:
+            type: string
+        rating:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ratingsOnly:
+          type: boolean
+        productAttributes:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        globalSearch:
           type: string
+        submissionTime:
+          $ref: '#/components/schemas/TimeRange'
+        moderationTime:
+          $ref: '#/components/schemas/TimeRange'
+        withClientResponse:
+          type: boolean
+        hasPhoto:
+          type: boolean
+        hasVideo:
+          type: boolean
+        includeNetwork:
+          type: boolean
+        featured:
+          type: boolean
+        campaignId:
+          type: array
+          items:
+            type: string
+        contributorExternalId:
+          type: array
+          items:
+            type: string
   securitySchemes:
     Bv-Passkey:
       type: apiKey

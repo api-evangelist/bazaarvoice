@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Bazaarvoice Client Response API
   version: '1.0'
-  description: 'Operations tagged Client Response across 2 of this provider''s published API definitions: bazaarvoice-response-count-openapi.yml, bazaarvoice-response-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Client Response across 2 of this provider''s published API definitions: bazaarvoice-response-count-openapi.json, bazaarvoice-response-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://stg.api.bazaarvoice.com
 - url: https://api.bazaarvoice.com
@@ -551,11 +551,6 @@ paths:
       description: PRODUCTION
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
     UserNotAuthorised:
       type: object
       properties:
@@ -563,6 +558,13 @@ components:
           type: integer
         message:
           type: string
+    ReviewResponseCountRequest:
+      type: object
+      properties:
+        reviewIds:
+          type: array
+          items:
+            type: string
     ReviewResponseCountResponse:
       type: object
       properties:
@@ -575,73 +577,19 @@ components:
                 type: string
               responseCount:
                 type: integer
-    ReviewResponseCountRequest:
+    ErrorResponse:
       type: object
       properties:
-        reviewIds:
-          type: array
-          items:
-            type: string
-    AuthorRelationship:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AuthorData'
-        links:
-          $ref: '#/components/schemas/Links'
-    AuthorData:
+        message:
+          type: string
+    ReviewData:
       type: object
       properties:
         type:
           type: string
         id:
           type: string
-    Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/ErrorCode'
-        field:
-          type: string
-          description: The field for which this error applies
-        message:
-          type: string
-          description: The human-readable message describing this error
-      description: Error relating to an API request
-    ReviewRelationship:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ReviewData'
-        links:
-          $ref: '#/components/schemas/Links'
-    ClientResponseRequest:
-      type: object
-      properties:
-        attributes:
-          type: object
-          properties:
-            department:
-              type: string
-            response:
-              type: string
-            responseBy:
-              type: string
-          required:
-          - department
-          - response
-      required:
-      - attributes
-      description: The data associated with a given Client Response record
-    Links:
-      type: object
-      properties:
-        self:
-          type: string
-        related:
+        clientName:
           type: string
     ErrorResponse_2:
       required:
@@ -663,35 +611,6 @@ components:
           items:
             $ref: '#/components/schemas/Error'
       description: Error Response to an API request
-    ClientResponseResponseModel:
-      type: object
-      properties:
-        type:
-          type: string
-        id:
-          type: string
-        attributes:
-          $ref: '#/components/schemas/ClientResponse'
-        relationships:
-          $ref: '#/components/schemas/ClientResponseRelationships'
-        links:
-          $ref: '#/components/schemas/Links'
-    ClientResponseRelationships:
-      type: object
-      properties:
-        author:
-          $ref: '#/components/schemas/AuthorRelationship'
-        review:
-          $ref: '#/components/schemas/ReviewRelationship'
-    IncorrectApiKey:
-      type: string
-      description: Message describing the error associated with API
-    ErrorCode:
-      type: object
-      properties:
-        message:
-          type: string
-      description: Error code value
     ClientResponse:
       type: object
       properties:
@@ -712,6 +631,89 @@ components:
           type: integer
           format: int64
       description: The data associated with a given Client Response record
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        field:
+          type: string
+          description: The field for which this error applies
+        message:
+          type: string
+          description: The human-readable message describing this error
+      description: Error relating to an API request
+    ErrorCode:
+      type: object
+      properties:
+        message:
+          type: string
+      description: Error code value
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API
+    ClientResponseRequest:
+      type: object
+      properties:
+        attributes:
+          type: object
+          properties:
+            department:
+              type: string
+            response:
+              type: string
+            responseBy:
+              type: string
+          required:
+          - department
+          - response
+      required:
+      - attributes
+      description: The data associated with a given Client Response record
+    AuthorRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthorData'
+        links:
+          $ref: '#/components/schemas/Links'
+    ReviewRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ReviewData'
+        links:
+          $ref: '#/components/schemas/Links'
+    Links:
+      type: object
+      properties:
+        self:
+          type: string
+        related:
+          type: string
+    ClientResponseResponseModel:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/ClientResponse'
+        relationships:
+          $ref: '#/components/schemas/ClientResponseRelationships'
+        links:
+          $ref: '#/components/schemas/Links'
+    ClientResponseRelationships:
+      type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/AuthorRelationship'
+        review:
+          $ref: '#/components/schemas/ReviewRelationship'
     UserNotAuthorised_2:
       type: object
       properties:
@@ -722,19 +724,17 @@ components:
           default: 403
         message:
           type: string
-    ReviewData:
+    AuthorData:
       type: object
       properties:
         type:
           type: string
         id:
           type: string
-        clientName:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
 x-refined-from:
-- bazaarvoice-response-count-openapi.yml
-- bazaarvoice-response-openapi.yml
+- bazaarvoice-response-count-openapi.json
+- bazaarvoice-response-openapi.json

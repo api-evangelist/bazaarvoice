@@ -181,6 +181,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1MediaByDataSourceId
+      x-operation-id-source: derived
   /v1/media/{dataSourceId}/items/{itemId}:
     get:
       tags:
@@ -269,6 +271,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1MediaByDataSourceIdItemsByItemId
+      x-operation-id-source: derived
   /v1/media/{dataSourceId}/items/{itemId}/recommendations:
     get:
       tags:
@@ -328,6 +332,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1MediaByDataSourceIdItemsByItemIdRecommendations
+      x-operation-id-source: derived
   /v1/media/{dataSourceId}/images/top:
     get:
       tags:
@@ -428,27 +434,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1MediaByDataSourceIdImagesTop
+      x-operation-id-source: derived
 components:
   schemas:
-    Price:
-      required:
-      - display
-      type: object
-      properties:
-        display:
-          type: string
-        value:
-          type: number
-        currencySymbol:
-          type: string
-        currencyCode:
-          type: string
-        saleValue:
-          type: number
-        saleDisplay:
-          type: string
-        isOnSale:
-          type: boolean
     Cursors:
       type: object
       properties:
@@ -477,75 +466,65 @@ components:
           $ref: '#/components/schemas/Image'
         mediumSquare:
           $ref: '#/components/schemas/Image'
-    GetRecommendedMediaResponse:
+    Price:
       required:
-      - items
-      - metadata
+      - display
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MediaItem'
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-    NetworkUser:
-      type: object
-      properties:
-        username:
+        display:
           type: string
-        displayName:
+        value:
+          type: number
+        currencySymbol:
           type: string
-        link:
+        currencyCode:
           type: string
-        image:
-          $ref: '#/components/schemas/ThumbnailPhoto'
-        followerCount:
-          type: integer
-          format: int64
-        followingCount:
-          type: integer
-          format: int64
-    ErrorPayload:
+        saleValue:
+          type: number
+        saleDisplay:
+          type: string
+        isOnSale:
+          type: boolean
+    SpatialTag:
       required:
-      - code
-      - errorId
+      - label
+      - x
+      - y
       type: object
       properties:
-        code:
+        x:
+          type: number
+          format: double
+        y:
+          type: number
+          format: double
+        label:
           type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
-          type: string
-          format: uuid
-        msg:
-          type: string
-        data:
-          type: object
-          properties: {}
-    MediaApiPaging:
+    MediaApiMetadata:
       required:
-      - cursors
+      - traceId
       type: object
       properties:
-        cursors:
-          $ref: '#/components/schemas/Cursors'
-        previous:
+        traceId:
           type: string
-          format: url
-        next:
+        requestId:
           type: string
-          format: url
-    Image:
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
+    MediaItemData:
       required:
-      - link
+      - item
       type: object
       properties:
-        link:
-          type: string
+        item:
+          $ref: '#/components/schemas/MediaItem'
     MediaItem:
       required:
       - id
@@ -575,65 +554,19 @@ components:
           format: int64
         clickthrough:
           $ref: '#/components/schemas/Clickthrough'
-    LocationDetails:
-      type: object
-      properties:
-        name:
-          type: string
-        longitude:
-          type: number
-          format: double
-        latitude:
-          type: number
-          format: double
-    GetMediaItemResponse:
+    MediaApiPaging:
       required:
-      - data
-      - metadata
+      - cursors
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/MediaItemData'
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-    Clickthrough:
-      required:
-      - link
-      type: object
-      properties:
-        link:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+        previous:
           type: string
-    GetMediaResponse:
-      required:
-      - data
-      - metadata
-      - paging
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MediaItemsData'
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    MediaApiMetadata:
-      required:
-      - traceId
-      type: object
-      properties:
-        traceId:
+          format: url
+        next:
           type: string
-        requestId:
-          type: string
-        firstPartyCuid:
-          type: string
-        curalateUserId:
-          type: string
-        customCuralateUserId:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
-        pdpMetadata:
-          $ref: '#/components/schemas/PdpMetadata'
+          format: url
     ContentSource:
       required:
       - lastUpdatedTimestamp
@@ -676,81 +609,23 @@ components:
         viewCount:
           type: integer
           format: int64
-    PdpMetadata:
-      type: object
-      properties:
-        curalateProductId:
-          type: string
-        curalateStyleId:
-          type: string
-    MediaItemData:
+    GetMediaItemResponse:
       required:
-      - item
-      type: object
-      properties:
-        item:
-          $ref: '#/components/schemas/MediaItem'
-    SpatialTag:
-      required:
-      - label
-      - x
-      - y
-      type: object
-      properties:
-        x:
-          type: number
-          format: double
-        y:
-          type: number
-          format: double
-        label:
-          type: string
-    MediaItemsData:
-      required:
-      - items
-      - resultsCount
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MediaItem'
-        resultsCount:
-          type: integer
-          format: int64
-    NetworkMedia:
-      type: object
-      discriminator:
-        propertyName: type
-    ProductDetails:
-      required:
-      - id
-      - images
-      - link
+      - data
       - metadata
-      - name
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkPhoto'
-        price:
-          $ref: '#/components/schemas/Price'
+        data:
+          $ref: '#/components/schemas/MediaItemData'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    Image:
+      required:
+      - link
+      type: object
+      properties:
         link:
           type: string
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-        spatialTag:
-          $ref: '#/components/schemas/SpatialTag'
-        reviewStatistic:
-          $ref: '#/components/schemas/ReviewStat'
     NetworkPhoto:
       required:
       - extraLarge
@@ -787,6 +662,119 @@ components:
           $ref: '#/components/schemas/Image'
         type:
           type: string
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
+    GetMediaResponse:
+      required:
+      - data
+      - metadata
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MediaItemsData'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    Clickthrough:
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
+    LocationDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+    ProductDetails:
+      required:
+      - id
+      - images
+      - link
+      - metadata
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkPhoto'
+        price:
+          $ref: '#/components/schemas/Price'
+        link:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        spatialTag:
+          $ref: '#/components/schemas/SpatialTag'
+        reviewStatistic:
+          $ref: '#/components/schemas/ReviewStat'
+    NetworkUser:
+      type: object
+      properties:
+        username:
+          type: string
+        displayName:
+          type: string
+        link:
+          type: string
+        image:
+          $ref: '#/components/schemas/ThumbnailPhoto'
+        followerCount:
+          type: integer
+          format: int64
+        followingCount:
+          type: integer
+          format: int64
+    NetworkMedia:
+      type: object
+      discriminator:
+        propertyName: type
+    GetRecommendedMediaResponse:
+      required:
+      - items
+      - metadata
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    MediaItemsData:
+      required:
+      - items
+      - resultsCount
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
+        resultsCount:
+          type: integer
+          format: int64
     ReviewStat:
       required:
       - overallRatingRange
@@ -804,6 +792,26 @@ components:
         productId:
           type: string
           x-qualified-classname: com.curalate.mediaapi.model.api.v1.ExternalId
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
   securitySchemes:
     ApiKey:
       type: apiKey

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Bazaarvoice Step 1 API
   version: 1.0.0
-  description: 'Operations tagged Step 1 across 2 of this provider''s published API definitions: bazaarvoice-displayable-content-export-openapi.yml, bazaarvoice-product-sentiment-export-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Step 1 across 2 of this provider''s published API definitions: bazaarvoice-displayable-content-export-openapi.json, bazaarvoice-product-sentiment-export-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://stg.api.bazaarvoice.com
   description: Staging
@@ -113,39 +113,6 @@ paths:
       description: Staging
 components:
   responses:
-    '401':
-      description: Unauthorized
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: RF unauthorised error
-                detail:
-                  errorcode: oauth.v2.RFUnauthorised
-    '403':
-      description: Forbidden
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: Invalid ApiKey
-                detail:
-                  errorcode: oauth.v2.InvalidApiKey
-    '500':
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            type: object
-            example:
-              fault:
-                faultstring: Raising fault. Fault name:- RFUnauthorized
-                detail:
-                  errorcode: steps.raisefault.RaiseFault
     '404':
       description: Not Found
       content:
@@ -157,6 +124,39 @@ components:
                 faultstring: Unable to identify proxy for host:- https_vhost and url:- /de/v3/data
                 detail:
                   errorcode: messaging.adaptors.http.flow.ApplicationNotFound
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              fault:
+                faultstring: Raising fault. Fault name:- RFUnauthorized
+                detail:
+                  errorcode: steps.raisefault.RaiseFault
+    '403':
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Invalid ApiKey
+                detail:
+                  errorcode: oauth.v2.InvalidApiKey
+    '401':
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: RF unauthorised error
+                detail:
+                  errorcode: oauth.v2.RFUnauthorised
     '404_2':
       description: Not Found
       content:
@@ -204,5 +204,5 @@ components:
               description: Name of the feature in requested language to be used for display and other purposes
       description: All features for a product
 x-refined-from:
-- bazaarvoice-displayable-content-export-openapi.yml
-- bazaarvoice-product-sentiment-export-openapi.yml
+- bazaarvoice-displayable-content-export-openapi.json
+- bazaarvoice-product-sentiment-export-openapi.json

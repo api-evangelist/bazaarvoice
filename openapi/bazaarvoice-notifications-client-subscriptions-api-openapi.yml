@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Notifications Subscriptions Notifications/{client}/subscriptions API
+  title: Notifications Subscriptions Notifications/{client}/subscript…
   x-api-id: 0a0913f4-76e3-4a84-8560-b09aa65823e9
   x-audience: external-partner
   description: The Notifications Subscription API enables clients to manage end-user subscriptions to email notifications triggered by the Bazaarvoice platform.
@@ -380,23 +380,6 @@ paths:
                 $ref: '#/components/schemas/IncorrectHttpMethod'
 components:
   schemas:
-    PaginatedResultsSubscriptionResponse:
-      type: object
-      properties:
-        offset:
-          type: string
-          description: A token, provided in each API response, to be used in the next request
-        data:
-          type: array
-          description: A JSON with emailAddress and timestamp
-          items:
-            $ref: '#/components/schemas/SubscriptionResponse'
-    limit:
-      maximum: 1000
-      minimum: 1
-      type: integer
-      format: int32
-      default: 100
     AddSubscriptionResponse:
       type: object
       properties:
@@ -465,22 +448,6 @@ components:
       - SELLER_RATINGS
       - APO
       - ALL
-    IncorrectApiKey:
-      type: string
-      description: Message describing the error associated with API key
-    InvalidUserToken:
-      description: Message describing the error associated with userToken
-      type: string
-    SubscriptionResponse:
-      type: object
-      properties:
-        emailAddress:
-          type: string
-          description: Email address encrypted using client's secret key
-        timestamp:
-          type: string
-          description: The date and time the user subscribed/unsubscribed
-          format: date-time
     IncorrectHttpMethod:
       type: object
       properties:
@@ -492,6 +459,29 @@ components:
         message:
           type: string
           example: HTTP 405 Method Not Allowed
+    limit:
+      maximum: 1000
+      minimum: 1
+      type: integer
+      format: int32
+      default: 100
+    InvalidUserToken:
+      description: Message describing the error associated with userToken
+      type: string
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API key
+    PaginatedResultsSubscriptionResponse:
+      type: object
+      properties:
+        offset:
+          type: string
+          description: A token, provided in each API response, to be used in the next request
+        data:
+          type: array
+          description: A JSON with emailAddress and timestamp
+          items:
+            $ref: '#/components/schemas/SubscriptionResponse'
     UserNotAuthorised:
       type: object
       properties:
@@ -502,6 +492,16 @@ components:
           default: 403
         message:
           type: string
+    SubscriptionResponse:
+      type: object
+      properties:
+        emailAddress:
+          type: string
+          description: Email address encrypted using client's secret key
+        timestamp:
+          type: string
+          description: The date and time the user subscribed/unsubscribed
+          format: date-time
   securitySchemes:
     apiKey:
       type: apiKey

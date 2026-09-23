@@ -71,6 +71,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1InstagramMedia
+      x-operation-id-source: derived
   /v1/instagram/auth/{accessToken}/validation:
     get:
       tags:
@@ -115,6 +117,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1InstagramAuthByAccessTokenValidation
+      x-operation-id-source: derived
   /v1/instagram/auth/{code}/exchange:
     get:
       tags:
@@ -163,8 +167,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1InstagramAuthByCodeExchange
+      x-operation-id-source: derived
 components:
   schemas:
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    ExternalMedia:
+      required:
+      - id
+      - link
+      - type
+      type: object
+      properties:
+        caption:
+          type: string
+        id:
+          type: string
+        link:
+          type: string
+          format: url
+        posterImageLink:
+          type: string
+          format: url
+        type:
+          type: string
+    GetInstagramMediaResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetInstagramMediaData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    ExchangeCodeResponse:
+      required:
+      - accessToken
+      - userId
+      type: object
+      properties:
+        accessToken:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    ValidTokenResponse:
+      type: object
+    GetInstagramMediaData:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
     ErrorPayload:
       required:
       - code
@@ -198,67 +265,6 @@ components:
         next:
           type: string
           format: url
-    ValidTokenResponse:
-      type: object
-    ExchangeCodeResponse:
-      required:
-      - accessToken
-      - userId
-      type: object
-      properties:
-        accessToken:
-          type: string
-        userId:
-          type: string
-        username:
-          type: string
-    GetInstagramMediaData:
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalMedia'
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-    GetInstagramMediaResponse:
-      required:
-      - data
-      - paging
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GetInstagramMediaData'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    ExternalMedia:
-      required:
-      - id
-      - link
-      - type
-      type: object
-      properties:
-        caption:
-          type: string
-        id:
-          type: string
-        link:
-          type: string
-          format: url
-        posterImageLink:
-          type: string
-          format: url
-        type:
-          type: string
   securitySchemes:
     ApiKey:
       type: apiKey

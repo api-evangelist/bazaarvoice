@@ -26,17 +26,10 @@ server:
   transport: stdio
 deployment:
   mode: none
-  auth: api-key
-  verified: searched
-  checked: '2026-08-13'
-  searched:
-  - https://developers.bazaarvoice.com/
-  - https://github.com/bazaarvoice
-  - npm registry search "bazaarvoice"
-  - PyPI
-  - web search for a Bazaarvoice MCP server
-  note: No remote endpoint and no stdio package exist. Nothing to install and nothing for an agent to
-    POST to.
+  verified: derived
+  tools: 15
+  checked: '2026-08-12'
+  source: catalog MCP census
 tool_count: 79
 tools:
 - name: getStructuredDataV2

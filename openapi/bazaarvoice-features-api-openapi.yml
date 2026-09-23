@@ -19,12 +19,12 @@ servers:
 - url: https://api.bazaarvoice.com/sentiment/v1/
   description: PROD
 tags:
-- name: features
+- name: Features
 paths:
   /summarised-features:
     get:
       tags:
-      - features
+      - Features
       summary: Provides best and worst features along with their quotes for a product
       operationId: getTopFeatureQuotes
       parameters:
@@ -100,7 +100,7 @@ paths:
   /summarised-features/{featureId}/quotes:
     get:
       tags:
-      - features
+      - Features
       summary: Provides quotes for a specific feature
       operationId: getSummarisedFeaturesWithQuotes
       parameters:
@@ -182,7 +182,7 @@ paths:
   /features:
     get:
       tags:
-      - features
+      - Features
       summary: Provides all features for a product
       operationId: getAllFeaturesForProduct
       parameters:
@@ -272,6 +272,31 @@ components:
           type: number
           format: float
           example: 0
+    FeaturesQuotesGrouped:
+      type: object
+      properties:
+        featureId:
+          type: string
+        feature:
+          type: string
+        percentPositive:
+          type: number
+          format: float
+        nativeFeature:
+          type: string
+        reviewsMentioned:
+          $ref: '#/components/schemas/ReviewsMentioned'
+        averageRatingReviews:
+          $ref: '#/components/schemas/AverageRatingReviews'
+        _embedded:
+          $ref: '#/components/schemas/EmbeddedQuotes'
+    EmbeddedQuotes:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quotes'
     ReviewsMentioned:
       type: object
       properties:
@@ -300,42 +325,6 @@ components:
         nativeFeature:
           type: string
           example: comfort
-    ProductFeaturesResponse:
-      type: object
-      properties:
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesResponse'
-    FeaturesQuotesGrouped:
-      type: object
-      properties:
-        featureId:
-          type: string
-        feature:
-          type: string
-        percentPositive:
-          type: number
-          format: float
-        nativeFeature:
-          type: string
-        reviewsMentioned:
-          $ref: '#/components/schemas/ReviewsMentioned'
-        averageRatingReviews:
-          $ref: '#/components/schemas/AverageRatingReviews'
-        _embedded:
-          $ref: '#/components/schemas/EmbeddedQuotes'
-    TopFeaturesQuotesGroupedResponse:
-      type: object
-      properties:
-        bestFeatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesQuotesGrouped'
-        worstFeatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesQuotesGrouped'
     Quotes:
       type: object
       properties:
@@ -375,13 +364,24 @@ components:
           - native
           - family
           - syndicated
-    EmbeddedQuotes:
+    TopFeaturesQuotesGroupedResponse:
       type: object
       properties:
-        quotes:
+        bestFeatures:
           type: array
           items:
-            $ref: '#/components/schemas/Quotes'
+            $ref: '#/components/schemas/FeaturesQuotesGrouped'
+        worstFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesQuotesGrouped'
+    ProductFeaturesResponse:
+      type: object
+      properties:
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesResponse'
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

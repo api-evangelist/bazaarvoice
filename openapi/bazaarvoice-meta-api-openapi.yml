@@ -20,6 +20,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VersionResponse'
+      operationId: getApiV1Version
+      x-operation-id-source: derived
 components:
   schemas:
     VersionResponse:

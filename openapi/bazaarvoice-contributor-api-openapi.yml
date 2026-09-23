@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bazaarvoice Content Search Answers Contributor API
+  title: Bazaarvoice Content Search Contributor API
   description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
   version: '2.0'
   contact:
@@ -167,41 +167,10 @@ paths:
           description: Unexpected internal error
 components:
   schemas:
-    ContributorSearchResult:
-      type: object
-      properties:
-        clearTextExternalId:
-          type: string
-        legacyInternalId:
-          type: string
-        displayName:
-          type: string
-        merit:
-          type: string
-        rank:
-          type: string
-        affiliation:
-          type: string
-        meritBadgeEligible:
-          type: string
-        hyperlinkingEnabled:
-          type: string
-        location:
-          type: string
-        externalId:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
+    ContributorResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContributorMatch'
     ContributorSort:
       type: object
       properties:
@@ -222,46 +191,6 @@ components:
         direction: asc
       - field: displayName
         direction: asc
-    ContributorQuery:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/ContributorSort'
-        fields:
-          type: array
-          items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/ContributorFilters'
-    ContributorResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContributorMatch'
-    ContributorSearchResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        totalQueriedAnswers:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContributorSearchResult'
     ContributorFilters:
       type: object
       properties:
@@ -302,13 +231,77 @@ components:
         statusGroup:
           type: string
           description: Grouped moderation status, APPROVED, REJECTED, PENDING, EXPIRED
-    ContributorRequest:
+    ContributorSearchResult:
       type: object
       properties:
-        term:
+        clearTextExternalId:
           type: string
-        mode:
+        legacyInternalId:
           type: string
+        displayName:
+          type: string
+        merit:
+          type: string
+        rank:
+          type: string
+        affiliation:
+          type: string
+        meritBadgeEligible:
+          type: string
+        hyperlinkingEnabled:
+          type: string
+        location:
+          type: string
+        externalId:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+    ContributorQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/ContributorSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/ContributorFilters'
+    ContributorSearchResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContributorSearchResult'
     ContributorMatch:
       type: object
       properties:
@@ -319,6 +312,13 @@ components:
         displayName:
           type: string
         externalId:
+          type: string
+    ContributorRequest:
+      type: object
+      properties:
+        term:
+          type: string
+        mode:
           type: string
   securitySchemes:
     Bv-Passkey:

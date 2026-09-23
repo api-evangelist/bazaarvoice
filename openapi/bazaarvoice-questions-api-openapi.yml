@@ -1,11 +1,11 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Bazaarvoice Content Search Answers Questions API
-  description: Bazaarvoice Developer Space V2.0 Content Search API. Provides programmatic search and retrieval of user-generated content (UGC) - Reviews, Questions, Answers, Contributor profiles - plus product catalog lookahead search and structured data (JSON-LD/Microdata) for products. Assembled by API Evangelist from the per-operation OpenAPI definitions published on developers.bazaarvoice.com reference pages.
-  version: '2.0'
-  contact:
-    name: Bazaarvoice Developer Support
-    url: https://developers.bazaarvoice.com/support
+  title: Bazaarvoice Questions API
+  x-refined-note:
+  - x-api-id differs across the merged source definitions and was not carried
+  - x-audience differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged Questions across 2 of this provider''s published API definitions: bazaarvoice-content-search-openapi.json, bazaarvoice-conversations-submission-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
   description: QA | Content Search
@@ -13,6 +13,8 @@ servers:
   description: Staging Server
 - url: https://seo.bazaarvoice.com/structured-data/v1
   description: Production Server
+- url: https://stg.api.bazaarvoice.com
+  description: Conversation-Submission API STG
 tags:
 - name: Questions
 paths:
@@ -66,6 +68,13 @@ paths:
           description: Question not found
         '500':
           description: Unexpected internal error
+    servers:
+    - url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+      description: QA | Content Search
+    - url: https://seo-stg.bazaarvoice.com/structured-data/v1
+      description: Staging Server
+    - url: https://seo.bazaarvoice.com/structured-data/v1
+      description: Production Server
   /{clientId}/questions/{legacyInternalId}:
     get:
       tags:
@@ -96,6 +105,13 @@ paths:
           description: Question not found
         '500':
           description: Unexpected internal error
+    servers:
+    - url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+      description: QA | Content Search
+    - url: https://seo-stg.bazaarvoice.com/structured-data/v1
+      description: Staging Server
+    - url: https://seo.bazaarvoice.com/structured-data/v1
+      description: Production Server
   /questions:
     post:
       tags:
@@ -126,6 +142,13 @@ paths:
           description: Invalid request body, or missing clientId header
         '500':
           description: Unexpected internal error
+    servers:
+    - url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+      description: QA | Content Search
+    - url: https://seo-stg.bazaarvoice.com/structured-data/v1
+      description: Staging Server
+    - url: https://seo.bazaarvoice.com/structured-data/v1
+      description: Production Server
   /{clientId}/questions:
     post:
       tags:
@@ -162,32 +185,407 @@ paths:
           description: Invalid request body
         '500':
           description: Unexpected internal error
+    servers:
+    - url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
+      description: QA | Content Search
+    - url: https://seo-stg.bazaarvoice.com/structured-data/v1
+      description: Staging Server
+    - url: https://seo.bazaarvoice.com/structured-data/v1
+      description: Production Server
+  /data/submitquestion.json:
+    get:
+      tags:
+      - Questions
+      operationId: GetQuestion
+      summary: Preview a question submission
+      parameters:
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product that this content is being submitted on.
+        example: product01
+      - name: Action
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The submission action to take
+        example: preview
+      - name: QuestionSummary
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Contains the text of the question summary. Only a single line of text is allowed.
+        example: How do I get it autoshipped every month?
+      - name: User
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated. Note that the UserId parameter does not contain authentication information and should not be used for hosted authentication. See the Authenticate User method for more information.
+        example: e4cd358f898194db893ff3905a40f64b646174653d3230323330393230267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d3930267375626a6563746964733d70726f647563743031
+      - name: agreedtotermsandconditions
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings.
+        example: 'yes'
+      - name: usernickname
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 4
+          maxLength: 25
+        description: User nickname display text.
+        example: sheenu
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuestion'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a GET operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Question submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERREO_CODE: ERROR_UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    post:
+      tags:
+      - Questions
+      operationId: SubmitQuestion
+      summary: Submit a question
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Action:
+                  type: string
+                  description: The submission action to take -- either 'Action=', 'Action=Preview' or 'Action=Submit'. 'Action=' will show information that can be used to build a submission form, 'Action=Preview' will show a draft of the content to be submitted; 'Action=Submit' will submit the content. If 'Action=Submit', the request must be an HTTP POST.
+                  example: preview
+                fp:
+                  type: string
+                  description: 'Fingerprint of content author''s device. See the Authenticity Tutorial for more information.
+
+
+                    Per the Bazaarvoice Authenticity Policy, you must send a device fingerprint attached to each submission. If you fail to send a device fingerprint with your submission, Bazaarvoice may take any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation of your API license.
+
+
+                    Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+                  example: 0400Ia/vP4SUWbEXk1Rjuv1iJmSjiw6jjNGA14xr7X6xRXldg3Eo6XtD78oKt7mA8bo/mtBit
+                AgreedToTermsAndConditions:
+                  type: boolean
+                  description: Boolean indicating whether or not the user agreed to the terms and conditions. Required depending on the client's settings.
+                  example: 'false'
+                CampaignId:
+                  type: string
+                  description: Arbitrary text that may be saved alongside content to indicate vehicle by which content was captured, e.g. “post-purchase email”.
+                  example: Campaign_1
+                HostedAuthentication_AuthenticationEmail:
+                  type: string
+                  description: Email address where the submitter will receive the confirmation email. If you are configured to use hosted email authentication, this parameter is required. See the Authenticate User method for more information on hosted authentication.
+                  example: dummy@dummy.com
+                HostedAuthentication_CallbackUrl:
+                  type: string
+                  description: URL of the link contained in the user authentication email. This should point to a landing page where a web application exists to complete the user authentication process. The host for the URL must be one of the domains configured for the client. The link in the email will contain a user authentication token (authtoken) that is used to verify the submitter. If you are configured to use hosted email authentication, this parameter is required. See the hosted authentication tutorial for more information.
+                  example: https://dummy.com
+                IsUserAnonymous:
+                  type: boolean
+                  description: Boolean value. If IsUserAnonymous is true, the user's display name will not be shown with the question. This parameter is unrelated to UserId. This parameter can be turned off on a per client basis.
+                  example: 'false'
+                Locale:
+                  type: string
+                  description: 'Locale to display Labels, Configuration, Product Attributes and Category Attributes in. The default value is the locale defined in the display associated with the API key.
+
+
+                    Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+                  example: en_US
+                PhotoCaption_<n>:
+                  type: string
+                  description: Value is caption text for the photo URL with the same value of <n>.
+                  example: Dummy caption for photo
+                PhotoUrl_<n>:
+                  type: string
+                  description: Value is a Bazaarvoice URL of a photo uploaded using the Data API, where <n> is a non-negative integer.
+                  example: https://dummy.com/abc.jpg
+                QuestionDetails:
+                  type: string
+                  description: Contains the text of the question details. Multiple lines of text are allowed.
+                  example: About the quality and durability of product.
+                QuestionSummary:
+                  type: string
+                  description: Contains the text of the question summary. Only a single line of text is allowed.
+                  example: How do I get it autoshipped every month?
+                SendEmailAlertWhenAnswered:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her question is answered.
+                  example: 'false'
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Boolean indicating whether or not the user wants to be notified when his/her content is published.
+                  example: 'true'
+                User:
+                  type: string
+                  description: Value of the encrypted user. This parameter demonstrates that a user has been authenticated. Note that the UserId parameter does not contain authentication information and should not be used for hosted authentication. See the Authenticate User method for more information.
+                  example: af0d220ddf1db8a9ed890aed409112a1646174653d3230323330393139267573657269643d74657374693226656d61696c616464726573733d746573747368726125343062762e636f6d26757365726e616d653d736b686172266d61786167653d313030267375626a6563746964733d70726f647563743031
+                UserEmail:
+                  type: string
+                  description: User's email address.
+                  example: testshra@bv.com
+                UserId:
+                  type: string
+                  description: 'User''s external ID. This value should come from your authentication system. See Client-Mastered Authentication for more information.
+
+
+                    Alert Do not use an email address for this value.'
+                  example: testi2
+                UserLocation:
+                  type: string
+                  description: User location text.
+                  example: India
+                UserNickname:
+                  type: string
+                  minLength: 4
+                  maxLength: 25
+                  description: User nickname display text.
+                  example: Jack
+      parameters:
+      - name: X-Forwarded-For
+        in: header
+        schema:
+          type: number
+        description: 'IP address of content author. This header is only necessary when performing submissions from your server. See Authenticity Tutorial for more information.
+
+
+          Per the Bazaarvoice Authenticity Policy, you must send author IP address attached to each submission. If you fail to send author IP address with your submission, Bazaarvoice may take any action deemed necessary in Bazaarvoice’s sole discretion to protect the integrity of the network. Such actions may include but are not limited to: rejection of your content, halting syndication of your content on the Bazaarvoice network, revocation of your API key, or revocation of your API license.
+
+
+          Alert Failure to submit this field will result in your content being ineligible for syndication, authenticity or other business processes.'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        description: 'The media-type type of the request body. Value must be application/x-www-form-urlencoded.
+
+
+          Required This field is required in all API requests.'
+        example: application/x-www-form-urlencoded
+      - name: ApiVersion
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The API version, e.g. 5.4.
+        example: 5.4
+      - name: ProductId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The id of the product that this content is being submitted on.
+        example: product01
+      - name: userId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: User's external ID. This value should come from you authentication system. See Client-Mastered Authentication for more information.
+        example: testing2
+      - name: questionsummary
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Contains the text of the question summary. Only a single line of text is allowed.
+        example: Quality of product
+      - name: PassKey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: API key is required to authenticate API user and check permission to access particular client's data.
+        example: caB45h2jBqXFw1OE043qoMBD1gJC8EwFNCjktzgwncXY4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitQuestion'
+        '400':
+          description: Bad Request - Missing required parameter.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/bad-request
+                title: Bad Request
+                staus: 400
+                ERROR_CODE: ERROR_BAD_REQUEST
+                detail: Missing required parameter - apiversion.
+        '401':
+          description: Unauthorized - Authentication or authorization failed. The provided credentials or authentication tokens are invalid or insufficient.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unauthorized
+                title: Unauthorized
+                staus: 401
+                ERROR_CODE: ERROR_PARAM_MISSING_USER_ID
+                detail: User authentication required, anonymous submission not allowed.
+        '403':
+          description: Forbidden.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/forbidden
+                title: Forbidden
+                staus: 403
+                ERROR_CODE: ERROR_FORBIDDEN
+                detail: Content may not be submitted using a POST operation.
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/not-found
+                title: Not Found
+                staus: 404
+                ERROR_CODE: ERROR_NOT_FOUND
+                detail: Question submission endpoint not found
+        '414':
+          description: Request-URI too long
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                fault:
+                  faultstring: request line size exceeding 7,168
+                  detail:
+                    errorcode: protocol.http.TooBigLine
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                type: /problems/unexpected-error
+                title: Unexpected Error
+                staus: 500
+                ERROR_CODE: ERROR-UNKNOWN
+                detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+    servers:
+    - url: https://stg.api.bazaarvoice.com
+      description: Conversation-Submission API STG
 components:
   schemas:
-    QuestionQuery:
+    AllAnswers:
       type: object
       properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/QuestionSort'
-        fields:
-          type: array
-          items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/QuestionFilters'
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
     Answer:
       type: object
       properties:
@@ -288,130 +686,6 @@ components:
           format: int32
         statusGroup:
           type: string
-    TimeRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    QuestionContributor:
-      type: object
-      properties:
-        id:
-          type: string
-        table:
-          type: string
-        version:
-          type: integer
-          format: int32
-        sourceVersion:
-          type: integer
-          format: int32
-        deleted:
-          type: boolean
-        signature:
-          type: string
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        type:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        clearTextExternalId:
-          type: string
-        anonymous:
-          type: boolean
-        rank:
-          type: string
-        merit:
-          type: string
-        affiliation:
-          type: string
-        contributorBadgeEnabled:
-          type: boolean
-        contributorLocation:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayCode:
-          type: string
-        displayLocale:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        displayName:
-          type: string
-        sourceName:
-          type: string
-        agreedToTermsAndConditions:
-          type: boolean
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        ratingOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        avatarPhoto:
-          $ref: '#/components/schemas/Photo'
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        displayLastUpdate:
-          $ref: '#/components/schemas/PrrUpdate'
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        ratingProperties:
-          type: object
-          additionalProperties:
-            type: string
-        externalId:
-          type: string
-    AllAnswers:
-      type: object
-      properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
     QuestionFilters:
       type: object
       properties:
@@ -513,30 +787,19 @@ components:
           type: boolean
         withAnswers:
           type: boolean
-    SingleQuestionDocument:
-      type: object
-      properties:
-        question:
-          $ref: '#/components/schemas/Question'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        product:
-          $ref: '#/components/schemas/Product'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-        totalQueriedAnswers:
-          type: integer
-          format: int32
     QuestionSort:
       type: object
       properties:
         field:
           type: string
         direction:
+          type: string
+    TimeRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
           type: string
     Question:
       type: object
@@ -647,6 +910,36 @@ components:
           $ref: '#/components/schemas/Coordinate'
         statusGroup:
           type: string
+    Video:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
+          type: string
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
     Coordinate:
       type: object
       properties:
@@ -654,22 +947,6 @@ components:
           type: string
         id:
           type: string
-    QuestionQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Question'
     Statistics:
       type: object
       properties:
@@ -701,6 +978,131 @@ components:
           type: boolean
         hasVideos:
           type: boolean
+    QuestionQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/QuestionSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/QuestionFilters'
+    QuestionContributor:
+      type: object
+      properties:
+        id:
+          type: string
+        table:
+          type: string
+        version:
+          type: integer
+          format: int32
+        sourceVersion:
+          type: integer
+          format: int32
+        deleted:
+          type: boolean
+        signature:
+          type: string
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        type:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        clearTextExternalId:
+          type: string
+        anonymous:
+          type: boolean
+        rank:
+          type: string
+        merit:
+          type: string
+        affiliation:
+          type: string
+        contributorBadgeEnabled:
+          type: boolean
+        contributorLocation:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayCode:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        displayName:
+          type: string
+        sourceName:
+          type: string
+        agreedToTermsAndConditions:
+          type: boolean
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        ratingOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        avatarPhoto:
+          $ref: '#/components/schemas/Photo'
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        displayLastUpdate:
+          $ref: '#/components/schemas/PrrUpdate'
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        ratingProperties:
+          type: object
+          additionalProperties:
+            type: string
+        externalId:
+          type: string
     Product:
       type: object
       properties:
@@ -724,39 +1126,1002 @@ components:
           type: string
         productPageUrl:
           type: string
-    Photo:
+    QuestionQueryResponse:
       type: object
       properties:
-        caption:
-          type: string
-        mediumImageId:
-          type: string
-        thumbnailImageId:
-          type: string
-        url:
-          type: string
-        thumbnailUrl:
-          type: string
-    Video:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    PrrUpdate:
       type: object
       properties:
-        legacyInternalId:
+        hash:
           type: string
-        rawUrlInput:
+        timestamp:
           type: string
-        caption:
+    SingleQuestionDocument:
+      type: object
+      properties:
+        question:
+          $ref: '#/components/schemas/Question'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        product:
+          $ref: '#/components/schemas/Product'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+    GetQuestion:
+      type: object
+      properties:
+        Locale:
           type: string
-        videoHost:
+        Errors:
+          type: array
+          items:
+            type: object
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
           type: string
-        videoId:
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+              properties:
+                photourl_6:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_2:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_3:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_4:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_5:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                sendemailalertwhenanswered:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_2:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_1:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_6:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_5:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_4:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photourl_1:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                photocaption_3:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                hostedauthentication_authenticationemail:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                questiondetails:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                hostedauthentication_rememberme:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_region:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                questionsummary:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                displayasanonymous:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_country:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_longitude:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                usernickname:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocation:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_latitude:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                sendemailalertwhenpublished:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Value:
+                      type: string
+                    Label:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+                userlocationgeocode_city:
+                  type: object
+                  properties:
+                    Options:
+                      type: array
+                      items:
+                        type: string
+                    Type:
+                      type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Value:
+                      type: string
+                    MinLength:
+                      type: number
+                    Id:
+                      type: string
+                    MaxLength:
+                      type: number
+                    Default:
+                      type: string
+            Groups:
+              type: object
+              properties:
+                photo_1:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_2:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_3:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_4:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                userlocationgeocode:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                hostedauthentication:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_5:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+                photo_6:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    SubElements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Type:
+                            type: string
+                          Id:
+                            type: string
+                    Required:
+                      type: boolean
+                    Label:
+                      type: string
+                    Id:
+                      type: string
+            FieldsOrder:
+              type: array
+              items:
+                type: string
+            GroupsOrder:
+              type: array
+              items:
+                type: string
+        Question:
+          type: object
+          properties:
+            QuestionSummary:
+              type: string
+            SubmissionTime:
+              type: string
+            SubmissionId:
+              type: string
+            SendEmailAlertWhenAnswered:
+              type: boolean
+            TypicalHoursToPost:
+              type: string
+            QuestionDetails:
+              type: string
+            Id:
+              type: string
+            SendEmailAlertWhenPublished:
+              type: boolean
+        TypicalHoursToPost:
+          type: integer
+        AuthorSubmissionToken:
           type: string
-        uploadStatus:
+        HasErrors:
+          type: boolean
+          example: false
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
           type: string
-        thumbnailUrl:
+          format: uri
+          default: about:blank
+        title:
           type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+    SubmitQuestion:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Question:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is published.
+            SendEmailAlertWhenAnswered:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is answered.
+            QuestionSummary:
+              type: string
+              description: The summary of the question.
+            SubmissionTime:
+              type: string
+              description: The submission time of the question.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the question to be posted.
+            SubmissionId:
+              type: string
+              description: The submission ID of the question.
+            QuestionDetails:
+              type: string
+              description: The details of the question.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the question.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
   securitySchemes:
     Bv-Passkey:
       type: apiKey
       in: header
       name: Bv-Passkey
       description: GEO API key for authentication
+x-refined-from:
+- bazaarvoice-content-search-openapi.json
+- bazaarvoice-conversations-submission-openapi.json

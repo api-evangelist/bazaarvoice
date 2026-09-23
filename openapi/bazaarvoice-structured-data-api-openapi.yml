@@ -97,6 +97,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
+      operationId: getV1StructuredDataContent
+      x-operation-id-source: derived
 components:
   schemas:
     ErrorPayload:

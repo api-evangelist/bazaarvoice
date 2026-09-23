@@ -19,12 +19,12 @@ servers:
 - url: https://api.bazaarvoice.com/sentiment/v1/
   description: PROD
 tags:
-- name: quotes
+- name: Quotes
 paths:
   /quotes:
     get:
       tags:
-      - quotes
+      - Quotes
       summary: Provides top 25 positive quotes for a product
       operationId: getProductQuotes
       parameters:

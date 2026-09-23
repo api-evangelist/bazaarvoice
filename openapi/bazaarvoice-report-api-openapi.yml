@@ -68,6 +68,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorPayload'
       x-codegen-request-body-name: body
+      operationId: postV1MediaReportByDataSourceIdItemsByItemId
+      x-operation-id-source: derived
 components:
   schemas:
     ErrorPayload:
@@ -90,26 +92,6 @@ components:
         data:
           type: object
           properties: {}
-    ReportMediaResponse:
-      required:
-      - metadata
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-    ReportMediaRequestBody:
-      required:
-      - message
-      - sourceUrl
-      - userEmail
-      type: object
-      properties:
-        message:
-          type: string
-        userEmail:
-          type: string
-        sourceUrl:
-          type: string
     MediaApiMetadata:
       required:
       - traceId
@@ -134,6 +116,26 @@ components:
         curalateProductId:
           type: string
         curalateStyleId:
+          type: string
+    ReportMediaResponse:
+      required:
+      - metadata
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    ReportMediaRequestBody:
+      required:
+      - message
+      - sourceUrl
+      - userEmail
+      type: object
+      properties:
+        message:
+          type: string
+        userEmail:
+          type: string
+        sourceUrl:
           type: string
   securitySchemes:
     ApiKey:

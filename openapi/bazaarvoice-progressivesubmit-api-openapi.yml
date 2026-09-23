@@ -149,6 +149,8 @@ paths:
                     staus: 500
                     ERROR_CODE: ERROR_UNKNOWN
                     detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+      operationId: postDataInitiateSubmitJson
+      x-operation-id-source: derived
   /data/progressiveSubmit.json:
     post:
       tags:
@@ -326,8 +328,49 @@ paths:
                 status: 500
                 ERROR_CODE: ERROR_UNKNOWN
                 detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
+      operationId: postDataProgressiveSubmitJson
+      x-operation-id-source: derived
 components:
   schemas:
+    progressiveSubmit:
+      type: object
+      properties:
+        hasErrors:
+          type: boolean
+          example: false
+        response:
+          type: object
+          properties:
+            review:
+              type: object
+              properties:
+                SendEmailAlertWhenCommented:
+                  type: boolean
+                  description: Flag indicating whether to send an email alert when the review is commented on.
+                Rating:
+                  type: number
+                  description: The rating of the review.
+                SubmissionTime:
+                  type: string
+                  description: The submission time of the review.
+                  pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+                ReviewText:
+                  type: string
+                  description: The text content of the review.
+                Title:
+                  type: string
+                  description: The title of the review.
+                SendEmailAlertWhenPublished:
+                  type: boolean
+                  description: Flag indicating whether to send an email alert when the review is published.
+            submissionId:
+              type: string
+              description: The submission ID.
+            isFormComplete:
+              type: boolean
+              description: Flag indicating whether the form is complete.
+            SubmissionSessionToken:
+              type: string
     ErrorResponse:
       type: object
       required:
@@ -381,45 +424,6 @@ components:
           type: string
           format: date-time
           example: '2023-07-19T09:10:04.446Z'
-    progressiveSubmit:
-      type: object
-      properties:
-        hasErrors:
-          type: boolean
-          example: false
-        response:
-          type: object
-          properties:
-            review:
-              type: object
-              properties:
-                SendEmailAlertWhenCommented:
-                  type: boolean
-                  description: Flag indicating whether to send an email alert when the review is commented on.
-                Rating:
-                  type: number
-                  description: The rating of the review.
-                SubmissionTime:
-                  type: string
-                  description: The submission time of the review.
-                  pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
-                ReviewText:
-                  type: string
-                  description: The text content of the review.
-                Title:
-                  type: string
-                  description: The title of the review.
-                SendEmailAlertWhenPublished:
-                  type: boolean
-                  description: Flag indicating whether to send an email alert when the review is published.
-            submissionId:
-              type: string
-              description: The submission ID.
-            isFormComplete:
-              type: boolean
-              description: Flag indicating whether the form is complete.
-            SubmissionSessionToken:
-              type: string
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
