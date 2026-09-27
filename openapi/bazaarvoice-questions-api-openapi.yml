@@ -577,15 +577,13 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
-    AllAnswers:
+    PrrUpdate:
       type: object
       properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
+        hash:
+          type: string
+        timestamp:
+          type: string
     Answer:
       type: object
       properties:
@@ -787,12 +785,159 @@ components:
           type: boolean
         withAnswers:
           type: boolean
-    QuestionSort:
+    Photo:
       type: object
       properties:
-        field:
+        caption:
           type: string
-        direction:
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
+    QuestionQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    Video:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
+          type: string
+    QuestionContributor:
+      type: object
+      properties:
+        id:
+          type: string
+        table:
+          type: string
+        version:
+          type: integer
+          format: int32
+        sourceVersion:
+          type: integer
+          format: int32
+        deleted:
+          type: boolean
+        signature:
+          type: string
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        type:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        clearTextExternalId:
+          type: string
+        anonymous:
+          type: boolean
+        rank:
+          type: string
+        merit:
+          type: string
+        affiliation:
+          type: string
+        contributorBadgeEnabled:
+          type: boolean
+        contributorLocation:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayCode:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        displayName:
+          type: string
+        sourceName:
+          type: string
+        agreedToTermsAndConditions:
+          type: boolean
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        ratingOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        avatarPhoto:
+          $ref: '#/components/schemas/Photo'
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        displayLastUpdate:
+          $ref: '#/components/schemas/PrrUpdate'
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        ratingProperties:
+          type: object
+          additionalProperties:
+            type: string
+        externalId:
           type: string
     TimeRange:
       type: object
@@ -801,6 +946,23 @@ components:
           type: string
         to:
           type: string
+    QuestionQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/QuestionSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/QuestionFilters'
     Question:
       type: object
       properties:
@@ -910,42 +1072,37 @@ components:
           $ref: '#/components/schemas/Coordinate'
         statusGroup:
           type: string
-    Video:
+    AllAnswers:
       type: object
       properties:
-        legacyInternalId:
-          type: string
-        rawUrlInput:
-          type: string
-        caption:
-          type: string
-        videoHost:
-          type: string
-        videoId:
-          type: string
-        uploadStatus:
-          type: string
-        thumbnailUrl:
-          type: string
-    Photo:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    Product:
       type: object
       properties:
-        caption:
-          type: string
-        mediumImageId:
-          type: string
-        thumbnailImageId:
-          type: string
-        url:
-          type: string
-        thumbnailUrl:
-          type: string
-    Coordinate:
-      type: object
-      properties:
-        table:
-          type: string
         id:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+        description:
+          type: string
+        imageUrl:
+          type: string
+        brandId:
+          type: string
+        brandName:
+          type: string
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+        productPageUrl:
           type: string
     Statistics:
       type: object
@@ -978,176 +1135,12 @@ components:
           type: boolean
         hasVideos:
           type: boolean
-    QuestionQuery:
+    Coordinate:
       type: object
       properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/QuestionSort'
-        fields:
-          type: array
-          items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/QuestionFilters'
-    QuestionContributor:
-      type: object
-      properties:
-        id:
-          type: string
         table:
           type: string
-        version:
-          type: integer
-          format: int32
-        sourceVersion:
-          type: integer
-          format: int32
-        deleted:
-          type: boolean
-        signature:
-          type: string
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        type:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        clearTextExternalId:
-          type: string
-        anonymous:
-          type: boolean
-        rank:
-          type: string
-        merit:
-          type: string
-        affiliation:
-          type: string
-        contributorBadgeEnabled:
-          type: boolean
-        contributorLocation:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayCode:
-          type: string
-        displayLocale:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        displayName:
-          type: string
-        sourceName:
-          type: string
-        agreedToTermsAndConditions:
-          type: boolean
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        ratingOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        avatarPhoto:
-          $ref: '#/components/schemas/Photo'
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        displayLastUpdate:
-          $ref: '#/components/schemas/PrrUpdate'
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        ratingProperties:
-          type: object
-          additionalProperties:
-            type: string
-        externalId:
-          type: string
-    Product:
-      type: object
-      properties:
         id:
-          type: string
-        name:
-          type: string
-        active:
-          type: boolean
-        description:
-          type: string
-        imageUrl:
-          type: string
-        brandId:
-          type: string
-        brandName:
-          type: string
-        categoryId:
-          type: string
-        categoryName:
-          type: string
-        productPageUrl:
-          type: string
-    QuestionQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Question'
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
           type: string
     SingleQuestionDocument:
       type: object
@@ -1167,6 +1160,119 @@ components:
         totalQueriedAnswers:
           type: integer
           format: int32
+    QuestionSort:
+      type: object
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
+    SubmitQuestion:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Question:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is published.
+            SendEmailAlertWhenAnswered:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is answered.
+            QuestionSummary:
+              type: string
+              description: The summary of the question.
+            SubmissionTime:
+              type: string
+              description: The submission time of the question.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the question to be posted.
+            SubmissionId:
+              type: string
+              description: The submission ID of the question.
+            QuestionDetails:
+              type: string
+              description: The details of the question.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the question.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
     GetQuestion:
       type: object
       properties:
@@ -2010,112 +2116,6 @@ components:
         HasErrors:
           type: boolean
           example: false
-    ErrorResponse:
-      type: object
-      required:
-      - code
-      - occurredAt
-      properties:
-        type:
-          type: string
-          format: uri
-          default: about:blank
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-          description: The HTTP status code generated by the origin server for this occurrence of the problem.
-          minimum: 100
-          maximum: 599
-          example: 400
-        detail:
-          type: string
-          description: A human readable explanation specific to this occurrence of the problem.
-          example: Connection to database timed out
-        instance:
-          type: string
-          format: uri
-          description: An absolute URI that identifies the specific occurrence of the problem.
-        code:
-          type: string
-          example: ERROR_PARAM_MISSING_PARAMETERS
-          x-extensible-enum:
-          - ERROR_ACCESS_DENIED
-          - ERROR_FORM_DUPLICATE
-          - ERROR_FORM_EMOJI
-          - ERROR_FORM_REQUIRED
-          - ERROR_FORM_REQUIRED_NICKNAME
-          - ERROR_FORM_TOO_SHORT
-          - ERROR_DUPLICATE_SUBMISSION
-          - ERROR_PARAM_INVALID_API_KEY
-          - ERROR_PARAM_INVALID_LOCALE
-          - ERROR_PARAM_INVALID_PARAMETERS
-          - ERROR_PARAM_MISSING_SUBJECT_ID
-          - ERROR_PARAM_MISSING_USER_ID
-          - ERROR_REQUEST_LIMIT_REACHED
-          - ERROR_UNKNOWN
-          - ERROR_UNSUPPORTED
-          - ERROR_NOT_FOUND
-          - ERROR_FORBIDDEN
-          - ERROR_REQUEST_LINE_TOO_LARGE
-        occurredAt:
-          type: string
-          format: date-time
-          example: '2023-07-19T09:10:04.446Z'
-    SubmitQuestion:
-      type: object
-      properties:
-        Data:
-          type: object
-        HasErrors:
-          type: boolean
-          example: false
-        Form:
-          type: array
-          items:
-            type: object
-        FormErrors:
-          type: object
-        Question:
-          type: object
-          properties:
-            SendEmailAlertWhenPublished:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the question is published.
-            SendEmailAlertWhenAnswered:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the question is answered.
-            QuestionSummary:
-              type: string
-              description: The summary of the question.
-            SubmissionTime:
-              type: string
-              description: The submission time of the question.
-              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
-            TypicalHoursToPost:
-              type: number
-              description: The typical number of hours it takes for the question to be posted.
-            SubmissionId:
-              type: string
-              description: The submission ID of the question.
-            QuestionDetails:
-              type: string
-              description: The details of the question.
-        TypicalHoursToPost:
-          type: number
-          description: The typical number of hours it takes for a submission to be posted.
-        SubmissionId:
-          type: string
-          description: The submission ID.
-        Locale:
-          type: string
-          description: The locale of the question.
-          pattern: ^[a-z]{2}_[A-Z]{2}$
-        Errors:
-          type: array
-          items:
-            type: object
   securitySchemes:
     Bv-Passkey:
       type: apiKey

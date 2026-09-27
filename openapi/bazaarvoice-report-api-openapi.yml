@@ -72,26 +72,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorPayload:
+    ReportMediaResponse:
       required:
-      - code
-      - errorId
+      - metadata
       type: object
       properties:
-        code:
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    ReportMediaRequestBody:
+      required:
+      - message
+      - sourceUrl
+      - userEmail
+      type: object
+      properties:
+        message:
           type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
+        userEmail:
           type: string
-          format: uuid
-        msg:
+        sourceUrl:
           type: string
-        data:
-          type: object
-          properties: {}
     MediaApiMetadata:
       required:
       - traceId
@@ -117,26 +117,26 @@ components:
           type: string
         curalateStyleId:
           type: string
-    ReportMediaResponse:
+    ErrorPayload:
       required:
-      - metadata
+      - code
+      - errorId
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-    ReportMediaRequestBody:
-      required:
-      - message
-      - sourceUrl
-      - userEmail
-      type: object
-      properties:
-        message:
+        code:
           type: string
-        userEmail:
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
           type: string
-        sourceUrl:
+          format: uuid
+        msg:
           type: string
+        data:
+          type: object
+          properties: {}
   securitySchemes:
     ApiKey:
       type: apiKey

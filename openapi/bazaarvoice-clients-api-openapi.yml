@@ -333,7 +333,7 @@ paths:
     get:
       summary: Fetch Structured Data (JSON-LD or Microdata)
       description: Retrieves structured data for a specific product. This is the recommended endpoint that accepts product-id as a query parameter.
-      operationId: getStructuredDataV2
+      operationId: getClientsByClientIdUgc
       security:
       - Bv-Passkey: []
       parameters:
@@ -533,6 +533,8 @@ paths:
               example: "<script type=\"application/json\" id=\"bv-error-data\">\n  {\n    \"type\": \"/problems/unexpected-error\",\n    \"status\": 500,\n    \"title\": \"Internal Server Error\",\n    \"detail\": \"Internal Server Error\",\n    \"instance\": \"/clients/clientid/ugc\"\n  }\n</script>\n"
       tags:
       - Clients
+      x-operation-id-source: normalized
+      x-operation-id-original: getStructuredDataV2
     servers:
     - url: https://content-search.eu-west-1a.bosun.qa.bazaarvoice.com/
       description: QA | Content Search
@@ -542,6 +544,27 @@ paths:
       description: Production Server
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      - detail
+      - instance
+      properties:
+        type:
+          type: string
+          format: uri-reference
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
     JsonLdResponseJSONFormat:
       type: object
       description: JSON-LD structured data object inside script tag
@@ -591,27 +614,6 @@ components:
               '@type': ImageObject
               name: Featuring Boots
               contentUrl: https://example.com/image2.jpg
-    ErrorResponse:
-      type: object
-      required:
-      - type
-      - title
-      - status
-      - detail
-      - instance
-      properties:
-        type:
-          type: string
-          format: uri-reference
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
     JsonLdResponseScript:
       type: string
       description: JSON-LD structured data object inside script tag which abides to google defined schema.org. Our Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review, Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating

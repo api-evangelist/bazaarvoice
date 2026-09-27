@@ -410,15 +410,13 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
-    AllAnswers:
+    PrrUpdate:
       type: object
       properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
+        hash:
+          type: string
+        timestamp:
+          type: string
     Answer:
       type: object
       properties:
@@ -532,80 +530,6 @@ components:
           type: string
         thumbnailUrl:
           type: string
-    Coordinate:
-      type: object
-      properties:
-        table:
-          type: string
-        id:
-          type: string
-    Video:
-      type: object
-      properties:
-        legacyInternalId:
-          type: string
-        rawUrlInput:
-          type: string
-        caption:
-          type: string
-        videoHost:
-          type: string
-        videoId:
-          type: string
-        uploadStatus:
-          type: string
-        thumbnailUrl:
-          type: string
-    AnswerQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        totalQueriedAnswers:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-    Statistics:
-      type: object
-      properties:
-        positiveFeedbackCount:
-          type: integer
-          format: int32
-        negativeFeedbackCount:
-          type: integer
-          format: int32
-        helpfulnessScore:
-          type: integer
-          format: int32
-        characterCount:
-          type: integer
-          format: int32
-        productReferenceCount:
-          type: integer
-          format: int32
-        inappropriateFeedbackCount:
-          type: integer
-          format: int32
-        numPhotos:
-          type: integer
-          format: int32
-        numVideos:
-          type: integer
-          format: int32
-        hasPhotos:
-          type: boolean
-        hasVideos:
-          type: boolean
     QuestionContributor:
       type: object
       properties:
@@ -714,17 +638,93 @@ components:
             type: string
         externalId:
           type: string
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
     AnswerFilters:
       type: object
       properties:
         questionId:
+          type: string
+    Statistics:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        helpfulnessScore:
+          type: integer
+          format: int32
+        characterCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        numPhotos:
+          type: integer
+          format: int32
+        numVideos:
+          type: integer
+          format: int32
+        hasPhotos:
+          type: boolean
+        hasVideos:
+          type: boolean
+    AnswerQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+    AllAnswers:
+      type: object
+      properties:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    Video:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
+          type: string
+    Coordinate:
+      type: object
+      properties:
+        table:
+          type: string
+        id:
           type: string
     GetAnswer:
       type: object

@@ -551,6 +551,18 @@ paths:
       description: PRODUCTION
 components:
   schemas:
+    ReviewResponseCountResponse:
+      type: object
+      properties:
+        counts:
+          type: array
+          items:
+            type: object
+            properties:
+              reviewId:
+                type: string
+              responseCount:
+                type: integer
     UserNotAuthorised:
       type: object
       properties:
@@ -565,52 +577,18 @@ components:
           type: array
           items:
             type: string
-    ReviewResponseCountResponse:
-      type: object
-      properties:
-        counts:
-          type: array
-          items:
-            type: object
-            properties:
-              reviewId:
-                type: string
-              responseCount:
-                type: integer
     ErrorResponse:
       type: object
       properties:
         message:
           type: string
-    ReviewData:
+    AuthorData:
       type: object
       properties:
         type:
           type: string
         id:
           type: string
-        clientName:
-          type: string
-    ErrorResponse_2:
-      required:
-      - errors
-      - httpCode
-      - requestURI
-      type: object
-      properties:
-        httpCode:
-          type: integer
-          description: The HTTP response code
-          format: int32
-        requestURI:
-          type: string
-          description: The incoming request URI
-        errors:
-          type: array
-          description: The list of detailed errors
-          items:
-            $ref: '#/components/schemas/Error'
-      description: Error Response to an API request
     ClientResponse:
       type: object
       properties:
@@ -631,30 +609,51 @@ components:
           type: integer
           format: int64
       description: The data associated with a given Client Response record
-    Error:
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API
+    ErrorResponse_2:
       required:
-      - code
-      - message
+      - errors
+      - httpCode
+      - requestURI
       type: object
       properties:
-        code:
-          $ref: '#/components/schemas/ErrorCode'
-        field:
+        httpCode:
+          type: integer
+          description: The HTTP response code
+          format: int32
+        requestURI:
           type: string
-          description: The field for which this error applies
-        message:
-          type: string
-          description: The human-readable message describing this error
-      description: Error relating to an API request
+          description: The incoming request URI
+        errors:
+          type: array
+          description: The list of detailed errors
+          items:
+            $ref: '#/components/schemas/Error'
+      description: Error Response to an API request
     ErrorCode:
       type: object
       properties:
         message:
           type: string
       description: Error code value
-    IncorrectApiKey:
-      type: string
-      description: Message describing the error associated with API
+    Links:
+      type: object
+      properties:
+        self:
+          type: string
+        related:
+          type: string
+    ReviewData:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        clientName:
+          type: string
     ClientResponseRequest:
       type: object
       properties:
@@ -673,27 +672,6 @@ components:
       required:
       - attributes
       description: The data associated with a given Client Response record
-    AuthorRelationship:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AuthorData'
-        links:
-          $ref: '#/components/schemas/Links'
-    ReviewRelationship:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ReviewData'
-        links:
-          $ref: '#/components/schemas/Links'
-    Links:
-      type: object
-      properties:
-        self:
-          type: string
-        related:
-          type: string
     ClientResponseResponseModel:
       type: object
       properties:
@@ -705,6 +683,13 @@ components:
           $ref: '#/components/schemas/ClientResponse'
         relationships:
           $ref: '#/components/schemas/ClientResponseRelationships'
+        links:
+          $ref: '#/components/schemas/Links'
+    AuthorRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthorData'
         links:
           $ref: '#/components/schemas/Links'
     ClientResponseRelationships:
@@ -724,13 +709,28 @@ components:
           default: 403
         message:
           type: string
-    AuthorData:
+    ReviewRelationship:
       type: object
       properties:
-        type:
+        data:
+          $ref: '#/components/schemas/ReviewData'
+        links:
+          $ref: '#/components/schemas/Links'
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        field:
           type: string
-        id:
+          description: The field for which this error applies
+        message:
           type: string
+          description: The human-readable message describing this error
+      description: Error relating to an API request
   securitySchemes:
     BearerAuth:
       type: http

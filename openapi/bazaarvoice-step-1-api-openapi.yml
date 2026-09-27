@@ -65,7 +65,7 @@ paths:
       tags:
       - Step 1
       summary: Step 1 - GET manifest file list
-      operationId: requestmanifestfilelist
+      operationId: getPsiV1Data
       parameters:
       - name: X-Bazaarvoice-Signature
         in: header
@@ -108,44 +108,13 @@ paths:
           $ref: '#/components/responses/404_2'
         '500':
           $ref: '#/components/responses/500'
+      x-operation-id-source: normalized
+      x-operation-id-original: requestmanifestfilelist
     servers:
     - url: https://stg.api.bazaarvoice.com
       description: Staging
 components:
   responses:
-    '404':
-      description: Not Found
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: Unable to identify proxy for host:- https_vhost and url:- /de/v3/data
-                detail:
-                  errorcode: messaging.adaptors.http.flow.ApplicationNotFound
-    '500':
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            type: object
-            example:
-              fault:
-                faultstring: Raising fault. Fault name:- RFUnauthorized
-                detail:
-                  errorcode: steps.raisefault.RaiseFault
-    '403':
-      description: Forbidden
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: Invalid ApiKey
-                detail:
-                  errorcode: oauth.v2.InvalidApiKey
     '401':
       description: Unauthorized
       content:
@@ -157,6 +126,39 @@ components:
                 faultstring: RF unauthorised error
                 detail:
                   errorcode: oauth.v2.RFUnauthorised
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              fault:
+                faultstring: Raising fault. Fault name:- RFUnauthorized
+                detail:
+                  errorcode: steps.raisefault.RaiseFault
+    '404':
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Unable to identify proxy for host:- https_vhost and url:- /de/v3/data
+                detail:
+                  errorcode: messaging.adaptors.http.flow.ApplicationNotFound
+    '403':
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Invalid ApiKey
+                detail:
+                  errorcode: oauth.v2.InvalidApiKey
     '404_2':
       description: Not Found
       content:

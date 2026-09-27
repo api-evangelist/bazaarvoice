@@ -175,6 +175,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SubmittedMedia:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Image
+          - Video
+        curalateMediaId:
+          type: string
+        url:
+          type: string
+          format: url
+        posterUrl:
+          type: string
+          format: url
+        caption:
+          type: string
     VideoProcessingVersion:
       required:
       - height
@@ -207,55 +227,6 @@ components:
           items:
             type: integer
             format: int64
-    SubmittedMedia:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Image
-          - Video
-        curalateMediaId:
-          type: string
-        url:
-          type: string
-          format: url
-        posterUrl:
-          type: string
-          format: url
-        caption:
-          type: string
-    UploadVideoResponse:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-          x-qualified-classname: com.curalate.global.model.types.video.VideoId
-    SubmitMediaResponse:
-      required:
-      - metadata
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-    GetVideoStatusResponse:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/VideoProcessingStatusData'
-    Image:
-      required:
-      - link
-      type: object
-      properties:
-        link:
-          type: string
     VideoProcessingStatusData:
       required:
       - video
@@ -263,35 +234,48 @@ components:
       properties:
         video:
           $ref: '#/components/schemas/VideoProcessingVideo'
-    UploadResponse:
+    SubmitMediaRequestBody:
       required:
-      - data
+      - emailAddress
+      - emailOptIn
+      - media
+      - mediaContainerId
+      - mediaContainerType
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/UploadData'
-        errors:
+        mediaContainerType:
+          type: string
+          enum:
+          - Like2Buy
+          - Fanreel
+          - Reveal
+          - All
+          - DynamicLandingPage
+          - Like2BuyV2
+        mediaContainerId:
+          type: string
+        displayName:
+          type: string
+        emailAddress:
+          type: string
+        emailOptIn:
+          type: boolean
+        media:
           type: array
           items:
-            $ref: '#/components/schemas/UploadError'
-    VideoProcessingVideo:
+            $ref: '#/components/schemas/SubmittedMedia'
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+            properties: {}
+    SubmitMediaResponse:
       required:
-      - posterFileId
-      - versions
-      - videoId
+      - metadata
       type: object
       properties:
-        videoId:
-          type: string
-        posterFileId:
-          type: string
-        duration:
-          type: integer
-          format: int64
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/VideoProcessingVersion'
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
     MediaApiMetadata:
       required:
       - traceId
@@ -310,6 +294,59 @@ components:
           x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
         pdpMetadata:
           $ref: '#/components/schemas/PdpMetadata'
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
+    VideoProcessingVideo:
+      required:
+      - posterFileId
+      - versions
+      - videoId
+      type: object
+      properties:
+        videoId:
+          type: string
+        posterFileId:
+          type: string
+        duration:
+          type: integer
+          format: int64
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoProcessingVersion'
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    UploadVideoResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          x-qualified-classname: com.curalate.global.model.types.video.VideoId
     UploadError:
       required:
       - message
@@ -323,6 +360,20 @@ components:
         message:
           type: string
           x-qualified-classname: com.curalate.mediaapi.model.api.v1.ErrorMessage
+    GetVideoStatusResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/VideoProcessingStatusData'
+    Image:
+      required:
+      - link
+      type: object
+      properties:
+        link:
+          type: string
     NetworkPhoto:
       required:
       - extraLarge
@@ -359,26 +410,17 @@ components:
           $ref: '#/components/schemas/Image'
         type:
           type: string
-    ErrorPayload:
+    UploadResponse:
       required:
-      - code
-      - errorId
+      - data
       type: object
       properties:
-        code:
-          type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
-          type: string
-          format: uuid
-        msg:
-          type: string
         data:
-          type: object
-          properties: {}
+          $ref: '#/components/schemas/UploadData'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadError'
     UploadData:
       required:
       - images
@@ -393,48 +435,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UploadVideoResponse'
-    SubmitMediaRequestBody:
-      required:
-      - emailAddress
-      - emailOptIn
-      - media
-      - mediaContainerId
-      - mediaContainerType
-      type: object
-      properties:
-        mediaContainerType:
-          type: string
-          enum:
-          - Like2Buy
-          - Fanreel
-          - Reveal
-          - All
-          - DynamicLandingPage
-          - Like2BuyV2
-        mediaContainerId:
-          type: string
-        displayName:
-          type: string
-        emailAddress:
-          type: string
-        emailOptIn:
-          type: boolean
-        media:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubmittedMedia'
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-            properties: {}
-    PdpMetadata:
-      type: object
-      properties:
-        curalateProductId:
-          type: string
-        curalateStyleId:
-          type: string
   securitySchemes:
     ApiKey:
       type: apiKey

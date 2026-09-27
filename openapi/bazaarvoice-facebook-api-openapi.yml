@@ -256,15 +256,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
     ExternalMedia:
       required:
       - id
@@ -284,37 +275,6 @@ components:
           format: url
         type:
           type: string
-    GetFacebookMediaResponse:
-      required:
-      - data
-      - paging
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GetFacebookMediaData'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    GetFacebookAlbumsResponse:
-      required:
-      - data
-      - paging
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GetFacebookAlbumsData'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    ValidTokenResponse:
-      type: object
-    GetFacebookMediaData:
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalMedia'
     FacebookAlbum:
       required:
       - id
@@ -334,6 +294,57 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FacebookAlbum'
+    GetFacebookAlbumsResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFacebookAlbumsData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    GetFacebookMediaResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFacebookMediaData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    MediaApiPaging:
+      required:
+      - cursors
+      type: object
+      properties:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+        previous:
+          type: string
+          format: url
+        next:
+          type: string
+          format: url
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    GetFacebookMediaData:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
     ErrorPayload:
       required:
       - code
@@ -354,19 +365,8 @@ components:
         data:
           type: object
           properties: {}
-    MediaApiPaging:
-      required:
-      - cursors
+    ValidTokenResponse:
       type: object
-      properties:
-        cursors:
-          $ref: '#/components/schemas/Cursors'
-        previous:
-          type: string
-          format: url
-        next:
-          type: string
-          format: url
   securitySchemes:
     ApiKey:
       type: apiKey

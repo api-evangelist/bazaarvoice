@@ -171,15 +171,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
     ExternalMedia:
       required:
       - id
@@ -209,6 +200,19 @@ components:
           $ref: '#/components/schemas/GetInstagramMediaData'
         paging:
           $ref: '#/components/schemas/MediaApiPaging'
+    MediaApiPaging:
+      required:
+      - cursors
+      type: object
+      properties:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+        previous:
+          type: string
+          format: url
+        next:
+          type: string
+          format: url
     ExchangeCodeResponse:
       required:
       - accessToken
@@ -221,17 +225,15 @@ components:
           type: string
         username:
           type: string
-    ValidTokenResponse:
-      type: object
-    GetInstagramMediaData:
-      required:
-      - items
+    Cursors:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalMedia'
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
     ErrorPayload:
       required:
       - code
@@ -252,19 +254,17 @@ components:
         data:
           type: object
           properties: {}
-    MediaApiPaging:
+    GetInstagramMediaData:
       required:
-      - cursors
+      - items
       type: object
       properties:
-        cursors:
-          $ref: '#/components/schemas/Cursors'
-        previous:
-          type: string
-          format: url
-        next:
-          type: string
-          format: url
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
+    ValidTokenResponse:
+      type: object
   securitySchemes:
     ApiKey:
       type: apiKey

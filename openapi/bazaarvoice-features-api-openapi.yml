@@ -257,65 +257,13 @@ paths:
                   detail: Your passkey quota has been expired. Please re-try after sometime.
 components:
   schemas:
-    AverageRatingReviews:
+    ProductFeaturesResponse:
       type: object
       properties:
-        positive:
-          type: number
-          format: float
-          example: 5.5
-        negative:
-          type: number
-          format: float
-          example: 0
-        incentivized:
-          type: number
-          format: float
-          example: 0
-    FeaturesQuotesGrouped:
-      type: object
-      properties:
-        featureId:
-          type: string
-        feature:
-          type: string
-        percentPositive:
-          type: number
-          format: float
-        nativeFeature:
-          type: string
-        reviewsMentioned:
-          $ref: '#/components/schemas/ReviewsMentioned'
-        averageRatingReviews:
-          $ref: '#/components/schemas/AverageRatingReviews'
-        _embedded:
-          $ref: '#/components/schemas/EmbeddedQuotes'
-    EmbeddedQuotes:
-      type: object
-      properties:
-        quotes:
+        features:
           type: array
           items:
-            $ref: '#/components/schemas/Quotes'
-    ReviewsMentioned:
-      type: object
-      properties:
-        total:
-          type: integer
-          format: int32
-          example: 90
-        positive:
-          type: integer
-          format: int32
-          example: 84
-        negative:
-          type: integer
-          format: int32
-          example: 0
-        incentivized:
-          type: integer
-          format: int32
-          example: 0
+            $ref: '#/components/schemas/FeaturesResponse'
     FeaturesResponse:
       type: object
       properties:
@@ -364,6 +312,13 @@ components:
           - native
           - family
           - syndicated
+    EmbeddedQuotes:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quotes'
     TopFeaturesQuotesGroupedResponse:
       type: object
       properties:
@@ -375,13 +330,58 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FeaturesQuotesGrouped'
-    ProductFeaturesResponse:
+    FeaturesQuotesGrouped:
       type: object
       properties:
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesResponse'
+        featureId:
+          type: string
+        feature:
+          type: string
+        percentPositive:
+          type: number
+          format: float
+        nativeFeature:
+          type: string
+        reviewsMentioned:
+          $ref: '#/components/schemas/ReviewsMentioned'
+        averageRatingReviews:
+          $ref: '#/components/schemas/AverageRatingReviews'
+        _embedded:
+          $ref: '#/components/schemas/EmbeddedQuotes'
+    AverageRatingReviews:
+      type: object
+      properties:
+        positive:
+          type: number
+          format: float
+          example: 5.5
+        negative:
+          type: number
+          format: float
+          example: 0
+        incentivized:
+          type: number
+          format: float
+          example: 0
+    ReviewsMentioned:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+          example: 90
+        positive:
+          type: integer
+          format: int32
+          example: 84
+        negative:
+          type: integer
+          format: int32
+          example: 0
+        incentivized:
+          type: integer
+          format: int32
+          example: 0
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
