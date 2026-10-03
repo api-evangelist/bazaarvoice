@@ -171,6 +171,47 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    GetInstagramMediaData:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
+    ExchangeCodeResponse:
+      required:
+      - accessToken
+      - userId
+      type: object
+      properties:
+        accessToken:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
     ExternalMedia:
       required:
       - id
@@ -200,6 +241,17 @@ components:
           $ref: '#/components/schemas/GetInstagramMediaData'
         paging:
           $ref: '#/components/schemas/MediaApiPaging'
+    ValidTokenResponse:
+      type: object
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
     MediaApiPaging:
       required:
       - cursors
@@ -213,58 +265,6 @@ components:
         next:
           type: string
           format: url
-    ExchangeCodeResponse:
-      required:
-      - accessToken
-      - userId
-      type: object
-      properties:
-        accessToken:
-          type: string
-        userId:
-          type: string
-        username:
-          type: string
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-    ErrorPayload:
-      required:
-      - code
-      - errorId
-      type: object
-      properties:
-        code:
-          type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
-          type: string
-          format: uuid
-        msg:
-          type: string
-        data:
-          type: object
-          properties: {}
-    GetInstagramMediaData:
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalMedia'
-    ValidTokenResponse:
-      type: object
   securitySchemes:
     ApiKey:
       type: apiKey

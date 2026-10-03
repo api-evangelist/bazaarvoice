@@ -410,126 +410,6 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
-    Answer:
-      type: object
-      properties:
-        id:
-          type: string
-        version:
-          type: integer
-          format: int32
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        client:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        moderationContentID:
-          type: string
-        moderationVersionID:
-          type: string
-        featured:
-          type: boolean
-        contributorNickname:
-          type: string
-        sendEmailAlertWhenPublished:
-          type: boolean
-        displayAsAnonymous:
-          type: boolean
-        text:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayLocale:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        externalAnswerId:
-          type: string
-        externalProductId:
-          type: string
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        tagOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        tagProperties:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        contributor:
-          $ref: '#/components/schemas/Coordinate'
-        question:
-          $ref: '#/components/schemas/Coordinate'
-        submissionInstant:
-          type: integer
-          format: int32
-        statusGroup:
-          type: string
-    Photo:
-      type: object
-      properties:
-        caption:
-          type: string
-        mediumImageId:
-          type: string
-        thumbnailImageId:
-          type: string
-        url:
-          type: string
-        thumbnailUrl:
-          type: string
     QuestionContributor:
       type: object
       properties:
@@ -643,6 +523,32 @@ components:
       properties:
         questionId:
           type: string
+    AnswerQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
+          type: string
     Statistics:
       type: object
       properties:
@@ -674,34 +580,6 @@ components:
           type: boolean
         hasVideos:
           type: boolean
-    AnswerQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        totalQueriedAnswers:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-    AllAnswers:
-      type: object
-      properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
     Video:
       type: object
       properties:
@@ -719,12 +597,134 @@ components:
           type: string
         thumbnailUrl:
           type: string
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+          format: int32
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        client:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
+        featured:
+          type: boolean
+        contributorNickname:
+          type: string
+        sendEmailAlertWhenPublished:
+          type: boolean
+        displayAsAnonymous:
+          type: boolean
+        text:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        externalAnswerId:
+          type: string
+        externalProductId:
+          type: string
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        tagOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        tagProperties:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        contributor:
+          $ref: '#/components/schemas/Coordinate'
+        question:
+          $ref: '#/components/schemas/Coordinate'
+        submissionInstant:
+          type: integer
+          format: int32
+        statusGroup:
+          type: string
     Coordinate:
       type: object
       properties:
         table:
           type: string
         id:
+          type: string
+    AllAnswers:
+      type: object
+      properties:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
           type: string
     GetAnswer:
       type: object

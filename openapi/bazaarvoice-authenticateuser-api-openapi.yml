@@ -123,6 +123,40 @@ paths:
                 detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
 components:
   schemas:
+    AuthenticateUser:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a user authentication request to be processed.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the user authentication request.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
+        Authentication:
+          type: object
+          properties:
+            User:
+              type: string
+              description: The user identifier.
     ErrorResponse:
       type: object
       required:
@@ -176,40 +210,6 @@ components:
           type: string
           format: date-time
           example: '2023-07-19T09:10:04.446Z'
-    AuthenticateUser:
-      type: object
-      properties:
-        Data:
-          type: object
-        HasErrors:
-          type: boolean
-          example: false
-        Form:
-          type: array
-          items:
-            type: object
-        FormErrors:
-          type: object
-        TypicalHoursToPost:
-          type: number
-          description: The typical number of hours it takes for a user authentication request to be processed.
-        SubmissionId:
-          type: string
-          description: The submission ID.
-        Locale:
-          type: string
-          description: The locale of the user authentication request.
-          pattern: ^[a-z]{2}_[A-Z]{2}$
-        Errors:
-          type: array
-          items:
-            type: object
-        Authentication:
-          type: object
-          properties:
-            User:
-              type: string
-              description: The user identifier.
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

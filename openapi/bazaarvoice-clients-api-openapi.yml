@@ -544,6 +544,14 @@ paths:
       description: Production Server
 components:
   schemas:
+    MicrodataResponse:
+      type: string
+      description: HTML containing Microdata tags. Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review , Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
+      example: "<div itemscope itemtype=\"https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review\" itemid=\"https://example.com/product\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
+    JsonLdResponseScript:
+      type: string
+      description: JSON-LD structured data object inside script tag which abides to google defined schema.org. Our Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review, Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
+      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://example.com/product\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
     ErrorResponse:
       type: object
       required:
@@ -614,14 +622,14 @@ components:
               '@type': ImageObject
               name: Featuring Boots
               contentUrl: https://example.com/image2.jpg
-    JsonLdResponseScript:
+    MicrodataResponse_2:
       type: string
-      description: JSON-LD structured data object inside script tag which abides to google defined schema.org. Our Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review, Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
-      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://example.com/product\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
-    MicrodataResponse:
+      description: HTML containing Microdata tags. Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating
+      example: "<div itemscope itemtype=\"https://schema.org/IndividualProduct\" itemid=\"https://www.example.com/skincare/acne/blemish-patches\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://schema.org/AggregateRating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
+    JsonLdResponseScript_2:
       type: string
-      description: HTML containing Microdata tags. Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review , Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
-      example: "<div itemscope itemtype=\"https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review\" itemid=\"https://example.com/product\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
+      description: JSON-LD structured data object inside script tag, Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating
+      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://www.example.com/skincare/acne/blemish-patches\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
     JsonLdResponseJSONFormat_2:
       type: object
       description: JSON-LD structured data object inside script tag
@@ -647,14 +655,6 @@ components:
             ratingValue: '4.7'
             reviewCount: 873
             bestRating: 5
-    JsonLdResponseScript_2:
-      type: string
-      description: JSON-LD structured data object inside script tag, Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating
-      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://www.example.com/skincare/acne/blemish-patches\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
-    MicrodataResponse_2:
-      type: string
-      description: HTML containing Microdata tags. Review schema - https://schema.org/Review , Aggregate Rating schema - https://schema.org/AggregateRating
-      example: "<div itemscope itemtype=\"https://schema.org/IndividualProduct\" itemid=\"https://www.example.com/skincare/acne/blemish-patches\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://schema.org/AggregateRating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
   securitySchemes:
     Bv-passkey:
       type: apiKey

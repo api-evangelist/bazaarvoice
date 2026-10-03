@@ -278,14 +278,14 @@ paths:
                 detail: An unexpected error has occurred, please retry. Contact Bazaarvoice if the problem persists.
 components:
   schemas:
-    BatchStatus:
+    TransactionStatus:
       type: string
       example: ACCEPTED
       x-extensible-enum:
       - ACCEPTED
-      - PARTIAL_SUCCESS
-      - SUCCESS
-      - FAILURE
+      - CANCELLED
+      - IN_PROGRESS
+      - REJECTED
     Problem:
       type: object
       properties:
@@ -324,6 +324,14 @@ components:
 
             '
           example: /some/uri-reference#specific-occurrence-context
+    InvalidateTransactionResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          example: transaction-id-123
+        transactionStatus:
+          $ref: '#/components/schemas/TransactionStatus'
     Product:
       required:
       - imageUrl
@@ -351,68 +359,11 @@ components:
           type: string
           example: 'yes'
           description: Indicates if a review is incentivized or includes a specific incentive type. Accepts "true", "false", or a value such as "Coupon" or "Cashback".
-    Transaction:
-      required:
-      - deploymentZone
-      - emailAddress
-      - locale
-      - products
-      - transactionDate
-      - transactionId
-      - userId
-      - userName
+    IngestTransactionResponse:
       type: object
       properties:
-        id:
-          type: string
-          example: transactionId-1234
-          description: The Identifier for the transaction between end customer and client. This is provided by the client and not created by Bazaarvoice.
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        emailAddress:
-          pattern: (.+)@(.+)
-          type: string
-          example: john-doe@gmail.com
-          description: The email address of the end customer for whom we need to send notifications.
-        transactionDate:
-          pattern: (?:\d{4})-(?:\d{2})-(?:\d{2})T(?:\d{2}):(?:\d{2}):(?:\d{2}).(?:\d{3})z
-          type: string
-          format: date-time
-          example: '2023-06-06T08:47:51.792Z'
-          description: The time at which the transaction was made at clients end by the end customer. We can check the example for the date-time format in which Bazaarvoice expects this field data.
-        nickname:
-          type: string
-          example: John Doe
-          description: The end customer username used during notifying the end customer.
-        userId:
-          pattern: '[^/]+'
-          type: string
-          example: john_doe
-          description: The end customer userId to be provided.
-        locale:
-          pattern: '[a-z]{2}(_[A-Z]{2}(_[0-9a-zA-Z_]+)?)?'
-          type: string
-          format: bcp47
-          example: en_US
-        deploymentZone:
-          pattern: '[a-zA-Z0-9_]+'
-          type: string
-          example: main_site
-          description: The deployment zone that this transaction should be processed at.
-        transactionChannel:
-          type: string
-          description: The transaction channel over which we would like to notify the customer.
-          example: EMAIL
-    TransactionStatus:
-      type: string
-      example: ACCEPTED
-      x-extensible-enum:
-      - ACCEPTED
-      - CANCELLED
-      - IN_PROGRESS
-      - REJECTED
+        responseMessage:
+          $ref: '#/components/schemas/TransactionStatus'
     InvalidateTransactionRequest:
       required:
       - clienName
@@ -424,43 +375,28 @@ components:
         id:
           type: string
           example: transaction-id-123
-    IngestBulkTransactionsRequest:
-      required:
-      - clientName
-      - transactions
+    BatchStatus:
+      type: string
+      example: ACCEPTED
+      x-extensible-enum:
+      - ACCEPTED
+      - PARTIAL_SUCCESS
+      - SUCCESS
+      - FAILURE
+    Money:
       type: object
       properties:
-        clientName:
+        amount:
+          maximum: 2
+          minimum: 0
+          type: number
+          format: double
+          description: Amount of the product.
+          example: 59.92
+        currency:
           type: string
-          example: test-client-name
-          description: The client identifier that needs to be provided corresponding to the apikey provided.
-        transactions:
-          type: array
-          maxItems: 300
-          items:
-            $ref: '#/components/schemas/Transaction'
-    IngestTransactionResponse:
-      type: object
-      properties:
-        responseMessage:
-          $ref: '#/components/schemas/TransactionStatus'
-    BulkTransactionsResponseItem:
-      type: object
-      properties:
-        transactionId:
-          type: string
-          example: transactionId-1234
-          description: The Identifier for the transaction between end customer and client. This is provided by the client and not created by Bazaarvoice.
-        occurredAt:
-          type: string
-          format: date-time
-          example: '2023-06-06T08:47:51.792Z'
-          description: Response time.
-        status:
-          $ref: '#/components/schemas/TransactionStatus'
-        message:
-          type: string
-          example: Accepted.
+          description: 3 letter currency code as defined by ISO-4217
+          example: EUR
     IngestTransactionRequest:
       required:
       - clientName
@@ -520,20 +456,92 @@ components:
           type: string
           description: The transaction channel over which we would like to notify the customer.
           example: EMAIL
-    Money:
+    BulkTransactionsResponseItem:
       type: object
       properties:
-        amount:
-          maximum: 2
-          minimum: 0
-          type: number
-          format: double
-          description: Amount of the product.
-          example: 59.92
-        currency:
+        transactionId:
           type: string
-          description: 3 letter currency code as defined by ISO-4217
-          example: EUR
+          example: transactionId-1234
+          description: The Identifier for the transaction between end customer and client. This is provided by the client and not created by Bazaarvoice.
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-06-06T08:47:51.792Z'
+          description: Response time.
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        message:
+          type: string
+          example: Accepted.
+    Transaction:
+      required:
+      - deploymentZone
+      - emailAddress
+      - locale
+      - products
+      - transactionDate
+      - transactionId
+      - userId
+      - userName
+      type: object
+      properties:
+        id:
+          type: string
+          example: transactionId-1234
+          description: The Identifier for the transaction between end customer and client. This is provided by the client and not created by Bazaarvoice.
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        emailAddress:
+          pattern: (.+)@(.+)
+          type: string
+          example: john-doe@gmail.com
+          description: The email address of the end customer for whom we need to send notifications.
+        transactionDate:
+          pattern: (?:\d{4})-(?:\d{2})-(?:\d{2})T(?:\d{2}):(?:\d{2}):(?:\d{2}).(?:\d{3})z
+          type: string
+          format: date-time
+          example: '2023-06-06T08:47:51.792Z'
+          description: The time at which the transaction was made at clients end by the end customer. We can check the example for the date-time format in which Bazaarvoice expects this field data.
+        nickname:
+          type: string
+          example: John Doe
+          description: The end customer username used during notifying the end customer.
+        userId:
+          pattern: '[^/]+'
+          type: string
+          example: john_doe
+          description: The end customer userId to be provided.
+        locale:
+          pattern: '[a-z]{2}(_[A-Z]{2}(_[0-9a-zA-Z_]+)?)?'
+          type: string
+          format: bcp47
+          example: en_US
+        deploymentZone:
+          pattern: '[a-zA-Z0-9_]+'
+          type: string
+          example: main_site
+          description: The deployment zone that this transaction should be processed at.
+        transactionChannel:
+          type: string
+          description: The transaction channel over which we would like to notify the customer.
+          example: EMAIL
+    IngestBulkTransactionsRequest:
+      required:
+      - clientName
+      - transactions
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: test-client-name
+          description: The client identifier that needs to be provided corresponding to the apikey provided.
+        transactions:
+          type: array
+          maxItems: 300
+          items:
+            $ref: '#/components/schemas/Transaction'
     IngestBulkTransactionsResponse:
       type: object
       properties:
@@ -546,14 +554,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BulkTransactionsResponseItem'
-    InvalidateTransactionResponse:
-      type: object
-      properties:
-        transactionId:
-          type: string
-          example: transaction-id-123
-        transactionStatus:
-          $ref: '#/components/schemas/TransactionStatus'
   securitySchemes:
     accessToken:
       type: http

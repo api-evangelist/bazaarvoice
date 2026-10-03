@@ -270,6 +270,62 @@ components:
 
             '
           example: /some/uri-reference#specific-occurrence-context
+    SubmitDsaFeedbackUrl:
+      type: object
+      properties:
+        formUrl:
+          type: string
+          example: https://test.dsacompliance.bazaarvoice.com/dsa/iframe/28/e9912a6e1569/?reference=1617911&url=https%3A%2F%2Fapps-qa.bazaarvoice.com%2Ftemp%2Fdsa_iframe%2Ftest_dsa_iframe_v2.html%3FbvmessageType%3DREVIEW_CONTENT%26bvTriggerer%3Ddsa_workflow%23review%2F1617911&hash=0d65f9021a42757913016c9db25bf16d2a5a894245eba0fefee171cc3e9a8915¶meters=%7B%22client%22%3A%22testcustomer-fast-prs-qa%22%2C%22displayCode%22%3A%2214176-en_us%22%2C%22contentType%22%3A%22review%22%2C%22destSiteId%22%3A%22main_site%22%2C%22contentLocale%22%3A%22en_US%22%2C%22product%22%3A%22rnr%22%7D&subject=testcustomer-fast-prs-qa_review_1617911&dhash=3406bda02f8a4ab45e3c14439bfd3326c6e900476b01175db717159323f969c1&domain=apps-qa.bazaarvoice.com
+          description: URL to the DSA feedback form, including parameters like locale, client, sourceClient, and contentType.
+    SubmitFeedback:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        TypicalHoursToPost:
+          type: object
+          description: The typical number of hours it takes for a feedback submission to be processed.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Feedback:
+          type: object
+          properties:
+            Inappropriate:
+              type: object
+              properties:
+                ReasonText:
+                  type: string
+                  description: The reason for flagging as inappropriate.
+                AuthorId:
+                  type: string
+                  description: The ID of the author flagging as inappropriate.
+            Helpfulness:
+              type: object
+              properties:
+                ReasonText:
+                  type: string
+                  description: The reason for flagging as helpful.
+                AuthorId:
+                  type: string
+                  description: The ID of the author flagging as helpful.
+        Locale:
+          type: string
+          description: The locale of the feedback submission.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
     ErrorResponse:
       type: object
       required:
@@ -323,13 +379,6 @@ components:
           type: string
           format: date-time
           example: '2023-07-19T09:10:04.446Z'
-    SubmitDsaFeedbackUrl:
-      type: object
-      properties:
-        formUrl:
-          type: string
-          example: https://test.dsacompliance.bazaarvoice.com/dsa/iframe/28/e9912a6e1569/?reference=1617911&url=https%3A%2F%2Fapps-qa.bazaarvoice.com%2Ftemp%2Fdsa_iframe%2Ftest_dsa_iframe_v2.html%3FbvmessageType%3DREVIEW_CONTENT%26bvTriggerer%3Ddsa_workflow%23review%2F1617911&hash=0d65f9021a42757913016c9db25bf16d2a5a894245eba0fefee171cc3e9a8915¶meters=%7B%22client%22%3A%22testcustomer-fast-prs-qa%22%2C%22displayCode%22%3A%2214176-en_us%22%2C%22contentType%22%3A%22review%22%2C%22destSiteId%22%3A%22main_site%22%2C%22contentLocale%22%3A%22en_US%22%2C%22product%22%3A%22rnr%22%7D&subject=testcustomer-fast-prs-qa_review_1617911&dhash=3406bda02f8a4ab45e3c14439bfd3326c6e900476b01175db717159323f969c1&domain=apps-qa.bazaarvoice.com
-          description: URL to the DSA feedback form, including parameters like locale, client, sourceClient, and contentType.
     DsaFeedbackUrlRequest:
       type: object
       required:
@@ -401,55 +450,6 @@ components:
               type: string
               example: en_US
               description: Language of the originated content.
-    SubmitFeedback:
-      type: object
-      properties:
-        Data:
-          type: object
-        HasErrors:
-          type: boolean
-          example: false
-        Form:
-          type: array
-          items:
-            type: object
-        FormErrors:
-          type: object
-        TypicalHoursToPost:
-          type: object
-          description: The typical number of hours it takes for a feedback submission to be processed.
-        SubmissionId:
-          type: string
-          description: The submission ID.
-        Feedback:
-          type: object
-          properties:
-            Inappropriate:
-              type: object
-              properties:
-                ReasonText:
-                  type: string
-                  description: The reason for flagging as inappropriate.
-                AuthorId:
-                  type: string
-                  description: The ID of the author flagging as inappropriate.
-            Helpfulness:
-              type: object
-              properties:
-                ReasonText:
-                  type: string
-                  description: The reason for flagging as helpful.
-                AuthorId:
-                  type: string
-                  description: The ID of the author flagging as helpful.
-        Locale:
-          type: string
-          description: The locale of the feedback submission.
-          pattern: ^[a-z]{2}_[A-Z]{2}$
-        Errors:
-          type: array
-          items:
-            type: object
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

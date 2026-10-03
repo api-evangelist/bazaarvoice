@@ -99,13 +99,6 @@ paths:
                   detail: Your passkey quota has been expired. Please re-try after sometime.
 components:
   schemas:
-    TopPositiveQuotesResponse:
-      type: object
-      properties:
-        quotes:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteResponse'
     QuoteResponse:
       type: object
       properties:
@@ -144,6 +137,13 @@ components:
           - native
           - family
           - syndicated
+    TopPositiveQuotesResponse:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteResponse'
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

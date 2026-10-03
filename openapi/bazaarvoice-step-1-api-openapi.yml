@@ -115,28 +115,6 @@ paths:
       description: Staging
 components:
   responses:
-    '401':
-      description: Unauthorized
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: RF unauthorised error
-                detail:
-                  errorcode: oauth.v2.RFUnauthorised
-    '500':
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            type: object
-            example:
-              fault:
-                faultstring: Raising fault. Fault name:- RFUnauthorized
-                detail:
-                  errorcode: steps.raisefault.RaiseFault
     '404':
       description: Not Found
       content:
@@ -159,6 +137,28 @@ components:
                 faultstring: Invalid ApiKey
                 detail:
                   errorcode: oauth.v2.InvalidApiKey
+    '401':
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: RF unauthorised error
+                detail:
+                  errorcode: oauth.v2.RFUnauthorised
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              fault:
+                faultstring: Raising fault. Fault name:- RFUnauthorized
+                detail:
+                  errorcode: steps.raisefault.RaiseFault
     '404_2':
       description: Not Found
       content:

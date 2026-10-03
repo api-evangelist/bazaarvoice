@@ -577,392 +577,6 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
-    Answer:
-      type: object
-      properties:
-        id:
-          type: string
-        version:
-          type: integer
-          format: int32
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        client:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        moderationContentID:
-          type: string
-        moderationVersionID:
-          type: string
-        featured:
-          type: boolean
-        contributorNickname:
-          type: string
-        sendEmailAlertWhenPublished:
-          type: boolean
-        displayAsAnonymous:
-          type: boolean
-        text:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayLocale:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        externalAnswerId:
-          type: string
-        externalProductId:
-          type: string
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        tagOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        tagProperties:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        contributor:
-          $ref: '#/components/schemas/Coordinate'
-        question:
-          $ref: '#/components/schemas/Coordinate'
-        submissionInstant:
-          type: integer
-          format: int32
-        statusGroup:
-          type: string
-    QuestionFilters:
-      type: object
-      properties:
-        questionId:
-          type: array
-          items:
-            type: string
-        submissionTime:
-          $ref: '#/components/schemas/TimeRange'
-        moderationTime:
-          $ref: '#/components/schemas/TimeRange'
-        brandId:
-          type: array
-          items:
-            type: string
-        categoryId:
-          type: array
-          items:
-            type: string
-        productId:
-          type: array
-          items:
-            type: string
-        activeProduct:
-          type: boolean
-        displayLocale:
-          type: array
-          items:
-            type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        questionModerationStatusGroup:
-          type: array
-          items:
-            type: string
-        questionModerationStatus:
-          type: array
-          items:
-            type: string
-        answerModerationStatusGroup:
-          type: array
-          items:
-            type: string
-        answerModerationStatus:
-          type: array
-          items:
-            type: string
-        globalSearch:
-          type: string
-        contributorExternalId:
-          type: array
-          items:
-            type: string
-        contributorDisplayName:
-          type: array
-          items:
-            type: string
-        contributorRank:
-          type: array
-          items:
-            type: string
-        answerLegacyInternalId:
-          type: array
-          items:
-            type: string
-        answerContentCodes:
-          type: array
-          items:
-            type: string
-        answerContributorExternalId:
-          type: array
-          items:
-            type: string
-        answerContributorNickname:
-          type: array
-          items:
-            type: string
-        answerCampaignSource:
-          type: array
-          items:
-            type: string
-        withApprovedAnswers:
-          type: boolean
-        withRejectedAnswers:
-          type: boolean
-        withPendingAnswers:
-          type: boolean
-        withExpiredAnswers:
-          type: boolean
-        questionHasPhotos:
-          type: boolean
-        questionHasVideos:
-          type: boolean
-        answerHasPhotos:
-          type: boolean
-        answerHasVideos:
-          type: boolean
-        withAnswers:
-          type: boolean
-    Photo:
-      type: object
-      properties:
-        caption:
-          type: string
-        mediumImageId:
-          type: string
-        thumbnailImageId:
-          type: string
-        url:
-          type: string
-        thumbnailUrl:
-          type: string
-    QuestionQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Question'
-    Video:
-      type: object
-      properties:
-        legacyInternalId:
-          type: string
-        rawUrlInput:
-          type: string
-        caption:
-          type: string
-        videoHost:
-          type: string
-        videoId:
-          type: string
-        uploadStatus:
-          type: string
-        thumbnailUrl:
-          type: string
-    QuestionContributor:
-      type: object
-      properties:
-        id:
-          type: string
-        table:
-          type: string
-        version:
-          type: integer
-          format: int32
-        sourceVersion:
-          type: integer
-          format: int32
-        deleted:
-          type: boolean
-        signature:
-          type: string
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        type:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        clearTextExternalId:
-          type: string
-        anonymous:
-          type: boolean
-        rank:
-          type: string
-        merit:
-          type: string
-        affiliation:
-          type: string
-        contributorBadgeEnabled:
-          type: boolean
-        contributorLocation:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayCode:
-          type: string
-        displayLocale:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        displayName:
-          type: string
-        sourceName:
-          type: string
-        agreedToTermsAndConditions:
-          type: boolean
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        ratingOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        avatarPhoto:
-          $ref: '#/components/schemas/Photo'
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        displayLastUpdate:
-          $ref: '#/components/schemas/PrrUpdate'
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        ratingProperties:
-          type: object
-          additionalProperties:
-            type: string
-        externalId:
-          type: string
-    TimeRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    QuestionQuery:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/QuestionSort'
-        fields:
-          type: array
-          items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/QuestionFilters'
     Question:
       type: object
       properties:
@@ -1072,15 +686,114 @@ components:
           $ref: '#/components/schemas/Coordinate'
         statusGroup:
           type: string
-    AllAnswers:
+    QuestionContributor:
       type: object
       properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
+        id:
+          type: string
+        table:
+          type: string
+        version:
+          type: integer
+          format: int32
+        sourceVersion:
+          type: integer
+          format: int32
+        deleted:
+          type: boolean
+        signature:
+          type: string
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        type:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        clearTextExternalId:
+          type: string
+        anonymous:
+          type: boolean
+        rank:
+          type: string
+        merit:
+          type: string
+        affiliation:
+          type: string
+        contributorBadgeEnabled:
+          type: boolean
+        contributorLocation:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayCode:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        displayName:
+          type: string
+        sourceName:
+          type: string
+        agreedToTermsAndConditions:
+          type: boolean
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        ratingOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        avatarPhoto:
+          $ref: '#/components/schemas/Photo'
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        displayLastUpdate:
+          $ref: '#/components/schemas/PrrUpdate'
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        ratingProperties:
+          type: object
+          additionalProperties:
+            type: string
+        externalId:
+          type: string
     Product:
       type: object
       properties:
@@ -1103,6 +816,154 @@ components:
         categoryName:
           type: string
         productPageUrl:
+          type: string
+    QuestionFilters:
+      type: object
+      properties:
+        questionId:
+          type: array
+          items:
+            type: string
+        submissionTime:
+          $ref: '#/components/schemas/TimeRange'
+        moderationTime:
+          $ref: '#/components/schemas/TimeRange'
+        brandId:
+          type: array
+          items:
+            type: string
+        categoryId:
+          type: array
+          items:
+            type: string
+        productId:
+          type: array
+          items:
+            type: string
+        activeProduct:
+          type: boolean
+        displayLocale:
+          type: array
+          items:
+            type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        questionModerationStatusGroup:
+          type: array
+          items:
+            type: string
+        questionModerationStatus:
+          type: array
+          items:
+            type: string
+        answerModerationStatusGroup:
+          type: array
+          items:
+            type: string
+        answerModerationStatus:
+          type: array
+          items:
+            type: string
+        globalSearch:
+          type: string
+        contributorExternalId:
+          type: array
+          items:
+            type: string
+        contributorDisplayName:
+          type: array
+          items:
+            type: string
+        contributorRank:
+          type: array
+          items:
+            type: string
+        answerLegacyInternalId:
+          type: array
+          items:
+            type: string
+        answerContentCodes:
+          type: array
+          items:
+            type: string
+        answerContributorExternalId:
+          type: array
+          items:
+            type: string
+        answerContributorNickname:
+          type: array
+          items:
+            type: string
+        answerCampaignSource:
+          type: array
+          items:
+            type: string
+        withApprovedAnswers:
+          type: boolean
+        withRejectedAnswers:
+          type: boolean
+        withPendingAnswers:
+          type: boolean
+        withExpiredAnswers:
+          type: boolean
+        questionHasPhotos:
+          type: boolean
+        questionHasVideos:
+          type: boolean
+        answerHasPhotos:
+          type: boolean
+        answerHasVideos:
+          type: boolean
+        withAnswers:
+          type: boolean
+    QuestionQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/QuestionSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/QuestionFilters'
+    QuestionQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    TimeRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
           type: string
     Statistics:
       type: object
@@ -1135,12 +996,158 @@ components:
           type: boolean
         hasVideos:
           type: boolean
+    QuestionSort:
+      type: object
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
+    AllAnswers:
+      type: object
+      properties:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+          format: int32
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        client:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
+        featured:
+          type: boolean
+        contributorNickname:
+          type: string
+        sendEmailAlertWhenPublished:
+          type: boolean
+        displayAsAnonymous:
+          type: boolean
+        text:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        externalAnswerId:
+          type: string
+        externalProductId:
+          type: string
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        tagOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        tagProperties:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        contributor:
+          $ref: '#/components/schemas/Coordinate'
+        question:
+          $ref: '#/components/schemas/Coordinate'
+        submissionInstant:
+          type: integer
+          format: int32
+        statusGroup:
+          type: string
     Coordinate:
       type: object
       properties:
         table:
           type: string
         id:
+          type: string
+    Video:
+      type: object
+      properties:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
           type: string
     SingleQuestionDocument:
       type: object
@@ -1160,66 +1167,6 @@ components:
         totalQueriedAnswers:
           type: integer
           format: int32
-    QuestionSort:
-      type: object
-      properties:
-        field:
-          type: string
-        direction:
-          type: string
-    ErrorResponse:
-      type: object
-      required:
-      - code
-      - occurredAt
-      properties:
-        type:
-          type: string
-          format: uri
-          default: about:blank
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-          description: The HTTP status code generated by the origin server for this occurrence of the problem.
-          minimum: 100
-          maximum: 599
-          example: 400
-        detail:
-          type: string
-          description: A human readable explanation specific to this occurrence of the problem.
-          example: Connection to database timed out
-        instance:
-          type: string
-          format: uri
-          description: An absolute URI that identifies the specific occurrence of the problem.
-        code:
-          type: string
-          example: ERROR_PARAM_MISSING_PARAMETERS
-          x-extensible-enum:
-          - ERROR_ACCESS_DENIED
-          - ERROR_FORM_DUPLICATE
-          - ERROR_FORM_EMOJI
-          - ERROR_FORM_REQUIRED
-          - ERROR_FORM_REQUIRED_NICKNAME
-          - ERROR_FORM_TOO_SHORT
-          - ERROR_DUPLICATE_SUBMISSION
-          - ERROR_PARAM_INVALID_API_KEY
-          - ERROR_PARAM_INVALID_LOCALE
-          - ERROR_PARAM_INVALID_PARAMETERS
-          - ERROR_PARAM_MISSING_SUBJECT_ID
-          - ERROR_PARAM_MISSING_USER_ID
-          - ERROR_REQUEST_LIMIT_REACHED
-          - ERROR_UNKNOWN
-          - ERROR_UNSUPPORTED
-          - ERROR_NOT_FOUND
-          - ERROR_FORBIDDEN
-          - ERROR_REQUEST_LINE_TOO_LARGE
-        occurredAt:
-          type: string
-          format: date-time
-          example: '2023-07-19T09:10:04.446Z'
     SubmitQuestion:
       type: object
       properties:
@@ -2116,6 +2063,59 @@ components:
         HasErrors:
           type: boolean
           example: false
+    ErrorResponse:
+      type: object
+      required:
+      - code
+      - occurredAt
+      properties:
+        type:
+          type: string
+          format: uri
+          default: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
+          type: string
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
+          type: string
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
   securitySchemes:
     Bv-Passkey:
       type: apiKey

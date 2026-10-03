@@ -58,6 +58,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LookaheadMatch'
+    LookaheadRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        term:
+          type: string
+        mode:
+          type: string
     LookaheadMatch:
       type: object
       properties:
@@ -68,15 +77,6 @@ components:
         name:
           type: string
         externalId:
-          type: string
-    LookaheadRequest:
-      type: object
-      properties:
-        type:
-          type: string
-        term:
-          type: string
-        mode:
           type: string
   securitySchemes:
     Bv-Passkey:

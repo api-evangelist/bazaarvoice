@@ -167,6 +167,13 @@ paths:
           description: Unexpected internal error
 components:
   schemas:
+    ContributorRequest:
+      type: object
+      properties:
+        term:
+          type: string
+        mode:
+          type: string
     ContributorSearchResponse:
       type: object
       properties:
@@ -186,17 +193,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContributorSearchResult'
-    ContributorMatch:
+    ContributorSort:
       type: object
       properties:
-        id:
+        field:
           type: string
-        legacyInternalID:
+        direction:
           type: string
-        displayName:
-          type: string
-        externalId:
-          type: string
+      example:
+      - field: lastPublishTime
+        direction: desc
+      - field: submissionTime
+        direction: asc
+      - field: legacyInternalId
+        direction: desc
+      - field: status
+        direction: desc
+      - field: externalId
+        direction: asc
+      - field: displayName
+        direction: asc
     ContributorSearchResult:
       type: object
       properties:
@@ -249,37 +265,6 @@ components:
             type: string
         filters:
           $ref: '#/components/schemas/ContributorFilters'
-    ContributorSort:
-      type: object
-      properties:
-        field:
-          type: string
-        direction:
-          type: string
-      example:
-      - field: lastPublishTime
-        direction: desc
-      - field: submissionTime
-        direction: asc
-      - field: legacyInternalId
-        direction: desc
-      - field: status
-        direction: desc
-      - field: externalId
-        direction: asc
-      - field: displayName
-        direction: asc
-    ContributorRequest:
-      type: object
-      properties:
-        term:
-          type: string
-        mode:
-          type: string
-    ContributorResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContributorMatch'
     ContributorFilters:
       type: object
       properties:
@@ -320,6 +305,21 @@ components:
         statusGroup:
           type: string
           description: Grouped moderation status, APPROVED, REJECTED, PENDING, EXPIRED
+    ContributorMatch:
+      type: object
+      properties:
+        id:
+          type: string
+        legacyInternalID:
+          type: string
+        displayName:
+          type: string
+        externalId:
+          type: string
+    ContributorResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContributorMatch'
   securitySchemes:
     Bv-Passkey:
       type: apiKey

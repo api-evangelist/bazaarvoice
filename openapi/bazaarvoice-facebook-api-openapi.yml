@@ -256,25 +256,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExternalMedia:
-      required:
-      - id
-      - link
-      - type
-      type: object
-      properties:
-        caption:
-          type: string
-        id:
-          type: string
-        link:
-          type: string
-          format: url
-        posterImageLink:
-          type: string
-          format: url
-        type:
-          type: string
     FacebookAlbum:
       required:
       - id
@@ -285,15 +266,6 @@ components:
           type: string
         id:
           type: string
-    GetFacebookAlbumsData:
-      required:
-      - albums
-      type: object
-      properties:
-        albums:
-          type: array
-          items:
-            $ref: '#/components/schemas/FacebookAlbum'
     GetFacebookAlbumsResponse:
       required:
       - data
@@ -304,47 +276,15 @@ components:
           $ref: '#/components/schemas/GetFacebookAlbumsData'
         paging:
           $ref: '#/components/schemas/MediaApiPaging'
-    GetFacebookMediaResponse:
+    GetFacebookAlbumsData:
       required:
-      - data
-      - paging
+      - albums
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/GetFacebookMediaData'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    MediaApiPaging:
-      required:
-      - cursors
-      type: object
-      properties:
-        cursors:
-          $ref: '#/components/schemas/Cursors'
-        previous:
-          type: string
-          format: url
-        next:
-          type: string
-          format: url
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-    GetFacebookMediaData:
-      required:
-      - items
-      type: object
-      properties:
-        items:
+        albums:
           type: array
           items:
-            $ref: '#/components/schemas/ExternalMedia'
+            $ref: '#/components/schemas/FacebookAlbum'
     ErrorPayload:
       required:
       - code
@@ -365,8 +305,68 @@ components:
         data:
           type: object
           properties: {}
+    ExternalMedia:
+      required:
+      - id
+      - link
+      - type
+      type: object
+      properties:
+        caption:
+          type: string
+        id:
+          type: string
+        link:
+          type: string
+          format: url
+        posterImageLink:
+          type: string
+          format: url
+        type:
+          type: string
+    GetFacebookMediaData:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
     ValidTokenResponse:
       type: object
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    MediaApiPaging:
+      required:
+      - cursors
+      type: object
+      properties:
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+        previous:
+          type: string
+          format: url
+        next:
+          type: string
+          format: url
+    GetFacebookMediaResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFacebookMediaData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
   securitySchemes:
     ApiKey:
       type: apiKey
