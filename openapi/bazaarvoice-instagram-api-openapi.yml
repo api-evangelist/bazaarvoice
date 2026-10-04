@@ -171,26 +171,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GetInstagramMediaData:
-      required:
-      - items
+    ValidTokenResponse:
+      type: object
+    Cursors:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalMedia'
-    ExchangeCodeResponse:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    ExternalMedia:
       required:
-      - accessToken
-      - userId
+      - id
+      - link
+      - type
       type: object
       properties:
-        accessToken:
+        caption:
           type: string
-        userId:
+        id:
           type: string
-        username:
+        link:
+          type: string
+          format: url
+        posterImageLink:
+          type: string
+          format: url
+        type:
           type: string
     ErrorPayload:
       required:
@@ -212,46 +221,27 @@ components:
         data:
           type: object
           properties: {}
-    ExternalMedia:
+    ExchangeCodeResponse:
       required:
-      - id
-      - link
-      - type
+      - accessToken
+      - userId
       type: object
       properties:
-        caption:
+        accessToken:
           type: string
-        id:
+        userId:
           type: string
-        link:
+        username:
           type: string
-          format: url
-        posterImageLink:
-          type: string
-          format: url
-        type:
-          type: string
-    GetInstagramMediaResponse:
+    GetInstagramMediaData:
       required:
-      - data
-      - paging
+      - items
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/GetInstagramMediaData'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    ValidTokenResponse:
-      type: object
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
     MediaApiPaging:
       required:
       - cursors
@@ -265,6 +255,16 @@ components:
         next:
           type: string
           format: url
+    GetInstagramMediaResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetInstagramMediaData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
   securitySchemes:
     ApiKey:
       type: apiKey

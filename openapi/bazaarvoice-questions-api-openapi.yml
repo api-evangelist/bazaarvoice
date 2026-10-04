@@ -577,6 +577,37 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
+    Statistics:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        helpfulnessScore:
+          type: integer
+          format: int32
+        characterCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        numPhotos:
+          type: integer
+          format: int32
+        numVideos:
+          type: integer
+          format: int32
+        hasPhotos:
+          type: boolean
+        hasVideos:
+          type: boolean
     Question:
       type: object
       properties:
@@ -686,6 +717,45 @@ components:
           $ref: '#/components/schemas/Coordinate'
         statusGroup:
           type: string
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
+          type: string
+    SingleQuestionDocument:
+      type: object
+      properties:
+        question:
+          $ref: '#/components/schemas/Question'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        product:
+          $ref: '#/components/schemas/Product'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+    Coordinate:
+      type: object
+      properties:
+        table:
+          type: string
+        id:
+          type: string
+    TimeRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
     QuestionContributor:
       type: object
       properties:
@@ -794,29 +864,23 @@ components:
             type: string
         externalId:
           type: string
-    Product:
+    QuestionQuery:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        active:
-          type: boolean
-        description:
-          type: string
-        imageUrl:
-          type: string
-        brandId:
-          type: string
-        brandName:
-          type: string
-        categoryId:
-          type: string
-        categoryName:
-          type: string
-        productPageUrl:
-          type: string
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/QuestionSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/QuestionFilters'
     QuestionFilters:
       type: object
       properties:
@@ -918,23 +982,22 @@ components:
           type: boolean
         withAnswers:
           type: boolean
-    QuestionQuery:
+    AllAnswers:
       type: object
       properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        sort:
-          $ref: '#/components/schemas/QuestionSort'
-        fields:
-          type: array
-          items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/QuestionFilters'
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    QuestionSort:
+      type: object
+      properties:
+        field:
+          type: string
+        direction:
+          type: string
     QuestionQueryResponse:
       type: object
       properties:
@@ -951,67 +1014,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Question'
-    TimeRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
-    Statistics:
-      type: object
-      properties:
-        positiveFeedbackCount:
-          type: integer
-          format: int32
-        negativeFeedbackCount:
-          type: integer
-          format: int32
-        helpfulnessScore:
-          type: integer
-          format: int32
-        characterCount:
-          type: integer
-          format: int32
-        productReferenceCount:
-          type: integer
-          format: int32
-        inappropriateFeedbackCount:
-          type: integer
-          format: int32
-        numPhotos:
-          type: integer
-          format: int32
-        numVideos:
-          type: integer
-          format: int32
-        hasPhotos:
-          type: boolean
-        hasVideos:
-          type: boolean
-    QuestionSort:
-      type: object
-      properties:
-        field:
-          type: string
-        direction:
-          type: string
-    AllAnswers:
-      type: object
-      properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
     Photo:
       type: object
       properties:
@@ -1024,6 +1026,29 @@ components:
         url:
           type: string
         thumbnailUrl:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        active:
+          type: boolean
+        description:
+          type: string
+        imageUrl:
+          type: string
+        brandId:
+          type: string
+        brandName:
+          type: string
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+        productPageUrl:
           type: string
     Answer:
       type: object
@@ -1125,13 +1150,6 @@ components:
           format: int32
         statusGroup:
           type: string
-    Coordinate:
-      type: object
-      properties:
-        table:
-          type: string
-        id:
-          type: string
     Video:
       type: object
       properties:
@@ -1149,24 +1167,6 @@ components:
           type: string
         thumbnailUrl:
           type: string
-    SingleQuestionDocument:
-      type: object
-      properties:
-        question:
-          $ref: '#/components/schemas/Question'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        product:
-          $ref: '#/components/schemas/Product'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-        totalQueriedAnswers:
-          type: integer
-          format: int32
     SubmitQuestion:
       type: object
       properties:

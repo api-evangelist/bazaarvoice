@@ -54,10 +54,6 @@ paths:
           description: Unexpected internal error
 components:
   schemas:
-    LookaheadResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/LookaheadMatch'
     LookaheadRequest:
       type: object
       properties:
@@ -78,6 +74,10 @@ components:
           type: string
         externalId:
           type: string
+    LookaheadResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/LookaheadMatch'
   securitySchemes:
     Bv-Passkey:
       type: apiKey

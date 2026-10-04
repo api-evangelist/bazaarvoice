@@ -126,17 +126,6 @@ components:
                 faultstring: Unable to identify proxy for host:- https_vhost and url:- /de/v3/data
                 detail:
                   errorcode: messaging.adaptors.http.flow.ApplicationNotFound
-    '403':
-      description: Forbidden
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: Invalid ApiKey
-                detail:
-                  errorcode: oauth.v2.InvalidApiKey
     '401':
       description: Unauthorized
       content:
@@ -159,6 +148,17 @@ components:
                 faultstring: Raising fault. Fault name:- RFUnauthorized
                 detail:
                   errorcode: steps.raisefault.RaiseFault
+    '403':
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Invalid ApiKey
+                detail:
+                  errorcode: oauth.v2.InvalidApiKey
     '404_2':
       description: Not Found
       content:

@@ -175,6 +175,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SubmitMediaResponse:
+      required:
+      - metadata
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    UploadError:
+      required:
+      - message
+      - multipartItemName
+      type: object
+      properties:
+        multipartItemName:
+          type: string
+        fileName:
+          type: string
+        message:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.ErrorMessage
     UploadResponse:
       required:
       - data
@@ -186,6 +206,39 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UploadError'
+    UploadVideoResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          x-qualified-classname: com.curalate.global.model.types.video.VideoId
+    MediaApiMetadata:
+      required:
+      - traceId
+      type: object
+      properties:
+        traceId:
+          type: string
+        requestId:
+          type: string
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
     VideoProcessingVideo:
       required:
       - posterFileId
@@ -204,33 +257,58 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VideoProcessingVersion'
-    UploadError:
+    VideoProcessingVersion:
       required:
-      - message
-      - multipartItemName
+      - height
+      - quality
+      - url
+      - width
       type: object
       properties:
-        multipartItemName:
+        quality:
           type: string
-        fileName:
+          enum:
+          - Original
+          - FullHD
+          - Standard
+          - Low
+          - VerticalVideo1500FitPad
+          - VerticalVideo1500FillPad
+          - VerticalVideo1500Pad
+          - Unknown
+        url:
           type: string
-        message:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.ErrorMessage
-    SubmitMediaResponse:
+        width:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+        chaptersInMillis:
+          type: array
+          items:
+            type: integer
+            format: int64
+    ErrorPayload:
       required:
-      - metadata
+      - code
+      - errorId
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
-    GetVideoStatusResponse:
-      required:
-      - data
-      type: object
-      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
         data:
-          $ref: '#/components/schemas/VideoProcessingStatusData'
+          type: object
+          properties: {}
     NetworkPhoto:
       required:
       - extraLarge
@@ -267,76 +345,61 @@ components:
           $ref: '#/components/schemas/Image'
         type:
           type: string
-    ErrorPayload:
+    Image:
       required:
-      - code
-      - errorId
+      - link
       type: object
       properties:
-        code:
+        link:
           type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
-          type: string
-          format: uuid
-        msg:
-          type: string
-        data:
-          type: object
-          properties: {}
-    VideoProcessingVersion:
+    VideoProcessingStatusData:
       required:
-      - height
-      - quality
-      - url
-      - width
+      - video
       type: object
       properties:
-        quality:
+        video:
+          $ref: '#/components/schemas/VideoProcessingVideo'
+    SubmittedMedia:
+      required:
+      - type
+      type: object
+      properties:
+        type:
           type: string
           enum:
-          - Original
-          - FullHD
-          - Standard
-          - Low
-          - VerticalVideo1500FitPad
-          - VerticalVideo1500FillPad
-          - VerticalVideo1500Pad
-          - Unknown
+          - Image
+          - Video
+        curalateMediaId:
+          type: string
         url:
           type: string
-        width:
-          type: integer
-          format: int32
-        height:
-          type: integer
-          format: int32
-        chaptersInMillis:
-          type: array
-          items:
-            type: integer
-            format: int64
-    MediaApiMetadata:
+          format: url
+        posterUrl:
+          type: string
+          format: url
+        caption:
+          type: string
+    UploadData:
       required:
-      - traceId
+      - images
+      - videos
       type: object
       properties:
-        traceId:
-          type: string
-        requestId:
-          type: string
-        firstPartyCuid:
-          type: string
-        curalateUserId:
-          type: string
-        customCuralateUserId:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
-        pdpMetadata:
-          $ref: '#/components/schemas/PdpMetadata'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkPhoto'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadVideoResponse'
+    GetVideoStatusResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/VideoProcessingStatusData'
     SubmitMediaRequestBody:
       required:
       - emailAddress
@@ -372,69 +435,6 @@ components:
           additionalProperties:
             type: object
             properties: {}
-    PdpMetadata:
-      type: object
-      properties:
-        curalateProductId:
-          type: string
-        curalateStyleId:
-          type: string
-    Image:
-      required:
-      - link
-      type: object
-      properties:
-        link:
-          type: string
-    UploadVideoResponse:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-          x-qualified-classname: com.curalate.global.model.types.video.VideoId
-    UploadData:
-      required:
-      - images
-      - videos
-      type: object
-      properties:
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkPhoto'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/UploadVideoResponse'
-    VideoProcessingStatusData:
-      required:
-      - video
-      type: object
-      properties:
-        video:
-          $ref: '#/components/schemas/VideoProcessingVideo'
-    SubmittedMedia:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Image
-          - Video
-        curalateMediaId:
-          type: string
-        url:
-          type: string
-          format: url
-        posterUrl:
-          type: string
-          format: url
-        caption:
-          type: string
   securitySchemes:
     ApiKey:
       type: apiKey

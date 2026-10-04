@@ -256,74 +256,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FacebookAlbum:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-        id:
-          type: string
-    GetFacebookAlbumsResponse:
-      required:
-      - data
-      - paging
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GetFacebookAlbumsData'
-        paging:
-          $ref: '#/components/schemas/MediaApiPaging'
-    GetFacebookAlbumsData:
-      required:
-      - albums
-      type: object
-      properties:
-        albums:
-          type: array
-          items:
-            $ref: '#/components/schemas/FacebookAlbum'
-    ErrorPayload:
-      required:
-      - code
-      - errorId
-      type: object
-      properties:
-        code:
-          type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
-          type: string
-          format: uuid
-        msg:
-          type: string
-        data:
-          type: object
-          properties: {}
-    ExternalMedia:
-      required:
-      - id
-      - link
-      - type
-      type: object
-      properties:
-        caption:
-          type: string
-        id:
-          type: string
-        link:
-          type: string
-          format: url
-        posterImageLink:
-          type: string
-          format: url
-        type:
-          type: string
     GetFacebookMediaData:
       required:
       - items
@@ -344,6 +276,65 @@ components:
         after:
           type: string
           x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+    GetFacebookAlbumsResponse:
+      required:
+      - data
+      - paging
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFacebookAlbumsData'
+        paging:
+          $ref: '#/components/schemas/MediaApiPaging'
+    ExternalMedia:
+      required:
+      - id
+      - link
+      - type
+      type: object
+      properties:
+        caption:
+          type: string
+        id:
+          type: string
+        link:
+          type: string
+          format: url
+        posterImageLink:
+          type: string
+          format: url
+        type:
+          type: string
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    FacebookAlbum:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
     MediaApiPaging:
       required:
       - cursors
@@ -357,6 +348,15 @@ components:
         next:
           type: string
           format: url
+    GetFacebookAlbumsData:
+      required:
+      - albums
+      type: object
+      properties:
+        albums:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookAlbum'
     GetFacebookMediaResponse:
       required:
       - data

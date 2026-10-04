@@ -548,10 +548,6 @@ components:
       type: string
       description: HTML containing Microdata tags. Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review , Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
       example: "<div itemscope itemtype=\"https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review\" itemid=\"https://example.com/product\">\n  <h1 itemprop=\"name\">Acne Patches</h1>\n  <div itemprop=\"aggregateRating\" itemscope itemtype=\"https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating\">\n    Rated \n    <span itemprop=\"ratingValue\">4.7</span> out of \n    <span itemprop=\"bestRating\">5</span> based on \n    <span itemprop=\"reviewCount\">873</span> reviews.\n  </div>\n</div>\n"
-    JsonLdResponseScript:
-      type: string
-      description: JSON-LD structured data object inside script tag which abides to google defined schema.org. Our Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review, Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
-      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://example.com/product\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
     ErrorResponse:
       type: object
       required:
@@ -573,6 +569,10 @@ components:
           type: string
         instance:
           type: string
+    JsonLdResponseScript:
+      type: string
+      description: JSON-LD structured data object inside script tag which abides to google defined schema.org. Our Review schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#review-schema-type-review, Aggregate Rating schema - https://developers.bazaarvoice.com/v1.0-AuthenticDiscoveryAPI/docs/retreive-data-in-json-ld#aggregaterating-schema-type-aggregaterating
+      example: "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org/\",\n  \"@id\": \"https://example.com/product\",\n  \"aggregateRating\": {\n    \"@type\": \"AggregateRating\",\n    \"ratingValue\": \"4.7\",\n    \"reviewCount\": 873,\n    \"bestRating\": 5\n  }\n}\n</script>\n"
     JsonLdResponseJSONFormat:
       type: object
       description: JSON-LD structured data object inside script tag

@@ -410,6 +410,75 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
+    Statistics:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        helpfulnessScore:
+          type: integer
+          format: int32
+        characterCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        numPhotos:
+          type: integer
+          format: int32
+        numVideos:
+          type: integer
+          format: int32
+        hasPhotos:
+          type: boolean
+        hasVideos:
+          type: boolean
+    AnswerQueryResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
+          type: string
+    Coordinate:
+      type: object
+      properties:
+        table:
+          type: string
+        id:
+          type: string
+    AnswerFilters:
+      type: object
+      properties:
+        questionId:
+          type: string
     QuestionContributor:
       type: object
       properties:
@@ -518,82 +587,25 @@ components:
             type: string
         externalId:
           type: string
-    AnswerFilters:
+    AllAnswers:
       type: object
       properties:
-        questionId:
-          type: string
-    AnswerQueryResponse:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    Photo:
       type: object
       properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        totalQueriedAnswers:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
-    Statistics:
-      type: object
-      properties:
-        positiveFeedbackCount:
-          type: integer
-          format: int32
-        negativeFeedbackCount:
-          type: integer
-          format: int32
-        helpfulnessScore:
-          type: integer
-          format: int32
-        characterCount:
-          type: integer
-          format: int32
-        productReferenceCount:
-          type: integer
-          format: int32
-        inappropriateFeedbackCount:
-          type: integer
-          format: int32
-        numPhotos:
-          type: integer
-          format: int32
-        numVideos:
-          type: integer
-          format: int32
-        hasPhotos:
-          type: boolean
-        hasVideos:
-          type: boolean
-    Video:
-      type: object
-      properties:
-        legacyInternalId:
-          type: string
-        rawUrlInput:
-          type: string
         caption:
           type: string
-        videoHost:
+        mediumImageId:
           type: string
-        videoId:
+        thumbnailImageId:
           type: string
-        uploadStatus:
+        url:
           type: string
         thumbnailUrl:
           type: string
@@ -697,32 +709,20 @@ components:
           format: int32
         statusGroup:
           type: string
-    Coordinate:
+    Video:
       type: object
       properties:
-        table:
+        legacyInternalId:
           type: string
-        id:
+        rawUrlInput:
           type: string
-    AllAnswers:
-      type: object
-      properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
-    Photo:
-      type: object
-      properties:
         caption:
           type: string
-        mediumImageId:
+        videoHost:
           type: string
-        thumbnailImageId:
+        videoId:
           type: string
-        url:
+        uploadStatus:
           type: string
         thumbnailUrl:
           type: string
@@ -828,6 +828,56 @@ components:
         HasErrors:
           type: boolean
           example: false
+    SubmitAnswer:
+      type: object
+      properties:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Answer:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the answer is published.
+            SubmissionTime:
+              type: string
+              description: The submission time of the answer.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the answer to be posted.
+            Id:
+              type: string
+              description: The ID of the answer.
+            SubmissionId:
+              type: string
+              description: The submission ID of the answer.
+            AnswerText:
+              type: string
+              description: The text content of the answer.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
+          type: string
+          description: The submission ID.
+        Locale:
+          type: string
+          description: The locale of the answer.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
     ErrorResponse:
       type: object
       required:
@@ -881,56 +931,6 @@ components:
           type: string
           format: date-time
           example: '2023-07-19T09:10:04.446Z'
-    SubmitAnswer:
-      type: object
-      properties:
-        Data:
-          type: object
-        HasErrors:
-          type: boolean
-          example: false
-        Form:
-          type: array
-          items:
-            type: object
-        FormErrors:
-          type: object
-        Answer:
-          type: object
-          properties:
-            SendEmailAlertWhenPublished:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the answer is published.
-            SubmissionTime:
-              type: string
-              description: The submission time of the answer.
-              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
-            TypicalHoursToPost:
-              type: number
-              description: The typical number of hours it takes for the answer to be posted.
-            Id:
-              type: string
-              description: The ID of the answer.
-            SubmissionId:
-              type: string
-              description: The submission ID of the answer.
-            AnswerText:
-              type: string
-              description: The text content of the answer.
-        TypicalHoursToPost:
-          type: number
-          description: The typical number of hours it takes for a submission to be posted.
-        SubmissionId:
-          type: string
-          description: The submission ID.
-        Locale:
-          type: string
-          description: The locale of the answer.
-          pattern: ^[a-z]{2}_[A-Z]{2}$
-        Errors:
-          type: array
-          items:
-            type: object
   securitySchemes:
     Bv-Passkey:
       type: apiKey

@@ -918,6 +918,31 @@ paths:
       operationId: getDataStatisticsJson
       x-operation-id-source: derived
 components:
+  responses:
+    UnauthorizedResponse:
+      description: Unauthorized Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedErrorResponseSchema'
+    InternalServerErrorResponse:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnknownErrorResponseSchema'
+    BadRequestResponse:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestErrorResponseSchema'
+    TooManyRequestsResponse:
+      description: Too Many Request Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestErrorResponseSchema'
   schemas:
     Question:
       type: object
@@ -1059,6 +1084,348 @@ components:
           type: array
           items:
             type: object
+    BadRequestErrorResponseSchema:
+      type: object
+      properties:
+        Includes:
+          type: object
+          default: {}
+        HasErrors:
+          type: boolean
+          default: true
+        Offset:
+          type: number
+          default: null
+        TotalResults:
+          type: number
+          default: null
+        Locale:
+          type: string
+          default: null
+        Results:
+          type: array
+          items:
+            type: object
+            default: {}
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+                example: The passKey provided is invalid.
+              Code:
+                type: string
+                example: ERROR_PARAM_INVALID_API_KEY
+                x-extensible-enum:
+                - ERROR_PARAM_INVALID_API_KEY
+                - ERROR_PARAM_INVALID_CALLBACK
+                - ERROR_PARAM_INVALID_FILTER_ATTRIBUTE
+                - ERROR_PARAM_INVALID_INCLUDED
+                - ERROR_PARAM_INVALID_LIMIT
+                - ERROR_PARAM_INVALID_LOCALE
+                - ERROR_PARAM_INVALID_OFFSET
+                - ERROR_PARAM_INVALID_SORT_ATTRIBUTE
+                - ERROR_PARAM_INVALID_SEARCH_ATTRIBUTE
+                - ERROR_UNKNOWN
+                - ERROR_UNSUPPORTED
+    UnknownErrorResponseSchema:
+      type: object
+      properties:
+        Includes:
+          type: object
+          default: {}
+        HasErrors:
+          type: boolean
+          default: true
+        Offset:
+          type: number
+          default: null
+        TotalResults:
+          type: number
+          default: null
+        Locale:
+          type: string
+          default: null
+        Results:
+          type: array
+          items:
+            type: object
+            default: {}
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+                example: Unknown error encountered.
+              Code:
+                type: string
+                example: ERROR_UNKNOWN
+                x-extensible-enum:
+                - ERROR_UNKNOWN
+    UnauthorizedErrorResponseSchema:
+      type: object
+      properties:
+        Includes:
+          type: object
+          default: {}
+        HasErrors:
+          type: boolean
+          default: true
+        Offset:
+          type: number
+          default: null
+        TotalResults:
+          type: number
+          default: null
+        Locale:
+          type: string
+          default: null
+        Results:
+          type: array
+          items:
+            type: object
+            default: {}
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+                example: You are not authorized to make this request.
+              Code:
+                type: string
+                example: ERROR_ACCESS_DENIED
+                x-extensible-enum:
+                - ERROR_ACCESS_DENIED
+    Product:
+      type: object
+      properties:
+        Limit:
+          type: number
+        Offset:
+          type: number
+        TotalResults:
+          type: number
+        Locale:
+          type: string
+        Results:
+          type: array
+          items:
+            type: object
+            properties:
+              Description:
+                type: string
+              ImageUrl:
+                type: string
+              Name:
+                type: string
+              Id:
+                type: string
+              CategoryId:
+                type: string
+              Active:
+                type: boolean
+              Disabled:
+                type: boolean
+              FamilyIds:
+                type: array
+                items:
+                  type: object
+              ModelNumbers:
+                type: array
+                items:
+                  type: object
+              AttributesOrder:
+                type: array
+                items:
+                  type: object
+              UPCs:
+                type: array
+                items:
+                  type: object
+              Brand:
+                type: object
+              ISBNs:
+                type: array
+                items:
+                  type: object
+              QuestionIds:
+                type: array
+                items:
+                  type: object
+              StoryIds:
+                type: array
+                items:
+                  type: object
+              BrandExternalId:
+                type: object
+              Attributes:
+                type: object
+              EANs:
+                type: array
+                items:
+                  type: object
+              ManufacturerPartNumbers:
+                type: array
+                items:
+                  type: object
+              ProductPageUrl:
+                type: object
+              ReviewIds:
+                type: array
+                items:
+                  type: object
+        Includes:
+          type: object
+        HasErrors:
+          type: boolean
+        Errors:
+          type: array
+          items:
+            type: object
+    Author:
+      type: object
+      properties:
+        Limit:
+          type: number
+        Offset:
+          type: number
+        TotalResults:
+          type: number
+        Locale:
+          type: string
+        Results:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+              ContributorRank:
+                type: string
+              UserNickname:
+                type: string
+              LastModeratedTime:
+                type: string
+              ModerationStatus:
+                type: string
+              SubmissionTime:
+                type: string
+              ThirdPartyIds:
+                type: array
+                items:
+                  type: object
+              Badges:
+                type: object
+              ProductRecommendationIds:
+                type: array
+                items:
+                  type: object
+              ContextDataValuesOrder:
+                type: array
+                items:
+                  type: object
+              Location:
+                type: object
+              SecondaryRatingsOrder:
+                type: array
+                items:
+                  type: object
+              QuestionIds:
+                type: array
+                items:
+                  type: object
+              SubmissionId:
+                type: object
+              Avatar:
+                type: object
+              Videos:
+                type: array
+                items:
+                  type: object
+              AnswerIds:
+                type: array
+                items:
+                  type: object
+              Photos:
+                type: array
+                items:
+                  type: object
+              SecondaryRatings:
+                type: object
+              CommentIds:
+                type: array
+                items:
+                  type: object
+              AdditionalFieldsOrder:
+                type: array
+                items:
+                  type: object
+              StoryIds:
+                type: array
+                items:
+                  type: object
+              ReviewIds:
+                type: array
+                items:
+                  type: object
+              ContextDataValues:
+                type: object
+              AdditionalFields:
+                type: object
+              BadgesOrder:
+                type: array
+                items:
+                  type: object
+        Includes:
+          type: object
+        HasErrors:
+          type: boolean
+        Errors:
+          type: array
+          items:
+            type: object
+    TooManyRequestErrorResponseSchema:
+      type: object
+      properties:
+        Includes:
+          type: object
+          default: {}
+        HasErrors:
+          type: boolean
+          default: true
+        Offset:
+          type: number
+          default: null
+        TotalResults:
+          type: number
+          default: null
+        Locale:
+          type: string
+          default: null
+        Results:
+          type: array
+          items:
+            type: object
+            default: {}
+        Errors:
+          type: array
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+                example: Please try again later.
+              Code:
+                type: string
+                example: ERROR_REQUEST_LIMIT_REACHED
+                x-extensible-enum:
+                - ERROR_REQUEST_LIMIT_REACHED
     Category:
       type: object
       properties:
@@ -1104,6 +1471,108 @@ components:
                 items:
                   type: object
               AttributesOrder:
+                type: array
+                items:
+                  type: object
+        Includes:
+          type: object
+        HasErrors:
+          type: boolean
+        Errors:
+          type: array
+          items:
+            type: object
+    Comment:
+      type: object
+      properties:
+        Limit:
+          type: number
+        Offset:
+          type: number
+        TotalResults:
+          type: number
+        Locale:
+          type: string
+        Results:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+              CID:
+                type: string
+              SourceClient:
+                type: string
+              LastModeratedTime:
+                type: string
+              LastModificationTime:
+                type: string
+              ReviewId:
+                type: string
+              Badges:
+                type: object
+                properties:
+                  top25:
+                    type: object
+                    properties:
+                      ContentType:
+                        type: string
+                      Id:
+                        type: string
+                      BadgeType:
+                        type: string
+              BadgesOrder:
+                type: array
+                items:
+                  type: string
+              AuthorId:
+                type: string
+              UserLocation:
+                type: string
+              ContentLocale:
+                type: string
+              IsFeatured:
+                type: boolean
+              TotalInappropriateFeedbackCount:
+                type: number
+              TotalFeedbackCount:
+                type: number
+              TotalNegativeFeedbackCount:
+                type: number
+              TotalPositiveFeedbackCount:
+                type: number
+              ModerationStatus:
+                type: string
+              SubmissionTime:
+                type: string
+              CommentText:
+                type: string
+              Title:
+                type: string
+              UserNickname:
+                type: string
+              StoryId:
+                type: object
+              InappropriateFeedbackList:
+                type: array
+                items:
+                  type: object
+              Photos:
+                type: array
+                items:
+                  type: object
+              SubmissionId:
+                type: object
+              Videos:
+                type: array
+                items:
+                  type: object
+              CampaignId:
+                type: object
+              IsSyndicated:
+                type: boolean
+              ProductRecommendationIds:
                 type: array
                 items:
                   type: object
@@ -1394,364 +1863,6 @@ components:
           type: array
           items:
             type: object
-    UnknownErrorResponseSchema:
-      type: object
-      properties:
-        Includes:
-          type: object
-          default: {}
-        HasErrors:
-          type: boolean
-          default: true
-        Offset:
-          type: number
-          default: null
-        TotalResults:
-          type: number
-          default: null
-        Locale:
-          type: string
-          default: null
-        Results:
-          type: array
-          items:
-            type: object
-            default: {}
-        Errors:
-          type: array
-          items:
-            type: object
-            properties:
-              Message:
-                type: string
-                example: Unknown error encountered.
-              Code:
-                type: string
-                example: ERROR_UNKNOWN
-                x-extensible-enum:
-                - ERROR_UNKNOWN
-    BadRequestErrorResponseSchema:
-      type: object
-      properties:
-        Includes:
-          type: object
-          default: {}
-        HasErrors:
-          type: boolean
-          default: true
-        Offset:
-          type: number
-          default: null
-        TotalResults:
-          type: number
-          default: null
-        Locale:
-          type: string
-          default: null
-        Results:
-          type: array
-          items:
-            type: object
-            default: {}
-        Errors:
-          type: array
-          items:
-            type: object
-            properties:
-              Message:
-                type: string
-                example: The passKey provided is invalid.
-              Code:
-                type: string
-                example: ERROR_PARAM_INVALID_API_KEY
-                x-extensible-enum:
-                - ERROR_PARAM_INVALID_API_KEY
-                - ERROR_PARAM_INVALID_CALLBACK
-                - ERROR_PARAM_INVALID_FILTER_ATTRIBUTE
-                - ERROR_PARAM_INVALID_INCLUDED
-                - ERROR_PARAM_INVALID_LIMIT
-                - ERROR_PARAM_INVALID_LOCALE
-                - ERROR_PARAM_INVALID_OFFSET
-                - ERROR_PARAM_INVALID_SORT_ATTRIBUTE
-                - ERROR_PARAM_INVALID_SEARCH_ATTRIBUTE
-                - ERROR_UNKNOWN
-                - ERROR_UNSUPPORTED
-    Author:
-      type: object
-      properties:
-        Limit:
-          type: number
-        Offset:
-          type: number
-        TotalResults:
-          type: number
-        Locale:
-          type: string
-        Results:
-          type: array
-          items:
-            type: object
-            properties:
-              Id:
-                type: string
-              ContributorRank:
-                type: string
-              UserNickname:
-                type: string
-              LastModeratedTime:
-                type: string
-              ModerationStatus:
-                type: string
-              SubmissionTime:
-                type: string
-              ThirdPartyIds:
-                type: array
-                items:
-                  type: object
-              Badges:
-                type: object
-              ProductRecommendationIds:
-                type: array
-                items:
-                  type: object
-              ContextDataValuesOrder:
-                type: array
-                items:
-                  type: object
-              Location:
-                type: object
-              SecondaryRatingsOrder:
-                type: array
-                items:
-                  type: object
-              QuestionIds:
-                type: array
-                items:
-                  type: object
-              SubmissionId:
-                type: object
-              Avatar:
-                type: object
-              Videos:
-                type: array
-                items:
-                  type: object
-              AnswerIds:
-                type: array
-                items:
-                  type: object
-              Photos:
-                type: array
-                items:
-                  type: object
-              SecondaryRatings:
-                type: object
-              CommentIds:
-                type: array
-                items:
-                  type: object
-              AdditionalFieldsOrder:
-                type: array
-                items:
-                  type: object
-              StoryIds:
-                type: array
-                items:
-                  type: object
-              ReviewIds:
-                type: array
-                items:
-                  type: object
-              ContextDataValues:
-                type: object
-              AdditionalFields:
-                type: object
-              BadgesOrder:
-                type: array
-                items:
-                  type: object
-        Includes:
-          type: object
-        HasErrors:
-          type: boolean
-        Errors:
-          type: array
-          items:
-            type: object
-    Comment:
-      type: object
-      properties:
-        Limit:
-          type: number
-        Offset:
-          type: number
-        TotalResults:
-          type: number
-        Locale:
-          type: string
-        Results:
-          type: array
-          items:
-            type: object
-            properties:
-              Id:
-                type: string
-              CID:
-                type: string
-              SourceClient:
-                type: string
-              LastModeratedTime:
-                type: string
-              LastModificationTime:
-                type: string
-              ReviewId:
-                type: string
-              Badges:
-                type: object
-                properties:
-                  top25:
-                    type: object
-                    properties:
-                      ContentType:
-                        type: string
-                      Id:
-                        type: string
-                      BadgeType:
-                        type: string
-              BadgesOrder:
-                type: array
-                items:
-                  type: string
-              AuthorId:
-                type: string
-              UserLocation:
-                type: string
-              ContentLocale:
-                type: string
-              IsFeatured:
-                type: boolean
-              TotalInappropriateFeedbackCount:
-                type: number
-              TotalFeedbackCount:
-                type: number
-              TotalNegativeFeedbackCount:
-                type: number
-              TotalPositiveFeedbackCount:
-                type: number
-              ModerationStatus:
-                type: string
-              SubmissionTime:
-                type: string
-              CommentText:
-                type: string
-              Title:
-                type: string
-              UserNickname:
-                type: string
-              StoryId:
-                type: object
-              InappropriateFeedbackList:
-                type: array
-                items:
-                  type: object
-              Photos:
-                type: array
-                items:
-                  type: object
-              SubmissionId:
-                type: object
-              Videos:
-                type: array
-                items:
-                  type: object
-              CampaignId:
-                type: object
-              IsSyndicated:
-                type: boolean
-              ProductRecommendationIds:
-                type: array
-                items:
-                  type: object
-        Includes:
-          type: object
-        HasErrors:
-          type: boolean
-        Errors:
-          type: array
-          items:
-            type: object
-    UnauthorizedErrorResponseSchema:
-      type: object
-      properties:
-        Includes:
-          type: object
-          default: {}
-        HasErrors:
-          type: boolean
-          default: true
-        Offset:
-          type: number
-          default: null
-        TotalResults:
-          type: number
-          default: null
-        Locale:
-          type: string
-          default: null
-        Results:
-          type: array
-          items:
-            type: object
-            default: {}
-        Errors:
-          type: array
-          items:
-            type: object
-            properties:
-              Message:
-                type: string
-                example: You are not authorized to make this request.
-              Code:
-                type: string
-                example: ERROR_ACCESS_DENIED
-                x-extensible-enum:
-                - ERROR_ACCESS_DENIED
-    TooManyRequestErrorResponseSchema:
-      type: object
-      properties:
-        Includes:
-          type: object
-          default: {}
-        HasErrors:
-          type: boolean
-          default: true
-        Offset:
-          type: number
-          default: null
-        TotalResults:
-          type: number
-          default: null
-        Locale:
-          type: string
-          default: null
-        Results:
-          type: array
-          items:
-            type: object
-            default: {}
-        Errors:
-          type: array
-          items:
-            type: object
-            properties:
-              Message:
-                type: string
-                example: Please try again later.
-              Code:
-                type: string
-                example: ERROR_REQUEST_LIMIT_REACHED
-                x-extensible-enum:
-                - ERROR_REQUEST_LIMIT_REACHED
     Answer:
       type: object
       properties:
@@ -1864,117 +1975,6 @@ components:
           type: array
           items:
             type: object
-    Product:
-      type: object
-      properties:
-        Limit:
-          type: number
-        Offset:
-          type: number
-        TotalResults:
-          type: number
-        Locale:
-          type: string
-        Results:
-          type: array
-          items:
-            type: object
-            properties:
-              Description:
-                type: string
-              ImageUrl:
-                type: string
-              Name:
-                type: string
-              Id:
-                type: string
-              CategoryId:
-                type: string
-              Active:
-                type: boolean
-              Disabled:
-                type: boolean
-              FamilyIds:
-                type: array
-                items:
-                  type: object
-              ModelNumbers:
-                type: array
-                items:
-                  type: object
-              AttributesOrder:
-                type: array
-                items:
-                  type: object
-              UPCs:
-                type: array
-                items:
-                  type: object
-              Brand:
-                type: object
-              ISBNs:
-                type: array
-                items:
-                  type: object
-              QuestionIds:
-                type: array
-                items:
-                  type: object
-              StoryIds:
-                type: array
-                items:
-                  type: object
-              BrandExternalId:
-                type: object
-              Attributes:
-                type: object
-              EANs:
-                type: array
-                items:
-                  type: object
-              ManufacturerPartNumbers:
-                type: array
-                items:
-                  type: object
-              ProductPageUrl:
-                type: object
-              ReviewIds:
-                type: array
-                items:
-                  type: object
-        Includes:
-          type: object
-        HasErrors:
-          type: boolean
-        Errors:
-          type: array
-          items:
-            type: object
-  responses:
-    BadRequestResponse:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BadRequestErrorResponseSchema'
-    InternalServerErrorResponse:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnknownErrorResponseSchema'
-    TooManyRequestsResponse:
-      description: Too Many Request Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TooManyRequestErrorResponseSchema'
-    UnauthorizedResponse:
-      description: Unauthorized Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UnauthorizedErrorResponseSchema'
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

@@ -281,39 +281,6 @@ components:
           type: number
           format: float
           example: 0
-    EmbeddedQuotes:
-      type: object
-      properties:
-        quotes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quotes'
-    ReviewsMentioned:
-      type: object
-      properties:
-        total:
-          type: integer
-          format: int32
-          example: 90
-        positive:
-          type: integer
-          format: int32
-          example: 84
-        negative:
-          type: integer
-          format: int32
-          example: 0
-        incentivized:
-          type: integer
-          format: int32
-          example: 0
-    ProductFeaturesResponse:
-      type: object
-      properties:
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesResponse'
     Quotes:
       type: object
       properties:
@@ -353,6 +320,20 @@ components:
           - native
           - family
           - syndicated
+    EmbeddedQuotes:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quotes'
+    ProductFeaturesResponse:
+      type: object
+      properties:
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesResponse'
     FeaturesQuotesGrouped:
       type: object
       properties:
@@ -371,6 +352,25 @@ components:
           $ref: '#/components/schemas/AverageRatingReviews'
         _embedded:
           $ref: '#/components/schemas/EmbeddedQuotes'
+    ReviewsMentioned:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+          example: 90
+        positive:
+          type: integer
+          format: int32
+          example: 84
+        negative:
+          type: integer
+          format: int32
+          example: 0
+        incentivized:
+          type: integer
+          format: int32
+          example: 0
     TopFeaturesQuotesGroupedResponse:
       type: object
       properties:

@@ -72,6 +72,38 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ReportMediaResponse:
+      required:
+      - metadata
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/MediaApiMetadata'
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
+    MediaApiMetadata:
+      required:
+      - traceId
+      type: object
+      properties:
+        traceId:
+          type: string
+        requestId:
+          type: string
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
     ErrorPayload:
       required:
       - code
@@ -105,38 +137,6 @@ components:
           type: string
         sourceUrl:
           type: string
-    MediaApiMetadata:
-      required:
-      - traceId
-      type: object
-      properties:
-        traceId:
-          type: string
-        requestId:
-          type: string
-        firstPartyCuid:
-          type: string
-        curalateUserId:
-          type: string
-        customCuralateUserId:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
-        pdpMetadata:
-          $ref: '#/components/schemas/PdpMetadata'
-    PdpMetadata:
-      type: object
-      properties:
-        curalateProductId:
-          type: string
-        curalateStyleId:
-          type: string
-    ReportMediaResponse:
-      required:
-      - metadata
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/MediaApiMetadata'
   securitySchemes:
     ApiKey:
       type: apiKey
