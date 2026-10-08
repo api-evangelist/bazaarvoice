@@ -81,3 +81,63 @@ trial: false
 self_serve_purchase: false
 evidence:
 - {url: 'https://www.bazaarvoice.com/pricing/', http_status: 200, finding: 'nine named tiers, zero published prices'}
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Ratings & Reviews - Essentials
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Ratings & Reviews - Advanced
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Ratings & Reviews - Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Social Commerce - Essentials
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Social Commerce - Advanced
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Social Commerce - Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Support - Standard
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Support - Priority
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Support - Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
