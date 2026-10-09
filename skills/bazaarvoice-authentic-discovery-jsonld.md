@@ -2,7 +2,7 @@
 name: Make UGC visible to AI crawlers with Authentic Discovery
 description: Fetch server-side JSON-LD or Microdata for a product from the Bazaarvoice Authentic Discovery API and embed it in the initial HTML so AI agents that do not execute JavaScript can read the reviews.
 api: openapi/bazaarvoice-authentic-discovery-openapi.yml
-operations: [getStructuredDataV2]
+operations: [getClientsByClientIdUgc]
 generated: '2026-08-13'
 method: generated
 source:
