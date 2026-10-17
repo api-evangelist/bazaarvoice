@@ -115,28 +115,6 @@ paths:
       description: Staging
 components:
   responses:
-    '404':
-      description: Not Found
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: Unable to identify proxy for host:- https_vhost and url:- /de/v3/data
-                detail:
-                  errorcode: messaging.adaptors.http.flow.ApplicationNotFound
-    '401':
-      description: Unauthorized
-      content:
-        application/problem+json:
-          schema:
-            type: string
-            example:
-              fault:
-                faultstring: RF unauthorised error
-                detail:
-                  errorcode: oauth.v2.RFUnauthorised
     '500':
       description: Internal Server Error
       content:
@@ -159,6 +137,28 @@ components:
                 faultstring: Invalid ApiKey
                 detail:
                   errorcode: oauth.v2.InvalidApiKey
+    '404':
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: Unable to identify proxy for host:- https_vhost and url:- /de/v3/data
+                detail:
+                  errorcode: messaging.adaptors.http.flow.ApplicationNotFound
+    '401':
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            type: string
+            example:
+              fault:
+                faultstring: RF unauthorised error
+                detail:
+                  errorcode: oauth.v2.RFUnauthorised
     '404_2':
       description: Not Found
       content:

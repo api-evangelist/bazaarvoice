@@ -556,13 +556,6 @@ components:
       properties:
         message:
           type: string
-    UserNotAuthorised:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
     ReviewResponseCountRequest:
       type: object
       properties:
@@ -570,6 +563,13 @@ components:
           type: array
           items:
             type: string
+    UserNotAuthorised:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     ReviewResponseCountResponse:
       type: object
       properties:
@@ -582,46 +582,20 @@ components:
                 type: string
               responseCount:
                 type: integer
-    IncorrectApiKey:
-      type: string
-      description: Message describing the error associated with API
-    ErrorCode:
-      type: object
-      properties:
-        message:
-          type: string
-      description: Error code value
-    ClientResponseResponseModel:
+    AuthorData:
       type: object
       properties:
         type:
           type: string
         id:
           type: string
-        attributes:
-          $ref: '#/components/schemas/ClientResponse'
-        relationships:
-          $ref: '#/components/schemas/ClientResponseRelationships'
-        links:
-          $ref: '#/components/schemas/Links'
-    ClientResponseRequest:
+    ReviewRelationship:
       type: object
       properties:
-        attributes:
-          type: object
-          properties:
-            department:
-              type: string
-            response:
-              type: string
-            responseBy:
-              type: string
-          required:
-          - department
-          - response
-      required:
-      - attributes
-      description: The data associated with a given Client Response record
+        data:
+          $ref: '#/components/schemas/ReviewData'
+        links:
+          $ref: '#/components/schemas/Links'
     Links:
       type: object
       properties:
@@ -629,13 +603,6 @@ components:
           type: string
         related:
           type: string
-    ClientResponseRelationships:
-      type: object
-      properties:
-        author:
-          $ref: '#/components/schemas/AuthorRelationship'
-        review:
-          $ref: '#/components/schemas/ReviewRelationship'
     Error:
       required:
       - code
@@ -651,49 +618,22 @@ components:
           type: string
           description: The human-readable message describing this error
       description: Error relating to an API request
-    AuthorData:
+    ErrorCode:
       type: object
       properties:
-        type:
+        message:
           type: string
-        id:
-          type: string
-    ReviewRelationship:
+      description: Error code value
+    IncorrectApiKey:
+      type: string
+      description: Message describing the error associated with API
+    ClientResponseRelationships:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/ReviewData'
-        links:
-          $ref: '#/components/schemas/Links'
-    ReviewData:
-      type: object
-      properties:
-        type:
-          type: string
-        id:
-          type: string
-        clientName:
-          type: string
-    ClientResponse:
-      type: object
-      properties:
-        department:
-          type: string
-        response:
-          type: string
-        responseBy:
-          type: string
-        responseSource:
-          type: string
-        responderClient:
-          type: string
-        created:
-          type: integer
-          format: int64
-        updated:
-          type: integer
-          format: int64
-      description: The data associated with a given Client Response record
+        author:
+          $ref: '#/components/schemas/AuthorRelationship'
+        review:
+          $ref: '#/components/schemas/ReviewRelationship'
     ErrorResponse_2:
       required:
       - errors
@@ -714,6 +654,13 @@ components:
           items:
             $ref: '#/components/schemas/Error'
       description: Error Response to an API request
+    AuthorRelationship:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AuthorData'
+        links:
+          $ref: '#/components/schemas/Links'
     UserNotAuthorised_2:
       type: object
       properties:
@@ -724,11 +671,64 @@ components:
           default: 403
         message:
           type: string
-    AuthorRelationship:
+    ReviewData:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/AuthorData'
+        type:
+          type: string
+        id:
+          type: string
+        clientName:
+          type: string
+    ClientResponseRequest:
+      type: object
+      properties:
+        attributes:
+          type: object
+          properties:
+            department:
+              type: string
+            response:
+              type: string
+            responseBy:
+              type: string
+          required:
+          - department
+          - response
+      required:
+      - attributes
+      description: The data associated with a given Client Response record
+    ClientResponse:
+      type: object
+      properties:
+        department:
+          type: string
+        response:
+          type: string
+        responseBy:
+          type: string
+        responseSource:
+          type: string
+        responderClient:
+          type: string
+        created:
+          type: integer
+          format: int64
+        updated:
+          type: integer
+          format: int64
+      description: The data associated with a given Client Response record
+    ClientResponseResponseModel:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/ClientResponse'
+        relationships:
+          $ref: '#/components/schemas/ClientResponseRelationships'
         links:
           $ref: '#/components/schemas/Links'
   securitySchemes:

@@ -79,31 +79,6 @@ components:
       properties:
         metadata:
           $ref: '#/components/schemas/MediaApiMetadata'
-    PdpMetadata:
-      type: object
-      properties:
-        curalateProductId:
-          type: string
-        curalateStyleId:
-          type: string
-    MediaApiMetadata:
-      required:
-      - traceId
-      type: object
-      properties:
-        traceId:
-          type: string
-        requestId:
-          type: string
-        firstPartyCuid:
-          type: string
-        curalateUserId:
-          type: string
-        customCuralateUserId:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
-        pdpMetadata:
-          $ref: '#/components/schemas/PdpMetadata'
     ErrorPayload:
       required:
       - code
@@ -124,6 +99,13 @@ components:
         data:
           type: object
           properties: {}
+    PdpMetadata:
+      type: object
+      properties:
+        curalateProductId:
+          type: string
+        curalateStyleId:
+          type: string
     ReportMediaRequestBody:
       required:
       - message
@@ -137,6 +119,24 @@ components:
           type: string
         sourceUrl:
           type: string
+    MediaApiMetadata:
+      required:
+      - traceId
+      type: object
+      properties:
+        traceId:
+          type: string
+        requestId:
+          type: string
+        firstPartyCuid:
+          type: string
+        curalateUserId:
+          type: string
+        customCuralateUserId:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.CustomCuralateUserId
+        pdpMetadata:
+          $ref: '#/components/schemas/PdpMetadata'
   securitySchemes:
     ApiKey:
       type: apiKey

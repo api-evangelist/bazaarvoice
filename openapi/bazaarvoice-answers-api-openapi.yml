@@ -410,74 +410,22 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
-    Statistics:
+    Video:
       type: object
       properties:
-        positiveFeedbackCount:
-          type: integer
-          format: int32
-        negativeFeedbackCount:
-          type: integer
-          format: int32
-        helpfulnessScore:
-          type: integer
-          format: int32
-        characterCount:
-          type: integer
-          format: int32
-        productReferenceCount:
-          type: integer
-          format: int32
-        inappropriateFeedbackCount:
-          type: integer
-          format: int32
-        numPhotos:
-          type: integer
-          format: int32
-        numVideos:
-          type: integer
-          format: int32
-        hasPhotos:
-          type: boolean
-        hasVideos:
-          type: boolean
-    AnswerQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        totalQueriedAnswers:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
+        legacyInternalId:
           type: string
-        timestamp:
+        rawUrlInput:
           type: string
-    Coordinate:
-      type: object
-      properties:
-        table:
+        caption:
           type: string
-        id:
+        videoHost:
           type: string
-    AnswerFilters:
-      type: object
-      properties:
-        questionId:
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
           type: string
     QuestionContributor:
       type: object
@@ -596,6 +544,13 @@ components:
           $ref: '#/components/schemas/QuestionContributor'
         statistics:
           $ref: '#/components/schemas/Statistics'
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
+          type: string
     Photo:
       type: object
       properties:
@@ -709,125 +664,68 @@ components:
           format: int32
         statusGroup:
           type: string
-    Video:
+    Coordinate:
       type: object
       properties:
-        legacyInternalId:
+        table:
           type: string
-        rawUrlInput:
+        id:
           type: string
-        caption:
-          type: string
-        videoHost:
-          type: string
-        videoId:
-          type: string
-        uploadStatus:
-          type: string
-        thumbnailUrl:
-          type: string
-    GetAnswer:
+    AnswerQueryResponse:
       type: object
       properties:
-        Locale:
-          type: string
-        Answer:
-          type: object
-          properties:
-            SubmissionTime:
-              type: string
-            SubmissionId:
-              type: string
-            AnswerText:
-              type: string
-            TypicalHoursToPost:
-              type: string
-            Id:
-              type: string
-            SendEmailAlertWhenPublished:
-              type: boolean
-        Errors:
-          type: array
-          items:
-            type: string
-        Form:
-          type: array
-          items:
-            type: object
-            properties:
-              Type:
-                type: string
-              Id:
-                type: string
-        FormErrors:
-          type: object
-        SubmissionId:
-          type: string
-        Data:
-          type: object
-          properties:
-            Fields:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  Options:
-                    type: array
-                    items:
-                      type: string
-                  Type:
-                    type: string
-                  Required:
-                    type: boolean
-                  Label:
-                    type: string
-                  Value:
-                    type: string
-                  MinLength:
-                    type: number
-                  Id:
-                    type: string
-                  MaxLength:
-                    type: number
-                  Default:
-                    type: string
-        Groups:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              Type:
-                type: string
-              SubElements:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    Type:
-                      type: string
-                    Id:
-                      type: string
-              Required:
-                type: boolean
-              Label:
-                type: string
-              Id:
-                type: string
-        FieldsOrder:
-          type: array
-          items:
-            type: string
-        GroupsOrder:
-          type: array
-          items:
-            type: string
-        TypicalHoursToPost:
+        limit:
           type: integer
-        AuthorSubmissionToken:
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int32
+        totalQueriedAnswers:
+          type: integer
+          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+    AnswerFilters:
+      type: object
+      properties:
+        questionId:
           type: string
-        HasErrors:
+    Statistics:
+      type: object
+      properties:
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        helpfulnessScore:
+          type: integer
+          format: int32
+        characterCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        numPhotos:
+          type: integer
+          format: int32
+        numVideos:
+          type: integer
+          format: int32
+        hasPhotos:
           type: boolean
-          example: false
+        hasVideos:
+          type: boolean
     SubmitAnswer:
       type: object
       properties:
@@ -931,6 +829,108 @@ components:
           type: string
           format: date-time
           example: '2023-07-19T09:10:04.446Z'
+    GetAnswer:
+      type: object
+      properties:
+        Locale:
+          type: string
+        Answer:
+          type: object
+          properties:
+            SubmissionTime:
+              type: string
+            SubmissionId:
+              type: string
+            AnswerText:
+              type: string
+            TypicalHoursToPost:
+              type: string
+            Id:
+              type: string
+            SendEmailAlertWhenPublished:
+              type: boolean
+        Errors:
+          type: array
+          items:
+            type: string
+        Form:
+          type: array
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+        FormErrors:
+          type: object
+        SubmissionId:
+          type: string
+        Data:
+          type: object
+          properties:
+            Fields:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  Options:
+                    type: array
+                    items:
+                      type: string
+                  Type:
+                    type: string
+                  Required:
+                    type: boolean
+                  Label:
+                    type: string
+                  Value:
+                    type: string
+                  MinLength:
+                    type: number
+                  Id:
+                    type: string
+                  MaxLength:
+                    type: number
+                  Default:
+                    type: string
+        Groups:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              Type:
+                type: string
+              SubElements:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Type:
+                      type: string
+                    Id:
+                      type: string
+              Required:
+                type: boolean
+              Label:
+                type: string
+              Id:
+                type: string
+        FieldsOrder:
+          type: array
+          items:
+            type: string
+        GroupsOrder:
+          type: array
+          items:
+            type: string
+        TypicalHoursToPost:
+          type: integer
+        AuthorSubmissionToken:
+          type: string
+        HasErrors:
+          type: boolean
+          example: false
   securitySchemes:
     Bv-Passkey:
       type: apiKey

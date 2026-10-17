@@ -256,26 +256,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GetFacebookMediaData:
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalMedia'
-    ValidTokenResponse:
-      type: object
-    Cursors:
-      type: object
-      properties:
-        before:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
-        after:
-          type: string
-          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
     GetFacebookAlbumsResponse:
       required:
       - data
@@ -286,55 +266,15 @@ components:
           $ref: '#/components/schemas/GetFacebookAlbumsData'
         paging:
           $ref: '#/components/schemas/MediaApiPaging'
-    ExternalMedia:
+    GetFacebookMediaData:
       required:
-      - id
-      - link
-      - type
+      - items
       type: object
       properties:
-        caption:
-          type: string
-        id:
-          type: string
-        link:
-          type: string
-          format: url
-        posterImageLink:
-          type: string
-          format: url
-        type:
-          type: string
-    ErrorPayload:
-      required:
-      - code
-      - errorId
-      type: object
-      properties:
-        code:
-          type: string
-          enum:
-          - Unknown
-          - MediaApiBadRequest
-          - InvalidInput
-        errorId:
-          type: string
-          format: uuid
-        msg:
-          type: string
-        data:
-          type: object
-          properties: {}
-    FacebookAlbum:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-        id:
-          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalMedia'
     MediaApiPaging:
       required:
       - cursors
@@ -357,6 +297,57 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FacebookAlbum'
+    FacebookAlbum:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+    ErrorPayload:
+      required:
+      - code
+      - errorId
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - Unknown
+          - MediaApiBadRequest
+          - InvalidInput
+        errorId:
+          type: string
+          format: uuid
+        msg:
+          type: string
+        data:
+          type: object
+          properties: {}
+    ExternalMedia:
+      required:
+      - id
+      - link
+      - type
+      type: object
+      properties:
+        caption:
+          type: string
+        id:
+          type: string
+        link:
+          type: string
+          format: url
+        posterImageLink:
+          type: string
+          format: url
+        type:
+          type: string
+    ValidTokenResponse:
+      type: object
     GetFacebookMediaResponse:
       required:
       - data
@@ -367,6 +358,15 @@ components:
           $ref: '#/components/schemas/GetFacebookMediaData'
         paging:
           $ref: '#/components/schemas/MediaApiPaging'
+    Cursors:
+      type: object
+      properties:
+        before:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
+        after:
+          type: string
+          x-qualified-classname: com.curalate.mediaapi.model.api.v1.BookmarkQuery
   securitySchemes:
     ApiKey:
       type: apiKey

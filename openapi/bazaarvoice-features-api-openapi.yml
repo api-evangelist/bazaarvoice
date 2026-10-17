@@ -257,30 +257,31 @@ paths:
                   detail: Your passkey quota has been expired. Please re-try after sometime.
 components:
   schemas:
-    FeaturesResponse:
+    EmbeddedQuotes:
       type: object
       properties:
-        feature:
-          type: string
-          example: comfort
-        nativeFeature:
-          type: string
-          example: comfort
-    AverageRatingReviews:
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quotes'
+    ProductFeaturesResponse:
       type: object
       properties:
-        positive:
-          type: number
-          format: float
-          example: 5.5
-        negative:
-          type: number
-          format: float
-          example: 0
-        incentivized:
-          type: number
-          format: float
-          example: 0
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesResponse'
+    TopFeaturesQuotesGroupedResponse:
+      type: object
+      properties:
+        bestFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesQuotesGrouped'
+        worstFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesQuotesGrouped'
     Quotes:
       type: object
       properties:
@@ -320,20 +321,6 @@ components:
           - native
           - family
           - syndicated
-    EmbeddedQuotes:
-      type: object
-      properties:
-        quotes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quotes'
-    ProductFeaturesResponse:
-      type: object
-      properties:
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesResponse'
     FeaturesQuotesGrouped:
       type: object
       properties:
@@ -371,17 +358,30 @@ components:
           type: integer
           format: int32
           example: 0
-    TopFeaturesQuotesGroupedResponse:
+    AverageRatingReviews:
       type: object
       properties:
-        bestFeatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesQuotesGrouped'
-        worstFeatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesQuotesGrouped'
+        positive:
+          type: number
+          format: float
+          example: 5.5
+        negative:
+          type: number
+          format: float
+          example: 0
+        incentivized:
+          type: number
+          format: float
+          example: 0
+    FeaturesResponse:
+      type: object
+      properties:
+        feature:
+          type: string
+          example: comfort
+        nativeFeature:
+          type: string
+          example: comfort
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

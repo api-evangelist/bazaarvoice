@@ -577,37 +577,309 @@ paths:
       description: Conversation-Submission API STG
 components:
   schemas:
-    Statistics:
+    Video:
       type: object
       properties:
-        positiveFeedbackCount:
+        legacyInternalId:
+          type: string
+        rawUrlInput:
+          type: string
+        caption:
+          type: string
+        videoHost:
+          type: string
+        videoId:
+          type: string
+        uploadStatus:
+          type: string
+        thumbnailUrl:
+          type: string
+    SingleQuestionDocument:
+      type: object
+      properties:
+        question:
+          $ref: '#/components/schemas/Question'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        product:
+          $ref: '#/components/schemas/Product'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllAnswers'
+        totalQueriedAnswers:
           type: integer
           format: int32
-        negativeFeedbackCount:
+    QuestionContributor:
+      type: object
+      properties:
+        id:
+          type: string
+        table:
+          type: string
+        version:
           type: integer
           format: int32
-        helpfulnessScore:
+        sourceVersion:
           type: integer
           format: int32
-        characterCount:
-          type: integer
-          format: int32
-        productReferenceCount:
-          type: integer
-          format: int32
-        inappropriateFeedbackCount:
-          type: integer
-          format: int32
-        numPhotos:
-          type: integer
-          format: int32
-        numVideos:
-          type: integer
-          format: int32
-        hasPhotos:
+        deleted:
           type: boolean
-        hasVideos:
+        signature:
+          type: string
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        type:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        clearTextExternalId:
+          type: string
+        anonymous:
           type: boolean
+        rank:
+          type: string
+        merit:
+          type: string
+        affiliation:
+          type: string
+        contributorBadgeEnabled:
+          type: boolean
+        contributorLocation:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayCode:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        displayName:
+          type: string
+        sourceName:
+          type: string
+        agreedToTermsAndConditions:
+          type: boolean
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        ratingOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        avatarPhoto:
+          $ref: '#/components/schemas/Photo'
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        displayLastUpdate:
+          $ref: '#/components/schemas/PrrUpdate'
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        ratingProperties:
+          type: object
+          additionalProperties:
+            type: string
+        externalId:
+          type: string
+    AllAnswers:
+      type: object
+      properties:
+        answer:
+          $ref: '#/components/schemas/Answer'
+        contributor:
+          $ref: '#/components/schemas/QuestionContributor'
+        statistics:
+          $ref: '#/components/schemas/Statistics'
+    PrrUpdate:
+      type: object
+      properties:
+        hash:
+          type: string
+        timestamp:
+          type: string
+    Photo:
+      type: object
+      properties:
+        caption:
+          type: string
+        mediumImageId:
+          type: string
+        thumbnailImageId:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: integer
+          format: int32
+        firstUpdateAt:
+          type: string
+        lastUpdateAt:
+          type: string
+        lastMutateAt:
+          type: string
+        client:
+          type: string
+        legacyInternalId:
+          type: integer
+          format: int32
+        moderationContentID:
+          type: string
+        moderationVersionID:
+          type: string
+        featured:
+          type: boolean
+        contributorNickname:
+          type: string
+        sendEmailAlertWhenPublished:
+          type: boolean
+        displayAsAnonymous:
+          type: boolean
+        text:
+          type: string
+        campaignId:
+          type: string
+        contentOriginId:
+          type: string
+        submissionTime:
+          type: string
+        firstPublishTime:
+          type: string
+        lastPublishTime:
+          type: string
+        displayLocale:
+          type: string
+        status:
+          type: string
+        contentCodes:
+          type: array
+          items:
+            type: string
+        submissionId:
+          type: string
+        externalAnswerId:
+          type: string
+        externalProductId:
+          type: string
+        cdvOrder:
+          type: array
+          items:
+            type: string
+        tagOrder:
+          type: array
+          items:
+            type: string
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Video'
+        cdvProperties:
+          type: object
+          additionalProperties:
+            type: string
+        productReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordinate'
+        tagProperties:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        customProperties:
+          type: object
+          additionalProperties:
+            type: string
+        contributor:
+          $ref: '#/components/schemas/Coordinate'
+        question:
+          $ref: '#/components/schemas/Coordinate'
+        submissionInstant:
+          type: integer
+          format: int32
+        statusGroup:
+          type: string
+    QuestionQuery:
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/QuestionSort'
+        fields:
+          type: array
+          items:
+            type: string
+        filters:
+          $ref: '#/components/schemas/QuestionFilters'
+    Coordinate:
+      type: object
+      properties:
+        table:
+          type: string
+        id:
+          type: string
+    TimeRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
     Question:
       type: object
       properties:
@@ -717,154 +989,7 @@ components:
           $ref: '#/components/schemas/Coordinate'
         statusGroup:
           type: string
-    PrrUpdate:
-      type: object
-      properties:
-        hash:
-          type: string
-        timestamp:
-          type: string
-    SingleQuestionDocument:
-      type: object
-      properties:
-        question:
-          $ref: '#/components/schemas/Question'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        product:
-          $ref: '#/components/schemas/Product'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllAnswers'
-        totalQueriedAnswers:
-          type: integer
-          format: int32
-    Coordinate:
-      type: object
-      properties:
-        table:
-          type: string
-        id:
-          type: string
-    TimeRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    QuestionContributor:
-      type: object
-      properties:
-        id:
-          type: string
-        table:
-          type: string
-        version:
-          type: integer
-          format: int32
-        sourceVersion:
-          type: integer
-          format: int32
-        deleted:
-          type: boolean
-        signature:
-          type: string
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        type:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        clearTextExternalId:
-          type: string
-        anonymous:
-          type: boolean
-        rank:
-          type: string
-        merit:
-          type: string
-        affiliation:
-          type: string
-        contributorBadgeEnabled:
-          type: boolean
-        contributorLocation:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayCode:
-          type: string
-        displayLocale:
-          type: string
-        status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        displayName:
-          type: string
-        sourceName:
-          type: string
-        agreedToTermsAndConditions:
-          type: boolean
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        ratingOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        avatarPhoto:
-          $ref: '#/components/schemas/Photo'
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        displayLastUpdate:
-          $ref: '#/components/schemas/PrrUpdate'
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        ratingProperties:
-          type: object
-          additionalProperties:
-            type: string
-        externalId:
-          type: string
-    QuestionQuery:
+    QuestionQueryResponse:
       type: object
       properties:
         limit:
@@ -873,14 +998,13 @@ components:
         offset:
           type: integer
           format: int32
-        sort:
-          $ref: '#/components/schemas/QuestionSort'
-        fields:
+        totalResults:
+          type: integer
+          format: int32
+        results:
           type: array
           items:
-            type: string
-        filters:
-          $ref: '#/components/schemas/QuestionFilters'
+            $ref: '#/components/schemas/Question'
     QuestionFilters:
       type: object
       properties:
@@ -982,50 +1106,43 @@ components:
           type: boolean
         withAnswers:
           type: boolean
-    AllAnswers:
+    Statistics:
       type: object
       properties:
-        answer:
-          $ref: '#/components/schemas/Answer'
-        contributor:
-          $ref: '#/components/schemas/QuestionContributor'
-        statistics:
-          $ref: '#/components/schemas/Statistics'
+        positiveFeedbackCount:
+          type: integer
+          format: int32
+        negativeFeedbackCount:
+          type: integer
+          format: int32
+        helpfulnessScore:
+          type: integer
+          format: int32
+        characterCount:
+          type: integer
+          format: int32
+        productReferenceCount:
+          type: integer
+          format: int32
+        inappropriateFeedbackCount:
+          type: integer
+          format: int32
+        numPhotos:
+          type: integer
+          format: int32
+        numVideos:
+          type: integer
+          format: int32
+        hasPhotos:
+          type: boolean
+        hasVideos:
+          type: boolean
     QuestionSort:
       type: object
       properties:
         field:
           type: string
         direction:
-          type: string
-    QuestionQueryResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        totalResults:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Question'
-    Photo:
-      type: object
-      properties:
-        caption:
-          type: string
-        mediumImageId:
-          type: string
-        thumbnailImageId:
-          type: string
-        url:
-          type: string
-        thumbnailUrl:
           type: string
     Product:
       type: object
@@ -1050,176 +1167,59 @@ components:
           type: string
         productPageUrl:
           type: string
-    Answer:
+    ErrorResponse:
       type: object
+      required:
+      - code
+      - occurredAt
       properties:
-        id:
+        type:
           type: string
-        version:
-          type: integer
-          format: int32
-        firstUpdateAt:
-          type: string
-        lastUpdateAt:
-          type: string
-        lastMutateAt:
-          type: string
-        client:
-          type: string
-        legacyInternalId:
-          type: integer
-          format: int32
-        moderationContentID:
-          type: string
-        moderationVersionID:
-          type: string
-        featured:
-          type: boolean
-        contributorNickname:
-          type: string
-        sendEmailAlertWhenPublished:
-          type: boolean
-        displayAsAnonymous:
-          type: boolean
-        text:
-          type: string
-        campaignId:
-          type: string
-        contentOriginId:
-          type: string
-        submissionTime:
-          type: string
-        firstPublishTime:
-          type: string
-        lastPublishTime:
-          type: string
-        displayLocale:
+          format: uri
+          default: about:blank
+        title:
           type: string
         status:
-          type: string
-        contentCodes:
-          type: array
-          items:
-            type: string
-        submissionId:
-          type: string
-        externalAnswerId:
-          type: string
-        externalProductId:
-          type: string
-        cdvOrder:
-          type: array
-          items:
-            type: string
-        tagOrder:
-          type: array
-          items:
-            type: string
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        videos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Video'
-        cdvProperties:
-          type: object
-          additionalProperties:
-            type: string
-        productReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coordinate'
-        tagProperties:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        customProperties:
-          type: object
-          additionalProperties:
-            type: string
-        contributor:
-          $ref: '#/components/schemas/Coordinate'
-        question:
-          $ref: '#/components/schemas/Coordinate'
-        submissionInstant:
           type: integer
           format: int32
-        statusGroup:
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
           type: string
-    Video:
-      type: object
-      properties:
-        legacyInternalId:
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
           type: string
-        rawUrlInput:
+          format: uri
+          description: An absolute URI that identifies the specific occurrence of the problem.
+        code:
           type: string
-        caption:
+          example: ERROR_PARAM_MISSING_PARAMETERS
+          x-extensible-enum:
+          - ERROR_ACCESS_DENIED
+          - ERROR_FORM_DUPLICATE
+          - ERROR_FORM_EMOJI
+          - ERROR_FORM_REQUIRED
+          - ERROR_FORM_REQUIRED_NICKNAME
+          - ERROR_FORM_TOO_SHORT
+          - ERROR_DUPLICATE_SUBMISSION
+          - ERROR_PARAM_INVALID_API_KEY
+          - ERROR_PARAM_INVALID_LOCALE
+          - ERROR_PARAM_INVALID_PARAMETERS
+          - ERROR_PARAM_MISSING_SUBJECT_ID
+          - ERROR_PARAM_MISSING_USER_ID
+          - ERROR_REQUEST_LIMIT_REACHED
+          - ERROR_UNKNOWN
+          - ERROR_UNSUPPORTED
+          - ERROR_NOT_FOUND
+          - ERROR_FORBIDDEN
+          - ERROR_REQUEST_LINE_TOO_LARGE
+        occurredAt:
           type: string
-        videoHost:
-          type: string
-        videoId:
-          type: string
-        uploadStatus:
-          type: string
-        thumbnailUrl:
-          type: string
-    SubmitQuestion:
-      type: object
-      properties:
-        Data:
-          type: object
-        HasErrors:
-          type: boolean
-          example: false
-        Form:
-          type: array
-          items:
-            type: object
-        FormErrors:
-          type: object
-        Question:
-          type: object
-          properties:
-            SendEmailAlertWhenPublished:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the question is published.
-            SendEmailAlertWhenAnswered:
-              type: boolean
-              description: Flag indicating whether to send an email alert when the question is answered.
-            QuestionSummary:
-              type: string
-              description: The summary of the question.
-            SubmissionTime:
-              type: string
-              description: The submission time of the question.
-              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
-            TypicalHoursToPost:
-              type: number
-              description: The typical number of hours it takes for the question to be posted.
-            SubmissionId:
-              type: string
-              description: The submission ID of the question.
-            QuestionDetails:
-              type: string
-              description: The details of the question.
-        TypicalHoursToPost:
-          type: number
-          description: The typical number of hours it takes for a submission to be posted.
-        SubmissionId:
-          type: string
-          description: The submission ID.
-        Locale:
-          type: string
-          description: The locale of the question.
-          pattern: ^[a-z]{2}_[A-Z]{2}$
-        Errors:
-          type: array
-          items:
-            type: object
+          format: date-time
+          example: '2023-07-19T09:10:04.446Z'
     GetQuestion:
       type: object
       properties:
@@ -2063,59 +2063,59 @@ components:
         HasErrors:
           type: boolean
           example: false
-    ErrorResponse:
+    SubmitQuestion:
       type: object
-      required:
-      - code
-      - occurredAt
       properties:
-        type:
+        Data:
+          type: object
+        HasErrors:
+          type: boolean
+          example: false
+        Form:
+          type: array
+          items:
+            type: object
+        FormErrors:
+          type: object
+        Question:
+          type: object
+          properties:
+            SendEmailAlertWhenPublished:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is published.
+            SendEmailAlertWhenAnswered:
+              type: boolean
+              description: Flag indicating whether to send an email alert when the question is answered.
+            QuestionSummary:
+              type: string
+              description: The summary of the question.
+            SubmissionTime:
+              type: string
+              description: The submission time of the question.
+              pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$
+            TypicalHoursToPost:
+              type: number
+              description: The typical number of hours it takes for the question to be posted.
+            SubmissionId:
+              type: string
+              description: The submission ID of the question.
+            QuestionDetails:
+              type: string
+              description: The details of the question.
+        TypicalHoursToPost:
+          type: number
+          description: The typical number of hours it takes for a submission to be posted.
+        SubmissionId:
           type: string
-          format: uri
-          default: about:blank
-        title:
+          description: The submission ID.
+        Locale:
           type: string
-        status:
-          type: integer
-          format: int32
-          description: The HTTP status code generated by the origin server for this occurrence of the problem.
-          minimum: 100
-          maximum: 599
-          example: 400
-        detail:
-          type: string
-          description: A human readable explanation specific to this occurrence of the problem.
-          example: Connection to database timed out
-        instance:
-          type: string
-          format: uri
-          description: An absolute URI that identifies the specific occurrence of the problem.
-        code:
-          type: string
-          example: ERROR_PARAM_MISSING_PARAMETERS
-          x-extensible-enum:
-          - ERROR_ACCESS_DENIED
-          - ERROR_FORM_DUPLICATE
-          - ERROR_FORM_EMOJI
-          - ERROR_FORM_REQUIRED
-          - ERROR_FORM_REQUIRED_NICKNAME
-          - ERROR_FORM_TOO_SHORT
-          - ERROR_DUPLICATE_SUBMISSION
-          - ERROR_PARAM_INVALID_API_KEY
-          - ERROR_PARAM_INVALID_LOCALE
-          - ERROR_PARAM_INVALID_PARAMETERS
-          - ERROR_PARAM_MISSING_SUBJECT_ID
-          - ERROR_PARAM_MISSING_USER_ID
-          - ERROR_REQUEST_LIMIT_REACHED
-          - ERROR_UNKNOWN
-          - ERROR_UNSUPPORTED
-          - ERROR_NOT_FOUND
-          - ERROR_FORBIDDEN
-          - ERROR_REQUEST_LINE_TOO_LARGE
-        occurredAt:
-          type: string
-          format: date-time
-          example: '2023-07-19T09:10:04.446Z'
+          description: The locale of the question.
+          pattern: ^[a-z]{2}_[A-Z]{2}$
+        Errors:
+          type: array
+          items:
+            type: object
   securitySchemes:
     Bv-Passkey:
       type: apiKey
