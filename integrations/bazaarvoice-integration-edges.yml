@@ -23,6 +23,7 @@ checked:
 - https://zapier.com/apps/bazaarvoice/integrations
 - zendesk/integrations/zendesk-integration-edges.yml
 - https://www.bazaarvoice.com/partners/
+- salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: own
@@ -141,23 +142,6 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: gthesheep)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
-- partner_name: Zendesk (own)
-  partner: zendesk
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://www.zendesk.com/marketplace/apps/support/949416/bazaarvoice/
-  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
-  apps:
-  - Bazaarvoice
-  listing_count: 1
-  detected: '2026-10-20'
-  detected_by: mirror-platform-listings.py
-  category: eComm and Payments
 - partner_name: Attentive
   app: Attentive
   partner: attentive
@@ -401,4 +385,38 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-reviews-ugc.py
   detected: '2026-10-20'
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/949416/bazaarvoice/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - Bazaarvoice
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: eComm and Payments
+- partner_name: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=aad0ab52-f5bd-4dc7-ba20-e5706c6a32ce
+  mirror_of: salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+  apps:
+  - Bazaarvoice Cartridge for B2C Commerce
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: eCommerce, marketing, integration
 templates: []
