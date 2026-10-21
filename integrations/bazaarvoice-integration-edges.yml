@@ -22,8 +22,17 @@ checked:
 - https://rubygems.org/api/v1
 - https://zapier.com/apps/bazaarvoice/integrations
 - zendesk/integrations/zendesk-integration-edges.yml
+- https://www.bazaarvoice.com/partners/
 summary: null
-marketplace_apps: []
+marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: bazaarvoice
+  url: https://www.bazaarvoice.com/partners/
+  app_count: 10
+  adapter: sweep-reviews-ugc.py:partner-pages
+  listed: 9
+  note: 10 listings read; only domain- / identity-linked partners are written
 edges:
 - partner_name: Maven Central
   partner: maven-central
@@ -149,4 +158,247 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: eComm and Payments
+- partner_name: Attentive
+  app: Attentive
+  partner: attentive
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/attentive/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Attentive
+    matched_domain: attentive.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Attentive
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Bluefish
+  app: Bluefish
+  partner: bluefish-ai
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/bluefish/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Bluefish
+    matched_domain: bluefishai.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Bluefish
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Contentsquare
+  app: Contentsquare
+  partner: contentsquare
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/contentsquare/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Contentsquare
+    matched_domain: contentsquare.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Contentsquare
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Evertune
+  app: Evertune
+  partner: evertune
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/evertune/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Evertune
+    matched_domain: evertune.ai
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Evertune
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Klaviyo
+  app: Klaviyo
+  partner: klaviyo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/klaviyo/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Klaviyo
+    matched_domain: klaviyo.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Klaviyo
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Monetate
+  app: Monetate
+  partner: monetate
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/monetate/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Monetate
+    matched_domain: monetate.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Monetate
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Profound
+  app: Profound
+  partner: profound
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/profound/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Profound
+    matched_domain: tryprofound.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Profound
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Shopify
+  app: Shopify
+  partner: shopify
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/shopify/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Shopify
+    matched_domain: shopify.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Shopify
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
+- partner_name: Tealium
+  app: Tealium
+  partner: tealium
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: unknown
+  relationship: platform-app
+  direction: unknown
+  evidence: https://www.bazaarvoice.com/partners/tealium/
+  category: null
+  contract_reference:
+    register: Bazaarvoice partners (bazaarvoice.com/partners/, partner pages)
+    spec_file: null
+    role: bazaarvoice-listing-builder-unknown
+    registered_name: Tealium
+    matched_domain: tealium.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Tealium
+    signal_note: 'builder not shown on the listing: direction unknown, kept out of position shares; one edge per
+      (partner, platform)'
+    detected_by: sweep-reviews-ugc.py
+    detected: '2026-10-20'
+  detected_by: sweep-reviews-ugc.py
+  detected: '2026-10-20'
 templates: []
