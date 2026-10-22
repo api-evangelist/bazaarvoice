@@ -335,32 +335,6 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
-- slug: bazaarvoice-zendesk-own
-  label: Zendesk (own)
-  partner: zendesk
-  partner_name: Zendesk (own)
-  category: eComm and Payments
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://www.zendesk.com/marketplace/apps/support/949416/bazaarvoice/
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: bazaarvoice-salesforce-commerce-cloud-own
-  label: Salesforce Commerce Cloud (own)
-  partner: salesforce-commerce-cloud
-  partner_name: Salesforce Commerce Cloud (own)
-  category: eCommerce, marketing, integration
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=aad0ab52-f5bd-4dc7-ba20-e5706c6a32ce
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: bazaarvoice-battery-ventures
   label: Battery Ventures
   partner: battery-ventures
@@ -387,5 +361,44 @@
     detected_by: sweep-vc-portfolios.py
     detected: '2026-10-21'
     status: 'NASDAQ: BV'
+  status: not-a-workflow
+  arazzo: null
+- slug: bazaarvoice-zendesk-own
+  label: Zendesk (own)
+  partner: zendesk
+  partner_name: Zendesk (own)
+  category: eComm and Payments
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.zendesk.com/marketplace/apps/support/949416/bazaarvoice/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: bazaarvoice-salesforce-commerce-cloud-own
+  label: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_name: Salesforce Commerce Cloud (own)
+  category: eCommerce, marketing, integration
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=aad0ab52-f5bd-4dc7-ba20-e5706c6a32ce
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: bazaarvoice-adobe-commerce-own
+  label: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_name: Adobe Commerce (own)
+  category: Adobe Commerce Marketplace extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://commercemarketplace.adobe.com/bazaarvoice-bazaarvoice-magento2-ext.html
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
